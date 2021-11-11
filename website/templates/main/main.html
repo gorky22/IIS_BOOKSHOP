@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block link_block %}
+    <link rel="stylesheet" href="/static/css/views/main.css">
+{% endblock %}
+
+{% block body_block %}
+<header class="content">
+    <h1 class="header">Rezervujte si knihu v knihovně, která je vám nejblíže</h1>
+    <div class="header-block">
+        <div class="left-block">
+            <ul class="num-block">
+                <li class="number-li"><span class="number">1</span>Najdi svoji vysněnou knihu</li>
+                <li class="number-li"><span class="number">2</span>Zvol si knihovnu, na které si knihu vyzvedneš</li>
+                <li class="number-li"><span class="number">3</span>Zarezervuj a už stačí si jen pro knížku dojít!</li>
+            </ul>
+        </div>
+        <div class="right-block">
+            <img src="/static/img/reading.svg" alt="woman reading book" class="book-reading">
+        </div>
+    </div>
+</header>
+
+
+{% endblock %}

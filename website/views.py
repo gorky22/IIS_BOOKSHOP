@@ -4,4 +4,4 @@ views = Blueprint("views",__name__)
 
 @views.route("/")
 def viewsPage():
-    return render_template("base.html")
+    return render_template("/main/main.html")
