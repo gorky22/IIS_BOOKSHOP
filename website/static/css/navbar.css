@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+html{
+    font-size: 62.5%;
+}
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/*
+    font-family: 'Baloo 2', cursive;
+    font-family: 'Nunito', sans-serif;
+*/
+body{
+    background-color: rgb(243, 239, 164);
+}
+
+.navbar{
+    background-color: #FFF;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+}
+.nav-content{
+    width: 120rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+}
+.logo{
+    font-size: 3rem;
+    text-decoration: none;
+    color: #333;
+}
+.right-nav{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    list-style: none;
+    display: flex;
+}
+.link-li{
+    margin-right: 5rem;
+}
+.link-li:last-child{
+    margin-right: 0;
+}
+.link-a{
+    color: #333;
+    text-decoration: none;
+}

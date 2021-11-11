@@ -1,1 +1,0 @@
---- sem statické soubory (js,css,images,icons)
