@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block link_block %}
+    
+{% endblock %}
+
+{% block body_block %}
+
+{% for book in book_list %}
+    <div class="book">
+        <h1 class="header">Bookkname = {{ book['Name']}} </h1>
+        <h1 class="header">Author = {{ book['Author']}} </h1>
+    </div>
+{% endfor %}
+{% endblock %}
