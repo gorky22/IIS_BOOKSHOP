@@ -70,3 +70,12 @@ body{
     background-color: #623CEA;
     color: #FFF;
 }
+
+.content{
+    width: 120rem;
+    border-radius: 1rem;
+    background-color: #FFF;
+    margin: auto;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}

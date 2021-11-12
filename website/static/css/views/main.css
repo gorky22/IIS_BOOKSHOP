@@ -1,10 +1,4 @@
-.content{
-    width: 120rem;
-    border-radius: 1rem;
-    background-color: #FFF;
-    margin: auto;
-    padding: 2rem;
-}
+
 
 .header{
     font-family: 'Baloo 2', cursive;
@@ -51,4 +45,51 @@
 }
 .number-li:last-child{
     margin-bottom: 0;
+}
+
+.content-header{
+    font-size: 3rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+.book-div{
+    width: 20rem;
+}
+.book-img{
+    width: 20rem;
+    height: 29rem;
+    border-radius: 2rem;
+    object-fit: cover;
+    object-position: 20% 10%; /* try 20px 10px */
+}
+.book-header{
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #333;
+}
+.book-author{
+    font-size: 1.4rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #241a47;
+}
+.percent-align{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.book-rating{
+    width: 100%;
+}
+.book-rating-text{
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
