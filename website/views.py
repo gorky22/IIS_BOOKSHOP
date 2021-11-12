@@ -13,4 +13,4 @@ def listPage():
     
 @views.route("/detail/")
 def detailPage():
-    return render_template('/main/deatil.html')
+    return render_template('/main/detail.html')

@@ -9,6 +9,97 @@
 
 {% block body_block %}
 
-    
-
+<div class="content extra-padding">
+    <div class="split-left">
+        <img src="/static/img/hp1.jpg" class="book-img-detail">
+    </div>
+    <div class="split-right">
+        <div class="top-split">
+            <h1 class="book-header-detail">Harry Potter a Kámen mudrců</h1>
+            <p class="book-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facilis, aliquam
+                eveniet et temporibus sequi, quas magni dignissimos eum laboriosam tenetur. Nostrum officia nesciunt vero
+                distinctio ipsam, est, laboriosam nisi accusantium debitis iusto quia facere eum ducimus magnam pariatur
+                maxime corrupti ea. Nobis magnam deserunt illo ducimus culpa voluptates labore repudiandae at est porro odit
+                laboriosam, odio aperiam similique optio dolore dicta asperiores, voluptatem quibusdam amet suscipit.
+                Obcaecati sed similique impedit exercitationem soluta suscipit repudiandae minima nostrum, explicabo quo.
+                Neque magni labore, veniam voluptas amet ex autem alias modi explicabo optio iusto unde deserunt aliquid,
+                harum earum reiciendis dolor. Amet.</p>
+            <p class="book-author-detail"><span class="baloo-bold">Autor: </span>J. K. Rowling</p>
+        </div>
+        
+        <div class="bottom-split">
+            <div class="bottom-left">
+                <div class="top">
+                    <p class="book-author-detail"><span class="baloo-bold">Hodnocení:</span></p>
+                    <div class="percent-align">
+                        <img src="/static/img/rating/90percent.png" alt="rating" class="book-rating">
+                        <p class="book-rating-text">90%</p>
+                    </div>
+                </div>
+                <button class="link-a btn btn-yellow">Ohodnotit</button>
+            </div>
+            <div class="bottom-right">
+                <p class="baloo-bold">Zvolte knihovnu</p>
+                <select name="library" class="library-select">
+                    <option value="1">Prvni knihovna</option>
+                    <option value="2">Druhá knihovna</option>
+                    <option value="3">Třetí knihovna</option>
+                    <option value="4">Čtvrtá knihovna</option>
+                </select>
+                <button class="link-a btn btn-blue">Rezervovat</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="content">
+    <h1 class="content-header">Podobné knihy</h1>
+    <div class="book-row">
+        <a href="{{ url_for('views.detailPage') }} " class="book-div">
+            <img src="/static/img/hp1.jpg" alt="hp1" class="book-img">
+            <h1 class="book-header">Harry Potter a Kámen mudrců</h1>
+            <h3 class="book-author">J. K. Rowling</h1>
+            <div class="percent-align">
+                <img src="/static/img/rating/100percent.png" alt="rating" class="book-rating">
+                <p class="book-rating-text">100%</p>
+            </div>
+        </a>
+        <a href="#" class="book-div">
+            <img src="/static/img/hp2.jpg" alt="hp1" class="book-img">
+            <h1 class="book-header">Harry Potter a Tajemná komnata</h1>
+            <h3 class="book-author">J. K. Rowling</h1>
+            <div class="percent-align">
+                <img src="/static/img/rating/30percent.png" alt="rating" class="book-rating">
+                <p class="book-rating-text">30%</p>
+            </div>
+        </a>
+        <a href="#" class="book-div">
+            <img src="/static/img/hp3.jpg" alt="hp1" class="book-img">
+            <h1 class="book-header">Harry Potter a Vězeň z Azkabanu</h1>
+            <h3 class="book-author">J. K. Rowling</h1>
+            <div class="percent-align">
+                <img src="/static/img/rating/80percent.png" alt="rating" class="book-rating">
+                <p class="book-rating-text">80%</p>
+            </div>
+        </a>
+        <a href="#" class="book-div">
+            <img src="/static/img/hp4.jpg" alt="hp1" class="book-img">
+            <h1 class="book-header">Harry Potter a Ohnivý pohár</h1>
+            <h3 class="book-author">J. K. Rowling</h1>
+            <div class="percent-align">
+                <img src="/static/img/rating/50percent.png" alt="rating" class="book-rating">
+                <p class="book-rating-text">50%</p>
+            </div>
+        </a>
+        <a href="#" class="book-div">
+            <img src="/static/img/hp5.jpg" alt="hp1" class="book-img">
+            <h1 class="book-header">Harry Potter a Fénixův řád</h1>
+            <h3 class="book-author">J. K. Rowling</h1>
+            <div class="percent-align">
+                <img src="/static/img/rating/60percent.png" alt="rating" class="book-rating">
+                <p class="book-rating-text">60%</p>
+            </div>
+        </a>
+    </div>
+</div>
 {% endblock %}
