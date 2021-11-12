@@ -52,10 +52,21 @@
     color: #333;
     font-family: 'Baloo 2', cursive;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+.book-row{
+    display: flex;
+    justify-content: space-between;
 }
 .book-div{
     width: 20rem;
+    margin: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out 0s;
+    cursor: pointer;
+}
+.book-div:hover{
+    transform: scale(1.05);
 }
 .book-img{
     width: 20rem;
@@ -63,6 +74,8 @@
     border-radius: 2rem;
     object-fit: cover;
     object-position: 20% 10%; /* try 20px 10px */
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.171);
 }
 .book-header{
     font-size: 1.8rem;
@@ -75,6 +88,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
     color: #241a47;
+    margin: 0.5rem 0;
 }
 .percent-align{
     position: relative;
@@ -89,7 +103,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
     position: absolute;
-    top: 40%;
+    top: 44%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
