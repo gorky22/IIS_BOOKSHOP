@@ -21,8 +21,17 @@
                     <li class="link-li">
                         <a href="{{ url_for('views.viewsPage') }}" {{ 'class=link-a-active' if request.path == '/' else 'class=link-a' }}>Domů</a>
                     </li>
-                    <li class="link-li">
-                        <a href="{{ url_for('views.listPage') }}" {{ 'class=link-a-active' if request.path == '/list/' else 'class=link-a' }}>Žánry</a>
+                    <li class="link-li dropdown">
+                        <a href="{{ url_for('views.listPage') }}" {{ 'class=link-a-active' if request.path == '/list/' else 'class=link-a' }}>Knihy</a>
+                        <div class="dropdown-content">
+                            <a href="#" class="drop-link">Žánr 1</a>
+                            <a href="#" class="drop-link">Žánr 2</a>
+                            <a href="#" class="drop-link">Žánr 3</a>
+                            <a href="#" class="drop-link">Žánr 4</a>
+                            <a href="#" class="drop-link">Žánr 5</a>
+                            <a href="#" class="drop-link">Žánr 6</a>
+                            <a href="#" class="drop-link">Žánr 7</a>
+                        </div>
                     </li>
                     <li class="link-li">
                         <a href="#" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
