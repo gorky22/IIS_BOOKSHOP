@@ -1,10 +1,4 @@
-.content{
-    width: 120rem;
-    border-radius: 1rem;
-    background-color: #FFF;
-    margin: auto;
-    padding: 2rem;
-}
+
 
 .header{
     font-family: 'Baloo 2', cursive;
@@ -52,3 +46,4 @@
 .number-li:last-child{
     margin-bottom: 0;
 }
+

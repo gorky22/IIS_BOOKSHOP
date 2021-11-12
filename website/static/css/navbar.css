@@ -26,15 +26,28 @@ body{
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
     margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
 }
 .nav-content{
-    width: 120rem;
+    max-width: 120rem;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 8rem;
 }
+
+.content{
+    max-width: 120rem;
+    border-radius: 1rem;
+    background-color: #FFF;
+    margin: auto;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+
 .logo{
     font-size: 3.5rem;
     text-decoration: none;
@@ -47,6 +60,8 @@ body{
     list-style: none;
     display: flex;
 }
+
+
 .link-li{
     margin-right: 5rem;
 }
@@ -56,6 +71,27 @@ body{
 .link-a{
     color: #333;
     text-decoration: none;
+    transition: 0.3s all;
+}
+.link-a:hover,
+.link-a-active:hover{
+    color: #623CEA;
+}
+.link-a-active{
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    transition: 0.3s all;
+}
+
+.link-a-active::after{
+    content:"";
+    position: absolute;
+    top: 110%;
+    transform: translateX(-85%);
+    width: 140%;
+    height: 3px;
+    background-color: #623CEA;
 }
 .btn{
     padding: 0.5rem 2.2rem;
@@ -66,7 +102,48 @@ body{
     background-color: #E7DFC6;
     color: #333;
 }
+.btn.btn-yellow:hover{
+    background-color: #5f5b50;
+    color: rgb(255, 255, 255);
+}
 .btn.btn-blue{
     background-color: #623CEA;
     color: #FFF;
 }
+.btn.btn-blue:hover{
+    background-color: #a38ef0;
+    color: #333;
+}
+
+.dropdown{
+    position: relative;
+    
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    min-width: 16rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.233);
+    z-index: 1;
+    text-align: center;
+    left: -100%;
+    padding: 2rem;
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+
+}
+.dropdown-content .drop-link{
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin: 0.5rem 0;
+    transition: 0.3s all;
+}
+.dropdown-content .drop-link:hover{
+    color: #623CEA;
+
+}
+
