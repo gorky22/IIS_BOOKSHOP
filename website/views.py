@@ -10,6 +10,7 @@ def viewsPage():
 def listPage():
     book_list = [{'Name' : 'HP1', 'Author': 'J.K.Rowling'},{'Name' : 'HP1', 'Author': 'J.K.Rowling'}]
     return render_template("/main/list.html",book_list=book_list)
+    
 @views.route("/detail/")
 def detailPage():
     return render_template('/main/deatil.html')
