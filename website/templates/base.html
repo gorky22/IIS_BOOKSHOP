@@ -8,9 +8,27 @@
         {% block link_block %}
 
         {% endblock %}
+        <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
         <title>Book Reserver</title>
     </head>
     <body>
+        <div class="res-navbar" >
+            <button class="hamburger-btn" id="btn-menu">
+                <img src="/static/img/ham.svg" class="hamburger-icon">
+            </button>
+            <div class="nav-box">
+                <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
+                <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
+                <a href="#" class="nav-link">Knihovny</a>
+                <a href="#" class="nav-link btn btn-blue">Registrovat</a>
+                <a href="#" class="nav-link btn btn-yellow">Přihlásit se</a>
+            </div>
+        </div>
+
+
         <nav class="navbar">
             <div class="nav-content">
                 <div class="left-nav">
@@ -52,5 +70,6 @@
         {% block body_block %}
         
         {% endblock %}
+        <script src="/static/js/navbarResp.js"></script>
     </body>
 </html>

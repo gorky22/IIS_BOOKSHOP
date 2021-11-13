@@ -7,7 +7,9 @@
 }
 .book-row{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
 }
 .book-div{
     width: 20rem;
@@ -24,7 +26,7 @@
     height: 29rem;
     border-radius: 2rem;
     object-fit: cover;
-    object-position: 20% 10%; /* try 20px 10px */
+    object-position: 50% 10%; /* try 20px 10px */
     background-color: rgba(0, 0, 0, 0);
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.171);
 }
@@ -41,4 +43,65 @@
     color: #241a47;
     margin: 0.5rem 0;
 }
+.book-rating{
+    width: 20rem;
+}
 
+.book-rating-text{
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.percent-align{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+@media only screen and (max-width: 512px){
+    .book-rating{
+        width: 18rem;
+    }
+    .book-div{
+        width: 18rem;
+        margin: 0.5rem;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out 0s;
+        cursor: pointer;
+    }
+    .shrink{
+        padding: 1rem;
+    }
+    .book-img{
+        width: 18rem;
+
+    }
+}
+@media only screen and (max-width: 420px){
+    .book-rating{
+        width: 14rem;
+    }
+    .book-div{
+        width: 14rem;
+        margin: 0.5rem;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out 0s;
+        cursor: pointer;
+    }
+    .shrink{
+        padding: 1rem;
+    }
+    .book-img{
+        width: 14rem;
+        margin: auto;
+    }
+    .book-header{
+        font-size: 1.6rem;
+    }
+    .book-author{
+        font-size: 1.2rem;
+    }
+}
