@@ -1,0 +1,90 @@
+.content.extra-padding{
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.split-left{
+    width: 26.8rem;
+}
+.split-right{
+    width: 100%;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.book-img-detail{
+    width: 26.8rem;
+    object-fit: cover;
+    object-position: 10% 20%;
+    border-radius: 1rem;
+    
+}
+.book-header-detail{
+    margin-top: -0.8rem;
+    font-size: 3.6rem;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+.book-description{
+    font-size: 1.6rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.baloo-bold{
+    font-size: 1.8rem;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+}
+.book-author-detail{
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+.percent-align{
+    position: relative;
+    color: white;
+    width: 20rem;
+    margin-bottom: 2rem;
+}
+
+.book-rating-text{
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.bottom-split{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.bottom-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bottom-right{
+    text-align: right;
+}
+.library-select{
+    width: 20rem;
+    text-align: right;
+    font-family: 'Nunito', sans-serif;
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    border: none;
+    padding: 1rem 0;
+    box-shadow: 0px 5px 7px #0000002a;
+    cursor: pointer;
+}

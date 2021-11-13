@@ -47,3 +47,20 @@
     margin-bottom: 0;
 }
 
+.book-rating{
+    width: 100%;
+}
+.book-rating-text{
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.percent-align{
+    position: relative;
+    text-align: center;
+    color: white;
+}

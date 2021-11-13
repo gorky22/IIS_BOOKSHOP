@@ -1,30 +1,59 @@
 {% extends 'base.html' %}
 
+
 {% block link_block %}
-    <link rel="stylesheet" href="/static/css/views/main.css">
     <link rel="stylesheet" href="/static/css/views/bookList.css">
+    <link rel="stylesheet" href="/static/css/views/detail.css">
 {% endblock %}
+
 
 {% block body_block %}
 
-<header class="content">
-    <h1 class="header">Rezervujte si knihu v knihovně, která je vám nejblíže</h1>
-    <div class="header-block">
-        <div class="left-block">
-            <ul class="num-block">
-                <li class="number-li"><span class="number">1</span>Najdi svoji vysněnou knihu</li>
-                <li class="number-li"><span class="number">2</span>Zvol si knihovnu, na které si knihu vyzvedneš</li>
-                <li class="number-li"><span class="number">3</span>Zarezervuj a už stačí si jen pro knížku dojít!</li>
-            </ul>
+<div class="content extra-padding">
+    <div class="split-left">
+        <img src="/static/img/hp1.jpg" class="book-img-detail">
+    </div>
+    <div class="split-right">
+        <div class="top-split">
+            <h1 class="book-header-detail">Harry Potter a Kámen mudrců</h1>
+            <p class="book-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facilis, aliquam
+                eveniet et temporibus sequi, quas magni dignissimos eum laboriosam tenetur. Nostrum officia nesciunt vero
+                distinctio ipsam, est, laboriosam nisi accusantium debitis iusto quia facere eum ducimus magnam pariatur
+                maxime corrupti ea. Nobis magnam deserunt illo ducimus culpa voluptates labore repudiandae at est porro odit
+                laboriosam, odio aperiam similique optio dolore dicta asperiores, voluptatem quibusdam amet suscipit.
+                Obcaecati sed similique impedit exercitationem soluta suscipit repudiandae minima nostrum, explicabo quo.
+                Neque magni labore, veniam voluptas amet ex autem alias modi explicabo optio iusto unde deserunt aliquid,
+                harum earum reiciendis dolor. Amet.</p>
+            <p class="book-author-detail"><span class="baloo-bold">Autor: </span>J. K. Rowling</p>
         </div>
-        <div class="right-block">
-            <img src="/static/img/reading.svg" alt="woman reading book" class="book-reading">
+        
+        <div class="bottom-split">
+            <div class="bottom-left">
+                <div class="top">
+                    <p class="book-author-detail"><span class="baloo-bold">Hodnocení:</span></p>
+                    <div class="percent-align">
+                        <img src="/static/img/rating/90percent.png" alt="rating" class="book-rating">
+                        <p class="book-rating-text">90%</p>
+                    </div>
+                </div>
+                <button class="link-a btn btn-yellow">Ohodnotit</button>
+            </div>
+            <div class="bottom-right">
+                <p class="baloo-bold">Zvolte knihovnu</p>
+                <select name="library" class="library-select">
+                    <option value="1">Prvni knihovna</option>
+                    <option value="2">Druhá knihovna</option>
+                    <option value="3">Třetí knihovna</option>
+                    <option value="4">Čtvrtá knihovna</option>
+                </select>
+                <button class="link-a btn btn-blue">Rezervovat</button>
+            </div>
+            
         </div>
     </div>
-</header>
-
+</div>
 <div class="content">
-    <h1 class="content-header">Nejlépe hodnocené knihy</h1>
+    <h1 class="content-header">Podobné knihy</h1>
     <div class="book-row">
         <a href="{{ url_for('views.detailPage') }} " class="book-div">
             <img src="/static/img/hp1.jpg" alt="hp1" class="book-img">
@@ -72,7 +101,5 @@
             </div>
         </a>
     </div>
-    
 </div>
-
 {% endblock %}
