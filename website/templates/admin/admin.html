@@ -1,0 +1,32 @@
+{% extends 'baseAdmin.html' %}
+
+{% block link_block %}
+    <link rel="stylesheet" href="/static/css/admin/admin.css">
+{% endblock %}
+
+{% block body_block %}
+
+<div class="content">
+    <table style="width: 100%">
+        <tr>
+            <th>E-mail</th>
+            <th>Celé jméno</th>
+            <th>Registrace dne</th>
+            <th>
+                <button class="btn btn-yellow">Search box</button>
+            </th>
+        </tr>
+        <tr>
+            <td>gorky@srac.sk</td>
+            <td>Pan gorky</td>
+            <td>21.12.1988</td>
+        </tr>
+        <tr>
+            <td>gorky@srac.sk</td>
+            <td>Pan gorky</td>
+            <td>21.12.1988</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

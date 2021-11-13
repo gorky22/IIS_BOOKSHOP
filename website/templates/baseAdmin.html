@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/navbar.css">
+        {% block link_block %}
+
+        {% endblock %}
+        <title>Book Reserver</title>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="left-nav">
+                    <a href="{{ url_for('views.viewsPage') }}" class="logo">Book&Reserve</a>
+                </div>
+                
+                <ul class="right-nav">
+                    <li class="link-li">
+                        <a href="{{ url_for('admin.adminPage') }}" {{ 'class=link-a-active' if request.path == '/admin/' else 'class=link-a' }}>Uživatelé</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('admin.libPage') }}" {{ 'class=link-a-active' if request.path == '/admin/libraries/' else 'class=link-a' }}>Knihovny</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('admin.distributorsPage')}}" {{ 'class=link-a-active' if request.path == '/admin/distributors/' else 'class=link-a' }}>Distributoři</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('admin.tagsPage')}}" {{ 'class=link-a-active' if request.path == '/admin/tags/' else 'class=link-a' }}>Tagy</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('views.viewsPage')}}" class="link-a btn btn-blue">Zpět na hlavní stránku</a>
+                    </li>
+                </ul>
+            
+            </div>
+        </nav>
+
+
+
+        {% block body_block %}
+        
+        {% endblock %}
+    </body>
+</html>
