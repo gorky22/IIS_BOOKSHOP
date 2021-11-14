@@ -85,4 +85,13 @@ input[type=text]:focus, input[type=text]:hover {
     opacity: 1;
 }
 
+.deleteBtn {
+    padding-right: 2rem;
+    text-align: right;
+}
+
+#btnDelete {
+    border-style: none;
+    border: none;
+}
 

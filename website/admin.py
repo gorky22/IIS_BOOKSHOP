@@ -8,8 +8,8 @@ def adminPage():
         users = [{'e-mail' : 'najdeny@email', 'name' : request.form["nm"], 'data' : '21.12.1988'}]
     else:
         users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
-             {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
-             {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
+                 {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
+                 {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
     
     return render_template("/admin/admin.html", users=users)
 
