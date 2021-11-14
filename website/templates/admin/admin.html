@@ -21,15 +21,20 @@
         </tr>
         
         {% for user in users %}
+     
         <tr>
             <td>{{ user['e-mail']}}</td>
             <td>{{ user['name'] }}</td>
             <td>{{ user['data']}}</td>
-            <td class="deleteBtn">
-                <form action="makes_tables.py" method="post">
-                    <input type="button" name="btnDelete" id="btnDelete" value="delete">
+            <td class="deleteForm">
+                <form method="post">
+                    <input type="button" class="deleteBtn" name="btnDelete" value="delete" data-user={{ user['name'] }}>
+                    <button type="button" ></button>
                 </form >
             </td>
+            <script type="text/javascript" src="/static/js/admin.js"></script>
+          
+
         </tr>
         {% endfor %}
     </table>
