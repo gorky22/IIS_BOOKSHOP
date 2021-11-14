@@ -1,5 +1,14 @@
-Host: sql11.freesqldatabase.com
-Database name: sql11449509
-Database user: sql11449509
-Database password: 1JR1eSrwxJ
+b91cfec2095f4d
+4fd07a3f
+eu-cdbr-west-01.cleardb.com/heroku_c8164a0212f5cf6?reconnect=true
+
+
+
+
+Host: eu-cdbr-west-01.cleardb.com
+Database name: heroku_c8164a0212f5cf6
+Database user: b91cfec2095f4d
+Database password: 4fd07a3f
 Port number: 3306
+
+https://www.cleardb.com/database/details?id=7BDB7F92E1F23BD48A18591279712984
