@@ -15,6 +15,7 @@ th {
     border-bottom: 0.3rem solid #333;
     font-size: 2.1rem;
     padding-bottom: 0%;
+    width: auto;
 }
 tr:nth-child(even){
     background-color: #cbbef6;
@@ -26,6 +27,8 @@ td{
 
 .search-box{
     text-align: right;
+    width: 20%;
+
 }
 .btn-search{
     text-align: center;
@@ -50,6 +53,36 @@ td{
 .btn-search.btn-yellow:hover{
     background-color: #5f5b50;
     color: rgb(255, 255, 255);
+}
+
+input[type=text] {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.7rem;
+    width: 85%;
+    padding: 0.2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 7px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+    background-color: #E7DFC6;
+    color: #333;
+    outline: none;
+}
+input[type=text]:focus, input[type=text]:hover {
+    background-color: #5f5b50;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-style: none;
+    box-shadow: 0px 5px 7px #0000002a;
+}
+/* for default text in search box */
+::placeholder {
+    opacity: 1;
 }
 
 
