@@ -94,6 +94,84 @@ insert_Book_title_author= '''INSERT INTO Book_title_author(title_id,author_id)
                     VALUES(%s, %s)
 '''
 
+#script for table which represent bindings with book_title and library
+make_user = '''
+      CREATE TABLE User(
+      user_id int AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(20) ,
+      surname VARCHAR(20) ,
+      email VARCHAR(30),
+      birth_date DATE,
+      password VARCHAR(30),
+      admin BOOLEAN,
+      librarian BOOLEAN,
+      distributor BOOLEAN,
+      reader BOOLEAN,
+      unregistered BOOLEAN,
+      library_id int,
+      CONSTRAINT fk_user foreign key (library_id) references Library(library_id)
+      )
+'''
+insert_user = '''INSERT INTO User(name,surname,email,birth_date,password,admin,librarian,distributor,reader,unregistered,library_id) 
+                    VALUES(%s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s)
+'''
+
+#script for table which represent bindings with book_title and library
+make_reservation = '''
+      CREATE TABLE Reservation(
+      reservation_id int AUTO_INCREMENT PRIMARY KEY,
+      time TIMESTAMP not null,
+      until Date not null,
+      title_id int not null,
+      creator_id int not null,
+      handler_id int ,
+      CONSTRAINT reservation_title foreign key (title_id) references Book_title(title_id),
+      CONSTRAINT reservation_creator foreign key (creator_id) references User(user_id),
+      CONSTRAINT reservation_handler foreign key (handler_id) references User(user_id)
+      )
+'''
+insert_Book_title_author= '''INSERT INTO Book_title_author(time,until,title_id,creator_id,handler_id) 
+                    VALUES(%s, %s,%s,%s,%s)
+'''
+
+#script for table which represent bindings with book_title and library
+make_lending = '''
+      CREATE TABLE Lending(
+      lending_id int AUTO_INCREMENT PRIMARY KEY,
+      when_borowed TIMESTAMP not null,
+      until DATE not null,
+      time_of_lending int not null,
+      title_id int not null,
+      customer_id int not null,
+      handler_id int,
+      CONSTRAINT lending_title foreign key (title_id) references Book_title(title_id),
+      CONSTRAINT lending_creator foreign key (customer_id) references User(user_id),
+      CONSTRAINT lending_handler foreign key (handler_id) references User(user_id)
+      )
+'''
+insert_Book_title_author= '''INSERT INTO Book_title_author(time,until,title_id,creator_id,handler_id) 
+                    VALUES(%s, %s,%s,%s,%s)
+'''
+
+make_votes = '''
+      CREATE TABLE Votes(
+      title_id int not null,
+      library_id int not null,
+      user_id int not null,
+      yes boolean,
+      no boolean,
+      CONSTRAINT votes_title foreign key (title_id) references Book_title(title_id),
+      CONSTRAINT votes_library foreign key (library_id) references Library(library_id),
+      CONSTRAINT votes_user foreign key (user_id) references User(user_id),
+      CONSTRAINT votes_user_library_title_unique UNIQUE (title_id, library_id, user_id)
+      )
+'''
+
+
+
+
+
+
 sql = '''select *
 from tmp2 u join tmp s on u.id = s.id and u.id = 2;
 '''
@@ -162,6 +240,17 @@ db_connection.commit()
 #cursor.execute('''SELECT count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
 #               JOIN Library l ON bl.library_id = l.library_id WHERE b.name = "Prezident" and l.town = "Brno"''')
 #
+
+#how_many votes for book
+#cursor.execute('''SELECT b.name,l.town, count(*)  FROM Book_title b JOIN Votes v ON b.title_id = v.title_id 
+#               JOIN Library l ON l.library_id = v.library_id join User u on u.user_id = v.user_id GROUP BY l.town, b.name''')
+
+#20 best books
+cursor.execute('''SELECT b.name,l.town, count(*)  FROM Book_title b JOIN Votes v ON b.title_id = v.title_id 
+               JOIN Library l ON l.library_id = v.library_id join User u on u.user_id = v.user_id GROUP BY l.town, b.name order by count(*) DESC limit 1''')
+
+#cursor.execute('''ALTER TABLE Lending 
+#ADD Column library_id int not null''')
 
 records = cursor.fetchall()
 print("Total number of rows in table: ", cursor.rowcount)
