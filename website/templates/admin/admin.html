@@ -14,36 +14,19 @@
             <th>Registrace dne</th>
             <th class="search-box">
                 <!-- <button class="btn-search btn-yellow">Search box</button> -->
-                <form>
-                    <input type="text" placeholder="Hledat uživatele">
-                </form>
+                <form action="{{ url_for('admin.adminPage') }}" method="post">
+                    <input type="text" name="nm" placeholder="Hledat uživatele">
+                </form >
             </th>
         </tr>
-        <tr>
-            <td>gorky@srac.sk</td>
-            <td>Pan gorky</td>
-            <td>21.12.1988</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Hanzik@beast.sk</td>
-            <td>Janicko</td>
-            <td>11.10.1992</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>Tomik@mergesort.sk</td>
-            <td>Shelby z brna</td>
-            <td>1.1.2002</td>
-            <td></td>
-        </tr>
+        
         {% for user in users %}
-            <tr>
-                <td>{{ user['e-mail']}}</td>
-                <td>{{ user['name'] }}</td>
-                <td>{{ user['data']}}</td>
-                <td></td>
-            </tr>
+        <tr>
+            <td>{{ user['e-mail']}}</td>
+            <td>{{ user['name'] }}</td>
+            <td>{{ user['data']}}</td>
+            <td></td>
+        </tr>
         {% endfor %}
     </table>
 </div>
