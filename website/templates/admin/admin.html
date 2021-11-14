@@ -25,7 +25,11 @@
             <td>{{ user['e-mail']}}</td>
             <td>{{ user['name'] }}</td>
             <td>{{ user['data']}}</td>
-            <td></td>
+            <td class="deleteBtn">
+                <form action="makes_tables.py" method="post">
+                    <input type="button" name="btnDelete" id="btnDelete" value="delete">
+                </form >
+            </td>
         </tr>
         {% endfor %}
     </table>
