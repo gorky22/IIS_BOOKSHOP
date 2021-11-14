@@ -1,4 +1,12 @@
 from flask import Flask
+import mysql.connector as mysql
+
+HOST = "eu-cdbr-west-01.cleardb.com" 
+DATABASE = "heroku_c8164a0212f5cf6"
+USER = "b91cfec2095f4d"
+PASSWORD = "4fd07a3f"
+
+db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
 
 def create_app():
     app = Flask(__name__)
