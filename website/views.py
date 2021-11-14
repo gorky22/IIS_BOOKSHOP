@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 views = Blueprint("views",__name__)
 
@@ -14,3 +14,12 @@ def listPage():
 @views.route("/detail/")
 def detailPage():
     return render_template('/main/detail.html')
+
+
+
+@views.route("/form/demo/",methods=["GET","POST"])
+def formPage():
+    if request.method == "POST":
+        print(request.form.get('text'))
+        
+    return render_template('/main/formTemplate.html')
