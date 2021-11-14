@@ -164,13 +164,15 @@ body{
 }
 .hamburger-btn{
     position: fixed;
-    right: 1rem;
+    left: 1rem;
     top: 1rem;
     cursor: pointer;
     background-color: #E7DFC6;
     border: none;
     border-radius: 1rem;
     box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    z-index: 6;
 
 }
 .hamburger-icon{
@@ -183,12 +185,23 @@ body{
 .nav-box{
     display: none;
     position: fixed;
-    right: 1rem;
-    top: 5rem;
+    left: 0rem;
+    top: 0rem;
+    width: 80vw;
+    height: 100vh;
     background-color: #fff;
     padding: 2rem;
-    border-radius: 1rem;
+    border-radius: 0rem 1rem 1rem 0rem;
     box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+.nav-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 .nav-link{
     font-family: 'Baloo 2', cursive;
