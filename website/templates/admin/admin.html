@@ -63,8 +63,29 @@
 <div class="bg-modal-edit">
     <div class="content-modal-edit">
         <div class="btnCloseEdit">+</div>
-        <p>Editace Uživatelé:</p>
-
+        <p id="editText">Editace Uživatelé : </p>
+        <div class="data-db">
+            <form action="">
+                <label for="name">Jméno: </label>
+                <p id="name"></p><br>
+                <label for="surname">Příjmení: </label>
+                <p id="surname"></p><br>
+                <label for="e-mail">E-mail: </label>
+                <p id="e-mail"></p><br>
+                <label for="birth_data">Dátum narození: </label>
+                <p id="birth-date"></p><br>
+                <p>Přiřazená práva:</p>               
+            
+                <p style="display: inline;">Administrátor</p>
+                <i class="fas fa-times"></i><br>
+                <p style="display: inline;">Knihovník</p>
+                <i class="fas fa-times"></i><br>
+                <p style="display: inline;">Distribútor</p>
+                <i class="fas fa-times"></i><br>
+                <p style="display: inline;">Bežný užívateľ</p>
+                <i class="fas fa-check"></i>
+            </form>
+        </div>
         <button class="btn-search btn-blue">Potvrdiť zmeny</button>
     </div>
 </div>

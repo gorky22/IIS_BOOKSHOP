@@ -55,6 +55,14 @@ $('.editBtn').click(function(e){
         url: "/admin/user/"+email,
         success: function (response) {
             var user = response['user']
+            document.getElementById('name').innerHTML = user['name']
+            document.getElementById('surname').innerHTML = user['surname']
+            document.getElementById('e-mail').innerHTML = user['email']
+            document.getElementById('birth-date').innerHTML = user['birth_date']
+            
+
+            
+            
             console.log(user['name'])
         }
     });

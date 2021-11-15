@@ -188,3 +188,22 @@ tr:nth-child(even) .editBtn:hover {
     position: relative;
 
 }
+.data-db {
+    text-align: left;
+    font-size: 1.5rem;
+    margin-left: 3rem;
+}
+
+#name, 
+#surname, 
+#e-mail, 
+#birth-date {
+    font-weight: bold;
+    display: inline;
+}
+
+.data-db i {
+    position: absolute;
+    padding-top: 4px;
+    left: 19rem;
+}

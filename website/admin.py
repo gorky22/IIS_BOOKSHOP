@@ -13,6 +13,7 @@ def adminPage():
             
     else:
         users = get_all_users()
+        print(users[0]['birth_date'])
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
@@ -33,6 +34,7 @@ def userDelete():
 @admin.route("/user/<useremail>")
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
+    print
     return {'user' : user[0]}
 
 
