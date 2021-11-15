@@ -10,6 +10,9 @@ $('.deleteBtn').click(function(e){
         dataType: "json",
         success: function (response) {
             alert(response['message'])
+
+            location.reload()   // aby obnovilo stranku 
         }
     });
 })
+
