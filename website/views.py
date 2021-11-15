@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request,session
 
 
 views = Blueprint("views",__name__)

@@ -22,7 +22,15 @@ $('#registration').click(function (e) {
         "year" : year,
     }
 
-
+    $.ajax({
+        type: "POST",
+        url: "/auth/register/",
+        data: data,
+        dataType: "json",
+        success: function (response) {
+                
+        }
+    });
 
 
 
@@ -115,9 +123,6 @@ $("#pass2").focusout(function(e){
 
 
 $('input').focusout(function(e){
-    console.log('jsme tu')
-    console.log(testSamePasswords($("#pass1"),$("#pass2")))
-
     if(testEmail($('#email').val()) && testSamePasswords($("#pass1").val(),$("#pass2").val())){
         $('#registration').prop("disabled",false)
         $('#registration').css("background-color","#623CEA")

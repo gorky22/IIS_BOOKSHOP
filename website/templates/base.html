@@ -57,12 +57,18 @@
                     <li class="link-li">
                         <a href="#" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
                     </li>
+                    {% if session['logged_in'] %}
                     <li class="link-li">
-                        <a href="{{ url_for('auth.authPage') }}" class="link-a btn btn-blue">Registrovat</a>
+                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">Ahoj {{ session['user']['email'] }} </a>
                     </li>
-                    <li class="link-li">
-                        <a href="#" class="link-a btn btn-yellow">Přihlásit se</a>
-                    </li>
+                    {% else %}
+                        <li class="link-li">
+                            <a href="{{ url_for('auth.authPage') }}" class="link-a btn btn-blue">Registrovat</a>
+                        </li>
+                        <li class="link-li">
+                            <a href="{{ url_for('auth.loginPage') }}" class="link-a btn btn-yellow">Přihlásit se</a>
+                        </li>
+                    {% endif %}
                 </ul>
             
             </div>

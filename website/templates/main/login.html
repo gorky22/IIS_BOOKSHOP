@@ -15,32 +15,16 @@
         <div class="right-part">
             
             <img src="/static/icons/logo.png" alt="bookLogo" class="topLogo">
-            <h1 class="form-header">Registrace</h1>
+            <h1 class="form-header">Login</h1>
             <form  id="registerForm">
                 <div class="input-div input-email">
                     <input type="email" placeholder="Vaše e-mailová adresa..." class="text-input" id="email">
                 </div>
-                <div class="input-div input-user">
-                    <input type="text" placeholder="Vaše křestní jméno..." class="text-input" id="firstName">
-                </div>
-                <div class="input-div input-user">
-                    <input type="text" placeholder="Vaše příjmení..." class="text-input" id="surName">
-                </div>
                 <div class="input-div input-password">
-                    <input type="password" placeholder="Vaše heslo..." class="text-input" id="pass1">
+                    <input type="password" placeholder="Vaše heslo..." class="text-input" id="pass">
                 </div>
-                <div class="input-div input-repeat">
-                    <input type="password" placeholder="Vaše heslo znovu..." class="text-input" id="pass2">
-                </div>
-                <div class="input-date">
-                    <label for="day" class="label">Den: </label>
-                    <input type="number" class="number-input" id="day" min="1" max="31" value="1">
-                    <label for="month" class="label">Měsíc: </label>
-                    <input type="number" class="number-input" id="month" min="1" max="12" value="1">
-                    <label for="month" class="label">Rok: </label>
-                    <input type="number" class="number-input" id="year" min="1900" max="2021" value="1999">
-                </div>
-                <button type="btn" class="btn btn-blue btn-long btn-disabled" id="registration" disabled>Registrovat</button>
+                
+                <button type="btn" class="btn btn-blue btn-long" id="login">Přihlásit se</button>
             </form>
         </div>
     </div>
@@ -48,5 +32,5 @@
 
 
 {% block script_block %}
-<script src="/static/js/auth.js"></script>
+<script src="/static/js/login.js"></script>
 {% endblock %}
