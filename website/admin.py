@@ -25,7 +25,8 @@ def userDelete():
     
     if request.method == "POST" :
         email = request.form.get("email")  
-        delete_user(email)
+        print("Vymazal som uzivatela", email)
+        #delete_user(email)
 
         return {'message' : f'Vymazal si uzivatela {email}'}
         

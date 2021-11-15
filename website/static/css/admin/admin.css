@@ -55,6 +55,15 @@ td{
     color: rgb(255, 255, 255);
 }
 
+.btn-search.btn-blue{
+    background-color: #623CEA;
+    color: #FFF;
+}
+.btn-search.btn-blue:hover{
+    background-color: #a38ef0;
+    color: #333;
+}
+
 input[type=text] {
     text-align: center;
     font-family: 'Baloo 2', cursive;
@@ -98,7 +107,7 @@ input[type=text]:focus, input[type=text]:hover {
     border-radius: 1rem;
     vertical-align: center;
     padding: 0.3rem;
-    
+    cursor: pointer;
 }
 
 
@@ -118,5 +127,64 @@ tr:nth-child(even) .editBtn:hover {
     color: #FFF;
 }
 
+.bg-modal-delete {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
 
+}
 
+.content-modal-delete {
+    width: 55rem;
+    height: 23rem;
+    background-color: #FFF;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    position: relative;
+
+}
+
+.btnClose, .btnCloseEdit {
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    font-size: 4rem;
+    transform: rotate(45deg);
+    cursor: pointer;
+
+}
+
+.bg-modal-edit {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content-modal-edit {
+    width: 55rem;
+    height: 35rem;
+    background-color: #FFF;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    position: relative;
+
+}

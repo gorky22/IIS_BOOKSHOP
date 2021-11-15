@@ -29,10 +29,9 @@
             <td> {{ user['registration_time'] }} </td>
             <td class="deleteForm">
                 <form method="post">
-                    <button type="button" class="editBtn" name="btnEdit">
+                    <button type="button" class="editBtn" name="btnEdit" data-edit={{ user['email'] }}>
                         <i class="fas fa-user-edit"></i>
                     </button>
-                    
                     <button type="button" class="deleteBtn" name="btnDelete" data-user={{ user['email'] }}>
                         <i class="far fa-trash-alt"></i>
                     </button>
@@ -47,6 +46,27 @@
         </tr>
         {% endfor %}
     </table>
+</div>
+<!-- Modal section -->
+<!-- Model Delete User -->
+<div class="bg-modal-delete">
+    <div class="content-modal-delete">
+        <div class="btnClose">+</div>
+        <p id="deleteText">Naozaj chceš vymazať uživateľa</p>
+        <p id="deleteEmail"></p>
+        <button id="btnYes" class="btn-search btn-yellow">Áno</button>
+        <button id="btnNo"class="btn-search btn-blue">Nie</button>
+    </div>
+</div>
+
+<!-- Model Edit User -->
+<div class="bg-modal-edit">
+    <div class="content-modal-edit">
+        <div class="btnCloseEdit">+</div>
+        <p>Editace Uživatelé:</p>
+
+        <button class="btn-search btn-blue">Potvrdiť zmeny</button>
+    </div>
 </div>
 
 {% endblock %}
