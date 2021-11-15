@@ -164,12 +164,12 @@ body{
 .dropdown-content{
     display: none;
     position: absolute;
-    min-width: 16rem;
+    min-width: 30rem;
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.233);
     text-align: center;
-    left: -100%;
+    transform: translateX(-44%);
     padding: 2rem;
 }
 .dropdown:hover .dropdown-content,
