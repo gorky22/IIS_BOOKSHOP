@@ -28,6 +28,7 @@ body{
     margin-bottom: 2rem;
     position: sticky;
     top: 0;
+    z-index: 2000;
 }
 .icon-div{
     position: relative;
@@ -167,7 +168,6 @@ body{
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.233);
-    z-index: 1;
     text-align: center;
     left: -100%;
     padding: 2rem;

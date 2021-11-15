@@ -11,20 +11,15 @@
 
 <div class="content extra-padding">
     <div class="split-left">
-        <img src="/static/img/hp1.jpg" class="book-img-detail">
+        <img src="{{ book['path_to_picture'] }}" class="book-img-detail">
     </div>
     <div class="split-right">
         <div class="top-split">
-            <h1 class="book-header-detail">Harry Potter a Kámen mudrců</h1>
-            <p class="book-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facilis, aliquam
-                eveniet et temporibus sequi, quas magni dignissimos eum laboriosam tenetur. Nostrum officia nesciunt vero
-                distinctio ipsam, est, laboriosam nisi accusantium debitis iusto quia facere eum ducimus magnam pariatur
-                maxime corrupti ea. Nobis magnam deserunt illo ducimus culpa voluptates labore repudiandae at est porro odit
-                laboriosam, odio aperiam similique optio dolore dicta asperiores, voluptatem quibusdam amet suscipit.
-                Obcaecati sed similique impedit exercitationem soluta suscipit repudiandae minima nostrum, explicabo quo.
-                Neque magni labore, veniam voluptas amet ex autem alias modi explicabo optio iusto unde deserunt aliquid,
-                harum earum reiciendis dolor. Amet.</p>
-            <p class="book-author-detail"><span class="baloo-bold">Autor: </span>J. K. Rowling</p>
+            <h1 class="book-header-detail">{{ book['name'] }}</h1>
+            <p class="book-description">{{ book['description'] }}</p>
+            <p class="book-author-detail">
+                <span class="baloo-bold">Autor: </span>J. K. Rowling
+            </p>
         </div>
         
         <div class="bottom-split">
@@ -32,8 +27,8 @@
                 <div class="top">
                     <p class="book-author-detail"><span class="baloo-bold">Hodnocení:</span></p>
                     <div class="percent-align">
-                        <img src="/static/img/rating/90percent.png" alt="rating" class="book-rating">
-                        <p class="book-rating-text">90%</p>
+                        <img src="{{ book['rating_path'] }}" alt="rating" class="book-rating">
+                        <p class="book-rating-text">{{ book['rating'] }}</p>
                     </div>
                 </div>
                 <button class="link-a btn btn-yellow">Ohodnotit</button>

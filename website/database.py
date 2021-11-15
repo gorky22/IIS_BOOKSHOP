@@ -58,11 +58,11 @@ def db_books():
 
 #this function takes as input library name
 #return dict of books in library
-def db_books_in_lib(library):
-        query = ''''SELECT b.name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
-                    JOIN Library l ON bl.library_id = l.library_id WHERE l.name = %s'''
+def db_books_in_lib(libraryid):
+        query = '''SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                    JOIN Library l ON bl.library_id = l.library_id WHERE l.library_id = %s'''
 
-        parameter = tuple([library])
+        parameter = tuple([libraryid])
         return execute_select(query,parameters=parameter)
 
 #this function returns 20 best rewiews books titles
@@ -80,6 +80,12 @@ def db_book_info(book_name):
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.name = %s'''
 
         return execute_select(query),execute_select(query2,parameters=parameter)
+
+def db_book_by_id(book_id):
+        query = "SELECT * FROM Book_title b WHERE b.title_id = %s"
+        parameter = tuple([book_id])
+
+        return execute_select(query,parameters=parameter)
 
 #takes as input id of user
 # returns all reservations from user with this id
