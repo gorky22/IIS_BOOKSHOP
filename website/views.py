@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 
+
 views = Blueprint("views",__name__)
 
 @views.route("/")
@@ -21,6 +22,6 @@ def detailPage():
 def formPage():
     if request.method == "POST":
         print(request.form.get('text'))
-        
+    
     return render_template('/main/formTemplate.html')
 
