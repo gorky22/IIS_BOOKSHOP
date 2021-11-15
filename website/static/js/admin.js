@@ -5,7 +5,7 @@ $('.deleteBtn').click(function(e){
     e.stopImmediatePropagation();
 
     var email= {"email" : $(this).data('user')}
-
+    
     let str  = email['email']
     
 
@@ -48,14 +48,19 @@ $('.editBtn').click(function(e){
 
 
     
-    var o =  $(this).data('edit')
-
-    alert($(this).data('edit')['email'])
+    var email =  $(this).data('edit')
+    var user = false
+    $.ajax({
+        type: "GET",
+        url: "/admin/user/"+email,
+        success: function (response) {
+            var user = response['user']
+            console.log(user['name'])
+        }
+    });
+    console.log(user['name'])
     document.querySelector('.bg-modal-edit').style.display = 'flex'
     
-    for (var prop in o) {
-        console.log(prop, o[prop]);
-     }
 
 
      // ak bolo stlacene tlacidlo exit

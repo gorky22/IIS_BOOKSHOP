@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-from website.database import delete_user, find_user, get_all_users, get_user_with_this_email
+from .database import *
 
 admin = Blueprint("admin",__name__)
 
@@ -30,6 +30,12 @@ def userDelete():
 
         return {'message' : f'Vymazal si uzivatela {email}'}
         
+@admin.route("/user/<useremail>")
+def get_user_by_id(useremail):
+    user = get_user_with_this_email(useremail)
+    return {'user' : user[0]}
+
+
 
 @admin.route("/libraries/")
 def libPage():
