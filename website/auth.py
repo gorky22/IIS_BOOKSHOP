@@ -23,7 +23,7 @@ def authPage():
         else:
             add_user(firstName,surName,email,birth_date,password,admin=True)
             print("Zaregistrováno!!!!!")
-            return {'message': 'OK','err': False}
+            return {'message': 'OK','err': False,'url': url_for('views.viewsPage')}
         
 
 
@@ -36,13 +36,13 @@ def loginPage():
         password = request.form.get('pass')
         user_from_db = get_user_with_this_email(email)
         if len(user_from_db) > 0:
-            #uzivatel s emailem existuje
             user_from_db = user_from_db[0]
             if sha256.verify(password,user_from_db.get('Password')):
                 session['logged_in'] = True
                 del user_from_db['Password']
                 session['user'] = user_from_db
-            return {'message' : 'OK','err':False}
+                return {'message' : 'OK','err':False,'url': url_for('views.viewsPage')}
+            return {'message' : 'Spatne heslo','err':True}
         else:
             return {'message' : 'E-mail neexistuje','err':True}
 

@@ -29,7 +29,12 @@ $('#registration').click(function (e) {
         dataType: "json",
         success: function (response) {
             if(response['err']){
-                   
+                Toast.show(response['message'],'E')
+            } else {
+                Toast.show('Byl jste úspěšně zaregistrován','S')
+                setTimeout(() => {
+                   window.location.href = response['url'];
+                },2000)
             }
         }
     });
