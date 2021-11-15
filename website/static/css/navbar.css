@@ -29,6 +29,16 @@ body{
     position: sticky;
     top: 0;
 }
+.icon-div{
+    position: relative;
+
+}
+.icon{
+    width: 3rem;
+    margin-top: .9rem;
+    cursor: pointer;
+}
+
 .nav-content{
     max-width: 120rem;
     margin: auto;
@@ -45,6 +55,25 @@ body{
     margin: auto;
     padding: 2rem;
     margin-bottom: 2rem;
+}
+.admin-url{
+    font-size: 2rem;
+    background-color: #F00;
+    color: #fff;
+    border-radius: 1rem;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    transition: 0.3s all;
+}
+.admin-url:hover,
+.admin-url:focus{
+    color: #fff;
+    background-color: #000;
 }
 @media only screen and (max-width: 1200px){
     .content{
@@ -64,6 +93,7 @@ body{
     font-size: 1.8rem;
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 
@@ -157,7 +187,47 @@ body{
     color: #623CEA;
 
 }
+.drop-link.btn.btn-blue{
+    color: #fff;
+}
 
+/*******************************************************/
+
+
+.dropdown-user{
+    position: relative;
+    
+}
+.dropdown-content-user{
+    display: none;
+    position: absolute;
+    min-width: 20rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.233);
+    z-index: 1;
+    text-align: center;
+    transform: translate(-85%);
+    padding: 2rem;
+}
+.dropdown-user:hover .dropdown-content-user{
+    display: block;
+
+}
+.dropdown-content-user .drop-link{
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin: 0.5rem 0;
+    transition: 0.3s all;
+}
+.dropdown-content-user .drop-link:hover{
+    color: #623CEA;
+
+}
+.drop-link.btn.btn-blue{
+    color: #fff;
+}
 /*********************Hamburger menu*************************/
 
 .res-navbar{

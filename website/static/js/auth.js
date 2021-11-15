@@ -36,6 +36,9 @@ $('#registration').click(function (e) {
                    window.location.href = response['url'];
                 },2000)
             }
+        },
+        error: function (response){
+            Toast.show('Při registraci nastala chyba. Zkuste to prosím později','E')
         }
     });
 
