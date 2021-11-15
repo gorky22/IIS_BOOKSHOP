@@ -10,3 +10,6 @@ Damiane pls udělej tyto selecty:
     Select na všechny knihovny v systému    db_libraries() Done
     Select na knihovny, které mají danou knihu (dostaneš jméno knihy a najdeš všechny knihovny, co ji mají) db_libraries_with_book(book_name)
     
+    ----------- Hanzelm --------
+    Select na všetkých uživateľov get_all_users()
+    Delete uzivatela delete_user(email)
