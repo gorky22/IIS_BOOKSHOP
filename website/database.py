@@ -109,7 +109,7 @@ def get_all_users():
 
 # this function takes as input email of user which will be deleted
 def delete_user(email):
-        param = tuple(["gorcak.damian@tmp.sk"])
+        param = tuple([email])
         query = "DELETE FROM User WHERE email=%s"
 
         cursor = db_connection.cursor()
