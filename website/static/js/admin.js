@@ -2,14 +2,17 @@
 $('.deleteBtn').click(function(e){
     e.preventDefault()
 
-    var name= {"name" : $(this).data('user')}
+    var email= {"email" : $(this).data('user')}
     $.ajax({
         type: "POST",
         url: "/admin/delete/",
-        data: name,
+        data: email,
         dataType: "json",
         success: function (response) {
-            alert(response['name'])
+            alert(response['message'])
+
+            location.reload()   // aby obnovilo stranku 
         }
     });
 })
+
