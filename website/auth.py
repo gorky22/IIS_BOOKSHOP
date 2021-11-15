@@ -22,6 +22,10 @@ def authPage():
             return {'message': 'Uživatel s tímto e-mailem již existuje.','err': True}
         else:
             add_user(firstName,surName,email,birth_date,password,admin=True)
+            user_from_db = get_user_with_this_email(email)[0]
+            session['logged_in'] = True
+            del user_from_db['Password']
+            session['user'] = user_from_db
             print("Zaregistrováno!!!!!")
             return {'message': 'OK','err': False,'url': url_for('views.viewsPage')}
         
