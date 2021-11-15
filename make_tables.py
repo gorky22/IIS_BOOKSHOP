@@ -269,15 +269,28 @@ db_connection.commit()
 #to_insert = ("Jan","Baraniak","bar@tmp.sk",datetime.date(1978,5,1),"kdsada",int(False),int(False),int(False),int(True),int(False))
 #cursor.execute('''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader, unregistered) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',to_insert)
 #db_connection.commit()
+
+
+#how many books on library
+
+#autory
 '''
-x = ('gorcak.damian@tmp.sk')
-
-query = 'SELECT * FROM User WHERE email=%s'
-parameter = tuple([x])
-
+library = "Mrazivé zlato"
+parameter = tuple([library])
+query = "SELECT a.name FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+              JOIN Author a ON ba.author_id = a.author_id WHERE b.name = %s"
 
 cursor.execute(query,parameter)
-        
+
+'''
+
+library = "Pre"
+parameter = tuple([library])
+cursor.execute('''SELECT l.name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+              JOIN Library l ON bl.library_id = l.library_id WHERE b.name = %s ''',parameter)
+
+      
+
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -292,3 +305,4 @@ print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
 # enter your code here!
+'''
