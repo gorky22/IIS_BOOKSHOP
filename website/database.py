@@ -118,3 +118,10 @@ def delete_user(email):
         db_connection.commit()
         cursor.close()
 
+#this function finds user via mailr or name or surname acording to input
+def find_user(string_to_find):
+        
+        param = tuple([string_to_find for i in range(3)])
+        query = "SELECT * FROM User WHERE email=%s or name=%s or surname=%s"
+
+        return execute_select(query,parameters=param)
