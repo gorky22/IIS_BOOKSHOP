@@ -19,6 +19,96 @@
 .right-part{
     width: 55rem;
     height: 100%;
-    background-color: rgb(21, 255, 0);
+    background-color: rgb(255, 255, 255);
     border-radius: 0rem 2rem 2rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.topLogo{
+    width: 13rem;
+    margin-bottom: 4rem;
+}
+.form-header{
+    text-align: center;
+    font-size: 2.6rem;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    color: #623CEA;
+    margin-bottom: 2rem;
+}
+.text-input{
+    font-size: 1.8rem;
+    width: 100%;
+    padding: 0.5rem 0;
+    padding-left: 5rem;
+    border-radius: 2rem;
+    border: 1px solid #623CEA;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+    box-shadow: 5px 0px 5px rgba(0,0,0, 0.2);
+    
+}
+#registerForm{
+    width: 80%;
+}
+.input-div{
+    position: relative;
+    margin-bottom: 2rem;
+}
+.input-div::before {
+    content: "";
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+}
+.input-email:before {
+    background: url("/static/icons/email.png") center / contain no-repeat;
+}
+.input-user:before {
+    background: url("/static/icons/user.png") center / contain no-repeat;
+}
+.input-password:before {
+    background: url("/static/icons/lock.png") center / contain no-repeat;
+}
+.input-repeat:before {
+    background: url("/static/icons/repeat.png") center / contain no-repeat;
+}
+
+
+.input-date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.number-input{
+    width: 7rem;
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem ;
+    border-radius: 2rem;
+    border: 1px solid #623CEA;
+    margin-right: 1rem;
+    text-align: center;
+}
+.number-input:last-child{
+    margin-right: 0;
+}
+.number-input#year{
+    width: 9rem;
+}
+.label{
+    font-size: 1.8rem;
+    margin-right: 1rem;
+}
+.btn-long{
+    width: 100%;
+}
+.btn.btn-disabled{
+    background-color: #FF0000;
+    cursor: not-allowed;
 }

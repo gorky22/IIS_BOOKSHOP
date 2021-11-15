@@ -107,6 +107,7 @@ body{
     box-shadow: 0px 5px 7px #0000002a;
     border: none;
     cursor: pointer;
+    transition: 0.3s all ease-in-out 0s;
 }
 .btn.btn-yellow{
     background-color: #E7DFC6;
