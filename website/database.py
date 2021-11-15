@@ -128,3 +128,11 @@ def find_user(string_to_find):
         query = "SELECT * FROM User WHERE email=%s or name=%s or surname=%s"
 
         return execute_select(query,parameters=param)
+
+#this function returns book which has this genre
+def db_books_with_genre(genre):
+        param = tuple([genre])
+        query = '''SELECT b.name FROM  Book_title b JOIN  Tag t ON b.title_id = t.title_id 
+                JOIN Genre g ON t.genre_id = g.genre_id WHERE g.name=%s'''
+
+        return execute_select(query,parameters=param)
