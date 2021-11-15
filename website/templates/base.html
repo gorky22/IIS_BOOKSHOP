@@ -18,6 +18,9 @@
         <title>Book Reserver</title>
     </head>
     <body>
+        {% if session['user']['admin'] %}
+            <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+        {% endif %}
         <div class="res-navbar" >
             <button class="hamburger-btn" id="btn-menu">
                 <img src="/static/img/ham.svg" class="hamburger-icon" id="hamburger">
@@ -27,9 +30,13 @@
                 <div class="nav-flex">
                     <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
                     <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
-                    <a href="#" class="nav-link">Knihovny</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knihovny</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Ankety</a>
                     {% if session['logged_in'] %}
-                        <a href="{{ url_for('auth.logout') }}" class="nav-link btn btn-blue">{{ session['user']['email'] }} </a>
+                        <a href="#" class="nav-link">Ahoj {{ session['user']['name'] }} </a>
+                        <!-- {{ url_for('auth.logout') }} -->
+                        <a href="#" class="nav-link">Moje Rezervace</a>
+                        <a href="{{ url_for('auth.logout') }}"" class="nav-link btn btn-blue">Odhlásit se</a>
                     {% else %}
                         <a href="{{ url_for('auth.authPage') }}" class="nav-link btn btn-blue">Registrovat</a>
                         <a href="{{ url_for('auth.loginPage') }}" class="nav-link btn btn-yellow">Přihlásit se</a>
@@ -66,7 +73,15 @@
                     </li>
                     {% if session['logged_in'] %}
                     <li class="link-li">
-                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">{{ session['user']['email'] }} </a>
+                        <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/quiz/' else 'class=link-a' }}>Ankety</a>
+                    </li>
+                    <li class="link-li dropdown-user">
+                        <img src="/static/icons/userBL.png" class="icon">
+                        <div class="dropdown-content-user">
+                            <a href="#" class="drop-link">Ahoj {{ session['user']['name'] }}</a>
+                            <a href="#" class="drop-link">Rezervace</a>
+                            <a href="{{ url_for('auth.logout') }}" class="drop-link btn btn-blue">Odhlásit se</a>
+                        </div>
                     </li>
                     {% else %}
                         <li class="link-li">

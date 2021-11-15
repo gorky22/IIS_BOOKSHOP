@@ -22,6 +22,9 @@ $("#login").click(function(e){
                    window.location.href = response['url'];
                 },1000)
             }
+        },
+        error: function (response){
+            Toast.show('Při přihlašování nastala chyba. Zkuste to prosím později','E')
         }
     });
 
