@@ -12,4 +12,5 @@ Damiane pls udělej tyto selecty:
     
     ----------- Hanzelm --------
     Select na všetkých uživateľov get_all_users()
+    Select na najdenia usera find_user(buď meno alebo email)
     Delete uzivatela delete_user(email)
