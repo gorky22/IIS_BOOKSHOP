@@ -301,9 +301,17 @@ for row in records:
 print(results)
 '''
 #param = tuple(["gorcak.damian@tmp.sk"])
+param = tuple(["Tomáš" for i in range(3)])
+        
+cursor.execute('''select * from User where email=%s or name = %s or surname = %s''',param)
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
 
-cursor.execute("ALTER TABLE User ADD registration_time TIMESTAMP not null AFTER user_id;")
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
 
+print(results)
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
