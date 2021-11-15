@@ -14,3 +14,25 @@ Damiane pls udělej tyto selecty:
     Select na všetkých uživateľov get_all_users() Done
     Select na najdenia usera find_user(buď meno alebo email) Done
     Delete uzivatela delete_user(email) Done
+
+
+
+
+
+
+
+------------------> INSERTY
+Potřeboval bych aby v databázi byli aspon 4 knhovny:
+    1. knihovna : Název-Knihovna Židlochovice, Adresa: Nádražní 232, 667 01 Židlochovice, E-mail: knhovna2@mkzidlochovice.cz
+    2. knihovna : Název-Moravská zemská knihovna v Brně, Adresa: Kounicova 65a, 601 87 Brno-střed, E-mail: mzk@mzk.cz
+    3. knihovna : Název-Knihovna Jiřího Mahena v Brně, adresa a email klidně stejné jako u předchozí knihovny
+    4. knihovna : Název-Ústřední knihovna VUT v Brně, adresa a email random nebo stejné jako u předchozích
+
+    U každé knihovny prosím nastav cestu k fotce knihovny:
+        Ty vesty jsou vesměs stejné /static/img/libraries/<jmenoSouboru>
+        - pro knihovnu 1 - jmenoSouboru = lib1.jpeg
+        - pro knihovnu 2 - jmenoSouboru = lib2.jpg
+        - pro knihovnu 3 - jmenoSouboru = lib3.jpg
+        - pro knihovnu 4 - jmenoSouboru = lib4.jpg
+
+    !!! K TOMU BY BYLO DOBRÉ UŽ VYTVOŘIT NĚJAKÉ KNÍŽKY, KTERÉ TYTO KNIHOVNY MAJÍ A SELECT, KTERÝ JSEM TI PSAL NAHORU (ŘÁDEK 8) !!!

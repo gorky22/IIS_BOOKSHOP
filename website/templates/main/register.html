@@ -11,10 +11,11 @@
     <div class="centered-block">
         <div class="left-part">
             <!-- HERE IMAGE -->
+            <img src="/static/img/loginlib.png" alt="books" class="left-side-img">
         </div>
         <div class="right-part">
             
-            <img src="/static/icons/logo.png" alt="bookLogo" class="topLogo">
+            <a href="{{ url_for('views.viewsPage') }}"><img src="/static/icons/logo.png" alt="bookLogo" class="topLogo"></a>
             <a href="{{ url_for('auth.loginPage') }}" class="change-url">Přihlášení</a>
             <h1 class="form-header">Registrace</h1>
             <form  id="registerForm">
@@ -34,12 +35,18 @@
                     <input type="password" placeholder="Vaše heslo znovu..." class="text-input" id="pass2">
                 </div>
                 <div class="input-date">
-                    <label for="day" class="label">Den: </label>
-                    <input type="number" class="number-input" id="day" min="1" max="31" value="1">
-                    <label for="month" class="label">Měsíc: </label>
-                    <input type="number" class="number-input" id="month" min="1" max="12" value="1">
-                    <label for="month" class="label">Rok: </label>
-                    <input type="number" class="number-input" id="year" min="1900" max="2021" value="1999">
+                    <div class="number-box">
+                        <label for="day" class="label">Den: </label>
+                        <input type="number" class="number-input" id="day" min="1" max="31" value="1">
+                    </div>
+                    <div class="number-box">
+                        <label for="month" class="label">Měsíc: </label>
+                        <input type="number" class="number-input" id="month" min="1" max="12" value="1">
+                    </div>
+                    <div class="number-box">
+                        <label for="month" class="label">Rok: </label>
+                        <input type="number" class="number-input" id="year" min="1900" max="2021" value="1999">
+                    </div>
                 </div>
                 <button type="btn" class="btn btn-blue btn-long btn-disabled" id="registration" disabled>Registrovat</button>
             </form>
