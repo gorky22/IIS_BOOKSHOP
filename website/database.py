@@ -72,11 +72,14 @@ def db_top_books():
         return execute_select(query)
 
 #takes as input name of book_title
-#returns all informations about this book 
+#returns all informations about this book and also dict of authors 
 def db_book_info(book_name):
         query = "SELECT * FROM Book_title"
+        parameter = tuple([book_name])
+        query2 = '''SELECT a.name a.surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+                    JOIN Author a ON ba.author_id = a.author_id WHERE b.name = %s'''
 
-        return execute_select(query)
+        return execute_select(query),execute_select(query2,parameters=parameter)
 
 #takes as input id of user
 # returns all reservations from user with this id
@@ -118,7 +121,7 @@ def delete_user(email):
         db_connection.commit()
         cursor.close()
 
-#this function finds user via mailr or name or surname acording to input
+#this function finds user via mail or name or surname acording to input
 def find_user(string_to_find):
         
         param = tuple([string_to_find for i in range(3)])
