@@ -266,14 +266,27 @@ db_connection.commit()
 #cursor.execute(make_reservation)
 
   
-to_insert = ("Jan","Baraniak","bar@tmp.sk",datetime.date(1978,5,1),"kdsada",int(False),int(False),int(False),int(True),int(False))
-cursor.execute('''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader, unregistered) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',to_insert)
-db_connection.commit()
-#records = cursor.fetchall()
-#print(records)
-#print("Total number of rows in table: ", cursor.rowcount)
+#to_insert = ("Jan","Baraniak","bar@tmp.sk",datetime.date(1978,5,1),"kdsada",int(False),int(False),int(False),int(True),int(False))
+#cursor.execute('''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader, unregistered) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',to_insert)
+#db_connection.commit()
+'''
+x = ('gorcak.damian@tmp.sk')
+
+query = 'SELECT * FROM User WHERE email=%s'
+parameter = tuple([x])
 
 
+cursor.execute(query,parameter)
+        
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
+
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
+
+print(results)
+'''
 print("Connected to:", db_connection.get_server_info())
 
 db_connection.close()
