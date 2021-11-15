@@ -102,7 +102,19 @@ def db_libraries_with_book(book_name):
         return execute_select(query,parameters=parameter)
 
 #this function returns all users in system
-def db_Users():
+def get_all_users():
         query = "SELECT * FROM User"
 
         return execute_select(query)
+
+# this function takes as input email of user which will be deleted
+def delete_user(email):
+        param = tuple(["gorcak.damian@tmp.sk"])
+        query = "DELETE FROM User WHERE email=%s"
+
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+

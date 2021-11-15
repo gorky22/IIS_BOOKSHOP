@@ -282,11 +282,15 @@ query = "SELECT a.name FROM  Book_title b JOIN Book_title_author ba ON b.title_i
 
 cursor.execute(query,parameter)
 
-'''
 
-cursor.execute('''ALTER TABLE User DROP COLUMN unregistered''')
-'''
+x = tuple(["votes"])
+#cursor.execute("ALTER TABLE Reservation DROP FOREIGN KEY lending_handler")
 
+cursor.execute("ALTER TABLE Lending ADD CONSTRAINT lending_handler FOREIGN KEY (handler_id) references User(user_id) ON DELETE CASCADE")
+
+
+'''
+cursor.execute("select * from user")
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -295,9 +299,11 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-'''
-print("Connected to:", db_connection.get_server_info())
 
+#param = tuple(["gorcak.damian@tmp.sk"])
+#cursor.execute("DELETE FROM User WHERE email=%s",param)
+
+print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
 # enter your code here!
