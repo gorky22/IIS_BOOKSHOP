@@ -26,7 +26,7 @@ def authPage():
             session['logged_in'] = True
             del user_from_db['Password']
             session['user'] = user_from_db
-            print("Zaregistrováno!!!!!")
+            #print("Zaregistrováno!!!!!")
             return {'message': 'OK','err': False,'url': url_for('views.viewsPage')}
         
 
@@ -45,7 +45,7 @@ def loginPage():
                 session['logged_in'] = True
                 del user_from_db['Password']
                 session['user'] = user_from_db
-                print(session['user'])
+                #print(session['user'])
                 return {'message' : 'OK','err':False,'url': url_for('views.viewsPage')}
             return {'message' : 'Spatne heslo','err':True}
         else:
