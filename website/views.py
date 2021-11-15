@@ -64,7 +64,8 @@ def booksByGenre(genreid):
 def booksInLibrary(library):
     
     books = db_books_in_lib(library)
-
+    library = db_library_info(library)[0]['name']
+    print(library)
     result = []
     for i in range(0,len(books),5):
         end = i+5 if (i+5) < len(books) else len(books)
@@ -74,7 +75,7 @@ def booksInLibrary(library):
             tmp.append(book)
         result.append(tmp)
 
-    return render_template("/main/list.html",books=result,library=library,genres=genres)
+    return render_template("/main/list.html",books=result,library=library,genres=genres,library_name=library)
 
 @views.route("/detail/<bookid>")
 def bookDetail(bookid):

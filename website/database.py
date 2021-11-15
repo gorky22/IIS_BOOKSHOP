@@ -153,3 +153,9 @@ def db_genre_info(genreid):
         query = '''SELECT * FROM Genre WHERE genre_id=%s'''
         param=tuple([genreid])
         return execute_select(query,parameters=param)
+
+def db_library_info(libid):
+
+        query = '''SELECT name FROM Library WHERE library_id=%s'''
+        param=tuple([libid])
+        return execute_select(query,parameters=param)
