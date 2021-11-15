@@ -1,9 +1,9 @@
 import mysql.connector as mysql
 import _datetime as datetime
-HOST = "sql11.freesqldatabase.com" 
-DATABASE = "sql11449509"
-USER = "sql11449509"
-PASSWORD = "1JR1eSrwxJ"
+HOST = "eu-cdbr-west-01.cleardb.com" 
+DATABASE = "heroku_c8164a0212f5cf6"
+USER = "b91cfec2095f4d"
+PASSWORD = "4fd07a3f"
 
 db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
 cursor = db_connection.cursor()
@@ -20,6 +20,7 @@ drop_tables = '''DROP TABLE IF EXISTS Book_title_author;
 make_library = '''
       CREATE TABLE Library(
       library_id int AUTO_INCREMENT PRIMARY KEY,
+      name varchar(30) not null,
       town VARCHAR(20) NOT NULL,
       street VARCHAR(20) NOT NULL,
       house_number VARCHAR(20) NOT NULL,              # because can be in shape like 256/22 thats why varchar 
@@ -98,10 +99,10 @@ insert_Book_title_author= '''INSERT INTO Book_title_author(title_id,author_id)
 make_user = '''
       CREATE TABLE User(
       user_id int AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(20) ,
-      surname VARCHAR(20) ,
-      email VARCHAR(30),
-      birth_date DATE,
+      name VARCHAR(20) not null,
+      surname VARCHAR(20) not null,
+      email VARCHAR(30) not null,
+      birth_date DATE not null,
       password VARCHAR(30),
       admin BOOLEAN,
       librarian BOOLEAN,
@@ -200,8 +201,8 @@ to_insert = (datetime.date(2021, 9, 11),"9788055907475",5.9,
                    ,"/static/img/JMENO_SOUBORU","Petra")
 cursor.execute(insert_Book_title,to_insert)
 db_connection.commit()
-
-
+'''
+'''
 to_insert = (1,3,100)
 cursor.execute(insert_Book_title_library,to_insert)
 db_connection.commit()
@@ -231,6 +232,7 @@ db_connection.commit()
 to_insert = (2,1)
 cursor.execute(insert_Book_title_author,to_insert)
 db_connection.commit()
+
 '''
  ## authors of book
 #cursor.execute('''SELECT a.name FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
@@ -246,16 +248,45 @@ db_connection.commit()
 #               JOIN Library l ON l.library_id = v.library_id join User u on u.user_id = v.user_id GROUP BY l.town, b.name''')
 
 #20 best books
-cursor.execute('''SELECT b.name,l.town, count(*)  FROM Book_title b JOIN Votes v ON b.title_id = v.title_id 
-               JOIN Library l ON l.library_id = v.library_id join User u on u.user_id = v.user_id GROUP BY l.town, b.name order by count(*) DESC limit 1''')
+#cursor.execute('''SELECT b.name,l.town, count(*)  FROM Book_title b JOIN Votes v ON b.title_id = v.title_id 
+#               JOIN Library l ON l.library_id = v.library_id join User u on u.user_id = v.user_id GROUP BY l.town, b.name order by count(*) DESC limit 1''')
 
 #cursor.execute('''ALTER TABLE Lending 
 #ADD Column library_id int not null''')
 
-records = cursor.fetchall()
-print("Total number of rows in table: ", cursor.rowcount)
+#print(records)
+#cursor.execute(make_library)
+#cursor.execute(make_book_title)
+#cursor.execute(make_book_title_library)
+#cursor.execute(make_author)
+#cursor.execute(make_book_title_author)
+#cursor.execute(make_user)
+#cursor.execute(make_votes)
+##cursor.execute(make_lending)
+#cursor.execute(make_reservation)
 
-print(records)
+  
+#to_insert = ("Jan","Baraniak","bar@tmp.sk",datetime.date(1978,5,1),"kdsada",int(False),int(False),int(False),int(True),int(False))
+#cursor.execute('''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader, unregistered) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''',to_insert)
+#db_connection.commit()
+'''
+x = ('gorcak.damian@tmp.sk')
+
+query = 'SELECT * FROM User WHERE email=%s'
+parameter = tuple([x])
+
+
+cursor.execute(query,parameter)
+        
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
+
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
+
+print(results)
+'''
 print("Connected to:", db_connection.get_server_info())
 
 db_connection.close()

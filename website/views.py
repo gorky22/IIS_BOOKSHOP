@@ -23,3 +23,4 @@ def formPage():
         print(request.form.get('text'))
         
     return render_template('/main/formTemplate.html')
+
