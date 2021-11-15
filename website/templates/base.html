@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/navbar.css">
         <link rel="stylesheet" href="/static/css/toast.css">
-        <link rel='shortcut icon' type='image/x-icon' href='static/img/bookinCircle.ico' />
+        <link rel='shortcut icon' type='image/x-icon' href='/static/img/bookinCircle.ico' />
         {% block link_block %}
 
         {% endblock %}
@@ -62,7 +62,7 @@
                         </div>
                     </li>
                     <li class="link-li">
-                        <a href="#" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
+                        <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
                     </li>
                     {% if session['logged_in'] %}
                     <li class="link-li">
