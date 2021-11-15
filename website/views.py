@@ -25,3 +25,6 @@ def formPage():
     
     return render_template('/main/formTemplate.html')
 
+@views.route("/libraries/")
+def librariesPage():
+    return render_template('/main/libraries.html')

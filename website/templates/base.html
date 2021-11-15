@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/navbar.css">
         <link rel="stylesheet" href="/static/css/toast.css">
+        <link rel='shortcut icon' type='image/x-icon' href='static/img/bookinCircle.ico' />
         {% block link_block %}
 
         {% endblock %}
@@ -24,12 +25,16 @@
             </button>
             <div class="nav-box">
                 <div class="nav-flex">
-                <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
-                <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
-                <a href="#" class="nav-link">Knihovny</a>
-                <a href="#" class="nav-link btn btn-blue">Registrovat</a>
-                <a href="#" class="nav-link btn btn-yellow">Přihlásit se</a>
-            </div>
+                    <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
+                    <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
+                    <a href="#" class="nav-link">Knihovny</a>
+                    {% if session['logged_in'] %}
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link btn btn-blue">{{ session['user']['email'] }} </a>
+                    {% else %}
+                        <a href="{{ url_for('auth.authPage') }}" class="nav-link btn btn-blue">Registrovat</a>
+                        <a href="{{ url_for('auth.loginPage') }}" class="nav-link btn btn-yellow">Přihlásit se</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
 
@@ -61,7 +66,7 @@
                     </li>
                     {% if session['logged_in'] %}
                     <li class="link-li">
-                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">Ahoj {{ session['user']['email'] }} </a>
+                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">{{ session['user']['email'] }} </a>
                     </li>
                     {% else %}
                         <li class="link-li">
