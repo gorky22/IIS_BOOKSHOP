@@ -5,9 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/static/css/navbar.css">
+        <link rel="stylesheet" href="/static/css/toast.css">
+        <link rel='shortcut icon' type='image/x-icon' href='/static/img/bookinCircle.ico' />
         {% block link_block %}
 
         {% endblock %}
+        
         <script
 			  src="https://code.jquery.com/jquery-3.6.0.min.js"
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -15,6 +18,9 @@
         <title>Book Reserver</title>
     </head>
     <body>
+        {% if session['user']['admin'] %}
+            <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+        {% endif %}
         <div class="res-navbar" >
             <button class="hamburger-btn" id="btn-menu">
                 <img src="/static/img/ham.svg" class="hamburger-icon" id="hamburger">
@@ -22,12 +28,20 @@
             </button>
             <div class="nav-box">
                 <div class="nav-flex">
-                <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
-                <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
-                <a href="#" class="nav-link">Knihovny</a>
-                <a href="#" class="nav-link btn btn-blue">Registrovat</a>
-                <a href="#" class="nav-link btn btn-yellow">Přihlásit se</a>
-            </div>
+                    <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
+                    <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knihovny</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Ankety</a>
+                    {% if session['logged_in'] %}
+                        <a href="#" class="nav-link">Ahoj {{ session['user']['name'] }} </a>
+                        <!-- {{ url_for('auth.logout') }} -->
+                        <a href="#" class="nav-link">Moje Rezervace</a>
+                        <a href="{{ url_for('auth.logout') }}"" class="nav-link btn btn-blue">Odhlásit se</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.authPage') }}" class="nav-link btn btn-blue">Registrovat</a>
+                        <a href="{{ url_for('auth.loginPage') }}" class="nav-link btn btn-yellow">Přihlásit se</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
 
@@ -55,11 +69,19 @@
                         </div>
                     </li>
                     <li class="link-li">
-                        <a href="#" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
+                        <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
                     </li>
                     {% if session['logged_in'] %}
                     <li class="link-li">
-                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">Ahoj {{ session['user']['email'] }} </a>
+                        <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/quiz/' else 'class=link-a' }}>Ankety</a>
+                    </li>
+                    <li class="link-li dropdown-user">
+                        <img src="/static/icons/userBL.png" class="icon">
+                        <div class="dropdown-content-user">
+                            <a href="#" class="drop-link">Ahoj {{ session['user']['name'] }}</a>
+                            <a href="#" class="drop-link">Rezervace</a>
+                            <a href="{{ url_for('auth.logout') }}" class="drop-link btn btn-blue">Odhlásit se</a>
+                        </div>
                     </li>
                     {% else %}
                         <li class="link-li">
@@ -79,10 +101,10 @@
         {% block body_block %}
         
         {% endblock %}
-
+        
 
         <script src="/static/js/navbarResp.js"></script>
-
+        <script src="/static/js/Toast.js"></script>
 
         {% block script_block %}
 

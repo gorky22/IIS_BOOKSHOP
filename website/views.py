@@ -25,3 +25,12 @@ def formPage():
     
     return render_template('/main/formTemplate.html')
 
+@views.route("/libraries/")
+def librariesPage():
+    return render_template('/main/libraries.html')
+
+
+@views.route("books/library/<library>")
+def booksInLibrary(library):
+    # get books for library
+    return render_template("/main/list.html",library=library)

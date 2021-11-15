@@ -12,8 +12,13 @@
 .left-part{
     width: 55rem;
     height: 100%;
-    background-color: rgb(255, 0, 0);
     border-radius: 2rem 0rem 0rem 2rem;
+}
+.left-side-img{
+    height: 100%;
+	object-fit: cover;
+    object-position: -16rem 0%;
+	border-radius: 1rem 0rem 0rem 1rem;	
 }
 
 .right-part{
@@ -111,4 +116,56 @@
 .btn.btn-disabled{
     background-color: #FF0000;
     cursor: not-allowed;
+}
+
+
+.change-url{
+    font-size: 1.4rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+    transition: 0.3s all;
+}
+.change-url:hover{
+    color: #623CEA;
+}
+.number-box{
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1200px){
+    .left-part{
+        display: none;
+    }
+    .right-part{
+        border-radius: 2rem;
+    }
+    .centered-block{
+        width: 55rem;
+    }
+}
+@media only screen and (max-width: 550px){
+
+    .right-part{
+        width: 40rem;
+        border-radius: 2rem;
+    }
+    .centered-block{
+        width: 30rem;
+        height: 80rem;
+    }
+    .input-date{
+        flex-wrap: wrap;
+    }
+    .number-input{
+        font-size: 1.4rem;
+    }
+    .label{
+        font-size: 1.4rem;
+    }
+    .text-input{
+        font-size: 1.6rem;
+    }
+
 }

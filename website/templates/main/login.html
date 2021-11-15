@@ -11,11 +11,15 @@
     <div class="centered-block">
         <div class="left-part">
             <!-- HERE IMAGE -->
+
+            <img src="/static/img/loginlib.png" alt="books" class="left-side-img">
         </div>
         <div class="right-part">
             
             <img src="/static/icons/logo.png" alt="bookLogo" class="topLogo">
-            <h1 class="form-header">Login</h1>
+            <a href="{{ url_for('auth.authPage') }}" class="change-url">Registrace</a>
+            <h1 class="form-header">Přihlášení</h1>
+            
             <form  id="registerForm">
                 <div class="input-div input-email">
                     <input type="email" placeholder="Vaše e-mailová adresa..." class="text-input" id="email">

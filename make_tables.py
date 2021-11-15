@@ -30,6 +30,26 @@ make_library = '''
       path_to_picture VARCHAR(35)
       )
 '''
+
+#script for library table
+make_genre = '''
+      CREATE TABLE Genre(
+      genre_id int AUTO_INCREMENT PRIMARY KEY,
+      name varchar(30) not null
+      )
+'''
+
+#script for table which represent bindings with book_title and library
+make_book_title_genre = '''
+      CREATE TABLE Tag(
+      title_id int not null,
+      genre_id int not null,
+      CONSTRAINT tag_title foreign key (title_id) references Book_title(title_id),
+      CONSTRAINT tag_genre foreign key (genre_id) references Genre(genre_id),
+      CONSTRAINT tag_unique UNIQUE (title_id, genre_id)
+      )
+'''
+
 insert_library = '''INSERT INTO Library(town,street,house_number,opening_hours,description,webpage_link,path_to_picture) 
                     VALUES(%s, %s, %s, %s, %s, %s, %s)
 '''
@@ -277,7 +297,7 @@ db_connection.commit()
 '''
 library = "Mrazivé zlato"
 parameter = tuple([library])
-query = "SELECT a.name FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+query = "SELECT a.name a.surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
               JOIN Author a ON ba.author_id = a.author_id WHERE b.name = %s"
 
 cursor.execute(query,parameter)
@@ -299,11 +319,11 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-'''
+
 #param = tuple(["gorcak.damian@tmp.sk"])
 param = tuple(["Tomáš" for i in range(3)])
         
-cursor.execute('''select * from User where email=%s or name = %s or surname = %s''',param)
+cursor.execute("select * from User where email=%s or name = %s or surname = %s")
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -312,6 +332,12 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
+
+'''
+
+cursor.execute("ALTER TABLE Library DROP COLUMN street;")
+cursor.execute("ALTER TABLE Library add COLUMN adress varchar(50) not null")
+
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()

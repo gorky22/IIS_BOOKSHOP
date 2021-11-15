@@ -14,8 +14,17 @@ $("#login").click(function(e){
         data: data,
         dataType: "json",
         success: function (response) {
-            if(!response['err'])
-                window.location.href = '/'
+            if(response['err']){
+                Toast.show(response['message'],'E')
+            } else {
+                Toast.show('Přihlášení proběhlo v pořádku','S')
+                setTimeout(() => {
+                   window.location.href = response['url'];
+                },1000)
+            }
+        },
+        error: function (response){
+            Toast.show('Při přihlašování nastala chyba. Zkuste to prosím později','E')
         }
     });
 
