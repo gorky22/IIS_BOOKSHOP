@@ -302,7 +302,7 @@ print(results)
 '''
 #param = tuple(["gorcak.damian@tmp.sk"])
 
-cursor.execute("ALTER TABLE User ADD registration_time TIMESTAMP not null AFTER user_id;")
+cursor.execute("select * from User where")
 
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
