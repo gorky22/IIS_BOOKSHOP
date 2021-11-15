@@ -301,9 +301,11 @@ for row in records:
 print(results)
 '''
 #param = tuple(["gorcak.damian@tmp.sk"])
-param = tuple(["Tomáš" for i in range(3)])
-        
-cursor.execute('''select * from User where email=%s or name = %s or surname = %s''',param)
+library = " Informatika a počítače"
+parameter = tuple([library])
+print(parameter)
+query = '''SELECT b.name FROM  Book_title b JOIN  Tag t ON b.title_id = t.title_id JOIN Genre g ON t.genre_id = g.genre_id WHERE g.name=%s'''
+cursor.execute(query,parameter)
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 

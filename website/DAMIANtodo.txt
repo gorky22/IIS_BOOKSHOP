@@ -2,7 +2,7 @@ Damiane pls udělej tyto selecty:
     --------------------------------------------------KNIHY--------------------------------------------------
     Select na všechny knihy v systemu  ------- db_books()       Done  
     Select na knihy z určité knihovny (dostaneš název knihovny jako argument) --- db_books_in_lib(library) Done
-    Select na knihy určitého žánru (dostaneš TAG a najdeš všechny knihy, které ho mají) -- db_books_with_genre(genre)
+    Select na knihy určitého žánru (dostaneš TAG a najdeš všechny knihy, které ho mají) -- db_books_with_genre(genre) Done
     Select na nejlépe hodnocené knihy (20 nejlépe hodnocených knih) db_top_books()  Done
     Select na knihy všechny rezervované daným uživatelem  (dostaneš ID uživatele) db_reserved_books(uzivatel (PK) ) Done
     Select na určitou knihu (dostaneš jméno knihy a vrátíš všechno o ní) db_book_info(book_name) Done but ask for aurthors
