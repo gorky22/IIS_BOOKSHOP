@@ -59,7 +59,7 @@ def db_books():
 #this function takes as input library name
 #return dict of books in library
 def db_books_in_lib(libraryid):
-        query = ''''SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+        query = '''SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
                     JOIN Library l ON bl.library_id = l.library_id WHERE l.library_id = %s'''
 
         parameter = tuple([libraryid])
