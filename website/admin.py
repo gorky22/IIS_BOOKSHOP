@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-from website.database import delete_user, get_all_users, get_user_with_this_email
+from website.database import delete_user, find_user, get_all_users, get_user_with_this_email
 
 admin = Blueprint("admin",__name__)
 
@@ -8,8 +8,8 @@ admin = Blueprint("admin",__name__)
 def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
-            #users = get_user_with_this_email(request.form["nm"])
-            users = [{'email' : 'najdeny@email', 'name' : request.form["nm"], 'data' : '21.12.1988'}]
+            users = find_user(request.form["nm"])
+            #users = [{'email' : 'najdeny@email', 'name' : request.form["nm"], 'data' : '21.12.1988'}]
             
     else:
         users = get_all_users()
