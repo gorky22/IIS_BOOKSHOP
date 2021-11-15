@@ -58,7 +58,7 @@
                         <a href="#" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
                     </li>
                     <li class="link-li">
-                        <a href="#" class="link-a btn btn-blue">Registrovat</a>
+                        <a href="{{ url_for(auth.uthPage) }}" class="link-a btn btn-blue">Registrovat</a>
                     </li>
                     <li class="link-li">
                         <a href="#" class="link-a btn btn-yellow">Přihlásit se</a>
