@@ -319,11 +319,15 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-
+'''
 #param = tuple(["gorcak.damian@tmp.sk"])
-param = tuple(["Tomáš" for i in range(3)])
-        
-cursor.execute("select * from User where email=%s or name = %s or surname = %s")
+query = '''SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                    JOIN Library l ON bl.library_id = %s'''
+
+libraryid = 5
+parameter = tuple([libraryid])
+print(parameter)
+cursor.execute(query,parameter)
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -333,10 +337,8 @@ for row in records:
 
 print(results)
 
-'''
 
-cursor.execute("ALTER TABLE Library DROP COLUMN street;")
-cursor.execute("ALTER TABLE Library add COLUMN adress varchar(50) not null")
+
 
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
