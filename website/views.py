@@ -5,6 +5,10 @@ views = Blueprint("views",__name__)
 
 @views.route("/")
 def viewsPage():
+    top = db_top_books()
+    print('-'*50)
+    print(len(top))
+    print('-'*50)
     return render_template("/main/main.html")
 
 @views.route("/list/")
@@ -46,8 +50,12 @@ def librariesPage():
 @views.route("books/library/<library>")
 def booksInLibrary(library):
     # get books for library
-    aaaaa = db_books_in_lib(library)
-    print(aaaaa)
+    try:
+        aaaaa = db_books_in_lib(library)
+    except:
+        pass
+    #print(aaaaa)
+
     books = db_books()
     
     result = []
