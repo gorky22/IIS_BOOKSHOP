@@ -10,6 +10,7 @@ def viewsPage():
 @views.route("/list/")
 def listPage():
     book_list = [{'Name' : 'HP1', 'Author': 'J.K.Rowling'},{'Name' : 'HP1', 'Author': 'J.K.Rowling'}]
+    print(db_genres())
     return render_template("/main/list.html",book_list=book_list)
     
 @views.route("/detail/")

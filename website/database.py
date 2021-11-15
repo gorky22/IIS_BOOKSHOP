@@ -136,3 +136,8 @@ def db_books_with_genre(genre):
                 JOIN Genre g ON t.genre_id = g.genre_id WHERE g.name=%s'''
 
         return execute_select(query,parameters=param)
+
+
+def db_genres():
+        query = '''SELECT * FROM Genre'''
+        return execute_select(query)
