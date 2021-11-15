@@ -36,3 +36,17 @@ Potřeboval bych aby v databázi byli aspon 4 knhovny:
         - pro knihovnu 4 - jmenoSouboru = lib4.jpg
 
     !!! K TOMU BY BYLO DOBRÉ UŽ VYTVOŘIT NĚJAKÉ KNÍŽKY, KTERÉ TYTO KNIHOVNY MAJÍ A SELECT, KTERÝ JSEM TI PSAL NAHORU (ŘÁDEK 8) !!!
+
+
+
+
+
+
+
+------- TABULKY
+Damiane prosímtě hodíš sem tabulky a jejich atributy?
+Např:
+TABULKAJMENO:
+    jmeno_attr1
+    jmeno_attr2
+    jmeno_attr3 :D

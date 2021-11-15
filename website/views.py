@@ -29,6 +29,7 @@ def formPage():
 @views.route("/libraries/")
 def librariesPage():
     libraries = db_libraries()
+    print(get_all_users())
     return render_template('/main/libraries.html',libraries=libraries)
 
 
