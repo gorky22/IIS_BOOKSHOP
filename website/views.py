@@ -1,11 +1,20 @@
 from flask import Blueprint, render_template, request,session
 from .database import *
+import random
 
 views = Blueprint("views",__name__)
-
+genres = db_genres()
 @views.route("/")
 def viewsPage():
-    return render_template("/main/main.html")
+    top = db_top_books()
+    
+    randomlist = random.sample(range(0, 9), 5)
+    books = [top[i] for i in randomlist]
+    for book in books:
+        book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
+
+    
+    return render_template("/main/main.html",books=books,genres=genres)
 
 @views.route("/list/")
 def listPage():
@@ -21,35 +30,41 @@ def listPage():
             tmp.append(book)
         result.append(tmp)
 
-    return render_template("/main/list.html",books=result)
+    return render_template("/main/list.html",books=result,genres=genres)
     
 @views.route("/detail/")
 def detailPage():
-    return render_template('/main/detail.html')
+    return render_template('/main/detail.html',genres=genres)
 
 
-
-@views.route("/form/demo/",methods=["GET","POST"])
-def formPage():
-    if request.method == "POST":
-        print(request.form.get('text'))
-    
-    return render_template('/main/formTemplate.html')
 
 @views.route("/libraries/")
 def librariesPage():
     libraries = db_libraries()
     print(libraries)
-    return render_template('/main/libraries.html',libraries=libraries)
+    return render_template('/main/libraries.html',libraries=libraries,genres=genres)
 
+
+@views.route("/books/genre/<genreid>")
+def booksByGenre(genreid):
+    books = db_books_with_genre(genreid)
+    genre = db_genre_info(genreid)[0]
+    result = []
+    for i in range(0,len(books),5):
+        end = i+5 if (i+5) < len(books) else len(books)
+        tmp = []
+        for book in books[i:end]:
+            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
+            tmp.append(book)
+        result.append(tmp)
+    return render_template('/main/list.html',books=result,genres=genres,active=genre)
+    
 
 @views.route("books/library/<library>")
 def booksInLibrary(library):
-    # get books for library
-    aaaaa = db_books_in_lib(library)
-    print(aaaaa)
-    books = db_books()
     
+    books = db_books_in_lib(library)
+
     result = []
     for i in range(0,len(books),5):
         end = i+5 if (i+5) < len(books) else len(books)
@@ -59,7 +74,7 @@ def booksInLibrary(library):
             tmp.append(book)
         result.append(tmp)
 
-    return render_template("/main/list.html",books=result,library=library)
+    return render_template("/main/list.html",books=result,library=library,genres=genres)
 
 @views.route("/detail/<bookid>")
 def bookDetail(bookid):
@@ -67,7 +82,7 @@ def bookDetail(bookid):
     book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
     
     print(book)
-    return render_template('/main/detail.html',book=book)
+    return render_template('/main/detail.html',book=book,genres=genres)
 
 # {'title_id': 15,
 # 'release_date': datetime.date(2021, 2, 1),
