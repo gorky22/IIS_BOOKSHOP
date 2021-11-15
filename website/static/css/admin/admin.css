@@ -90,8 +90,33 @@ input[type=text]:focus, input[type=text]:hover {
     text-align: right;
 }
 
-.deleteBtn {
+.deleteBtn, .editBtn {
     border-style: none;
     border: none;
+    background-color: transparent; 
+    font-size: 1.8rem;
+    border-radius: 1rem;
+    vertical-align: center;
+    padding: 0.3rem;
+    
 }
+
+
+tr:nth-child(odd) .deleteBtn:hover {
+    color: #623CEA;
+}
+
+tr:nth-child(even) .deleteBtn:hover {
+    color: #FFF;
+}
+
+tr:nth-child(odd) .editBtn:hover {
+    color: #623CEA;
+}
+
+tr:nth-child(even) .editBtn:hover {
+    color: #FFF;
+}
+
+
 

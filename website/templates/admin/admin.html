@@ -2,6 +2,7 @@
 
 {% block link_block %}
     <link rel="stylesheet" href="/static/css/admin/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 {% endblock %}
 
 {% block body_block %}
@@ -28,7 +29,16 @@
             <td>{{ user['data']}}</td>
             <td class="deleteForm">
                 <form method="post">
-                    <input type="button" class="deleteBtn" name="btnDelete" value="delete" data-user={{ user['name'] }}>
+                    <button type="button" class="editBtn" name="btnEdit">
+                        <i class="fas fa-user-edit"></i>
+                    </button>
+                    
+                    <button type="button" class="deleteBtn" name="btnDelete" data-user={{ user['name'] }}>
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                   
+
+                    <!-- <input type="button" class="deleteBtn" name="btnDelete" value="delete" data-user={{ user['name'] }}> -->
                 </form >
             </td>
             <script type="text/javascript" src="/static/js/admin.js"></script>
