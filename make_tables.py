@@ -289,7 +289,7 @@ x = tuple(["votes"])
 cursor.execute("ALTER TABLE Lending ADD CONSTRAINT lending_handler FOREIGN KEY (handler_id) references User(user_id) ON DELETE CASCADE")
 
 
-'''
+
 cursor.execute("select * from user")
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
@@ -299,9 +299,10 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-
+'''
 #param = tuple(["gorcak.damian@tmp.sk"])
-#cursor.execute("DELETE FROM User WHERE email=%s",param)
+
+cursor.execute("select * from User where")
 
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
