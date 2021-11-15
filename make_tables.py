@@ -103,7 +103,7 @@ make_user = '''
       surname VARCHAR(20) not null,
       email VARCHAR(30) not null,
       birth_date DATE not null,
-      password VARCHAR(30),
+      password VARCHAR(300),
       admin BOOLEAN,
       librarian BOOLEAN,
       distributor BOOLEAN,
@@ -284,12 +284,8 @@ cursor.execute(query,parameter)
 
 '''
 
-library = "Pre"
-parameter = tuple([library])
-cursor.execute('''SELECT l.name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
-              JOIN Library l ON bl.library_id = l.library_id WHERE b.name = %s ''',parameter)
-
-      
+cursor.execute('''ALTER TABLE User DROP COLUMN unregistered''')
+'''
 
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
@@ -305,4 +301,3 @@ print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
 # enter your code here!
-'''

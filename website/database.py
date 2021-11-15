@@ -100,3 +100,9 @@ def db_libraries_with_book(book_name):
         
         parameter = tuple([book_name])
         return execute_select(query,parameters=parameter)
+
+#this function returns all users in system
+def db_Users():
+        query = "SELECT * FROM User"
+
+        return execute_select(query)
