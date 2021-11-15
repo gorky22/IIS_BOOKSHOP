@@ -24,16 +24,16 @@
         {% for user in users %}
      
         <tr>
-            <td>{{ user['e-mail']}}</td>
+            <td>{{ user['email']}}</td>
             <td>{{ user['name'] }}</td>
-            <td>{{ user['data']}}</td>
+            <td> {{ user['registration_time'] }} </td>
             <td class="deleteForm">
                 <form method="post">
                     <button type="button" class="editBtn" name="btnEdit">
                         <i class="fas fa-user-edit"></i>
                     </button>
                     
-                    <button type="button" class="deleteBtn" name="btnDelete" data-user={{ user['name'] }}>
+                    <button type="button" class="deleteBtn" name="btnDelete" data-user={{ user['email'] }}>
                         <i class="far fa-trash-alt"></i>
                     </button>
                    
