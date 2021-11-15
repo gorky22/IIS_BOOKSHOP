@@ -11,60 +11,24 @@
 
     <div class="content library-content">
         <h1 class="header-library">Knihovny</h1>
-        <div class="library">
-            <div class="left-img">
-                <img src="/static/img/libraries/lib1.jpeg" class="library-img">
-            </div>
-            <div class="right-part">
-                <div class="header"><a href="{{ url_for('views.booksInLibrary',library=1)}}">Knihovna Židlochovice</a></div>
-                <div class="bottom-part">
-                    <h2 class="addr-info">Adresa: Nádražní 232, 667 01 Židlochovice</h2>
-                    <h2 class="addr-info">Celkem knih v knihovně: 456123</h2>
-                    <h2 class="addr-info">E-mail: knhovna2@mkzidlochovice.cz</h2>
+        {% for lib in libraries%}
+            <div class="library">
+                <div class="left-img">
+                    <img src="{{ lib['path_to_picture'] }}" alt="library-img" class="library-img">
+                </div>
+                <div class="right-part">
+                    <div class="header">
+                        <a href="{{ url_for('views.booksInLibrary',library=lib['library_id'])}}">{{ lib['name']}}</a>
+                    </div>
+                    <div class="bottom-part">
+                        <div class="addr-info">Adresa: {{ lib['adress'] }}</div>
+                        <div class="addr-info">Celkem knih: 123</div>
+                        <div class="addr-info">E-mail: {{ lib['email'] }}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="library">
-            <div class="left-img">
-                <img src="/static/img/libraries/lib2.jpg" class="library-img">
-            </div>
-            <div class="right-part">
-                <div class="header"><a href="{{ url_for('views.booksInLibrary',library=1)}}">Moravská zemská knihovna v Brně</a></div>
-                <div class="bottom-part">
-                    <h2 class="addr-info">Adresa: Kounicova 65a, 601 87 Brno-střed</h2>
-                    <h2 class="addr-info">Celkem knih v knihovně: 456123</h2>
-                    <h2 class="addr-info">E-mail: mzk@mzk.cz</h2>
-                </div>
-            </div>
-        </div>
-        <div class="library">
-            <div class="left-img">
-                <img src="/static/img/libraries/lib3.jpg" class="library-img">
-            </div>
-            <div class="right-part">
-                <div class="header"><a href="{{ url_for('views.booksInLibrary',library=1)}}">Knihovna Jiřího Mahena v Brně</a></div>
-                <div class="bottom-part">
-                    <h2 class="addr-info">Adresa: Kounicova 65a, 601 87 Brno-střed</h2>
-                    <h2 class="addr-info">Celkem knih v knihovně: 456123</h2>
-                    <h2 class="addr-info">E-mail: mzk@mzk.cz</h2>
-                </div>
-                
-            </div>
-        </div>
-        <div class="library">
-            <div class="left-img">
-                <img src="/static/img/libraries/lib4.jpg" class="library-img">
-            </div>
-            <div class="right-part">
-                <div class="header"><a href="{{ url_for('views.booksInLibrary',library=1)}}">Ústřední knihovna VUT v Brně</a></div>
-                <div class="bottom-part">
-                    <h2 class="addr-info">Adresa: Kounicova 65a, 601 87 Brno-střed</h2>
-                    <h2 class="addr-info">Celkem knih v knihovně: 456123</h2>
-                    <h2 class="addr-info">E-mail: mzk@mzk.cz</h2>
-                </div>
-                
-            </div>
-        </div>
+        {% endfor %}
+        
     </div>
 {% endblock %}
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request,session
-
+from .database import *
 
 views = Blueprint("views",__name__)
 
@@ -27,10 +27,32 @@ def formPage():
 
 @views.route("/libraries/")
 def librariesPage():
-    return render_template('/main/libraries.html')
+    libraries = db_libraries()
+    return render_template('/main/libraries.html',libraries=libraries)
 
 
 @views.route("books/library/<library>")
 def booksInLibrary(library):
     # get books for library
-    return render_template("/main/list.html",library=library)
+
+    books = db_books()
+    
+    result = []
+    for i in range(0,len(books),5):
+        end = i+5 if (i+5) < len(books) else len(books)
+        tmp = []
+        for book in books[i:end]:
+            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
+            tmp.append(book)
+        result.append(tmp)
+
+    return render_template("/main/list.html",books=result,library=library)
+
+@views.route("/detail/<bookid>")
+def bookDetail(bookid):
+    return render_template('/main/detail.html')
+
+
+
+#static/img/libraries/lib7.jpg
+#static/img/libraries/lib7.jpg

@@ -172,7 +172,8 @@ body{
     left: -100%;
     padding: 2rem;
 }
-.dropdown:hover .dropdown-content{
+.dropdown:hover .dropdown-content,
+.dropdown:focus .dropdown-content{
     display: block;
 
 }
@@ -210,7 +211,8 @@ body{
     transform: translate(-85%);
     padding: 2rem;
 }
-.dropdown-user:hover .dropdown-content-user{
+.dropdown-user:hover .dropdown-content-user,
+.dropdown-user:focus .dropdown-content-user{
     display: block;
 
 }

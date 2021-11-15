@@ -10,6 +10,21 @@
 
 <div class="content">
     <h1 class="content-header">Knihy</h1>
+    {% for book_row in books %}
+        <div class="book-row">
+            {% for book in book_row %}
+                <a href="{{ url_for('views.bookDetail',bookid=book['title_id'])}}" class="book-div">
+                    <img src="{{ book['path_to_picture'] }}" alt="{{ book['name'] }}" class="book-img">
+                    <h1 class="book-header">{{ book['name'] }}</h1>
+                    <h3 class="book-author">NEJAKY AUTOR</h3>
+                    <div class="percent-align">
+                        <img src="{{ book['rating_path'] }}" alt="{{ book['rating'] }}">
+                        <p class="book-rating-text">{{ book['rating'] }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endfor %}
     <div class="book-row">
         <a href="#" class="book-div">
             <img src="/static/img/hp1.jpg" alt="hp1" class="book-img">

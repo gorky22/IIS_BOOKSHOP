@@ -52,7 +52,7 @@ def get_user_with_this_email(email):
 #this function takes no arguments and returns all titles which are in the system
 def db_books():
 
-        query = "SELECT name FROM Book_title"
+        query = "SELECT * FROM Book_title"
 
         return execute_select(query)
 
@@ -92,7 +92,7 @@ def db_reserved_books(user_id):
 
 #this function returns all libraries in system
 def db_libraries():
-        query = "SELECT name FROM Library"
+        query = "SELECT * FROM Library"
 
         return execute_select(query)
 

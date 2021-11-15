@@ -18,8 +18,10 @@
         <title>Book Reserver</title>
     </head>
     <body>
-        {% if session['user']['admin'] %}
+        {% if session['user'] %}
+            {% if session['user']['admin']%}
             <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+            {% endif %}
         {% endif %}
         <div class="res-navbar" >
             <button class="hamburger-btn" id="btn-menu">
