@@ -31,7 +31,7 @@ def add_user(name,surname,email,birth_date,
         distributor=False,reader=False,unregistered=False):
 
         query = '''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader) 
-               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+               VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
             '''
         to_insert = (name,surname,email,birth_date,password,int(admin),int(librarian),int(distributor),int(reader))
 

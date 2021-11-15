@@ -28,7 +28,9 @@ $('#registration').click(function (e) {
         data: data,
         dataType: "json",
         success: function (response) {
-                
+            if(response['err']){
+                   
+            }
         }
     });
 
