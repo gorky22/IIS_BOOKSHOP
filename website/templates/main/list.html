@@ -9,7 +9,7 @@
 {% block body_block %}
 
 <div class="content">
-    <h1 class="content-header">Knihy{% if active %}: {{active['name']}} {% endif %}</h1>
+    <h1 class="content-header">Knihy{% if active %}: {{active['name']}} {% elif library_name %}: {{library_name}}{% endif %}</h1>
     {% for book_row in books %}
         <div class="book-row">
             {% for book in book_row %}
