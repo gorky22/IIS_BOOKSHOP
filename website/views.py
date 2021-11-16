@@ -53,7 +53,6 @@ def listPage():
     books = db_all_book_info()
     format_ratings(books)
     books = group_by_five(books)
-    print(books)
 
     return render_template("/main/list.html",books=books,genres=genres)
     
@@ -102,10 +101,7 @@ def booksInLibrary(library):
 @views.route("/detail/<bookid>")
 def bookDetail(bookid):
     book = db_book_info(bookid)
-    print(book)
     book = format_book_and_authors(book)
-    print(book)
-
     return render_template('/main/detail.html',book=book,genres=genres)
 
 
