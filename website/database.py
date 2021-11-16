@@ -290,6 +290,20 @@ def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
         db_connection.commit()
         cursor.close()
 
+def db_insert_reservation(until,title_id,user_id,library_id):
+        query = '''INSERT INTO `Reservation` (`until`, `title_id`, `user_id`,`library_id`) 
+                    VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s);'''
+        
+        x = [until,title_id,user_id,library_id]
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
 def db_remove_borrow(bor_pk):
         param = tuple([bor_pk])
         query = "DELETE FROM Lending WHERE lending_id=%s"
@@ -309,3 +323,4 @@ def find_similar_genre_book(title_id):
         
         param = tuple([title_id])
         return execute_select(query,parameters=param)
+
