@@ -1,11 +1,12 @@
 from flask import Blueprint
-from . import db_connection
+from . import db_connection, is_connect
 
 database = Blueprint("database",__name__)
 
 #takse as input query and input parameters
 #this function execute select query and return dict of results
 def execute_select(query,parameters = None):
+        is_connect()
         cursor = db_connection.cursor()
 
         if(parameters != None):
@@ -35,6 +36,7 @@ def add_user(name,surname,email,birth_date,
             '''
         to_insert = (name,surname,email,birth_date,password,int(admin),int(librarian),int(distributor),int(reader))
 
+        is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,to_insert)
         db_connection.commit()
@@ -121,6 +123,7 @@ def delete_user(email):
         param = tuple([email])
         query = "DELETE FROM User WHERE email=%s"
 
+        is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,param)
         
