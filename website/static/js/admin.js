@@ -51,8 +51,8 @@ function checkBtn(id, value){
 }
 
 function setPlaceholder(user){
-    $('#nameI').attr('placeholder', user['name'])
-    $('#surnameI').attr('placeholder', user['surname'])
+    $('#nameI').attr('placeholder', user['user_name'])
+    $('#surnameI').attr('placeholder', user['user_surname'])
     $('#e-mailI').attr('placeholder', user['email'])
     $('#birth-dateI').attr('placeholder', user['birth_date'])
 }
@@ -124,8 +124,8 @@ $('.editBtn').click(function(e){
         url: "/admin/user/"+email,
         success: function (response) {
             var user = response['user']
-            document.getElementById('name').innerHTML = user['name']
-            document.getElementById('surname').innerHTML = user['surname']
+            document.getElementById('name').innerHTML = user['user_name']
+            document.getElementById('surname').innerHTML = user['user_surname']
             document.getElementById('e-mail').innerHTML = user['email']
             document.getElementById('birth-date').innerHTML = user['birth_date']
             
