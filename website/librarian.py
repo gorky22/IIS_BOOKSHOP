@@ -1,9 +1,6 @@
 from flask import Blueprint, render_template, request,session, wrappers,redirect, url_for
 from functools import wraps
 
-
-
-
 def librarian_required(f):
     @wraps(f)
     def decorated_function(*args,**kwargs):
