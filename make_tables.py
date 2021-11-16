@@ -435,9 +435,10 @@ for i in range(0,26):
 
 #param = tuple(["gorcak.damian@tmp.sk"])
 cursor = db_connection.cursor()
-'''
+
 ######################### niesu v ziadnej kniznici #######################################################
-query = "SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)"
+query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
+                    '''
 
 libraryid = 5
 #parameter = tuple([libraryid])
@@ -452,16 +453,19 @@ for row in records:
 
 print(results)
 cursor.close()
-'''
-######book not in libraryies
-#query = '''SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
-#                    '''
+db_connection.close()
 
-query = "ALTER TABLE Author RENAME COLUMN surname TO _surname"
+if (not db_connection.is_connected()):
+        db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
+
+cursor = db_connection.cursor()
+query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
+                    '''
+cursor = db_connection.cursor()
 libraryid = 5
 #parameter = tuple([libraryid])
 #print(parameter)
-cursor.execute("select * from User")
+cursor.execute(query)
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
