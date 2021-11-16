@@ -6,7 +6,10 @@ views = Blueprint("views",__name__)
 genres = db_genres()
 
 def format_book_and_authors(book):
-    new_book = {'title_name':book[0]['title_name'],
+    new_book = {
+        'title_id':book[0]['title_id'],
+        'description':book[0]['description'],
+        'title_name':book[0]['title_name'],
         'rating':book[0]['rating'],
         'path_to_picture':book[0]['path_to_picture'],
         'authors':[]
@@ -15,7 +18,7 @@ def format_book_and_authors(book):
     for book_author in book:
         author = " ".join([book_author['author_name'], book_author['author_surname']])
         new_book['authors'].append(author)
-
+    new_book['authors'] = ", ".join(new_book['authors'])
     new_book['rating_path'] = '/static/img/rating/' + str(round(new_book['rating'])*10)+'percent.png'
     return new_book
 
@@ -83,7 +86,6 @@ def booksByGenre(genreid):
 
 @views.route("books/library/<library>")
 def booksInLibrary(library):
-    
     books = db_books_in_lib(library)
     library = db_library_info(library)[0]['library_name']
     result = []
@@ -99,10 +101,11 @@ def booksInLibrary(library):
 
 @views.route("/detail/<bookid>")
 def bookDetail(bookid):
-    book = db_book_by_id(bookid)[0]
-    book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-    
+    book = db_book_info(bookid)
     print(book)
+    book = format_book_and_authors(book)
+    print(book)
+
     return render_template('/main/detail.html',book=book,genres=genres)
 
 

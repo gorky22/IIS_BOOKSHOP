@@ -19,4 +19,4 @@ librarySystem = Blueprint('librarySystem',__name__)
 @librarySystem.route('/libPage/')
 @librarian_required
 def homePage():
-    return '<h1>Jsi kouzelnik Harry</h1>'
+    return render_template('/librarian/mainLibrary.html')

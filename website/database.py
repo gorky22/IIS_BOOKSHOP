@@ -86,7 +86,7 @@ def db_top_books():
 def db_book_info(title_id):
         query = "SELECT title_name FROM Book_title"
         parameter = tuple([title_id])
-        query2 = '''SELECT  b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT b.title_id, b.title_name,b.rating,b.path_to_picture, b.description,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
 
         return execute_select(query2,parameters=parameter)

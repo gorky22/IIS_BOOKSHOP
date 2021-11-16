@@ -44,8 +44,17 @@ def loginPage():
                 session['logged_in'] = True
                 del user_from_db['Password']
                 session['user'] = user_from_db
-                #print(session['user'])
-                return {'message' : 'OK','err':False,'url': url_for('views.viewsPage')}
+                returning_url = ''
+                if user_from_db['reader']:
+                    returning_url = url_for('views.viewsPage')
+                if user_from_db['librarian']:
+                    returning_url = url_for('librarySystem.homePage')
+                if user_from_db['distributor']:
+                    returning_url = url_for('views.viewsPage')
+                if user_from_db['admin']:
+                    returning_url = url_for('admin.adminPage')
+                    
+                return {'message' : 'OK','err':False,'url': returning_url}
             return {'message' : 'Spatne heslo','err':True}
         else:
             return {'message' : 'E-mail neexistuje','err':True}
