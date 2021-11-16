@@ -338,3 +338,15 @@ def find_similar_genre_book(title_id):
         param = tuple([title_id])
         return execute_select(query,parameters=param)
 
+def add_to_queue(book_id,lib_id,user_id):
+        query = '''INSERT INTO `queue` (`title_id`, `user_id`, `library_id`, `time`) 
+                VALUES (%s, %s, %s, CURRENT_TIMESTAMP);'''
+        x = book_id,lib_id,user_id
+        param = tuple(x)
+        
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+
+        db_connection.commit()
+        cursor.close()
