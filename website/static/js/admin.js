@@ -58,6 +58,7 @@ function setPlaceholder(user){
 }
 
 
+
 $('.editBtn').click(function(e){
     e.preventDefault()
     e.stopPropagation();
@@ -191,7 +192,6 @@ $('.editBtn').click(function(e){
     
     
 
-   
 
 
 

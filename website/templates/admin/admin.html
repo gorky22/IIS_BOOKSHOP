@@ -20,7 +20,6 @@
                 </form >
             </th>
         </tr>
-        
         {% for user in users %}
      
         <tr>
@@ -40,11 +39,13 @@
                     <!-- <input type="button" class="deleteBtn" name="btnDelete" value="delete" data-user={{ user['name'] }}> -->
                 </form >
             </td>
-            <script type="text/javascript" src="/static/js/admin.js"></script>
+            
           
 
         </tr>
         {% endfor %}
+
+        
     </table>
 </div>
 <!-- Modal section -->
@@ -99,18 +100,21 @@
                     <input id="birth-dateI" type="text" placeholder="">
                 </form>
                 <br>
-                <button id="adminAdd" class="btnGreen">Udeliť práva</button>
-                <button id="adminRemove" class="btnRed">Odebrať práva</button>
-                <button id="libAdd" class="btnGreen">Udeliť práva</button>
-                <button id="libRemove" class="btnRed">Odebrať práva</button> 
-                <button id="disAdd" class="btnGreen">Udeliť práva</button>
-                <button id="disRemove" class="btnRed">Odebrať práva</button> 
-                <button id="basicUserAdd" class="btnGreen">Udeliť práva</button>
-                <button id="basicUserRemove" class="btnRed">Odebrať práva</button>  
+                <div>
+                    <button id="adminAdd" class="btnGreen">Udeliť práva</button>
+                    <button id="adminRemove" class="btnRed">Odebrať práva</button>
+                    <button id="libAdd" class="btnGreen">Udeliť práva</button>
+                    <button id="libRemove" class="btnRed">Odebrať práva</button> 
+                    <button id="disAdd" class="btnGreen">Udeliť práva</button>
+                    <button id="disRemove" class="btnRed">Odebrať práva</button> 
+                    <button id="basicUserAdd" class="btnGreen">Udeliť práva</button>
+                    <button id="basicUserRemove" class="btnRed">Odebrať práva</button>
+                </div>
+                  
             </div>
         </div>
         <button id="sendEdit" class="btn-search btn-blue">Potvrdiť zmeny</button>
     </div>
 </div>
-
+<script type="text/javascript" src="/static/js/admin.js"></script>
 {% endblock %}
