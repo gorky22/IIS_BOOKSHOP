@@ -1,12 +1,15 @@
 import mysql.connector as mysql
 import _datetime as datetime
+from random import seed
+from random import randint
+
 HOST = "eu-cdbr-west-01.cleardb.com" 
 DATABASE = "heroku_c8164a0212f5cf6"
 USER = "b91cfec2095f4d"
 PASSWORD = "4fd07a3f"
 
 db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
-cursor = db_connection.cursor()
+
 
 #deleting tables if exists
 drop_tables = '''DROP TABLE IF EXISTS Book_title_author;
@@ -319,10 +322,10 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-'''
+
 #param = tuple(["gorcak.damian@tmp.sk"])
-query = '''SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
-                    JOIN Library l ON bl.library_id = %s'''
+query = "SELECT b.name, bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                    JOIN Library l ON bl.library_id = %s"
 
 libraryid = 5
 parameter = tuple([libraryid])
@@ -344,3 +347,87 @@ print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
 # enter your code here!
+
+'''
+
+
+
+#INSERT INTO `book_title_library` (`title_id`, `library_id`, `count`) VALUES ('235', '35', '2')#
+
+
+
+
+
+####### boook title library inserting ##############
+
+seed(1)
+
+# generate some integers
+'''
+for i in range(0,6):
+      tmp = []
+      library_id = (i * 10 + 5)
+      for _ in range(15):
+            query = "INSERT INTO `book_title_library` (`title_id`, `library_id`, `count`) VALUES (%s, %s, %s)"
+            book_id = randint(0, 23) * 10 + 5
+            while(book_id in tmp):
+                  book_id = randint(0, 23) * 10 + 5
+            tmp.append(book_id)
+            count = randint(1, 100)
+            x = [book_id,library_id,count]
+            parameter = tuple(x)
+            cursor = db_connection.cursor()
+            cursor.execute(query,parameter)
+            db_connection.commit()
+            cursor.close()
+'''
+
+#generate authors
+'''
+names = ["George", "Bella","Terry", "Ryan"," Catherine", "Michelle", "Meghan", "Aidan", "Daniella", "Mason", "Carmen", "Elijah", "Freddie", "Felicity", "Felix"]
+surnames = ["Stewart", "Taylor", "Brown", "Williams", "Lewis", "Smith", "Johnson", "Thomas", "Evans", "Wilson", "Roberts", "Jones", "Davies", "Thompson", "Robinson"]
+
+
+for i in range (0,30):
+      query = "INSERT INTO `author` (`author_id`, `name`, `surname`) VALUES (NULL, %s, %s)"
+      name = names[randint(0,14)]
+      surname = surnames[randint(0,14)]
+      x = [name,surname]
+      parameter = tuple(x)
+      cursor = db_connection.cursor()
+      cursor.execute(query,parameter)
+      db_connection.commit()
+      cursor.close()
+db_connection.close()
+'''
+
+for i in range(0,26):
+      cursor = db_connection.cursor()
+      book_id = (i * 10 + 5)
+      author_id = randint(0, 23) * 10 + 5
+      x = [book_id,author_id]
+      parameter = tuple(x)
+      query = "INSERT INTO `book_title_author` (`title_id`, `author_id`) VALUES (%s, %s)"
+      cursor.execute(query,parameter)
+      db_connection.commit()
+      if(i %3 == 0):
+            while(True):
+                  tmp = randint(0, 23) * 10 + 5
+                  print(author_id,tmp)
+                  if author_id != tmp:
+                        break
+            x = [book_id,tmp]
+            parameter = tuple(x)
+            cursor.execute(query,parameter)
+            db_connection.commit()
+      if(i %9 == 0):
+            while(True):
+                  tmp2 = randint(0, 23) * 10 + 5
+                  if tmp2 != tmp and tmp2 != author_id:
+                        break
+            x = [book_id,tmp2]
+            parameter = tuple(x)
+            cursor.execute(query,parameter)
+            db_connection.commit()
+      cursor.close()
+db_connection.close()
