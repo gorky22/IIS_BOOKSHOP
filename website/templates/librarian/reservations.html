@@ -15,43 +15,26 @@
                 <th>Jméno knihy</th>
                 <th>Rezervace do</th>
                 <th class="search-box">
-                    <!-- <button class="btn-search btn-yellow">Search box</button> -->
-                    <form action="{{ url_for('admin.adminPage') }}" method="post">
-                        <input type="text" name="nm" placeholder="Hledat uživatele">
-                    </form >
+                        <input type="text" name="nm" placeholder="Hledat email">                
                 </th>
             </tr>
             
-
-         
-            <tr id="res-num-">
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td class="deleteForm">
-                    <button class="button-icon" id="reservation-done" data-res="neco">
-                        <i class="fas fa-check-circle"></i>
-                    </button>
-                    <button class="button-icon" id="reservation-delete" data-res="neco">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    
-                </td>
-            </tr>
-            <tr id="res-num-">
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td class="deleteForm">
-                    <button class="button-icon" id="reservation-done" data-res="neco">
-                        <i class="fas fa-check-circle"></i>
-                    </button>
-                    <button class="button-icon" id="reservation-delete" data-res="neco">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                    
-                </td>
-            </tr>
+            {% for res in reservations %}
+                <tr id="res-num-{{ res['reservation_id'] }}">
+                    <td>{{ res['email'] }}</td>
+                    <td>{{ res['book_name'] }}</td>
+                    <td>{{ res['time'] }}</td>
+                    <td class="deleteForm">
+                        <button class="button-icon" id="reservation-done" data-res="neco">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
+                        <button class="button-icon" id="reservation-delete" data-res="neco">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
 
         </table>
     </div>

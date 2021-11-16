@@ -28,7 +28,11 @@ def homePage():
 @librarySystem.route('/reservations/')
 @librarian_required
 def reservations():
-    return render_template('/librarian/reservations.html')
+    reservations = db_reservations_in_lib(session['user']['library_id'])
+    for res in reservations:
+        res['book_name'] = db_book_by_id(res['title_id'])[0]['title_name']
+    print(reservations)
+    return render_template('/librarian/reservations.html',reservations=reservations)
 
 @librarySystem.route('/reservations/delete/<resid>/')
 @librarian_required

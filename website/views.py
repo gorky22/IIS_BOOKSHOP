@@ -95,13 +95,24 @@ def bookDetail(bookid):
     if request.method=="POST":
         if session.get('user'):
             #rezervace
-            library_id = request.form.get('lib')
-            user_id = session['user']['user_id']
-            until = datetime.date.today() + datetime.timedelta(days=10)
-            #insert reservace do databaze
-            #odecteni 1 ze vztahu mezi knihou a knihovnou
-            
-            return {'err':False}
+            if session['user'].get('reader'):
+                library_id = request.form.get('lib')
+                user_id = session['user']['user_id']
+                until = datetime.date.today() + datetime.timedelta(days=10)
+                
+                if len(db_res_with_book_lib_user(bookid,user_id,library_id)) == 0:
+                    count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
+                    print('Před rezervací -- ',count_of_book)
+                    if count_of_book > 0:
+                        db_insert_reservation(until,bookid,user_id,library_id)
+                        count_of_book-=1
+                        db_update_actual_count(str(count_of_book),library_id,bookid)
+                        count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
+                        print('Po rezervaci -- ',count_of_book)
+                        return {'err':False}
+                    return {'err': True, 'msg':'Tato kniha již není k dispozici v této knihovně'}
+                return {'err':True,'msg':'Na tuto knížku již učiněnou rezervaci máte'}
+            return {'err':True,'msg':'Nemůžete rezervovat knihy, nemáte práva čtenáře.'}
         return {'err':True,'msg':'Rezervace nebyla dokončena, pro dokončení rezervace musíte být přihlášeni.'}
 
 
