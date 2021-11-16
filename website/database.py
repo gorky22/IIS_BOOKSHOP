@@ -11,8 +11,8 @@ def convert_datetime_to_date(arr):
                 el["registration_time"] =  el["registration_time"].date()
         return arr
 
-def decide(old,new):
-        if new == None:
+def decide(old,new): 
+        if new == None or new == "":
                 return old
         else:
                 return new
