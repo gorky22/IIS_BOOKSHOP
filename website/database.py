@@ -11,6 +11,11 @@ def convert_datetime_to_date(arr):
                 el["registration_time"] =  el["registration_time"].date()
         return arr
 
+def decide(old,new):
+        if new == None:
+                return old
+        else:
+                return new
 
 #takse as input query and input parameters
 #this function execute select query and return dict of results
@@ -206,12 +211,19 @@ def db_library_info(libid):
 
 #this function updates user table
 def update_user_db(atributes):
-        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s,`Password` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`user_id` = %s'''
+        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
 
-        x = [atributes["user_name"],atributes["user_surname"],atributes["email"],
-                        atributes["birth_date"],atributes["Password"],
-                        atributes["admin"],atributes["librarian"],atributes["distributor"],
-                        atributes["reader"],atributes["user_id"]]
+        original_values = get_user_with_this_email(atributes["old_email"])
+        x = [decide(original_values["user_name"],atributes["user_name"]),
+             decide(original_values["user_surname"],atributes["user_surname"]),
+             decide(original_values["email"],atributes["email"]),
+             decide(original_values["birth_date"],atributes["birth_date"]),
+             decide(original_values["admin"],atributes["admin"]),
+             decide(original_values["librarian"],atributes["librarian"]) ,  
+             decide(original_values["distributor"],atributes["distributor"]) ,  
+             decide(original_values["reader"],atributes["reader"]) ,
+             atributes["old_email"]
+             ]
         
         parameter = tuple(x)
 
