@@ -103,6 +103,20 @@ insert_author = '''INSERT INTO Author(name,surname)
                    VALUES(%s, %s)
 '''
 
+make_book_queue= '''
+      CREATE TABLE Queue(
+      title_id int not null,
+      user_id int not null,
+      library_id int not null,
+      time TIMESTAMP not null,
+      CONSTRAINT queue_title key (title_id) references Book_title(title_id) ON DELETE CASCADE,
+      CONSTRAINT queue_user foreign key (user_id) references User(user_id) ON DELETE CASCADE,
+      CONSTRAINT queue_library foreign key (library_id) references Library(library_id) ON DELETE CASCADE,
+      CONSTRAINT queue_library_user_title UNIQUE (title_id, user_id,library_id)
+      )
+'''
+
+
 #script for table which represent bindings with book_title and library
 make_book_title_author = '''
       CREATE TABLE Book_title_author(
@@ -440,21 +454,11 @@ cursor = db_connection.cursor()
 #query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
 #                    '''
 
+x = [25,125,15]
+param = tuple(x)
+cursor.execute('''INSERT INTO `queue` (`title_id`, `user_id`, `library_id`, `time`) VALUES (%s, %s, %s, CURRENT_TIMESTAMP);''',param)
 
-
-cursor.execute('''SELECT b.title_name FROM  Book_title b JOIN tag t ON b.title_id = t.title_id 
-              JOIN genre g ON g.genre_id = t.genre_id WHERE g.name = (SELECT g.name FROM  Book_title b JOIN 
-              tag t ON b.title_id = t.title_id 
-              JOIN genre g ON g.genre_id = t.genre_id WHERE b.title_id = %s)''')
-records = cursor.fetchall()
-columns = [i[0] for i in cursor.description]
-
-results = []
-for row in records:
-      results.append(dict(zip(columns, row)))  
-
-
-print(results)
+db_connection.commit()
 
 
 
