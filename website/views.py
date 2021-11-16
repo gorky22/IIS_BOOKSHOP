@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request,session
 from .database import *
 import random
+import datetime
 
 views = Blueprint("views",__name__)
 genres = db_genres()
@@ -96,7 +97,10 @@ def bookDetail(bookid):
             #rezervace
             library_id = request.form.get('lib')
             user_id = session['user']['user_id']
-            print(user_id,library_id)
+            until = datetime.date.today() + datetime.timedelta(days=10)
+            #insert reservace do databaze
+            #odecteni 1 ze vztahu mezi knihou a knihovnou
+
             return {'err':False}
         return {'err':True,'msg':'Rezervace nebyla dokončena, pro dokončení rezervace musíte být přihlášeni.'}
 
