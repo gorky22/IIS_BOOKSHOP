@@ -20,7 +20,10 @@
     <body>
         {% if session['user'] %}
             {% if session['user']['admin']%}
-            <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+                <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+            {% endif %}
+            {% if session['user']['librarian']%}
+                <a href="{{ url_for('librarySystem.homePage') }}" class="admin-url green">KNIHOVNIK</a>
             {% endif %}
         {% endif %}
         <div class="res-navbar" >
@@ -78,6 +81,7 @@
                         <div class="dropdown-content-user">
                             <a href="#" class="drop-link">Ahoj {{ session['user']['user_name'] }}</a>
                             <a href="#" class="drop-link">Rezervace</a>
+                            <a href="#" class="drop-link">Výpůjčky</a>
                             <a href="{{ url_for('auth.logout') }}" class="drop-link btn btn-blue">Odhlásit se</a>
                         </div>
                     </li>

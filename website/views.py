@@ -6,7 +6,10 @@ views = Blueprint("views",__name__)
 genres = db_genres()
 
 def format_book_and_authors(book):
-    new_book = {'title_name':book[0]['title_name'],
+    new_book = {
+        'title_id':book[0]['title_id'],
+        'description':book[0]['description'],
+        'title_name':book[0]['title_name'],
         'rating':book[0]['rating'],
         'path_to_picture':book[0]['path_to_picture'],
         'authors':[]
@@ -15,7 +18,7 @@ def format_book_and_authors(book):
     for book_author in book:
         author = " ".join([book_author['author_name'], book_author['author_surname']])
         new_book['authors'].append(author)
-
+    new_book['authors'] = ", ".join(new_book['authors'])
     new_book['rating_path'] = '/static/img/rating/' + str(round(new_book['rating'])*10)+'percent.png'
     return new_book
 
@@ -50,7 +53,6 @@ def listPage():
     books = db_all_book_info()
     format_ratings(books)
     books = group_by_five(books)
-    print(books)
 
     return render_template("/main/list.html",books=books,genres=genres)
     
@@ -68,41 +70,27 @@ def librariesPage():
 
 @views.route("/books/genre/<genreid>")
 def booksByGenre(genreid):
-    books = db_books_with_genre(genreid)
+    books = db_all_book_with_genre(genreid)
+    format_ratings(books)
+    books = group_by_five(books)
     genre = db_genre_info(genreid)[0]
-    result = []
-    for i in range(0,len(books),5):
-        end = i+5 if (i+5) < len(books) else len(books)
-        tmp = []
-        for book in books[i:end]:
-            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-            tmp.append(book)
-        result.append(tmp)
-    return render_template('/main/list.html',books=result,genres=genres,active=genre)
+    
+    return render_template('/main/list.html',books=books,genres=genres,active=genre)
     
 
 @views.route("books/library/<library>")
 def booksInLibrary(library):
-    
-    books = db_books_in_lib(library)
+    books = db_all_book_in_lib(library)
+    format_ratings(books)
+    books = group_by_five(books)
     library = db_library_info(library)[0]['library_name']
-    result = []
-    for i in range(0,len(books),5):
-        end = i+5 if (i+5) < len(books) else len(books)
-        tmp = []
-        for book in books[i:end]:
-            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-            tmp.append(book)
-        result.append(tmp)
 
-    return render_template("/main/list.html",books=result,library=library,genres=genres,library_name=library)
+    return render_template("/main/list.html",books=books,library=library,genres=genres,library_name=library)
 
 @views.route("/detail/<bookid>")
 def bookDetail(bookid):
-    book = db_book_by_id(bookid)[0]
-    book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-    
-    print(book)
+    book = db_book_info(bookid)
+    book = format_book_and_authors(book)
     return render_template('/main/detail.html',book=book,genres=genres)
 
 

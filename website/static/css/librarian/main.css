@@ -1,0 +1,54 @@
+.buttons{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    
+}
+.lib-header {
+	font-size: 4rem;
+	
+	border-radius: 2rem;
+	padding: 2rem 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274);
+}
+.row{
+    display: flex;
+}
+.huge-btn{
+    display: block;
+    width: 50rem;
+    height: 30rem;
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 3rem;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274);
+    transition: all 0.3s;
+}
+
+.blue{
+    background-color: #00f;
+}
+.red{
+    background-color: #f00;
+}
+.green{
+    background-color: #0f0;
+}
+.pink{
+    background-color: rgb(255, 0, 106);
+}
+.huge-btn:hover{
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+}

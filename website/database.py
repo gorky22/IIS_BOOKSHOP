@@ -4,9 +4,21 @@ from . import db_connection, HOST, DATABASE, USER, PASSWORD
 
 database = Blueprint("database",__name__)
 
+
+#converts array element which has type datetime to date
+def convert_datetime_to_date(arr):
+        for el in arr:
+                el["registration_time"] =  el["registration_time"].date()
+        return arr
+
+def decide(old,new):
+        if new == None:
+                return old
+        else:
+                return new
+
 #takse as input query and input parameters
 #this function execute select query and return dict of results
-
 def is_connect():
     global db_connection
     
@@ -56,7 +68,7 @@ def get_user_with_this_email(email):
         query = 'SELECT * FROM User WHERE email=%s'
         parameter = tuple([email])
 
-        return execute_select(query,parameters=parameter)
+        return convert_datetime_to_date(execute_select(query,parameters=parameter))
         
 
 #this function takes no arguments and returns all titles which are in the system
@@ -86,7 +98,7 @@ def db_top_books():
 def db_book_info(title_id):
         query = "SELECT title_name FROM Book_title"
         parameter = tuple([title_id])
-        query2 = '''SELECT  b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT b.title_id, b.title_name,b.rating,b.path_to_picture, b.description,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
 
         return execute_select(query2,parameters=parameter)
@@ -105,17 +117,17 @@ def db_all_book_info():
 
 def db_all_book_in_lib(lib_id):
         parameter = tuple([lib_id])
-        query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+        query = '''SELECT b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
                     JOIN Library l ON bl.library_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
-        return execute_select(query)
+        return execute_select(query,parameters=parameter)
 
 def db_all_book_with_genre(genre_id):
         parameter = tuple([genre_id])
-        query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
+        query = '''SELECT b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
                     JOIN Genre g ON t.genre_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
-        return execute_select(query)
+        return execute_select(query,parameters=parameter)
 
 def db_book_by_id(book_id):
         query = "SELECT * FROM Book_title b WHERE b.title_id = %s"
@@ -150,7 +162,7 @@ def db_libraries_with_book(book_name):
 def get_all_users():
         query = "SELECT * FROM User"
 
-        return execute_select(query)
+        convert_datetime_to_date(execute_select(query))
 
 # this function takes as input email of user which will be deleted
 def delete_user(email):
@@ -170,7 +182,7 @@ def find_user(string_to_find):
         param = tuple([string_to_find for i in range(3)])
         query = "SELECT * FROM User WHERE email=%s or user_name=%s or user_surname=%s"
 
-        return execute_select(query,parameters=param)
+        return convert_datetime_to_date(execute_select(query,parameters=param))
 
 #this function returns book which has this genre
 def db_books_with_genre(genre):
@@ -196,3 +208,28 @@ def db_library_info(libid):
         query = '''SELECT library_name FROM Library WHERE library_id=%s'''
         param=tuple([libid])
         return execute_select(query,parameters=param)
+
+#this function updates user table
+def update_user_db(atributes):
+        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
+
+        original_values = get_user_with_this_email(atributes["old_email"])
+        x = [decide(original_values["user_name"],atributes["user_name"]),
+             decide(original_values["user_surname"],atributes["user_surname"]),
+             decide(original_values["email"],atributes["email"]),
+             decide(original_values["birth_date"],atributes["birth_date"]),
+             decide(original_values["admin"],atributes["admin"]),
+             decide(original_values["librarian"],atributes["librarian"]) ,  
+             decide(original_values["distributor"],atributes["distributor"]) ,  
+             decide(original_values["reader"],atributes["reader"]) ,
+             atributes["old_email"]
+             ]
+        
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
