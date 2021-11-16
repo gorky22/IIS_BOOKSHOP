@@ -1,10 +1,18 @@
 from flask import Blueprint
-from . import db_connection, is_connect
+import mysql.connector as mysql
+from . import db_connection, HOST, DATABASE, USER, PASSWORD
 
 database = Blueprint("database",__name__)
 
 #takse as input query and input parameters
 #this function execute select query and return dict of results
+
+def is_connect():
+    global db_connection
+    
+    if (not db_connection.is_connected()):
+        db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
+
 def execute_select(query,parameters = None):
         is_connect()
         cursor = db_connection.cursor()
