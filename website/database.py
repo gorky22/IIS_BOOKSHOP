@@ -213,7 +213,8 @@ def db_library_info(libid):
 def update_user_db(atributes):
         query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
 
-        original_values = get_user_with_this_email(atributes["old_email"])
+        original_values = get_user_with_this_email(atributes["old_email"])[0]
+        
         x = [decide(original_values["user_name"],atributes["user_name"]),
              decide(original_values["user_surname"],atributes["user_surname"]),
              decide(original_values["email"],atributes["email"]),
@@ -224,6 +225,8 @@ def update_user_db(atributes):
              decide(original_values["reader"],atributes["reader"]) ,
              atributes["old_email"]
              ]
+
+        
         
         parameter = tuple(x)
 
