@@ -162,7 +162,7 @@ def db_libraries_with_book(book_name):
 def get_all_users():
         query = "SELECT * FROM User"
 
-        convert_datetime_to_date(execute_select(query))
+        return convert_datetime_to_date(execute_select(query))
 
 # this function takes as input email of user which will be deleted
 def delete_user(email):
