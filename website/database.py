@@ -350,3 +350,15 @@ def add_to_queue(book_id,lib_id,user_id):
 
         db_connection.commit()
         cursor.close()
+
+def db_remove_from_queue(book_id,lib_id,user_id):
+        x = book_id,lib_id,user_id
+        param = tuple(x)
+        query = "DELETE FROM Queue WHERE title_id=%s and user_id = %s and library_id = %s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
