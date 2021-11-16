@@ -63,9 +63,11 @@
 <div class="bg-modal-edit">
     <div class="content-modal-edit">
         <div class="btnCloseEdit">+</div>
-        <p id="editText">Editace Uživatelé : </p>
-        <div class="data-db">
-            <form action="">
+        <p id="editText">Editace Uživatelé</p>
+
+        <div id="colsContainer">
+            <div class="data-db">
+                <h1>Informace v databázi</h1>
                 <label for="name">Jméno: </label>
                 <p id="name"></p><br>
                 <label for="surname">Příjmení: </label>
@@ -74,17 +76,31 @@
                 <p id="e-mail"></p><br>
                 <label for="birth_data">Dátum narození: </label>
                 <p id="birth-date"></p><br>
-                <p>Přiřazená práva:</p>               
-            
+                <p style="display: inline;">Přiřazená práva:</p>  
+                <i id="rights" class="fas fa-check"></i>             
+                <br>
                 <p style="display: inline;">Administrátor</p>
-                <i class="fas fa-times"></i><br>
+                <i id ="adminR" class="fas"></i>
+                <br>
                 <p style="display: inline;">Knihovník</p>
-                <i class="fas fa-times"></i><br>
+                <i id="libR" class="fas"></i><br>
                 <p style="display: inline;">Distribútor</p>
-                <i class="fas fa-times"></i><br>
+                <i id="disR" class="fas"></i><br>
                 <p style="display: inline;">Bežný užívateľ</p>
-                <i class="fas fa-check"></i>
-            </form>
+                <i id="basicUserR" class="fas"></i>
+               
+            </div>
+            <div class="changeTo">
+                <h1>Změnit na</h1>
+                <button class="btnGreen">Udeliť práva</button>
+                <button class="btnRed">Odebrať práva</button>
+                <button class="btnGreen">Udeliť práva</button>
+                <button class="btnRed">Odebrať práva</button> 
+                <button class="btnGreen">Udeliť práva</button>
+                <button class="btnRed">Odebrať práva</button> 
+                <button class="btnGreen">Udeliť práva</button>
+                <button class="btnRed">Odebrať práva</button>  
+            </div>
         </div>
         <button class="btn-search btn-blue">Potvrdiť zmeny</button>
     </div>

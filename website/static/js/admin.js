@@ -40,6 +40,15 @@ $('.deleteBtn').click(function(e){
 })
 
 
+function checkBtn(id, value){
+    if (value == 1) {
+        document.getElementById(id).classList.add('fa-check')
+        document.getElementById(id).classList.remove('fa-times')
+    } else {
+        document.getElementById(id).classList.add('fa-times')
+        document.getElementById(id).classList.remove('fa-check')
+    }
+}
 
 $('.editBtn').click(function(e){
     e.preventDefault()
@@ -60,9 +69,12 @@ $('.editBtn').click(function(e){
             document.getElementById('e-mail').innerHTML = user['email']
             document.getElementById('birth-date').innerHTML = user['birth_date']
             
+            checkBtn("adminR", user['admin'])
+            checkBtn("libR", user['librarian'])
+            checkBtn("disR", user['distributor'])
+            checkBtn("basicUserR", user['reader'])
 
-            
-            
+
             console.log(user['name'])
         }
     });
