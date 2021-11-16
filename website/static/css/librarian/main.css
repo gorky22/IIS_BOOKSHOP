@@ -3,14 +3,25 @@
     left: 50%;
     top:50%;
     transform: translate(-50%,-50%);
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    
+}
+.lib-header {
+	font-size: 4rem;
+	
+	border-radius: 2rem;
+	padding: 2rem 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274);
 }
 .row{
     display: flex;
 }
 .huge-btn{
     display: block;
-    width: 40rem;
-    height: 20rem;
+    width: 50rem;
+    height: 30rem;
     text-decoration: none;
     color: #fff;
     font-family: 'Baloo 2', cursive;
@@ -24,6 +35,7 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274);
     transition: all 0.3s;
 }
+
 .blue{
     background-color: #00f;
 }

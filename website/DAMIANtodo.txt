@@ -28,33 +28,14 @@ Damiane pls udělej tyto selecty:
 
 
 
-
-------------------> INSERTY
-Potřeboval bych aby v databázi byli aspon 4 knhovny:
-    1. knihovna : Název-Knihovna Židlochovice, Adresa: Nádražní 232, 667 01 Židlochovice, E-mail: knhovna2@mkzidlochovice.cz
-    2. knihovna : Název-Moravská zemská knihovna v Brně, Adresa: Kounicova 65a, 601 87 Brno-střed, E-mail: mzk@mzk.cz
-    3. knihovna : Název-Knihovna Jiřího Mahena v Brně, adresa a email klidně stejné jako u předchozí knihovny
-    4. knihovna : Název-Ústřední knihovna VUT v Brně, adresa a email random nebo stejné jako u předchozích
-
-    U každé knihovny prosím nastav cestu k fotce knihovny:
-        Ty vesty jsou vesměs stejné /static/img/libraries/<jmenoSouboru>
-        - pro knihovnu 1 - jmenoSouboru = lib1.jpeg
-        - pro knihovnu 2 - jmenoSouboru = lib2.jpg
-        - pro knihovnu 3 - jmenoSouboru = lib3.jpg
-        - pro knihovnu 4 - jmenoSouboru = lib4.jpg
-
-    !!! K TOMU BY BYLO DOBRÉ UŽ VYTVOŘIT NĚJAKÉ KNÍŽKY, KTERÉ TYTO KNIHOVNY MAJÍ A SELECT, KTERÝ JSEM TI PSAL NAHORU (ŘÁDEK 8) !!!
+--------------------------------------------------Knihovnik--------------------------------------------------
+- Dostaneš library ID a potřebuji informace o všech rezervacích na dané knihovně 
+    (Primární klíč člověka co si zarezervoval knížku,Jeho E-mail,
+    jakou knizku si rezervoval a kdy si ji rezervoval, a samozřejmě PK rezervace) -- db_reservations_in_lib(lib_pk)
+- Potřebuji funkci na to abych mohl odstranit rezervaci z databáze -- db_remove_reservation(res_pk)
+- Potřebuji možnost vložit novou výpůjčku (dám ti vše co bude potřeba (lib_id,do kdy vypujcka bude, pro koho je, na jakou knizku je)) - db_insert_borrow(Všechny věci co jsou potřeba)
+- Potřebuji update funkci, která updatne čas rezervace (dostaneš rezervační ID a nový časový údaj) - db_update_reservation_time(res_pk)
+- Potřebuji funkci na to abych mohl odstranit výpůjčku z databáze -- db_remove_borrow(bor_pk)
+- Potřebuji funkci, která mi vrátí počet knížek v dané knihovně, dostaneš knihovna PK a kniha PK - db_actual_count(lib_pk,book_pk)
 
 
-
-
-
-
-
-------- TABULKY
-Damiane prosímtě hodíš sem tabulky a jejich atributy?
-Např:
-TABULKAJMENO:
-    jmeno_attr1
-    jmeno_attr2
-    jmeno_attr3 :D

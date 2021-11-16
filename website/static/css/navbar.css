@@ -71,6 +71,9 @@ body{
     font-weight: 800;
     transition: 0.3s all;
 }
+.admin-url.green{
+    background-color: #0F0;
+}
 .admin-url:hover,
 .admin-url:focus{
     color: #fff;
