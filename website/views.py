@@ -116,6 +116,13 @@ def addToQue():
 
 @views.route("/detail/<bookid>/",methods=["GET","POST"])
 def bookDetail(bookid):
+    similar_books=find_similar_genre_book(bookid)
+    for i in range(len(similar_books)):
+        if similar_books[i]['title_id'] == int(bookid):
+            del similar_books[i]
+            break
+    format_ratings(similar_books)
+    
 
     if request.method=="POST":
         if session.get('user'):
@@ -143,6 +150,6 @@ def bookDetail(bookid):
     book = format_book_and_authors(book)
     libraries = db_libraries_with_book(book['title_id'])
     
-    return render_template('/main/detail.html',book=book,genres=genres,libraries=libraries)
+    return render_template('/main/detail.html',book=book,genres=genres,libraries=libraries,similar=similar_books)
 
 

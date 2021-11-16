@@ -39,7 +39,7 @@ def delete_res(resid):
     res_info = db_reservation_info(resid)[0]
 
     db_remove_reservation(resid)
-    count_of_book = int(db_actual_count(res_info['title_id'],res_info['library_id'])[0]['count'])
+    count_of_book = int(db_actual_count(res_info['library_id'],res_info['title_id'],)[0]['count'])
     count_of_book+=1
     db_update_actual_count(str(count_of_book),res_info['library_id'],res_info['title_id'])
 
@@ -53,7 +53,6 @@ def confirm_res(resid):
     user_id = request.form.get('user_id')
     title_id = request.form.get('title_id')
 
-    print(f"{until} -- LIB {library_id} -- USER {user_id} -- BOOK {title_id}")
     db_insert_borrow(until,title_id,user_id,session['user']['user_id'],library_id)
     db_remove_reservation(resid)
 
@@ -64,9 +63,23 @@ def confirm_res(resid):
 @librarian_required
 def borrowed():
     borrowed = db_borrowed_in_lib(session['user']['library_id'])
-    print(*borrowed,sep='\n*******************************************\n')
-
     return render_template('/librarian/borrowed.html',borrows=borrowed)
+
+@librarySystem.route('/borrowed/delete/<borid>/')
+@librarian_required
+def delete_bor(borid):
+    borrow_info = db_borrow_info(borid)[0]
+    db_remove_borrow(borid)
+
+    count_of_book = int(db_actual_count(borrow_info['library_id'],borrow_info['title_id'])[0]['count'])
+    count_of_book+=1
+    db_update_actual_count(str(count_of_book),borrow_info['library_id'],borrow_info['title_id'])
+
+
+    return {"err":False}
+
+
+
 
 @librarySystem.route('/order/')
 @librarian_required

@@ -339,7 +339,7 @@ def db_res_with_book_lib_user(titleid,userid,libid):
 
 def db_remove_borrow(bor_pk):
         param = tuple([bor_pk])
-        query = "DELETE FROM Lending WHERE lending_id=%s"
+        query = "DELETE FROM lending WHERE lending_id=%s"
 
         is_connect()
         cursor = db_connection.cursor()
@@ -348,11 +348,16 @@ def db_remove_borrow(bor_pk):
         db_connection.commit()
         cursor.close()
 
+def db_borrow_info(bor_pk):
+        query = '''SELECT * FROM lending WHERE lending_id = %s;'''
+        params = tuple([bor_pk])
+        return execute_select(query,parameters=params)
+
 def find_similar_genre_book(title_id):
-        query = '''SELECT b.title_name FROM  Book_title b JOIN tag t ON b.title_id = t.title_id 
+        query = '''SELECT b.title_id, b.title_name,b.rating,b.path_to_picture FROM  Book_title b JOIN tag t ON b.title_id = t.title_id 
               JOIN genre g ON g.genre_id = t.genre_id WHERE g.name = (SELECT g.name FROM  Book_title b JOIN 
               tag t ON b.title_id = t.title_id 
-              JOIN genre g ON g.genre_id = t.genre_id WHERE b.title_id = %s ) limit 5'''
+              JOIN genre g ON g.genre_id = t.genre_id WHERE b.title_id = %s LIMIT 1) limit 5'''
         
         param = tuple([title_id])
         return execute_select(query,parameters=param)

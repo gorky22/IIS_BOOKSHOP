@@ -49,51 +49,17 @@
 <div class="content">
     <h1 class="content-header">Podobné knihy</h1>
     <div class="book-row">
-        <a href="{{ url_for('views.detailPage') }} " class="book-div">
-            <img src="/static/img/hp1.jpg" alt="hp1" class="book-img">
-            <h1 class="book-header">Harry Potter a Kámen mudrců</h1>
-            <h3 class="book-author">J. K. Rowling</h1>
-            <div class="percent-align">
-                <img src="/static/img/rating/100percent.png" alt="rating" class="book-rating">
-                <p class="book-rating-text">100%</p>
-            </div>
-        </a>
-        <a href="#" class="book-div">
-            <img src="/static/img/hp2.jpg" alt="hp1" class="book-img">
-            <h1 class="book-header">Harry Potter a Tajemná komnata</h1>
-            <h3 class="book-author">J. K. Rowling</h1>
-            <div class="percent-align">
-                <img src="/static/img/rating/30percent.png" alt="rating" class="book-rating">
-                <p class="book-rating-text">30%</p>
-            </div>
-        </a>
-        <a href="#" class="book-div">
-            <img src="/static/img/hp3.jpg" alt="hp1" class="book-img">
-            <h1 class="book-header">Harry Potter a Vězeň z Azkabanu</h1>
-            <h3 class="book-author">J. K. Rowling</h1>
-            <div class="percent-align">
-                <img src="/static/img/rating/80percent.png" alt="rating" class="book-rating">
-                <p class="book-rating-text">80%</p>
-            </div>
-        </a>
-        <a href="#" class="book-div">
-            <img src="/static/img/hp4.jpg" alt="hp1" class="book-img">
-            <h1 class="book-header">Harry Potter a Ohnivý pohár</h1>
-            <h3 class="book-author">J. K. Rowling</h1>
-            <div class="percent-align">
-                <img src="/static/img/rating/50percent.png" alt="rating" class="book-rating">
-                <p class="book-rating-text">50%</p>
-            </div>
-        </a>
-        <a href="#" class="book-div">
-            <img src="/static/img/hp5.jpg" alt="hp1" class="book-img">
-            <h1 class="book-header">Harry Potter a Fénixův řád</h1>
-            <h3 class="book-author">J. K. Rowling</h1>
-            <div class="percent-align">
-                <img src="/static/img/rating/60percent.png" alt="rating" class="book-rating">
-                <p class="book-rating-text">60%</p>
-            </div>
-        </a>
+        {% for book in similar %}
+            <a href="{{ url_for('views.bookDetail',bookid=book['title_id'])}} " class="book-div">
+                <img src="{{ book['path_to_picture'] }}" alt="hp1" class="book-img">
+                <h1 class="book-header">{{ book['title_name'] }}</h1>
+                <h3 class="book-author">J. K. Rowling</h1>
+                <div class="percent-align">
+                    <img src="{{ book['rating_path'] }}" alt="rating" class="book-rating">
+                    <p class="book-rating-text">{{ book['rating'] }}</p>
+                </div>
+            </a>
+        {% endfor %}
     </div>
 </div>
 

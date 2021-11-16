@@ -20,18 +20,14 @@
             </tr>
             
             {% for bor in borrows %}
-                <tr id="bor-num-{{ bor['borervation_id'] }}" data-user="{{bor['user_id']}}" data-book="{{bor['title_id']}}">
+                <tr id="bor-num-{{ bor['lending_id'] }}" data-user="{{bor['user_id']}}" data-book="{{bor['title_id']}}">
                     <td>{{ bor['email'] }}</td>
                     <td>{{ bor['title_name'] }}</td>
                     <td>{{ bor['until'].strftime("%d. %m. %Y") }}</td>
                     <td class="deleteForm">
-                        <button class="button-icon confirm-bor" data-bor="{{ bor['borervation_id'] }}">
+                        <button class="button-icon confirm-bor" data-bor="{{ bor['lending_id'] }}">
                             <i class="fas fa-check-circle"></i>
                         </button>
-                        <button class="button-icon delete-bor" data-bor="{{ bor['borervation_id'] }}">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                        
                     </td>
                 </tr>
             {% endfor %}
