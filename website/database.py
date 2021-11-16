@@ -11,7 +11,7 @@ def convert_datetime_to_date(arr):
                 el["registration_time"] =  el["registration_time"].date()
         return arr
 
-def decide(old,new): 
+def decide(old,new):
         if new == None or new == "":
                 return old
         else:
@@ -229,6 +229,36 @@ def update_user_db(atributes):
         
         
         parameter = tuple(x)
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_reservations_in_lib(lib_pk):
+        query = '''SELECT u.user_id,u.email,b.title_id,r.time,r.reservation_id from Reservation r 
+                   join Library l on %s = r.library_id join User u on 
+                   u.user_id = r.user_id join Book_title b on r.title_id = b.title_id  GROUP BY r.reservation_id'''
+        param=tuple([lib_pk])
+        return execute_select(query,parameters=param)
+
+def db_remove_reservation(res_pk):
+        param = tuple([res_pk])
+        query = "DELETE FROM Reservation WHERE reservation_id=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_update_reservation_time(res_pk,time):
+        query = '''UPDATE `Reservation` SET `until` = %s WHERE `reservation`.`reservation_id` = %s'''
+
+        x = [time,res_pk]
+        parameter = tuple(x)
 
         is_connect()
         cursor = db_connection.cursor()
@@ -236,3 +266,46 @@ def update_user_db(atributes):
         
         db_connection.commit()
         cursor.close()
+
+def db_actual_count(lib_pk,book_pk):
+        query = '''SELECT count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                JOIN Library l ON bl.library_id = l.library_id WHERE b.title_id = %s and l.library_id = %s'''
+
+        x = [book_pk,lib_pk]
+        param=tuple(x)
+        return execute_select(query,parameters=param)
+
+#until = datetime.date()
+def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
+        query = '''INSERT INTO `lending` (`when_borowed`, `until`, `title_id`, `customer_id`, `handler_id`, `library_id`) 
+                    VALUES (CURRENT_TIMESTAMP, %s, %s, %s, %s, %s);'''
+        
+        x = [until,title_id,customer_id,handler_id,library_id]
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_remove_borrow(bor_pk):
+        param = tuple([bor_pk])
+        query = "DELETE FROM Lending WHERE lending_id=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+def find_similar_genre_book(title_id):
+        query = '''SELECT b.title_name FROM  Book_title b JOIN tag t ON b.title_id = t.title_id 
+              JOIN genre g ON g.genre_id = t.genre_id WHERE g.name = (SELECT g.name FROM  Book_title b JOIN 
+              tag t ON b.title_id = t.title_id 
+              JOIN genre g ON g.genre_id = t.genre_id WHERE b.title_id = %s ) limit 5'''
+        
+        param = tuple([title_id])
+        return execute_select(query,parameters=param)
