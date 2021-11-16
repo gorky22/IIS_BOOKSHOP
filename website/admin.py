@@ -29,7 +29,7 @@ def userDelete():
         print("Vymazal som uzivatela", email)
         #delete_user(email)
 
-        return {'message' : f'Vymazal si uzivatela {email}'}
+        return {'message' : "ok"}
         
 @admin.route("/user/<useremail>")
 def get_user_by_id(useremail):
@@ -45,7 +45,7 @@ def edit_user():
         print("Data", data)
         #update_user_db(data)
 
-        return {'message' : 'Ok'}
+        return {'message' : 'ok'}
 
 @admin.route("/libraries/")
 def libPage():

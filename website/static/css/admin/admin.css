@@ -176,7 +176,7 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .content-modal-edit {
-    width: 58rem;
+    width: 60rem;
     height: 42rem;
 
     background-color: #FFF;
@@ -220,7 +220,10 @@ tr:nth-child(even) .editBtn:hover {
     display: inline;
 }
 #rights {
-    color: #FFF;
+    font-size: 1.8rem;
+    font-family: 'Baloo 2', cursive;
+    color: #623CEA;
+    font-weight: bold;
 }
 
 .data-db i {
@@ -277,4 +280,20 @@ tr:nth-child(even) .editBtn:hover {
     
 }
 
+.rightsBtn {
+    text-align: right;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    
+}
 
+.rightsBtn i {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+
+
+.btnRed {
+    margin-right: 11rem;
+}

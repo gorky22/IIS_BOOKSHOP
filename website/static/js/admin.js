@@ -33,19 +33,38 @@ $('.deleteBtn').click(function(e){
             data: email,
             dataType: "json",
             success: function (response) {
-                location.reload()   // aby obnovilo stranku 
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Uspešne si odstránil uživateľa','S')
+                }                
             }
         });
+
+        document.querySelector('.bg-modal-delete').style.display = 'none'
     })
 })
 
+function beautifulDate(input_date) {
+    var date = new Date(input_date)
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    var day = date.getDate()
+    var birth_date = year + '-' + month + '-' + day
+
+    return birth_date
+}
 
 function checkBtn(id, value){
     if (value == 1) {
         document.getElementById(id).classList.add('fa-check')
         document.getElementById(id).classList.remove('fa-times')
+        document.getElementById(id).style.marginRight = "1rem"
+        document.getElementById(id).style.marginLeft = "1rem"
     } else {
         document.getElementById(id).classList.add('fa-times')
+        document.getElementById(id).style.marginRight = "1.3rem"
+        document.getElementById(id).style.marginLeft = "1.3rem"
+
         document.getElementById(id).classList.remove('fa-check')
     }
 }
@@ -54,7 +73,10 @@ function setPlaceholder(user){
     $('#nameI').attr('placeholder', user['user_name'])
     $('#surnameI').attr('placeholder', user['user_surname'])
     $('#e-mailI').attr('placeholder', user['email'])
-    $('#birth-dateI').attr('placeholder', user['birth_date'])
+
+    var birth_date = beautifulDate(user['birth_date'])
+    
+    $('#birth-dateI').attr('placeholder', birth_date)
 }
 
 
@@ -108,7 +130,12 @@ $('.editBtn').click(function(e){
             data: data,
             dataType: "json",
             success: function (response) {
-
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia uživateľa','S')
+                }                
+               
+                //location.reload()   // aby obnovilo stranku 
             }
         });
         document.getElementById("e-mailI").value = ""
@@ -128,7 +155,10 @@ $('.editBtn').click(function(e){
             document.getElementById('name').innerHTML = user['user_name']
             document.getElementById('surname').innerHTML = user['user_surname']
             document.getElementById('e-mail').innerHTML = user['email']
-            document.getElementById('birth-date').innerHTML = user['birth_date']
+
+            var date = beautifulDate(user['birth_date'])
+
+            document.getElementById('birth-date').innerHTML = date
             
             checkBtn("adminR", user['admin'])
             checkBtn("libR", user['librarian'])
@@ -189,7 +219,7 @@ $('.editBtn').click(function(e){
     */
 })
 
-    
+   
     
 
 
