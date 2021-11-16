@@ -52,7 +52,6 @@ def viewsPage():
 @views.route("/list/")
 def listPage():
     books = db_all_book_info()
-    print(books)
     format_ratings(books)
     books = group_by_five(books)
 
@@ -98,7 +97,10 @@ def is_book_availible(bookid,libid):
 
 @views.route('/addToQue/',methods=['POST'])
 def addToQue():
-    
+    user_id = session['user']['user_id']
+    lib_id = request.form.get('lib')
+    book_id = request.form.get('book')
+    add_to_queue(book_id,lib_id,user_id)
     return {'err':False}
 
 @views.route("/detail/<bookid>/",methods=["GET","POST"])
@@ -114,13 +116,11 @@ def bookDetail(bookid):
                 
                 if len(db_res_with_book_lib_user(bookid,user_id,library_id)) == 0:
                     count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
-                    print('Před rezervací -- ',count_of_book)
                     if count_of_book > 0:
                         db_insert_reservation(until,bookid,user_id,library_id)
                         count_of_book-=1
                         db_update_actual_count(str(count_of_book),library_id,bookid)
                         count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
-                        print('Po rezervaci -- ',count_of_book)
                         return {'err':False}
                     return {'err': True, 'msg':'Tato kniha již není k dispozici v této knihovně'}
                 return {'err':True,'msg':'Na tuto knížku již učiněnou rezervaci máte'}

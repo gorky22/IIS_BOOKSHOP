@@ -9,7 +9,7 @@
 
 {% block body_block %}
     <div class="content">
-        <table>
+        <table id="library-res-table" data-library="{{ session['user']['library_id'] }}">
             <tr>
                 <th>E-mail uživatele</th>
                 <th>Jméno knihy</th>
@@ -20,15 +20,15 @@
             </tr>
             
             {% for res in reservations %}
-                <tr id="res-num-{{ res['reservation_id'] }}">
+                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}">
                     <td>{{ res['email'] }}</td>
                     <td>{{ res['book_name'] }}</td>
                     <td>{{ res['time'] }}</td>
                     <td class="deleteForm">
-                        <button class="button-icon" id="reservation-done" data-res="neco">
+                        <button class="button-icon confirm-res" data-res="{{ res['reservation_id'] }}">
                             <i class="fas fa-check-circle"></i>
                         </button>
-                        <button class="button-icon" id="reservation-delete" data-res="neco">
+                        <button class="button-icon delete-res" data-res="{{ res['reservation_id'] }}">
                             <i class="fas fa-trash"></i>
                         </button>
                         
@@ -42,5 +42,6 @@
 {% endblock %}
 
 {% block script_block %}
- <script src="/static/js/libres.js"></script>
+    <script src="/static/js/libres.js"></script>
+ 
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request,session, wrappers,redirect, url_for
 from functools import wraps
 from .database import *
+import datetime
 
 def librarian_required(f):
     @wraps(f)
@@ -37,13 +38,32 @@ def reservations():
 @librarySystem.route('/reservations/delete/<resid>/')
 @librarian_required
 def delete_res(resid):
-    print(resid)
-    return {"err":True}
+    db_remove_reservation(resid)
+    return {"err":False}
+
+@librarySystem.route('/reservations/confirm/<resid>/',methods=['POST'])
+@librarian_required
+def confirm_res(resid):
+    # take form arguments
+    # take res arguments
+    # delete res
+    # add to borrowed
+    until = datetime.date.today() + datetime.timedelta(days=31)
+    library_id = request.form.get('library_id')
+    user_id = request.form.get('user_id')
+    title_id = request.form.get('title_id')
+
+    print(f"{until} -- LIB {library_id} -- USER {user_id} -- BOOK {title_id}")
+    db_insert_borrow(until,title_id,user_id,session['user']['user_id'],library_id)
+    db_remove_reservation(resid)
+
+    return {"err":False,'resToDelete':resid}
 
 
 @librarySystem.route('/borrowed/')
 @librarian_required
 def borrowed():
+    
     return render_template('/librarian/borrowed.html')
 
 @librarySystem.route('/order/')

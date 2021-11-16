@@ -2,13 +2,44 @@
 
 
 {% block link_block %}
-    
+<link rel="stylesheet" href="/static/css/admin/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<link rel="stylesheet" href="/static/css/librarian/reservation.css">    
 {% endblock %}
 
 {% block body_block %}
+    <div class="content">
+        <table id="library-res-table" data-library="{{ session['user']['library_id'] }}">
+            <tr>
+                <th>E-mail uživatele</th>
+                <th>Jméno knihy</th>
+                <th>Výpůjčka do</th>
+                <th class="search-box">
+                        <input type="text" name="nm" placeholder="Hledat email">                
+                </th>
+            </tr>
+            
+            {% for res in reservations %}
+                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}">
+                    <td>{{ res['email'] }}</td>
+                    <td>{{ res['book_name'] }}</td>
+                    <td>{{ res['time'] }}</td>
+                    <td class="deleteForm">
+                        <button class="button-icon confirm-res" data-res="{{ res['reservation_id'] }}">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
+                        <button class="button-icon delete-res" data-res="{{ res['reservation_id'] }}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
 
+        </table>
+    </div>
 {% endblock %}
 
 {% block script_block %}
-
+<script src="/static/js/libbor.js"></script>
 {% endblock %}
