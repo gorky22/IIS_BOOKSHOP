@@ -275,6 +275,20 @@ def db_actual_count(lib_pk,book_pk):
         param=tuple(x)
         return execute_select(query,parameters=param)
 
+def db_update_actual_count(lib_pk,book_pk):
+        query = '''UPDATE `Book_title_library` SET `count` = %s WHERE `litle_id` = %s and `library_id` = %s '''
+
+        x = [book_pk,lib_pk]
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+
 #until = datetime.date()
 def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
         query = '''INSERT INTO `lending` (`when_borowed`, `until`, `title_id`, `customer_id`, `handler_id`, `library_id`) 
