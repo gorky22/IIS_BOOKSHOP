@@ -51,6 +51,7 @@ def viewsPage():
 @views.route("/list/")
 def listPage():
     books = db_all_book_info()
+    print(books)
     format_ratings(books)
     books = group_by_five(books)
 
@@ -87,10 +88,23 @@ def booksInLibrary(library):
 
     return render_template("/main/list.html",books=books,library=library,genres=genres,library_name=library)
 
-@views.route("/detail/<bookid>")
+@views.route("/detail/<bookid>/",methods=["GET","POST"])
 def bookDetail(bookid):
+
+    if request.method=="POST":
+        if session.get('user'):
+            #rezervace
+            library_id = request.form.get('lib')
+            user_id = session['user']['user_id']
+            print(user_id,library_id)
+            return {'err':False}
+        return {'err':True,'msg':'Rezervace nebyla dokončena, pro dokončení rezervace musíte být přihlášeni.'}
+
+
     book = db_book_info(bookid)
     book = format_book_and_authors(book)
-    return render_template('/main/detail.html',book=book,genres=genres)
+    libraries = db_libraries_with_book(book['title_id'])
+    
+    return render_template('/main/detail.html',book=book,genres=genres,libraries=libraries)
 
 

@@ -106,7 +106,7 @@ def db_book_authors(title_id):
 
 
 def db_all_book_info():
-        query2 = '''SELECT  b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT  b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
         return execute_select(query2)
 
@@ -146,11 +146,11 @@ def db_libraries():
         return execute_select(query)
 
 #this function returns counts of given title in each libraries
-def db_libraries_with_book(book_name):
-        query = '''SELECT l.library_name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
-                   JOIN Library l ON bl.library_id = l.library_id WHERE b.title_name = %s'''
+def db_libraries_with_book(title_id):
+        query = '''SELECT l.library_id,l.library_name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                   JOIN Library l ON bl.library_id = l.library_id WHERE b.title_id = %s'''
         
-        parameter = tuple([book_name])
+        parameter = tuple([title_id])
         return execute_select(query,parameters=parameter)
 
 #this function returns all users in system
