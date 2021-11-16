@@ -9,7 +9,7 @@ def librarian_required(f):
         if not session.get('user'):
             return redirect(url_for('auth.authPage'))
         if not session['user']['librarian']:
-            return redirect(url_for('admin.loginPage'))
+            return redirect(url_for('admin.notPermited'))
         return f(*args,**kwargs)
     return decorated_function
 
@@ -30,24 +30,24 @@ def homePage():
 @librarian_required
 def reservations():
     reservations = db_reservations_in_lib(session['user']['library_id'])
-    for res in reservations:
-        res['book_name'] = db_book_by_id(res['title_id'])[0]['title_name']
-    print(reservations)
+
     return render_template('/librarian/reservations.html',reservations=reservations)
 
 @librarySystem.route('/reservations/delete/<resid>/')
 @librarian_required
 def delete_res(resid):
+    res_info = db_reservation_info(resid)[0]
+
     db_remove_reservation(resid)
+    count_of_book = int(db_actual_count(res_info['title_id'],res_info['library_id'])[0]['count'])
+    count_of_book+=1
+    db_update_actual_count(str(count_of_book),res_info['library_id'],res_info['title_id'])
+
     return {"err":False}
 
 @librarySystem.route('/reservations/confirm/<resid>/',methods=['POST'])
 @librarian_required
 def confirm_res(resid):
-    # take form arguments
-    # take res arguments
-    # delete res
-    # add to borrowed
     until = datetime.date.today() + datetime.timedelta(days=31)
     library_id = request.form.get('library_id')
     user_id = request.form.get('user_id')
@@ -63,8 +63,10 @@ def confirm_res(resid):
 @librarySystem.route('/borrowed/')
 @librarian_required
 def borrowed():
-    
-    return render_template('/librarian/borrowed.html')
+    borrowed = db_borrowed_in_lib(session['user']['library_id'])
+    print(*borrowed,sep='\n*******************************************\n')
+
+    return render_template('/librarian/borrowed.html',borrows=borrowed)
 
 @librarySystem.route('/order/')
 @librarian_required

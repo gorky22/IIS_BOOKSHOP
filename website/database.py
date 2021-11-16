@@ -237,10 +237,15 @@ def update_user_db(atributes):
         cursor.close()
 
 def db_reservations_in_lib(lib_pk):
-        query = '''SELECT u.user_id,u.email,b.title_id,r.time,r.reservation_id from Reservation r 
+        query = '''SELECT u.user_id,u.email,b.title_id,b.title_name,r.time,r.reservation_id from Reservation r 
                    join Library l on %s = r.library_id join User u on 
                    u.user_id = r.user_id join Book_title b on r.title_id = b.title_id  GROUP BY r.reservation_id'''
         param=tuple([lib_pk])
+        return execute_select(query,parameters=param)
+
+def db_reservation_info(res_pk):
+        query = '''SELECT * FROM Reservation WHERE reservation_id = %s;'''
+        param=tuple([res_pk])
         return execute_select(query,parameters=param)
 
 def db_remove_reservation(res_pk):
@@ -304,6 +309,14 @@ def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
         
         db_connection.commit()
         cursor.close()
+
+def db_borrowed_in_lib(lib_pk):
+        query = '''SELECT u.user_id,u.email,b.title_id,b.title_name,le.until,le.lending_id from lending le 
+                   join Library l on %s = le.library_id join User u on 
+                   u.user_id = le.customer_id join Book_title b on le.title_id = b.title_id  GROUP BY le.lending_id'''
+
+        parameter=tuple([lib_pk])
+        return execute_select(query,parameters=parameter)
 
 def db_insert_reservation(until,title_id,user_id,library_id):
         query = '''INSERT INTO `Reservation` (`until`, `title_id`, `user_id`,`library_id`) 

@@ -3,10 +3,28 @@ from flask import Blueprint, render_template,request,session,redirect,url_for
 from .database import get_user_with_this_email, add_user
 from passlib.hash import pbkdf2_sha256 as sha256
 import datetime
+from functools import wraps
+
+def login_unrequired(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        if session.get('user'):
+            return redirect(url_for('views.viewsPage'))
+        return f(*args,**kwargs)
+    return decorated_function
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        if not session.get('user'):
+            return redirect(url_for('auth.loginPage'))
+        return f(*args,**kwargs)
+    return decorated_function
 
 auth = Blueprint("auth",__name__)
 
 @auth.route("/register/",methods=["POST","GET"])
+@login_unrequired
 def authPage():
     if request.method == "POST":
         
@@ -33,6 +51,7 @@ def authPage():
     return render_template("main/register.html")
 
 @auth.route("/login/",methods=["POST","GET"])
+@login_unrequired
 def loginPage():
     if request.method == "POST":
         email = request.form.get('email')
@@ -62,6 +81,7 @@ def loginPage():
     return render_template("main/login.html")
 
 @auth.route('/logOut/')
+@login_required
 def logout():
     session.clear()
     return redirect(url_for('views.viewsPage'))

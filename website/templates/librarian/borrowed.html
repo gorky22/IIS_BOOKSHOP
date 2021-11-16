@@ -9,7 +9,7 @@
 
 {% block body_block %}
     <div class="content">
-        <table id="library-res-table" data-library="{{ session['user']['library_id'] }}">
+        <table id="library-bor-table" data-library="{{ session['user']['library_id'] }}">
             <tr>
                 <th>E-mail uživatele</th>
                 <th>Jméno knihy</th>
@@ -19,16 +19,16 @@
                 </th>
             </tr>
             
-            {% for res in reservations %}
-                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}">
-                    <td>{{ res['email'] }}</td>
-                    <td>{{ res['book_name'] }}</td>
-                    <td>{{ res['time'] }}</td>
+            {% for bor in borrows %}
+                <tr id="bor-num-{{ bor['borervation_id'] }}" data-user="{{bor['user_id']}}" data-book="{{bor['title_id']}}">
+                    <td>{{ bor['email'] }}</td>
+                    <td>{{ bor['title_name'] }}</td>
+                    <td>{{ bor['until'].strftime("%d. %m. %Y") }}</td>
                     <td class="deleteForm">
-                        <button class="button-icon confirm-res" data-res="{{ res['reservation_id'] }}">
+                        <button class="button-icon confirm-bor" data-bor="{{ bor['borervation_id'] }}">
                             <i class="fas fa-check-circle"></i>
                         </button>
-                        <button class="button-icon delete-res" data-res="{{ res['reservation_id'] }}">
+                        <button class="button-icon delete-bor" data-bor="{{ bor['borervation_id'] }}">
                             <i class="fas fa-trash"></i>
                         </button>
                         

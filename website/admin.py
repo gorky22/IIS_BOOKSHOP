@@ -1,6 +1,17 @@
-from flask import Blueprint, render_template, request
-
+from flask import Blueprint, render_template, request,session,redirect,url_for
+from functools import wraps
 from .database import *
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        if not session.get('user'):
+            return redirect(url_for('auth.loginPage'))
+        if not session['user']['admin']:
+            return redirect(url_for('admin.notPermited'))
+        return f(*args,**kwargs)
+    return decorated_function
+
 
 admin = Blueprint("admin",__name__)
 

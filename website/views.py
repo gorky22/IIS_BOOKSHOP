@@ -1,7 +1,18 @@
-from flask import Blueprint, render_template, request,session
+from flask import Blueprint, render_template, request,session,redirect,url_for
 from .database import *
 import random
 import datetime
+from functools import wraps
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        if not session.get('user'):
+            return redirect(url_for('auth.authPage'))
+        if not session['user']['librarian']:
+            return redirect(url_for('admin.notPermited'))
+        return f(*args,**kwargs)
+    return decorated_function
 
 views = Blueprint("views",__name__)
 genres = db_genres()

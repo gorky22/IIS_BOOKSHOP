@@ -22,8 +22,8 @@
             {% for res in reservations %}
                 <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}">
                     <td>{{ res['email'] }}</td>
-                    <td>{{ res['book_name'] }}</td>
-                    <td>{{ res['time'] }}</td>
+                    <td>{{ res['title_name'] }}</td>
+                    <td>{{ res['time'].strftime("%d. %m. %Y") }}</td>
                     <td class="deleteForm">
                         <button class="button-icon confirm-res" data-res="{{ res['reservation_id'] }}">
                             <i class="fas fa-check-circle"></i>
