@@ -177,7 +177,8 @@ tr:nth-child(even) .editBtn:hover {
 
 .content-modal-edit {
     width: 58rem;
-    height: 38rem;
+    height: 42rem;
+
     background-color: #FFF;
     border-radius: 3rem;
     padding: 3rem;
@@ -187,7 +188,6 @@ tr:nth-child(even) .editBtn:hover {
     font-family: 'Baloo 2', cursive;
     position: relative;
     margin: auto;
-    
 
 }
 #colsContaier {
@@ -274,5 +274,7 @@ tr:nth-child(even) .editBtn:hover {
     background-color: #fff;
     color: #333;
     outline: none;
+    
 }
+
 
