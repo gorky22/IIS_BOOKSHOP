@@ -12,7 +12,7 @@ def viewsPage():
     books = [top[i] for i in randomlist]
     for book in books:
         book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-        book['authors'] = db_book_authors(book['title_id'])
+        #book['authors'] = db_book_authors(book['title_id'])
 
     
     return render_template("/main/main.html",books=books,genres=genres)

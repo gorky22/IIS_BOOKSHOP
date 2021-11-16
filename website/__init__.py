@@ -32,4 +32,7 @@ def create_app():
     from .database import database
     app.register_blueprint(database,url_prefix='/database/')
     
+    from .librarian import librarySystem
+    app.register_blueprint(librarySystem,url_prefix='/librarian/')
+
     return app
