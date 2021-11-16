@@ -2,11 +2,20 @@
 
 
 {% block link_block %}
-
+    <link rel="stylesheet" href="/static/css/librarian/main.css">
 {% endblock %}
 
 {% block body_block %}
-
+    <div class="buttons">
+        <div class="row">
+            <a href="{{ url_for('librarySystem.reservations') }}" class="huge-btn blue">Rezervace</a>
+            <a href="{{ url_for('librarySystem.borrowed') }}" class="huge-btn red">Výpůjčky</a>
+        </div>
+        <div class="row">
+            <a href="{{ url_for('librarySystem.order') }}" class="huge-btn pink">Objednávka knih</a>
+            <a href="{{ url_for('librarySystem.booksInLib') }}" class="huge-btn green">Knižní tituly</a>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script_block %}

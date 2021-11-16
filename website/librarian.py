@@ -20,3 +20,24 @@ librarySystem = Blueprint('librarySystem',__name__)
 @librarian_required
 def homePage():
     return render_template('/librarian/mainLibrary.html')
+
+
+@librarySystem.route('/reservations/')
+@librarian_required
+def reservations():
+    return render_template('/librarian/reservations.html')
+
+@librarySystem.route('/borrowed/')
+@librarian_required
+def borrowed():
+    return render_template('/librarian/borrowed.html')
+
+@librarySystem.route('/order/')
+@librarian_required
+def order():
+    return render_template('/librarian/order.html')
+
+@librarySystem.route('/order/')
+@librarian_required
+def booksInLib():
+    return render_template('/librarian/booksInLib.html')
