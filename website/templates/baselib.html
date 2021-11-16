@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/navbar.css">
+        <link rel="stylesheet" href="/static/css/toast.css">
+        <link rel='shortcut icon' type='image/x-icon' href='/static/img/bookinCircle.ico' />
+        {% block link_block %}
+
+        {% endblock %}
+        
+        <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
+        <title>Book Reserver</title>
+    </head>
+    <body>
+        {% if session['user'] %}
+            {% if session['user']['admin']%}
+                <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+            {% endif %}
+            {% if session['user']['librarian']%}
+                <a href="{{ url_for('librarySystem.homePage') }}" class="admin-url green">KNIHOVNIK</a>
+            {% endif %}
+        {% endif %}
+        <div class="res-navbar" >
+            <button class="hamburger-btn" id="btn-menu">
+                <img src="/static/img/ham.svg" class="hamburger-icon" id="hamburger">
+                <img src="/static/img/cross.png" class="hamburger-icon" id="cross">
+            </button>
+            <div class="nav-box">
+                <div class="nav-flex">
+                    <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
+                    <a href="{{ url_for('views.listPage') }}" class="nav-link">Rezervace</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Výpůjčky</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Objednávka knih</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knižní tituly</a>
+                    {% if session['logged_in'] %}
+                        <a href="#" class="nav-link">Ahoj {{ session['user']['name'] }} </a>
+                        <!-- {{ url_for('auth.logout') }} -->
+                        <a href="#" class="nav-link">Moje Rezervace</a>
+                        <a href="{{ url_for('auth.logout') }}"" class="nav-link btn btn-blue">Odhlásit se</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.authPage') }}" class="nav-link btn btn-blue">Registrovat</a>
+                        <a href="{{ url_for('auth.loginPage') }}" class="nav-link btn btn-yellow">Přihlásit se</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="left-nav">
+                    <a href="{{ url_for('views.viewsPage') }}" class="logo">Book&Reserve</a>
+                </div>
+                
+                <ul class="right-nav">
+                    <li class="link-li">
+                        <a href="{{ url_for('librarySystem.homePage') }}" {{ 'class=link-a-active' if request.path == '/librarian/libPage/' else 'class=link-a' }}>Domů</a>
+                    </li>
+                    <li class="link-li dropdown">
+                        <a href="{{ url_for('librarySystem.reservations') }}" {{ 'class=link-a-active' if request.path == '/librarian/reservations/' else 'class=link-a' }}>Rezervace</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('librarySystem.borrowed') }}" {{ 'class=link-a-active' if request.path == '/librarian/borrowed/' else 'class=link-a' }}>Výpůjčky</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('librarySystem.order') }}" {{ 'class=link-a-active' if request.path == '/librarian/order/' else 'class=link-a' }}>Objednávky</a>
+                    </li>
+                    <li class="link-li">
+                        <a href="{{ url_for('librarySystem.booksInLib') }}" {{ 'class=link-a-active' if request.path == '/librarian/books/' else 'class=link-a' }}>Knižní tituly</a>
+                    </li>
+                    
+                    {% if session['logged_in'] %}
+                    <li class="link-li">
+                        <a href="{{ url_for('auth.logout') }}" class="link-a btn btn-blue">Odhlásit se</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            
+            </div>
+        </nav>
+
+
+
+        {% block body_block %}
+        
+        {% endblock %}
+        
+
+        <script src="/static/js/navbarResp.js"></script>
+        <script src="/static/js/Toast.js"></script>
+
+        {% block script_block %}
+
+        {% endblock %}
+    </body>
+</html>

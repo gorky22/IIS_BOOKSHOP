@@ -30,6 +30,13 @@ def homePage():
 def reservations():
     return render_template('/librarian/reservations.html')
 
+@librarySystem.route('/reservations/delete/<resid>/')
+@librarian_required
+def delete_res(resid):
+    print(resid)
+    return {"err":True}
+
+
 @librarySystem.route('/borrowed/')
 @librarian_required
 def borrowed():
@@ -40,7 +47,7 @@ def borrowed():
 def order():
     return render_template('/librarian/order.html')
 
-@librarySystem.route('/order/')
+@librarySystem.route('/books/')
 @librarian_required
 def booksInLib():
     return render_template('/librarian/booksInLib.html')

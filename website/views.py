@@ -100,7 +100,7 @@ def bookDetail(bookid):
             until = datetime.date.today() + datetime.timedelta(days=10)
             #insert reservace do databaze
             #odecteni 1 ze vztahu mezi knihou a knihovnou
-
+            
             return {'err':False}
         return {'err':True,'msg':'Rezervace nebyla dokončena, pro dokončení rezervace musíte být přihlášeni.'}
 

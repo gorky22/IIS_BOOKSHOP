@@ -1,0 +1,16 @@
+.button-icon{
+    font-size: 3rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: #333;
+    transition: all 0.3s;
+    cursor: pointer;
+    margin-right: 3rem;
+}
+.button-icon:last-child{
+    margin-right: 0;
+}
+.button-icon:hover{
+    color: #0f0;
+    transform: scale(1.1)
+}
