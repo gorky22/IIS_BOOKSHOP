@@ -10,7 +10,7 @@ const Toast = {
         document.body.appendChild(this.el)
 
     },
-    show(message,state){
+    show(message,state,timeForAppear=2000){
         clearTimeout(this.hideTimeout)
         this.el.textContent = message
         this.el.className = 'toast toast-visible'
@@ -20,7 +20,7 @@ const Toast = {
         }
         this.hideTimeout = setTimeout(() => {
             this.el.classList.remove('toast-visible')
-        },2000)
+        },timeForAppear)
     }
 
 };

@@ -89,6 +89,18 @@ def booksInLibrary(library):
 
     return render_template("/main/list.html",books=books,library=library,genres=genres,library_name=library)
 
+@views.route("/isbookAvailible/<bookid>/<libid>/",methods=["GET","POST"])
+def is_book_availible(bookid,libid):
+    count_of_book = int(db_actual_count(libid,bookid)[0]['count'])
+    if count_of_book > 0:
+        return {'answer':True}
+    return {'answer':False}
+
+@views.route('/addToQue/',methods=['POST'])
+def addToQue():
+    
+    return {'err':False}
+
 @views.route("/detail/<bookid>/",methods=["GET","POST"])
 def bookDetail(bookid):
 
