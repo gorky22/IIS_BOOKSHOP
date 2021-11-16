@@ -50,14 +50,74 @@ function checkBtn(id, value){
     }
 }
 
+function setPlaceholder(user){
+    $('#nameI').attr('placeholder', user['name'])
+    $('#surnameI').attr('placeholder', user['surname'])
+    $('#e-mailI').attr('placeholder', user['email'])
+    $('#birth-dateI').attr('placeholder', user['birth_date'])
+}
+
+
 $('.editBtn').click(function(e){
     e.preventDefault()
     e.stopPropagation();
     e.stopImmediatePropagation();
-
-
     
     var email =  $(this).data('edit')
+
+    $('#sendEdit').click(function(e){
+
+        var name = $('#nameI').val()
+        var surname = $('#surnameI').val()
+        var new_email = $('#e-mailI').val()
+        var birth_date = $('#birth-dateI').val()
+        var adminR = 0
+        var libR = 0
+        var disR = 0
+        var basicUserR = 0
+
+        if (document.getElementById('adminR').classList.contains('fa-check')){
+            adminR = 1
+        }
+        if (document.getElementById('libR').classList.contains('fa-check')){
+            libR = 1
+        }
+        if (document.getElementById('disR').classList.contains('fa-check')){
+            disR = 1
+        }
+        if (document.getElementById('basicUserR').classList.contains('fa-check')){
+            basicUserR = 1
+        }
+
+        var data = {
+            "old_email" : email,
+            "email" : new_email,
+            "user_name" : name,
+            "user_surname" : surname,
+            "birth_date" : birth_date,
+            "admin" : adminR,
+            "librarian" : libR,
+            "distributor" : disR,
+            "reader" : basicUserR,
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/admin/editUser/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+
+            }
+        });
+        document.getElementById("e-mailI").value = ""
+        document.querySelector('.bg-modal-edit').style.display = 'none'
+
+       
+       
+
+    })
+  
     var user = false
     $.ajax({
         type: "GET",
@@ -74,10 +134,8 @@ $('.editBtn').click(function(e){
             checkBtn("disR", user['distributor'])
             checkBtn("basicUserR", user['reader'])
 
-            $('#nameI').attr('placeholder', user['name'])
-            $('#surnameI').attr('placeholder', user['surname'])
-            $('#e-mailI').attr('placeholder', user['email'])
-            $('#birth-dateI').attr('placeholder', user['birth_date'])
+            setPlaceholder(user)
+            
             
             $('#adminAdd').click(function(e){
                 checkBtn("adminR", 1)
@@ -85,7 +143,24 @@ $('.editBtn').click(function(e){
             $('#adminRemove').click(function(e){
                 checkBtn("adminR", 0)
             })
-          
+            $('#libAdd').click(function(e){
+                checkBtn("libR", 1)
+            })
+            $('#libRemove').click(function(e){
+                checkBtn("libR", 0)
+            })
+            $('#disAdd').click(function(e){
+                checkBtn("disR", 1)
+            })
+            $('#disRemove').click(function(e){
+                checkBtn("disR", 0)
+            })
+            $('#basicUserAdd').click(function(e){
+                checkBtn("basicUserR", 1)
+            })
+            $('#basicUserRemove').click(function(e){
+                checkBtn("basicUserR", 0)
+            })
 
         }
     });
@@ -112,6 +187,14 @@ $('.editBtn').click(function(e){
     })
     */
 })
+
+    
+    
+
+   
+
+
+
 
 
 

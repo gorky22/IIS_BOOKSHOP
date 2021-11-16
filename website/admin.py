@@ -37,7 +37,15 @@ def get_user_by_id(useremail):
     print
     return {'user' : user[0]}
 
+@admin.route('/editUser/', methods=["POST"])
+def edit_user():
+    print("EDITOVANIE USERA")
+    if request.method == "POST" :
+        data = request.form  
+        print("Data", data)
+        #delete_user(email)
 
+        return {'message' : 'Ok'}
 
 @admin.route("/libraries/")
 def libPage():
