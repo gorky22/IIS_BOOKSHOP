@@ -399,7 +399,7 @@ for i in range (0,30):
       db_connection.commit()
       cursor.close()
 db_connection.close()
-'''
+
 
 for i in range(0,26):
       cursor = db_connection.cursor()
@@ -430,4 +430,32 @@ for i in range(0,26):
             cursor.execute(query,parameter)
             db_connection.commit()
       cursor.close()
+'''
+
+
+#param = tuple(["gorcak.damian@tmp.sk"])
+cursor = db_connection.cursor()
+
+######################### niesu v ziadnej kniznici #######################################################
+query = '''SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
+                    '''
+
+libraryid = 5
+#parameter = tuple([libraryid])
+#print(parameter)
+cursor.execute(query)
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
+
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
+
+print(results)
+
+
+
+
+print("Connected to:", db_connection.get_server_info())
 db_connection.close()
+cursor.close()
