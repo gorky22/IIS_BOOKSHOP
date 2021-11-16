@@ -76,15 +76,15 @@ def db_top_books():
 #takes as input name of book_title
 #returns all informations about this book and also dict of authors 
 def db_book_info(title_id):
-        query = "SELECT * FROM Book_title"
+        query = "SELECT title_name FROM Book_title"
         parameter = tuple([title_id])
-        query2 = '''SELECT a.author_name a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT  b.title_name,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
 
-        return execute_select(query),execute_select(query2,parameters=parameter)
+        return execute_select(query2,parameters=parameter)
 
 def db_book_authors(title_id):
-        query2 = '''SELECT a.author_name a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
         parameter = tuple([title_id])
         return execute_select(query2,parameters=parameter)

@@ -10,6 +10,8 @@ def viewsPage():
     
     randomlist = random.sample(range(0, 9), 5)
     books = [top[i] for i in randomlist]
+    info = [db_book_info(book['title_id']) for book in books]
+    print(*info,sep='\n')
     for book in books:
         book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
 
@@ -40,7 +42,6 @@ def detailPage():
 @views.route("/libraries/")
 def librariesPage():
     libraries = db_libraries()
-    print(libraries)
     return render_template('/main/libraries.html',libraries=libraries,genres=genres)
 
 
@@ -83,3 +84,9 @@ def bookDetail(bookid):
     print(book)
     return render_template('/main/detail.html',book=book,genres=genres)
 
+
+#[{'title_name': 'Sila geografie v 21. storočí',
+# 'author_name': 'Johannes',
+# 'author_surname': 'Straus'},
+# {'title_name': 'Sila geografie v 21. storočí',
+# 'author_name': 'Terry', 'author_surname': 'Wilson'}]
