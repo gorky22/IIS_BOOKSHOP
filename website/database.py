@@ -105,17 +105,17 @@ def db_all_book_info():
 
 def db_all_book_in_lib(lib_id):
         parameter = tuple([lib_id])
-        query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+        query = '''SELECT b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
                     JOIN Library l ON bl.library_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
-        return execute_select(query)
+        return execute_select(query,parameters=parameter)
 
 def db_all_book_with_genre(genre_id):
         parameter = tuple([genre_id])
-        query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
+        query = '''SELECT b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
                     JOIN Genre g ON t.genre_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
-        return execute_select(query)
+        return execute_select(query,parameters=parameter)
 
 def db_book_by_id(book_id):
         query = "SELECT * FROM Book_title b WHERE b.title_id = %s"

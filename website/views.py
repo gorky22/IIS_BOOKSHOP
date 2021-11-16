@@ -70,17 +70,12 @@ def librariesPage():
 
 @views.route("/books/genre/<genreid>")
 def booksByGenre(genreid):
-    books = db_books_with_genre(genreid)
+    books = db_all_book_with_genre(genreid)
+    format_ratings(books)
+    books = group_by_five(books)
     genre = db_genre_info(genreid)[0]
-    result = []
-    for i in range(0,len(books),5):
-        end = i+5 if (i+5) < len(books) else len(books)
-        tmp = []
-        for book in books[i:end]:
-            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-            tmp.append(book)
-        result.append(tmp)
-    return render_template('/main/list.html',books=result,genres=genres,active=genre)
+    
+    return render_template('/main/list.html',books=books,genres=genres,active=genre)
     
 
 @views.route("books/library/<library>")
