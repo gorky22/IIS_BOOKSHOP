@@ -288,6 +288,20 @@ def db_update_actual_count(new_count,lib_pk,book_pk):
         db_connection.commit()
         cursor.close()
 
+def db_update_actual_count(lib_pk,book_pk):
+        query = '''UPDATE `Book_title_library` SET `count` = %s WHERE `litle_id` = %s and `library_id` = %s '''
+
+        x = [book_pk,lib_pk]
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+
 #until = datetime.date()
 def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
         query = '''INSERT INTO `lending` (`when_borowed`, `until`, `title_id`, `customer_id`, `handler_id`, `library_id`) 
@@ -342,3 +356,27 @@ def find_similar_genre_book(title_id):
         param = tuple([title_id])
         return execute_select(query,parameters=param)
 
+def add_to_queue(book_id,lib_id,user_id):
+        query = '''INSERT INTO `queue` (`title_id`, `user_id`, `library_id`, `time`) 
+                VALUES (%s, %s, %s, CURRENT_TIMESTAMP);'''
+        x = book_id,lib_id,user_id
+        param = tuple(x)
+        
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+
+        db_connection.commit()
+        cursor.close()
+
+def db_remove_from_queue(book_id,lib_id,user_id):
+        x = book_id,lib_id,user_id
+        param = tuple(x)
+        query = "DELETE FROM Queue WHERE title_id=%s and user_id = %s and library_id = %s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()

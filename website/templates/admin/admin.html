@@ -77,18 +77,7 @@
                 <p id="e-mail"></p><br>
                 <label for="birth_data">Dátum narození: </label>
                 <p id="birth-date"></p><br>
-                <p style="display: inline;">Přiřazená práva:</p>  
-                <i id="rights" class="fas fa-check"></i>             
-                <br>
-                <p style="display: inline;">Administrátor</p>
-                <i id ="adminR" class="fas"></i>
-                <br>
-                <p style="display: inline;">Knihovník</p>
-                <i id="libR" class="fas"></i><br>
-                <p style="display: inline;">Distribútor</p>
-                <i id="disR" class="fas"></i><br>
-                <p style="display: inline;">Bežný užívateľ</p>
-                <i id="basicUserR" class="fas"></i>
+                
                
             </div>
             <div class="changeTo">
@@ -100,19 +89,40 @@
                     <input id="birth-dateI" type="text" placeholder="">
                 </form>
                 <br>
-                <div>
-                    <button id="adminAdd" class="btnGreen">Udeliť práva</button>
-                    <button id="adminRemove" class="btnRed">Odebrať práva</button>
-                    <button id="libAdd" class="btnGreen">Udeliť práva</button>
-                    <button id="libRemove" class="btnRed">Odebrať práva</button> 
-                    <button id="disAdd" class="btnGreen">Udeliť práva</button>
-                    <button id="disRemove" class="btnRed">Odebrať práva</button> 
-                    <button id="basicUserAdd" class="btnGreen">Udeliť práva</button>
-                    <button id="basicUserRemove" class="btnRed">Odebrať práva</button>
-                </div>
-                  
             </div>
         </div>
+        <br>
+        
+        <p id="rights" style="display: inline;">Přiřazená práva:</p>  
+                        
+        <br>
+        <div class="rightsBtn">
+            <p style="display: inline;">Administrátor</p>
+            <i id ="adminR" class="fas"></i>
+            <button id="adminAdd" class="btnGreen">Udeliť práva</button>
+            <button id="adminRemove" class="btnRed">Odebrať práva</button>
+            
+            <br>
+            <p style="display: inline;">Knihovník</p>
+            <i id="libR" class="fas"></i>
+            <button id="libAdd" class="btnGreen">Udeliť práva</button>
+            <button id="libRemove" class="btnRed">Odebrať práva</button> 
+            <br>
+
+            <p style="display: inline;">Distribútor</p>
+            <i id="disR" class="fas"></i>
+            <button id="disAdd" class="btnGreen">Udeliť práva</button>
+            <button id="disRemove" class="btnRed">Odebrať práva</button> 
+            <br>
+
+            <p style="display: inline;">Bežný užívateľ</p>
+            <i id="basicUserR" class="fas"></i>
+
+            <button id="basicUserAdd" class="btnGreen">Udeliť práva</button>
+            <button id="basicUserRemove" class="btnRed">Odebrať práva</button>
+        </div>
+        
+
         <button id="sendEdit" class="btn-search btn-blue">Potvrdiť zmeny</button>
     </div>
 </div>
