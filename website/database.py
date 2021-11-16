@@ -196,3 +196,21 @@ def db_library_info(libid):
         query = '''SELECT library_name FROM Library WHERE library_id=%s'''
         param=tuple([libid])
         return execute_select(query,parameters=param)
+
+#this function updates user table
+def update_user_db(atributes):
+        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s,`Password` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`user_id` = %s'''
+
+        x = [atributes["user_name"],atributes["user_surname"],atributes["email"],
+                        atributes["birth_date"],atributes["Password"],
+                        atributes["admin"],atributes["librarian"],atributes["distributor"],
+                        atributes["reader"],atributes["user_id"]]
+        
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()

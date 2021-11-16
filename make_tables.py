@@ -444,16 +444,16 @@ for i in range(0,26):
 
 cursor = db_connection.cursor()
 parameter = tuple([15])
-query2 = '''SELECT  b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
-                    JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
-query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
-                    JOIN Genre g ON t.genre_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
-                    JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
+query2 = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s,`Password` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`user_id` = %s'''
 
-libraryid = 5
-#parameter = tuple([libraryid])
-#print(parameter)
-cursor.execute(query,parameter)
+
+libraryid = 75
+x = ["jano","Krivanek","xxx@xx.com",datetime.date(2000,1,3),"kkk",0,1,0,0,75]
+parameter = tuple(x)
+print(parameter)
+cursor.execute(query2,parameter)
+db_connection.commit()
+'''
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -462,7 +462,7 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-
+'''
 
 
 print("Connected to:", db_connection.get_server_info())
