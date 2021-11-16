@@ -16,7 +16,7 @@
                 <a href="{{ url_for('views.bookDetail',bookid=book['title_id'])}}" class="book-div">
                     <img src="{{ book['path_to_picture'] }}" alt="{{ book['title_name'] }}" class="book-img">
                     <h1 class="book-header">{{ book['title_name'] }}</h1>
-                    <h3 class="book-author">NEJAKY AUTOR</h3>
+                    <h3 class="book-author">{{ book['author_name'] }} {{ book['author_surname']}}</h3>
                     <div class="percent-align">
                         <img class="book-rating" src="{{ book['rating_path'] }}" alt="{{ book['rating'] }}">
                         <p class="book-rating-text">{{ book['rating'] }}</p>
