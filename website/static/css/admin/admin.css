@@ -64,7 +64,7 @@ td{
     color: #333;
 }
 
-input[type=text] {
+.search-box input[type=text] {
     text-align: center;
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
@@ -82,7 +82,7 @@ input[type=text] {
     color: #333;
     outline: none;
 }
-input[type=text]:focus, input[type=text]:hover {
+.search-box input[type=text]:focus, .search-box input[type=text]:hover {
     background-color: #5f5b50;
     color: rgb(255, 255, 255);
     border: none;
@@ -176,8 +176,8 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .content-modal-edit {
-    width: 55rem;
-    height: 35rem;
+    width: 58rem;
+    height: 38rem;
     background-color: #FFF;
     border-radius: 3rem;
     padding: 3rem;
@@ -186,13 +186,31 @@ tr:nth-child(even) .editBtn:hover {
     color: #333;
     font-family: 'Baloo 2', cursive;
     position: relative;
+    margin: auto;
+    
 
 }
-.data-db {
-    text-align: left;
-    font-size: 1.5rem;
-    margin-left: 3rem;
+#colsContaier {
+    width: 100%;
+    margin: auto;
 }
+.data-db {
+    text-align: right;
+    float: left;
+    font-size: 1.3rem;
+    margin-left: 3rem;
+    width:  40%;
+   
+}
+.changeTo {
+    text-align: left;
+    float: left;
+
+    font-size: 1.3rem;
+    margin-left: 3rem;
+    width: 40%;
+}
+
 
 #name, 
 #surname, 
@@ -201,9 +219,60 @@ tr:nth-child(even) .editBtn:hover {
     font-weight: bold;
     display: inline;
 }
+#rights {
+    color: #FFF;
+}
 
 .data-db i {
-    position: absolute;
-    padding-top: 4px;
-    left: 19rem;
+  padding-left: 1rem;
 }
+
+.data-db h1, .changeTo h1 {
+    font-size: 1.8rem;
+    font-family: 'Baloo 2', cursive;
+    color: #623CEA;
+
+}
+
+.btnGreen {
+    background-color: #8ac926;
+    border-radius: 0.8rem;
+    border: none;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    color: #333;
+}
+.btnGreen:hover {
+    background-color: rgba(138, 201, 38, 0.7);
+}
+
+.btnRed {
+    background-color:#ff595e;
+    border-radius: 0.8rem;
+    border: none;
+    
+    padding: 0.3rem 0.8rem;
+
+    cursor: pointer;
+    color: #FFF;
+
+}
+.btnRed:hover {
+    background-color: rgba(255, 89, 94, 0.7);
+}
+
+.changeTo input[type=text] {
+    width: 85%;
+    padding: 0.2rem;
+    padding-left: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 2px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+}
+

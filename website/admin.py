@@ -13,7 +13,7 @@ def adminPage():
             
     else:
         users = get_all_users()
-        print(users[0]['birth_date'])
+        print(users)
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
@@ -37,7 +37,16 @@ def get_user_by_id(useremail):
     print
     return {'user' : user[0]}
 
+@admin.route('/editUser/', methods=["POST"])
+def edit_user():
+    print("EDITOVANIE USERA")
+    if request.method == "POST" :
+        data = request.form  
+        print("Data", data)
+        #delete_user(email)
+        update_user_db(data)
 
+        return {'message' : 'Ok'}
 
 @admin.route("/libraries/")
 def libPage():

@@ -11,6 +11,11 @@ def convert_datetime_to_date(arr):
                 el["registration_time"] =  el["registration_time"].date()
         return arr
 
+def decide(old,new):
+        if new == None:
+                return old
+        else:
+                return new
 
 #takse as input query and input parameters
 #this function execute select query and return dict of results
@@ -157,7 +162,7 @@ def db_libraries_with_book(title_id):
 def get_all_users():
         query = "SELECT * FROM User"
 
-        convert_datetime_to_date(execute_select(query))
+        return convert_datetime_to_date(execute_select(query))
 
 # this function takes as input email of user which will be deleted
 def delete_user(email):
@@ -203,3 +208,31 @@ def db_library_info(libid):
         query = '''SELECT library_name FROM Library WHERE library_id=%s'''
         param=tuple([libid])
         return execute_select(query,parameters=param)
+
+#this function updates user table
+def update_user_db(atributes):
+        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
+
+        original_values = get_user_with_this_email(atributes["old_email"])[0]
+        
+        x = [decide(original_values["user_name"],atributes["user_name"]),
+             decide(original_values["user_surname"],atributes["user_surname"]),
+             decide(original_values["email"],atributes["email"]),
+             decide(original_values["birth_date"],atributes["birth_date"]),
+             decide(original_values["admin"],atributes["admin"]),
+             decide(original_values["librarian"],atributes["librarian"]) ,  
+             decide(original_values["distributor"],atributes["distributor"]) ,  
+             decide(original_values["reader"],atributes["reader"]) ,
+             atributes["old_email"]
+             ]
+
+        
+        
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
