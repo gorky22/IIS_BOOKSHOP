@@ -31,7 +31,7 @@ def add_user(name,surname,email,birth_date,
         password,admin=False,librarian=False,
         distributor=False,reader=False,unregistered=False):
 
-        query = '''INSERT INTO User(name, surname, email, birth_date, password, admin, librarian, distributor, reader) 
+        query = '''INSERT INTO User(user_name, user_surname, email, birth_date, password, admin, librarian, distributor, reader) 
                VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)
             '''
         to_insert = (name,surname,email,birth_date,password,int(admin),int(librarian),int(distributor),int(reader))
@@ -61,7 +61,7 @@ def db_books():
 #this function takes as input library name
 #return dict of books in library
 def db_books_in_lib(libraryid):
-        query = '''SELECT b.title_id, b.name, b.rating, b.path_to_picture ,bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+        query = '''SELECT b.title_id, b.title_name, b.rating, b.path_to_picture ,bl.count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
                     JOIN Library l ON bl.library_id = l.library_id WHERE l.library_id = %s'''
 
         parameter = tuple([libraryid])
@@ -69,7 +69,7 @@ def db_books_in_lib(libraryid):
 
 #this function returns 20 best rewiews books titles
 def db_top_books():     
-        query = "SELECT title_id,name,rating,path_to_picture FROM Book_title GROUP BY rating DESC limit 10"
+        query = "SELECT title_id,title_name,rating,path_to_picture FROM Book_title GROUP BY rating DESC limit 10"
 
         return execute_select(query)
 
@@ -78,13 +78,13 @@ def db_top_books():
 def db_book_info(title_id):
         query = "SELECT * FROM Book_title"
         parameter = tuple([title_id])
-        query2 = '''SELECT a.name a.surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT a.author_name a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
 
         return execute_select(query),execute_select(query2,parameters=parameter)
 
 def db_book_authors(title_id):
-        query2 = '''SELECT a.name a.surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT a.author_name a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
         parameter = tuple([title_id])
         return execute_select(query2,parameters=parameter)
@@ -112,8 +112,8 @@ def db_libraries():
 
 #this function returns counts of given title in each libraries
 def db_libraries_with_book(book_name):
-        query = '''SELECT l.name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
-                   JOIN Library l ON bl.library_id = l.library_id WHERE b.name = %s'''
+        query = '''SELECT l.library_name, count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+                   JOIN Library l ON bl.library_id = l.library_id WHERE b.title_name = %s'''
         
         parameter = tuple([book_name])
         return execute_select(query,parameters=parameter)
@@ -140,14 +140,14 @@ def delete_user(email):
 def find_user(string_to_find):
         
         param = tuple([string_to_find for i in range(3)])
-        query = "SELECT * FROM User WHERE email=%s or name=%s or surname=%s"
+        query = "SELECT * FROM User WHERE email=%s or user_name=%s or user_surname=%s"
 
         return execute_select(query,parameters=param)
 
 #this function returns book which has this genre
 def db_books_with_genre(genre):
         param = tuple([genre])
-        query = '''SELECT b.title_id, b.name, b.rating, b.path_to_picture FROM  Book_title b JOIN  Tag t ON b.title_id = t.title_id 
+        query = '''SELECT b.title_id, b.title_name, b.rating, b.path_to_picture FROM  Book_title b JOIN  Tag t ON b.title_id = t.title_id 
                 JOIN Genre g ON t.genre_id = g.genre_id WHERE g.genre_id=%s'''
 
         return execute_select(query,parameters=param)
@@ -165,6 +165,6 @@ def db_genre_info(genreid):
 
 def db_library_info(libid):
 
-        query = '''SELECT name FROM Library WHERE library_id=%s'''
+        query = '''SELECT library_name FROM Library WHERE library_id=%s'''
         param=tuple([libid])
         return execute_select(query,parameters=param)

@@ -435,10 +435,9 @@ for i in range(0,26):
 
 #param = tuple(["gorcak.damian@tmp.sk"])
 cursor = db_connection.cursor()
-
+'''
 ######################### niesu v ziadnej kniznici #######################################################
-query = '''SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
-                    '''
+query = "SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)"
 
 libraryid = 5
 #parameter = tuple([libraryid])
@@ -452,7 +451,25 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
+cursor.close()
+'''
+######book not in libraryies
+#query = '''SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
+#                    '''
 
+query = "ALTER TABLE Author RENAME COLUMN surname TO _surname"
+libraryid = 5
+#parameter = tuple([libraryid])
+#print(parameter)
+cursor.execute("select * from User")
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
+
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
+
+print(results)
 
 
 
