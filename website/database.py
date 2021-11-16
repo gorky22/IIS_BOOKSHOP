@@ -4,9 +4,16 @@ from . import db_connection, HOST, DATABASE, USER, PASSWORD
 
 database = Blueprint("database",__name__)
 
+
+#converts array element which has type datetime to date
+def convert_datetime_to_date(arr):
+        for el in arr:
+                el["registration_time"] =  el["registration_time"].date()
+        return arr
+
+
 #takse as input query and input parameters
 #this function execute select query and return dict of results
-
 def is_connect():
     global db_connection
     
@@ -56,7 +63,7 @@ def get_user_with_this_email(email):
         query = 'SELECT * FROM User WHERE email=%s'
         parameter = tuple([email])
 
-        return execute_select(query,parameters=parameter)
+        return convert_datetime_to_date(execute_select(query,parameters=parameter))
         
 
 #this function takes no arguments and returns all titles which are in the system
@@ -150,7 +157,7 @@ def db_libraries_with_book(book_name):
 def get_all_users():
         query = "SELECT * FROM User"
 
-        return execute_select(query)
+        convert_datetime_to_date(execute_select(query))
 
 # this function takes as input email of user which will be deleted
 def delete_user(email):
@@ -170,7 +177,7 @@ def find_user(string_to_find):
         param = tuple([string_to_find for i in range(3)])
         query = "SELECT * FROM User WHERE email=%s or user_name=%s or user_surname=%s"
 
-        return execute_select(query,parameters=param)
+        return convert_datetime_to_date(execute_select(query,parameters=param))
 
 #this function returns book which has this genre
 def db_books_with_genre(genre):
