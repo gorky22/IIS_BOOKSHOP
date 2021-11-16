@@ -1,0 +1,26 @@
+.not-permited{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 3rem;
+    color: #fff;
+    padding: 4rem 6rem;
+    background-color: #623CEA;
+    border-radius: 3rem;
+    text-align: center;
+}
+.not-permited a{
+    text-decoration: none;
+    color: rgb(247, 0, 255);
+    background-color: #fff;
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+    transition: 0.3s all;
+}
+.not-permited a:hover{
+    color: #fff;
+    background-color: rgb(247, 0, 255);
+}

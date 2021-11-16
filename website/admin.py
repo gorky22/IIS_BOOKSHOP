@@ -53,3 +53,7 @@ def distributorsPage():
 def tagsPage():
     return render_template("admin/tags.html")
     
+
+@admin.route('/notPermited/')
+def notPermited():
+    return render_template('admin/notPermited.html')

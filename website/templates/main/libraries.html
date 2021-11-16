@@ -18,12 +18,12 @@
                 </div>
                 <div class="right-part">
                     <div class="header">
-                        <a href="{{ url_for('views.booksInLibrary',library=lib['library_id'])}}">{{ lib['name']}}</a>
+                        <a href="{{ url_for('views.booksInLibrary',library=lib['library_id'])}}">{{ lib['library_name']}}</a>
                     </div>
                     <div class="bottom-part">
                         <div class="addr-info">Adresa: {{ lib['adress'] }}</div>
                         <div class="addr-info">Celkem knih: 123</div>
-                        <div class="addr-info">E-mail: {{ lib['email'] }}</div>
+                        <div class="addr-info">E-mail: {{ lib['library_email'] }}</div>
                     </div>
                 </div>
             </div>

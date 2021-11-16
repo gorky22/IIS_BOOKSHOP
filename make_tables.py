@@ -434,16 +434,26 @@ for i in range(0,26):
 
 
 #param = tuple(["gorcak.damian@tmp.sk"])
-cursor = db_connection.cursor()
+#cursor = db_connection.cursor()
 
 ######################### niesu v ziadnej kniznici #######################################################
-query = '''SELECT b.name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
-                    '''
+#query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
+#                    '''
+
+
+
+cursor = db_connection.cursor()
+parameter = tuple([15])
+query2 = '''SELECT  b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+                    JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
+query = '''SELECT b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
+                    JOIN Genre g ON t.genre_id = %s join Book_title_author ba ON b.title_id = ba.title_id 
+                    JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
 
 libraryid = 5
 #parameter = tuple([libraryid])
 #print(parameter)
-cursor.execute(query)
+cursor.execute(query,parameter)
 records = cursor.fetchall()
 columns = [i[0] for i in cursor.description]
 
@@ -452,7 +462,6 @@ for row in records:
       results.append(dict(zip(columns, row)))  
 
 print(results)
-
 
 
 

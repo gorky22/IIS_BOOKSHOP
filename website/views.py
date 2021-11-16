@@ -4,33 +4,55 @@ import random
 
 views = Blueprint("views",__name__)
 genres = db_genres()
+
+def format_book_and_authors(book):
+    new_book = {'title_name':book[0]['title_name'],
+        'rating':book[0]['rating'],
+        'path_to_picture':book[0]['path_to_picture'],
+        'authors':[]
+    }
+
+    for book_author in book:
+        author = " ".join([book_author['author_name'], book_author['author_surname']])
+        new_book['authors'].append(author)
+
+    new_book['rating_path'] = '/static/img/rating/' + str(round(new_book['rating'])*10)+'percent.png'
+    return new_book
+
+def group_by_five(books):
+    result = []
+    for i in range(0,len(books),5):
+        end = i+5 if (i+5) < len(books) else len(books)
+        tmp = []
+        for book in books[i:end]:
+            tmp.append(book)
+        result.append(tmp)
+    return result
+
+def format_ratings(books):
+    for book in books:
+        book['rating_path'] = '/static/img/rating/'+str(round(book['rating'])*10)+'percent.png'
+
+
 @views.route("/")
 def viewsPage():
     top = db_top_books()
     
     randomlist = random.sample(range(0, 9), 5)
     books = [top[i] for i in randomlist]
-    for book in books:
-        book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-
+    books = [db_book_info(book['title_id']) for book in books]
+    books = [format_book_and_authors(book) for book in books]
     
     return render_template("/main/main.html",books=books,genres=genres)
 
 @views.route("/list/")
 def listPage():
-    book_list = [{'Name' : 'HP1', 'Author': 'J.K.Rowling'},{'Name' : 'HP1', 'Author': 'J.K.Rowling'}]
-    books = db_books()
-    
-    result = []
-    for i in range(0,len(books),5):
-        end = i+5 if (i+5) < len(books) else len(books)
-        tmp = []
-        for book in books[i:end]:
-            book['rating_path'] = '/static/img/rating/' + str(round(book['rating'])*10)+'percent.png'
-            tmp.append(book)
-        result.append(tmp)
+    books = db_all_book_info()
+    format_ratings(books)
+    books = group_by_five(books)
+    print(books)
 
-    return render_template("/main/list.html",books=result,genres=genres)
+    return render_template("/main/list.html",books=books,genres=genres)
     
 @views.route("/detail/")
 def detailPage():
@@ -41,7 +63,6 @@ def detailPage():
 @views.route("/libraries/")
 def librariesPage():
     libraries = db_libraries()
-    print(libraries)
     return render_template('/main/libraries.html',libraries=libraries,genres=genres)
 
 
@@ -64,8 +85,7 @@ def booksByGenre(genreid):
 def booksInLibrary(library):
     
     books = db_books_in_lib(library)
-    library = db_library_info(library)[0]['name']
-    print(library)
+    library = db_library_info(library)[0]['library_name']
     result = []
     for i in range(0,len(books),5):
         end = i+5 if (i+5) < len(books) else len(books)
@@ -85,13 +105,4 @@ def bookDetail(bookid):
     print(book)
     return render_template('/main/detail.html',book=book,genres=genres)
 
-# {'title_id': 15,
-# 'release_date': datetime.date(2021, 2, 1),
-# 'ISBN': '9788088243519',
-# 'rating': 8.2,
-# 'description': 'Franku Cottonovi, požitkáři, jenž vyčerpal veškeré možnosti zábavy v této realitě, se podařilo odhalit tajemství Lemarchandovy kostky, bájného hlavolamu, který otevírá dveře k absolutním rozkoším jiných sfér. Stanul na prahu a vyčkával příchodu svých průvodců, cenobitů, příslušníků tajného řádu těch, kdo rozkoš také hledali, našli a už také pochopili, že s vypjatou smyslností je neodmyslitelně spjata i její věčná souputnice: trýznivá bolest. Hrůzná, nesnesitelná kombinace však Franka přivede za hranici života, zpoza níž mu může pomoci pouze Julia, žena, která kdysi podlehla kouzlu jeho osobnosti. Při boji za Frankovu záchranu dojde ke střetu zástupců pekelného světa blahé agonie s obyčejnými smrtelníky, ovládanými chtíčem, žárlivostí i láskou.',
-# 'path_to_picture': '/static/img/hellraiser.jpg',
-# 'name': 'Hellraiser'}
 
-#static/img/libraries/lib7.jpg
-#static/img/libraries/lib7.jpg

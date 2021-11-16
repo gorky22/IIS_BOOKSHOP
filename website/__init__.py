@@ -9,12 +9,6 @@ PASSWORD = "4fd07a3f"
 db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
 
 #this function try if connector is connect if not it reconect db_connection
-def is_connect():
-    global db_connection
-    
-    if (not db_connection.is_connected()):
-        db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
-
 
 def create_app():
     app = Flask(__name__)
@@ -32,4 +26,7 @@ def create_app():
     from .database import database
     app.register_blueprint(database,url_prefix='/database/')
     
+    from .librarian import librarySystem
+    app.register_blueprint(librarySystem,url_prefix='/librarian/')
+
     return app
