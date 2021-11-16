@@ -64,7 +64,7 @@ td{
     color: #333;
 }
 
-input[type=text] {
+.search-box input[type=text] {
     text-align: center;
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
@@ -82,7 +82,7 @@ input[type=text] {
     color: #333;
     outline: none;
 }
-input[type=text]:focus, input[type=text]:hover {
+.search-box input[type=text]:focus, .search-box input[type=text]:hover {
     background-color: #5f5b50;
     color: rgb(255, 255, 255);
     border: none;
@@ -235,21 +235,44 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .btnGreen {
-    background-color: #3cb371;
+    background-color: #8ac926;
     border-radius: 0.8rem;
     border: none;
     padding: 0.3rem 0.8rem;
     cursor: pointer;
     color: #333;
 }
+.btnGreen:hover {
+    background-color: rgba(138, 201, 38, 0.7);
+}
 
 .btnRed {
-    background-color:#dc143c;
+    background-color:#ff595e;
     border-radius: 0.8rem;
     border: none;
+    
     padding: 0.3rem 0.8rem;
 
     cursor: pointer;
     color: #FFF;
 
 }
+.btnRed:hover {
+    background-color: rgba(255, 89, 94, 0.7);
+}
+
+.changeTo input[type=text] {
+    width: 85%;
+    padding: 0.2rem;
+    padding-left: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 2px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+}
+

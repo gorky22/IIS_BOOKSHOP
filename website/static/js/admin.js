@@ -74,8 +74,19 @@ $('.editBtn').click(function(e){
             checkBtn("disR", user['distributor'])
             checkBtn("basicUserR", user['reader'])
 
+            $('#nameI').attr('placeholder', user['name'])
+            $('#surnameI').attr('placeholder', user['surname'])
+            $('#e-mailI').attr('placeholder', user['email'])
+            $('#birth-dateI').attr('placeholder', user['birth_date'])
+            
+            $('#adminAdd').click(function(e){
+                checkBtn("adminR", 1)
+            })
+            $('#adminRemove').click(function(e){
+                checkBtn("adminR", 0)
+            })
+          
 
-            console.log(user['name'])
         }
     });
     console.log(user['name'])
@@ -101,4 +112,7 @@ $('.editBtn').click(function(e){
     })
     */
 })
+
+
+
 
