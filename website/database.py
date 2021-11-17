@@ -184,6 +184,13 @@ def find_user(string_to_find):
 
         return convert_datetime_to_date(execute_select(query,parameters=param))
 
+def find_library(string_to_find):
+        
+        param = tuple([string_to_find for i in range(3)])
+        query = "SELECT * FROM Library WHERE library_email=%s or library_name=%s or town = %s"
+
+        return execute_select(query,parameters=param)
+
 #this function returns book which has this genre
 def db_books_with_genre(genre):
         param = tuple([genre])
