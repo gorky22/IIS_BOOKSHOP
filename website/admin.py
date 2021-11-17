@@ -96,7 +96,7 @@ def edit_lib():
     if request.method == "POST" :
         data = request.form  
         print("Data", data)
-        #update_lib_db(data)
+        update_lib_db(data)
 
         return {'message' : 'ok'}
 

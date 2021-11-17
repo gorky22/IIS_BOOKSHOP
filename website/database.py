@@ -449,21 +449,17 @@ def delete_library(lib_email):
 
 #this function updates user table
 def update_lib_db(atributes):
-        query = '''UPDATE `Library` SET `library_name` = %s, `opening_hours` = %s, `description` = %s,`webpage_link` = %s, `library_email` = %s, `adress` = %s WHERE `Library`.`library_id` = %s'''
+        query = '''UPDATE `Library` SET `library_name` = %s, `opening_hours` = %s,`webpage_link` = %s, `library_email` = %s WHERE `library_email` = %s'''
 
         original_values = find_library(atributes["old_email"])[0]
-        
+       
         x = [decide(original_values["library_name"],atributes["library_name"]),
              decide(original_values["opening_hours"],atributes["opening_hours"]),
-             decide(original_values["description"],atributes["description"]),
              decide(original_values["webpage_link"],atributes["webpage_link"]),
              decide(original_values["library_email"],atributes["library_email"]),
-             decide(original_values["adress"],atributes["adress"]) ,  
              atributes["old_email"]
              ]
 
-        
-        
         parameter = tuple(x)
         is_connect()
         cursor = db_connection.cursor()
