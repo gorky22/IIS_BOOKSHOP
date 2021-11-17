@@ -2,10 +2,66 @@
 
 
 {% block link_block %}
-
+<link rel="stylesheet" href="/static/css/admin/tags.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 {% endblock %}
 
 
 {% block body_block %}
+ <div class="content">
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th class="tag">Názov</th>
+            <th></th>
+            <th class="search-box">
+                <form action="{{ url_for('admin.tagsPage') }}" method="post">
+                    <input type="text" name="nm" placeholder="Hledat tag"> 
+                </form >
+            </th>
+        </tr>
+        
+        {% for tag in tags %}
+     
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="tag"> {{ tag['name'] }} </td>
+            <td></td>
+            <td class="deleteForm">
+                <form method="post">
+                    <button type="button" class="editBtn" name="btnEdit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" class="deleteBtn" name="btnDelete">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                   
 
+                   
+                </form >
+            </td>
+            
+          
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="tag">
+                <button type="button" class="addBtn" name="btnadd"}>
+                    <i class="far fa-plus"></i>
+                </button>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    
+ </div>
+ 
 {% endblock %}
+

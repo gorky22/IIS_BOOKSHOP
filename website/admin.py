@@ -81,16 +81,29 @@ def libPage():
     return render_template("admin/libraries.html", libraries=libraries)
 
 
-@admin.route("/distributors/")
+@admin.route("/distributors/", methods=["POST", "GET"])
 #@admin_required
 def distributorsPage():
-    return render_template("admin/distributors.html")
+    if request.method == "POST":
+        if "nm" in request.form:
+            distributors = find_distributors(request.form["nm"])
+            
+    else:
+        distributors = db_distributors()
+        
+    return render_template("admin/distributors.html", distributors=distributors)
 
 
-@admin.route("/tags/")
+@admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required
 def tagsPage():
-    return render_template("admin/tags.html")
+    if request.method == "POST":
+        if "nm" in request.form:
+            tags = db_tags(tag=request.form["nm"])
+            
+    else:
+        tags = db_tags()
+    return render_template("admin/tags.html", tags=tags)
     
 
 @admin.route('/notPermited/')

@@ -485,7 +485,7 @@ cursor = db_connection.cursor()
 
 x = [25,125,15]
 param = tuple(x)
-cursor.execute(make_order_book)
+cursor.execute("ALTER TABLE publishers add Column town varchar(30) not null")
 #cursor.execute("ALTER TABLE Book_title ADD CONSTRAINT title_publisher FOREIGN KEY ( publisher_id ) REFERENCES Publishers(publisher_id) ON DELETE CASCADE" )
 
 
