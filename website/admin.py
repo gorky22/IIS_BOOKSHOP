@@ -60,7 +60,7 @@ def edit_user():
 
 @admin.route("/libraries/")
 def libPage():
-    return render_template("admin/libraries.html")
+    return render_template("/admin/libraries.html")
 
 
 @admin.route("/distributors/")
