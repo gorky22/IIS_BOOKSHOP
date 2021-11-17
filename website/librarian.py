@@ -30,7 +30,10 @@ def homePage():
 @librarian_required
 def reservations():
     reservations = db_reservations_in_lib(session['user']['library_id'])
-
+    today = datetime.date.today()
+    for reserve in reservations:
+        reserve['days'] = (reserve['until'] - today).days
+        
     return render_template('/librarian/reservations.html',reservations=reservations)
 
 @librarySystem.route('/reservations/delete/<resid>/')

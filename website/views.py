@@ -147,9 +147,14 @@ def bookDetail(bookid):
 
 
     book = db_book_info(bookid)
+    print(book)
     book = format_book_and_authors(book)
     libraries = db_libraries_with_book(book['title_id'])
     
     return render_template('/main/detail.html',book=book,genres=genres,libraries=libraries,similar=similar_books)
 
 
+@views.route("/user/reservations/")
+def userReservation():
+    
+    return render_template('/main/userReservation.html')

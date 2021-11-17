@@ -237,7 +237,7 @@ def update_user_db(atributes):
         cursor.close()
 
 def db_reservations_in_lib(lib_pk):
-        query = '''SELECT u.user_id,u.email,b.title_id,b.title_name,r.time,r.reservation_id from Reservation r 
+        query = '''SELECT u.user_id,u.email,b.title_id,b.title_name,r.time,r.reservation_id, r.until from Reservation r 
                    join Library l on %s = r.library_id join User u on 
                    u.user_id = r.user_id join Book_title b on r.title_id = b.title_id  GROUP BY r.reservation_id'''
         param=tuple([lib_pk])
