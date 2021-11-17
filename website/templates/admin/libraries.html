@@ -30,10 +30,10 @@
             <td> {{ library['town'] }} </td>
             <td class="deleteForm">
                 <form method="post">
-                    <button type="button" class="editBtn" name="btnEdit">
+                    <button type="button" class="editBtn" name="btnEdit" data-edit= {{ library['library_email'] }} >
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button type="button" class="deleteBtn" name="btnDelete">
+                    <button type="button" class="deleteBtn" name="btnDelete" data-lib= {{ library['library_email'] }} >
                         <i class="far fa-trash-alt"></i>
                     </button>
                 </form >
@@ -42,11 +42,67 @@
         {% endfor %}
     </table>
 
-    <button type="button" class="addBtn" name="btnadd"}>
-        <i class="far fa-plus"></i>
-    </button>
+    <button id="btnAddLib" class="btn-search btn-blue" name="btnadd">Pridať knihovnu</button>
     
  </div>
+
+
+ <!-- Modal section -->
+<!-- Model Delete Lib -->
+<div class="bg-modal-delete">
+    <div class="content-modal-delete">
+        <div class="btnClose">+</div>
+        <p id="deleteText">Naozaj chceš vymazať knihovnu</p>
+        <p id="deleteLib">Fero</p>
+        <button id="btnYes" class="btn-search btn-yellow">Áno</button>
+        <button id="btnNo"class="btn-search btn-blue">Nie</button>
+    </div>
+</div>
+
+<!-- Model Edit User -->
+<div class="bg-modal-edit">
+    <div class="content-modal-edit">
+        <div class="btnCloseEdit">+</div>
+        <p id="editText">Editace Knihovny</p>
+
+        <div id="colsContainer">
+            <div class="data-db">
+                <h1>Informace v databázi</h1>
+                <label for="name">Jméno: </label>
+                <p  id="name"></p><br>
+                <label for="town">Mesto: </label>
+                <p id=town></p><br>
+                <label for="opening_hours">Otvárací hodiny: </label>
+                <p id="opening_hours"></p><br>
+                <label for="web_link">Webstránka: </label>
+                <p id="web_link"></p><br>
+                <label for="path_pic">Cesta k obrázku: </label>
+                <p id="path_pic"></p><br>
+                <label for="email">Email: </label>
+                <p id="lib_email"></p><br>
+            </div>
+
+            <div class="changeTo">
+                <h1>Změnit na</h1>
+                <form action="">
+                    <input id='nameI' type="text" placeholder="">
+                    <input id="townI" type="text" placeholder="">
+                    <input id="opening_hoursI" type="text" placeholder="">
+                    <input id="web_linkI" type="text" placeholder="">
+                    <input id="path_picI" type="text" placeholder="">
+                    <input id="lib_emailI" type="text" placeholder="">
+                </form>
+            </div>
+
+        </div>
+
+        <button id="sendEdit" class="btn-search btn-blue">Potvrdiť zmeny</button>
+
+    </div>
+
+</div>
  
+<script type="text/javascript" src="/static/js/adminLibs.js"></script>
+
 {% endblock %}
 

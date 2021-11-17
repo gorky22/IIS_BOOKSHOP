@@ -176,8 +176,8 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .content-modal-edit {
-    width: 60rem;
-    height: 42rem;
+    width: 80rem;
+    height: 32rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -197,11 +197,12 @@ tr:nth-child(even) .editBtn:hover {
 .data-db {
     text-align: right;
     float: left;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     margin-left: 3rem;
     width:  40%;
    
 }
+
 .changeTo {
     text-align: left;
     float: left;
@@ -213,17 +214,13 @@ tr:nth-child(even) .editBtn:hover {
 
 
 #name, 
-#surname, 
-#e-mail, 
-#birth-date {
+#town, 
+#opening_hours, 
+#web_link,
+#path_pic,
+#lib_email {
     font-weight: bold;
     display: inline;
-}
-#rights {
-    font-size: 1.8rem;
-    font-family: 'Baloo 2', cursive;
-    color: #623CEA;
-    font-weight: bold;
 }
 
 .data-db i {
@@ -302,4 +299,18 @@ tr:nth-child(even) .addBtn:hover {
 
 .btnRed {
     margin-right: 11rem;
+}
+
+
+
+/* ADDED */
+#btnAddLib {
+    margin-top: 2rem;
+    width: 23rem;
+}
+#deleteLib {
+    font-weight: bold;
+}
+#sendEdit {
+    margin-top: 2rem;
 }
