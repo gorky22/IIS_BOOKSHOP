@@ -39,3 +39,12 @@ Damiane pls udělej tyto selecty:
 - Potřebuji funkci, která mi vrátí počet knížek v dané knihovně, dostaneš knihovna PK a kniha PK - db_actual_count(lib_pk,book_pk) Done
 
 
+--------------------------------------------------Distributor--------------------------------------------------
+-- SELECT na všechny distributory, které mají nějakou  knížku (dostaneš title_id)
+-- SELECT na všechny objednávky, které nějaký distributor má (dostaneš distributorské ID) (jen ty, co jsou nevyřízené)
+-- SELECT na všechny knížky, které má daný distributor
+-- INSERT na novou knížku - Dostaneš vše co je potřeba
+-- INSERT na novou objednávku - také dostaneš vše, co bude potřeba
+-- UPDATE na objednávku (dostaneš objednávka ID a přepíšeš vyřízeno na TRUE)
+-- DELETE na objednávku (dostaneš objednávka ID)
+
