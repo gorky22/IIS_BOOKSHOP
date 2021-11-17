@@ -218,11 +218,12 @@ def db_library_info(libid):
 
 #this function updates user table
 def update_user_db(atributes):
-        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
+        query = '''UPDATE `user` SET `library_id` = %s,`user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
 
         original_values = get_user_with_this_email(atributes["old_email"])[0]
         
-        x = [decide(original_values["user_name"],atributes["user_name"]),
+        x = [decide(original_values["library_id"],atributes["library_id"]),
+             decide(original_values["user_name"],atributes["user_name"]),
              decide(original_values["user_surname"],atributes["user_surname"]),
              decide(original_values["email"],atributes["email"]),
              decide(original_values["birth_date"],atributes["birth_date"]),
