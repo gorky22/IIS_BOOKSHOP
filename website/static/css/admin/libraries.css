@@ -1,0 +1,299 @@
+.content {
+    font-size: 1.7rem;
+    color: #333;
+    padding: 2rem 2.5rem;
+    font-family: 'Baloo 2', cursive;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    border-bottom: 0.3rem solid #333;
+    font-size: 2.1rem;
+    padding-bottom: 0%;
+    width: auto;
+}
+tr:nth-child(even){
+    background-color: #cbbef6;
+}
+td{
+    padding-left: 1.2rem;
+}
+
+
+.search-box{
+    text-align: right;
+    width: 20%;
+
+}
+.btn-search{
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.7rem;
+    width: 80%;
+    padding: 0.2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 7px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+}
+
+.btn-search.btn-yellow{
+    background-color: #E7DFC6;
+    color: #333;
+}
+.btn-search.btn-yellow:hover{
+    background-color: #5f5b50;
+    color: rgb(255, 255, 255);
+}
+
+.btn-search.btn-blue{
+    background-color: #623CEA;
+    color: #FFF;
+}
+.btn-search.btn-blue:hover{
+    background-color: #a38ef0;
+    color: #333;
+}
+
+.search-box input[type=text] {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.7rem;
+    width: 85%;
+    padding: 0.2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 7px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+    background-color: #E7DFC6;
+    color: #333;
+    outline: none;
+}
+.search-box input[type=text]:focus, .search-box input[type=text]:hover {
+    background-color: #5f5b50;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-style: none;
+    box-shadow: 0px 5px 7px #0000002a;
+}
+/* for default text in search box */
+::placeholder {
+    opacity: 1;
+}
+
+.deleteForm {
+    padding-right: 2rem;
+    text-align: right;
+}
+
+.deleteBtn, .editBtn {
+    border-style: none;
+    border: none;
+    background-color: transparent; 
+    font-size: 1.8rem;
+    border-radius: 1rem;
+    vertical-align: center;
+    padding: 0.3rem;
+    cursor: pointer;
+}
+
+
+tr:nth-child(odd) .deleteBtn:hover {
+    color: #623CEA;
+}
+
+tr:nth-child(even) .deleteBtn:hover {
+    color: #FFF;
+}
+
+tr:nth-child(odd) .editBtn:hover {
+    color: #623CEA;
+}
+
+tr:nth-child(even) .editBtn:hover {
+    color: #FFF;
+}
+
+.bg-modal-delete {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content-modal-delete {
+    width: 55rem;
+    height: 23rem;
+    background-color: #FFF;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    position: relative;
+
+}
+
+.btnClose, .btnCloseEdit {
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    font-size: 4rem;
+    transform: rotate(45deg);
+    cursor: pointer;
+
+}
+
+.bg-modal-edit {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.content-modal-edit {
+    width: 60rem;
+    height: 42rem;
+
+    background-color: #FFF;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    position: relative;
+    margin: auto;
+
+}
+#colsContaier {
+    width: 100%;
+    margin: auto;
+}
+.data-db {
+    text-align: right;
+    float: left;
+    font-size: 1.3rem;
+    margin-left: 3rem;
+    width:  40%;
+   
+}
+.changeTo {
+    text-align: left;
+    float: left;
+
+    font-size: 1.3rem;
+    margin-left: 3rem;
+    width: 40%;
+}
+
+
+#name, 
+#surname, 
+#e-mail, 
+#birth-date {
+    font-weight: bold;
+    display: inline;
+}
+#rights {
+    font-size: 1.8rem;
+    font-family: 'Baloo 2', cursive;
+    color: #623CEA;
+    font-weight: bold;
+}
+
+.data-db i {
+  padding-left: 1rem;
+}
+
+.data-db h1, .changeTo h1 {
+    font-size: 1.8rem;
+    font-family: 'Baloo 2', cursive;
+    color: #623CEA;
+
+}
+
+.btnGreen {
+    background-color: #8ac926;
+    border-radius: 0.8rem;
+    border: none;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    color: #333;
+}
+.btnGreen:hover {
+    background-color: rgba(138, 201, 38, 0.7);
+}
+
+.btnRed {
+    background-color:#ff595e;
+    border-radius: 0.8rem;
+    border: none;
+    
+    padding: 0.3rem 0.8rem;
+
+    cursor: pointer;
+    color: #FFF;
+
+}
+.btnRed:hover {
+    background-color: rgba(255, 89, 94, 0.7);
+}
+
+.changeTo input[type=text] {
+    width: 85%;
+    padding: 0.2rem;
+    padding-left: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 2px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    
+}
+
+.rightsBtn {
+    text-align: right;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    
+}
+
+.rightsBtn i {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+
+
+.btnRed {
+    margin-right: 11rem;
+}
