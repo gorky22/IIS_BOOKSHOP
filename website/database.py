@@ -429,9 +429,9 @@ def db_remove_from_queue(book_id,lib_id,user_id):
         db_connection.commit()
         cursor.close()
 
-def delete_library(lib_id):
-        param = tuple([lib_id])
-        query = "DELETE FROM Library WHERE library_id=%s"
+def delete_library(lib_email):
+        param = tuple([lib_email])
+        query = "DELETE FROM Library WHERE library_email=%s"
 
         is_connect()
         cursor = db_connection.cursor()
