@@ -16,6 +16,7 @@ def admin_required(f):
 admin = Blueprint("admin",__name__)
 
 @admin.route("/", methods=["POST", "GET"])
+#@admin_required
 def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -24,15 +25,17 @@ def adminPage():
             
     else:
         users = get_all_users()
-        #print(users)
+        libs = db_libraries()
+        print(users)
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
 
-    return render_template("/admin/admin.html", users=users)
+    return render_template("/admin/admin.html", users=users, libraries=libs)
 
 
 @admin.route("delete/", methods=["POST"])
+#@admin_required
 def userDelete():
     
     if request.method == "POST" :
@@ -43,22 +46,30 @@ def userDelete():
         return {'message' : "ok"}
         
 @admin.route("/user/<useremail>")
+#@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
-    print
+    print(user[0])
     return {'user' : user[0]}
 
 @admin.route('/editUser/', methods=["POST"])
+#@admin_required
 def edit_user():
     print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
         print("Data", data)
-        #update_user_db(data)
 
-        return {'message' : 'ok'}
+        # knihovnikovi nebola pridana kniznica
+        if data['librarian'] == '1' and data['library_id'] == '0':
+            return {'message' : 'err'}
+        else:
+            update_user_db(data)
+            return {'message' : 'ok'}
+
 
 @admin.route("/libraries/", methods=["POST", "GET"])
+#@admin_required
 def libPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -71,11 +82,13 @@ def libPage():
 
 
 @admin.route("/distributors/")
+#@admin_required
 def distributorsPage():
     return render_template("admin/distributors.html")
 
 
 @admin.route("/tags/")
+#@admin_required
 def tagsPage():
     return render_template("admin/tags.html")
     

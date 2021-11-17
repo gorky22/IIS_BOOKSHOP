@@ -218,11 +218,17 @@ def db_library_info(libid):
 
 #this function updates user table
 def update_user_db(atributes):
-        query = '''UPDATE `user` SET `user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
+        query = '''UPDATE `user` SET `library_id` = %s,`user_name` = %s, `user_surname` = %s, `email` = %s,`birth_date` = %s, `admin` = %s, `librarian` = %s, `distributor` = %s, `reader` = %s WHERE `user`.`email` = %s'''
 
         original_values = get_user_with_this_email(atributes["old_email"])[0]
         
-        x = [decide(original_values["user_name"],atributes["user_name"]),
+        if(int(atributes["library_id"]) == 0):       
+                lib_id =  original_values["library_id"]
+        else:
+                lib_id = atributes["library_id"]
+
+        x = [lib_id,
+             decide(original_values["user_name"],atributes["user_name"]),
              decide(original_values["user_surname"],atributes["user_surname"]),
              decide(original_values["email"],atributes["email"]),
              decide(original_values["birth_date"],atributes["birth_date"]),
@@ -436,3 +442,38 @@ def db_book_by_publisher(pub_id):
         query = '''SELECT title_id, title_name FROM Book_title WHERE publisher_id=%s;'''
         parameter = tuple([pub_id])
         return execute_select(query,parameters=parameter)
+def delete_library(lib_id):
+        param = tuple([lib_id])
+        query = "DELETE FROM Library WHERE library_id=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+#this function updates user table
+def update_lib_db(atributes):
+        query = '''UPDATE `Library` SET `library_name` = %s, `opening_hours` = %s, `description` = %s,`webpage_link` = %s, `library_email` = %s, `adress` = %s WHERE `Library`.`library_id` = %s'''
+
+        original_values = find_library(atributes["old_email"])[0]
+        
+        x = [decide(original_values["library_name"],atributes["library_name"]),
+             decide(original_values["opening_hours"],atributes["opening_hours"]),
+             decide(original_values["description"],atributes["description"]),
+             decide(original_values["webpage_link"],atributes["webpage_link"]),
+             decide(original_values["library_email"],atributes["library_email"]),
+             decide(original_values["adress"],atributes["adress"]) ,  
+             atributes["old_email"]
+             ]
+
+        
+        
+        parameter = tuple(x)
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
