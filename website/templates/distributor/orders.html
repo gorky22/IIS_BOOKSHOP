@@ -2,18 +2,45 @@
 
 
 {% block link_block %}
-    
+    <link rel="stylesheet" href="/static/css/distributor/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
 {% endblock %}
 
 {% block body_block %}
-    {% for order in orders %}
-        <h1>Objednavka: {{order['order_id']}}</h1>
-        {% for book in order['books']%}
-        <h2 style="margin-left: 2rem;">{{book['title_name']}}</h2>
-        {%endfor%}
+    <div class="content">
+        <h1 class="order-header" style="text-align: center;">Objednávky</h1>
+
+        {% for order in orders %}
+            <div class="order" id="order-box-{{order['order_id']}}">
+                <div class="top-part">
+                    <h1 class="order-name">Objednavka: č.{{order['order_id']}}</h1>
+                    <div class="right">
+                        <button class="btn-icon check" data-order="{{order['order_id']}}">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
+                        <button class="btn-icon roll-down" data-bottom="rollDown-{{order['order_id']}}">
+                            <img src="/static/icons/right-arrow.png" alt="arrow" class="arrow-png">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bottom-part" id="rollDown-{{order['order_id']}}" data-open="0">
+                    {% for book in order['books']%}
+
+                        <div class="info">
+                            <h1 class="book-name">{{ book['title_name'] }}</h1>
+                            <h1 class="book-name ">{{ book['count'] }}</h1>
+                        </div>
+
+                    {%endfor%}
+                </div>
+            </div>
     {% endfor %}
+    </div>
+    
 {% endblock %}
 
 {% block script_block %}
-
+<script src="/static/js/ordersDis.js"></script>
 {% endblock %}
