@@ -53,6 +53,26 @@ make_book_title_genre = '''
       )
 '''
 
+make_order = '''CREATE TABLE Orders(
+      order_id int AUTO_INCREMENT PRIMARY KEY,
+      librarian_id int not NULL,
+      distributor_id int not NULL,
+      CONSTRAINT order_librarian foreign key (librarian_id) references User(user_id) ON DELETE CASCADE,
+      CONSTRAINT order_distributor foreign key (distributor_id) references User(user_id) ON DELETE CASCADE,
+      CONSTRAINT order_unique UNIQUE (librarian_id, distributor_id)
+      )
+'''
+
+make_order_book = '''CREATE TABLE Order_book(
+      title_id int not NULL,
+      order_id int not NULL,
+      count int not null,
+      CONSTRAINT order_title foreign key (title_id) references Book_title(title_id) ON DELETE CASCADE,
+      CONSTRAINT order_book foreign key (order_id) references Orders(order_id) ON DELETE CASCADE,
+      CONSTRAINT order_unique UNIQUE (title_id, order_id)
+      )
+'''
+
 insert_library = '''INSERT INTO Library(town,street,house_number,opening_hours,description,webpage_link,path_to_picture) 
                     VALUES(%s, %s, %s, %s, %s, %s, %s)
 '''
@@ -168,6 +188,15 @@ make_reservation = '''
       CONSTRAINT reservation_handler foreign key (handler_id) references User(user_id)
       )
 '''
+
+make_publishers = '''
+      CREATE TABLE Publishers(
+      publisher_id int AUTO_INCREMENT PRIMARY KEY,
+      publisher_name varchar(50) not null
+      )
+'''
+
+
 insert_Book_title_author= '''INSERT INTO Book_title_author(time,until,title_id,creator_id,handler_id) 
                     VALUES(%s, %s,%s,%s,%s)
 '''
@@ -456,9 +485,9 @@ cursor = db_connection.cursor()
 
 x = [25,125,15]
 param = tuple(x)
-cursor.execute('''INSERT INTO `queue` (`title_id`, `user_id`, `library_id`, `time`) VALUES (%s, %s, %s, CURRENT_TIMESTAMP);''',param)
+cursor.execute(make_order_book)
+#cursor.execute("ALTER TABLE Book_title ADD CONSTRAINT title_publisher FOREIGN KEY ( publisher_id ) REFERENCES Publishers(publisher_id) ON DELETE CASCADE" )
 
-db_connection.commit()
 
 
 
