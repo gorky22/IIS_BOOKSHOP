@@ -49,7 +49,7 @@ def userDelete():
 #@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
-    print
+    print(user[0])
     return {'user' : user[0]}
 
 @admin.route('/editUser/', methods=["POST"])
@@ -64,7 +64,7 @@ def edit_user():
         if data['librarian'] == '1' and data['library_id'] == '0':
             return {'message' : 'err'}
         else:
-            update_user_db(data)
+            #update_user_db(data)
             return {'message' : 'ok'}
 
 
