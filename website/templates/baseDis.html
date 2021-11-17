@@ -26,10 +26,8 @@
             <div class="nav-box">
                 <div class="nav-flex">
                     <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
-                    <a href="{{ url_for('views.listPage') }}" class="nav-link">Rezervace</a>
-                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Výpůjčky</a>
-                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Objednávka knih</a>
-                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knižní tituly</a>
+                    <a href="{{ url_for('distribSystem.distribOrders') }}" class="nav-link">Objednávky</a>
+                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knihy</a>
                     {% if session['logged_in'] %}
                         <a href="#" class="nav-link">Ahoj {{ session['user']['name'] }} </a>
                         <!-- {{ url_for('auth.logout') }} -->
@@ -52,19 +50,13 @@
                 
                 <ul class="right-nav">
                     <li class="link-li">
-                        <a href="{{ url_for('librarySystem.homePage') }}" {{ 'class=link-a-active' if request.path == '/librarian/libPage/' else 'class=link-a' }}>Domů</a>
+                        <a href="{{ url_for('distribSystem.distribHome') }}" {{ 'class=link-a-active' if request.path == '/distributor/' else 'class=link-a' }}>Domů</a>
                     </li>
                     <li class="link-li dropdown">
-                        <a href="{{ url_for('librarySystem.reservations') }}" {{ 'class=link-a-active' if request.path == '/librarian/reservations/' else 'class=link-a' }}>Rezervace</a>
+                        <a href="{{ url_for('distribSystem.distribOrders') }}" {{ 'class=link-a-active' if request.path == '/distributor/orders/' else 'class=link-a' }}>Objednávky</a>
                     </li>
                     <li class="link-li">
-                        <a href="{{ url_for('librarySystem.borrowed') }}" {{ 'class=link-a-active' if request.path == '/librarian/borrowed/' else 'class=link-a' }}>Výpůjčky</a>
-                    </li>
-                    <li class="link-li">
-                        <a href="{{ url_for('librarySystem.order') }}" {{ 'class=link-a-active' if request.path == '/librarian/order/' else 'class=link-a' }}>Objednávky</a>
-                    </li>
-                    <li class="link-li">
-                        <a href="{{ url_for('librarySystem.booksInLib') }}" {{ 'class=link-a-active' if request.path == '/librarian/books/' else 'class=link-a' }}>Knižní tituly</a>
+                        <a href="{{ url_for('distribSystem.distribBooks') }}" {{ 'class=link-a-active' if request.path == '/distributor/books/' else 'class=link-a' }}>Knihy</a>
                     </li>
                     
                     {% if session['logged_in'] %}

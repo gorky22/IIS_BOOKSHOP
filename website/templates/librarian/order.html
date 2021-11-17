@@ -2,13 +2,27 @@
 
 
 {% block link_block %}
-    
+    <link rel="stylesheet" href="/static/css/librarian/order.css">
 {% endblock %}
 
 {% block body_block %}
-
+    <div class="content">
+        <h1 class="order-header">Objednávka</h1>
+        <h2 class="side-header">Vyberte distributora:</h1>
+        <form id="pub-form">
+            {% for pub in publishers%}
+                <input type="radio" name="distributor" value="{{pub['publisher_id']}}" id="pub-{{pub['publisher_id']}}" class="radio-button">
+                <label for="pub-{{pub['publisher_id']}}" class="radio-header">{{pub['publisher_name']}}</label>
+            {% endfor %}
+        </form>
+        <form id="book-form">
+            <div class="books">
+                
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block script_block %}
-
+<script src="/static/js/liborder.js"></script>
 {% endblock %}

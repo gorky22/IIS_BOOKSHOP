@@ -29,4 +29,7 @@ def create_app():
     from .librarian import librarySystem
     app.register_blueprint(librarySystem,url_prefix='/librarian/')
 
+    from .distrib import distribSystem
+    app.register_blueprint(distribSystem,url_prefix='/distributor/')
+
     return app

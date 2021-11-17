@@ -422,3 +422,17 @@ def db_remove_from_queue(book_id,lib_id,user_id):
         
         db_connection.commit()
         cursor.close()
+
+def db_distributor_info(distrib_pk):
+        query = '''SELECT * FROM publishers WHERE publisher_id = %s'''
+        parameter = tuple([distrib_pk])
+        return execute_select(query,parameters=parameter)
+
+def db_publishers():
+        query = '''SELECT * FROM publishers'''
+        return execute_select(query)
+
+def db_book_by_publisher(pub_id):
+        query = '''SELECT title_id, title_name FROM Book_title WHERE publisher_id=%s;'''
+        parameter = tuple([pub_id])
+        return execute_select(query,parameters=parameter)

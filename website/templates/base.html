@@ -18,13 +18,19 @@
         <title>Book Reserver</title>
     </head>
     <body>
+
         {% if session['user'] %}
-            {% if session['user']['admin']%}
-                <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
-            {% endif %}
-            {% if session['user']['librarian']%}
-                <a href="{{ url_for('librarySystem.homePage') }}" class="admin-url green">KNIHOVNIK</a>
-            {% endif %}
+            <div class="control-buttons">
+                {% if session['user']['admin']%}
+                    <a href="{{ url_for('admin.adminPage') }}" class="admin-url">ADMIN</a>
+                {% endif %}
+                {% if session['user']['librarian']%}
+                    <a href="{{ url_for('librarySystem.homePage') }}" class="admin-url green">KNIHOVNIK</a>
+                {% endif %}
+                {% if session['user']['distributor']%}
+                    <a href="{{ url_for('distribSystem.distribHome') }}" class="admin-url blue">DISTRIBUTOR</a>
+                {% endif %}
+            </div>
         {% endif %}
         <div class="res-navbar" >
             <button class="hamburger-btn" id="btn-menu">
