@@ -61,7 +61,7 @@ def libDelete():
 #@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
-    print(user[0])
+    #print(user[0])
     return {'user' : user[0]}
 
 
@@ -70,17 +70,17 @@ def get_user_by_id(useremail):
 def get_lib_by_email(email):
     library = find_library(email)
     
-    print(library[0])
+    #print(library[0])
     return {'lib' : library[0]}
 
 
 @admin.route('/editUser/', methods=["POST"])
 #@admin_required
 def edit_user():
-    print("EDITOVANIE USERA")
+    #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
-        print("Data", data)
+        #print("Data", data)
 
         # knihovnikovi nebola pridana kniznica
         if data['librarian'] == '1' and data['library_id'] == '0':
