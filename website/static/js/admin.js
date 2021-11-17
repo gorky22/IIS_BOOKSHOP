@@ -234,7 +234,7 @@ $('#sendEdit').click(function(e){
     }
 
     
-
+    alert("posielam gorkymu: " + libraryId)
     var data = {
         "old_email" : email,
         "email" : new_email,

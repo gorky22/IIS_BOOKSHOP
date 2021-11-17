@@ -64,7 +64,7 @@ def edit_user():
         if data['librarian'] == '1' and data['library_id'] == '0':
             return {'message' : 'err'}
         else:
-            #update_user_db(data)
+            update_user_db(data)
             return {'message' : 'ok'}
 
 
