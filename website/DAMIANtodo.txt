@@ -16,7 +16,7 @@ Damiane pls udělej tyto selecty:
 
 
     --------------------------------------------------Tagy--------------------------------------------------
-    Dostaneš TAG_ID a potřebuji 5 knížek, které mají stejný TAG
+    Dostaneš TAG_ID a potřebuji 5 knížek, které mají stejný TAG Done
 
     ----------- Hanzelm --------
     Select na všetkých uživateľov get_all_users() Done
