@@ -26,8 +26,7 @@ def adminPage():
     else:
         users = get_all_users()
         libs = db_libraries()
-        print(libs)
-        #print(users)
+        print(users)
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
@@ -60,9 +59,13 @@ def edit_user():
     if request.method == "POST" :
         data = request.form  
         print("Data", data)
-        #update_user_db(data)
 
-        return {'message' : 'ok'}
+        # knihovnikovi nebola pridana kniznica
+        if data['librarian'] == '1' and data['library_id'] == '0':
+            return {'message' : 'err'}
+        else:
+            update_user_db(data)
+            return {'message' : 'ok'}
 
 
 @admin.route("/libraries/", methods=["POST", "GET"])

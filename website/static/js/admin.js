@@ -93,6 +93,8 @@ function setPlaceholder(user){
 $('.editBtn').click(function(e){
     e.preventDefault()
     
+    document.getElementById('res-combobox').value=0
+
     var email =  $(this).data('edit')
     var user = false
 
@@ -113,6 +115,10 @@ $('.editBtn').click(function(e){
             if (user['librarian'] == 1){
                 document.getElementById("res-combobox").classList.remove('hide')
                 document.getElementById("hide_br").classList.remove('hide')
+                document.getElementById('res-combobox').value=user['library_id']
+            } else {
+                document.getElementById("res-combobox").classList.add('hide')
+                document.getElementById("hide_br").classList.add('hide')
             }
             checkBtn("disR", user['distributor'])
             checkBtn("basicUserR", user['reader'])
@@ -151,6 +157,8 @@ $('#libAdd').click(function(e){
     document.getElementById("res-combobox").classList.remove('hide')
     document.getElementById("hide_br").classList.remove('hide')
 
+    document.getElementById('res-combobox').value=0
+
     //$('#res-combobox').find('option:selected').val(10)
     //var fero = $('#res-combobox').find('option:selected').val()
     
@@ -160,6 +168,11 @@ $('#libAdd').click(function(e){
     checkBtn("libR", 1)
 })
 $('#libRemove').click(function(e){
+    document.getElementById("res-combobox").classList.add('hide')
+    document.getElementById("hide_br").classList.add('hide')
+
+    //odobrat knihovnu v ktorej user pracuje
+    document.getElementById('res-combobox').value=0
     checkBtn("libR", 0)
 })
 $('#disAdd').click(function(e){
@@ -193,7 +206,6 @@ document.querySelector('.btnCloseEdit').addEventListener('click', function() {
 // Ak bolo stlacene tlacidlo na ulozenie zmien
 $('#sendEdit').click(function(e){
     var email = document.getElementById('e-mail').innerHTML
-    alert(email)
 
     var name = $('#nameI').val()
     var surname = $('#surnameI').val()
@@ -204,13 +216,15 @@ $('#sendEdit').click(function(e){
     var disR = 0
     var basicUserR = 0
     var libraryId = $('#res-combobox').find('option:selected').val()
-    alert(libraryId)
 
     if (document.getElementById('adminR').classList.contains('fa-check')){
         adminR = 1
     }
     if (document.getElementById('libR').classList.contains('fa-check')){
         libR = 1
+    } else {
+        document.getElementById("res-combobox").classList.add('hide')
+        document.getElementById("hide_br").classList.add('hide')
     }
     if (document.getElementById('disR').classList.contains('fa-check')){
         disR = 1
@@ -219,9 +233,7 @@ $('#sendEdit').click(function(e){
         basicUserR = 1
     }
 
-
-    document.getElementById("res-combobox").classList.remove('hide')
-    document.getElementById("hide_br").classList.remove('hide')
+    
 
     var data = {
         "old_email" : email,
@@ -233,6 +245,7 @@ $('#sendEdit').click(function(e){
         "librarian" : libR,
         "distributor" : disR,
         "reader" : basicUserR,
+        "library_id" : libraryId,
     }
 
     $.ajax({
@@ -244,10 +257,12 @@ $('#sendEdit').click(function(e){
             if (response['message'] == 'ok')
             {
                 Toast.show('Úspešna editácia uživateľa','S')
-            }        
-            
-            document.querySelector('.bg-modal-edit').style.display = 'none'
-            delete_inputs()
+                document.querySelector('.bg-modal-edit').style.display = 'none'
+                delete_inputs()
+
+            } else {
+                Toast.show('Knihovnikovi nebola priadana knihovna','E')
+            }    
         }
     });
 })

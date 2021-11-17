@@ -110,6 +110,7 @@
             <br>
                 
             <select name="library" class="library-select hide" id="res-combobox">
+                <option value="0">Vyber knihovnu</option>
                 {% for library in libraries %}
                     <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
                 {% endfor %}
