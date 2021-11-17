@@ -118,7 +118,6 @@ $('.editBtn').click(function(e){
             // Zobrazi sa Pop Up okno na editaciu            
             document.querySelector('.bg-modal-edit').style.display = 'flex'
 
-           
         }
     });
 })
@@ -229,9 +228,6 @@ $('#sendEdit').click(function(e){
             delete_inputs()
         }
     });
-    
-  
-
 })
 
 

@@ -106,9 +106,14 @@
             <p style="display: inline;">Knihovník</p>
             <i id="libR" class="fas"></i>
             <button id="libAdd" class="btnGreen">Udeliť práva</button>
-            <button id="libRemove" class="btnRed">Odebrať práva</button> 
+            <button id="libRemove" class="btnRed">Odebrať práva</button>
             <br>
-
+            <select name="library" class="library-select" id="res-combobox">
+                {% for library in libraries %}
+                    <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
+                {% endfor %}
+            </select> 
+            <br>        
             <p style="display: inline;">Distribútor</p>
             <i id="disR" class="fas"></i>
             <button id="disAdd" class="btnGreen">Udeliť práva</button>

@@ -16,6 +16,7 @@ def admin_required(f):
 admin = Blueprint("admin",__name__)
 
 @admin.route("/", methods=["POST", "GET"])
+#@admin_required
 def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -33,6 +34,7 @@ def adminPage():
 
 
 @admin.route("delete/", methods=["POST"])
+#@admin_required
 def userDelete():
     
     if request.method == "POST" :
@@ -43,12 +45,14 @@ def userDelete():
         return {'message' : "ok"}
         
 @admin.route("/user/<useremail>")
+#@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
     print
     return {'user' : user[0]}
 
 @admin.route('/editUser/', methods=["POST"])
+#@admin_required
 def edit_user():
     print("EDITOVANIE USERA")
     if request.method == "POST" :
@@ -59,16 +63,19 @@ def edit_user():
         return {'message' : 'ok'}
 
 @admin.route("/libraries/")
+#@admin_required
 def libPage():
     return render_template("/admin/libraries.html")
 
 
 @admin.route("/distributors/")
+#@admin_required
 def distributorsPage():
     return render_template("admin/distributors.html")
 
 
 @admin.route("/tags/")
+#@admin_required
 def tagsPage():
     return render_template("admin/tags.html")
     

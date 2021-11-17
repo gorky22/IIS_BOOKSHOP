@@ -177,7 +177,7 @@ tr:nth-child(even) .editBtn:hover {
 
 .content-modal-edit {
     width: 60rem;
-    height: 42rem;
+    height: 46rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -296,4 +296,18 @@ tr:nth-child(even) .editBtn:hover {
 
 .btnRed {
     margin-right: 11rem;
+}
+
+.library-select{
+    width: 10rem;
+    height: 1.2rem;
+    margin-right: 22rem;
+
+    font-family: 'Nunito', sans-serif;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    border: none;
+    padding: 1rem 0;
+    box-shadow: 0px 5px 7px #0000002a;
+    cursor: pointer;
 }
