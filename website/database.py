@@ -191,6 +191,13 @@ def find_library(string_to_find):
 
         return execute_select(query,parameters=param)
 
+def find_distributors(string_to_find):
+        
+        param = tuple([string_to_find for i in range(3)])
+        query = "SELECT * FROM Publishers WHERE publisher_email=%s or publisher_name=%s or town = %s"
+
+        return execute_select(query,parameters=param)
+
 #this function returns book which has this genre
 def db_books_with_genre(genre):
         param = tuple([genre])
@@ -458,6 +465,76 @@ def update_lib_db(atributes):
         
         
         parameter = tuple(x)
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+#this function updates user table
+def update_distributor_db(atributes):
+        query = '''UPDATE `Publishers` SET `publisher_name` = %s, `publisher_email` = %s, `adress` = %s,`town` = %s WHERE `Publishers`.`publisher_id` = %s'''
+
+        original_values = find_distributors(atributes["old_email"])[0]
+        
+        x = [decide(original_values["publisher_name"],atributes["publisher_name"]),
+             decide(original_values["publisher_email"],atributes["publisher_email"]),
+             decide(original_values["adress"],atributes["adress"]),
+             decide(original_values["town"],atributes["town"]),
+             original_values["publisher_id"]
+             ]
+
+        
+        
+        parameter = tuple(x)
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_distributors():
+        query = '''SELECT * FROM Publishers'''
+
+        return execute_select(query)
+
+def delete_distributors(dist_id):
+        param = tuple([dist_id])
+        query = "DELETE FROM Publishers WHERE publisher_id=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_tags(tag=None):
+        if(tag == None):
+                query = '''SELECT * FROM Genre'''
+                return execute_select(query)
+        else:
+                query = '''SELECT * FROM Genre where name = %s'''
+                param = tuple([tag])
+                return execute_select(query,parameters=param)
+
+def delete_tag(tag_id):
+        param = tuple([tag_id])
+        query = "DELETE FROM Genre WHERE genre_id=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+def update_tag_db(name):
+        query = '''UPDATE `Genre` SET `name` = %s WHERE `name` = %s'''        
+        
+        parameter = tuple(name)
         is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,parameter)
