@@ -31,7 +31,6 @@ $('.deleteBtn').click(function(e){
 document.getElementById('btnYes').addEventListener('click', function() {
     var str = document.getElementById('deleteLib').innerHTML
 
-    alert("som tu")
     var email = {"email" : str}
     $.ajax({
         type: "POST",
