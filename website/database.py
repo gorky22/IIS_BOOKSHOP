@@ -222,7 +222,10 @@ def update_user_db(atributes):
 
         original_values = get_user_with_this_email(atributes["old_email"])[0]
         
-        x = [decide(original_values["library_id"],atributes["library_id"]),
+        if(atributes["library_id"] == 0):       
+                atributes["library_id"] = original_values["library_id"]
+
+        x = [decide(atributes["library_id"],
              decide(original_values["user_name"],atributes["user_name"]),
              decide(original_values["user_surname"],atributes["user_surname"]),
              decide(original_values["email"],atributes["email"]),
