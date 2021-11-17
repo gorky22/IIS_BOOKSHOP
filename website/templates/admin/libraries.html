@@ -23,7 +23,6 @@
         </tr>
         
         {% for library in libraries %}
-     
         <tr>
             <td>{{ library['library_email']}}</td>
             <td>{{ library['library_name'] }}</td>
@@ -37,27 +36,15 @@
                     <button type="button" class="deleteBtn" name="btnDelete">
                         <i class="far fa-trash-alt"></i>
                     </button>
-                   
-
-                   
                 </form >
             </td>
-            
-          
-
         </tr>
         {% endfor %}
-        <tr>
-            <td></td>
-            <td></td>
-            <td>
-                <button type="button" class="addBtn" name="btnadd"}>
-                    <i class="far fa-plus"></i>
-                </button>
-            </td>
-        </tr>
     </table>
 
+    <button type="button" class="addBtn" name="btnadd"}>
+        <i class="far fa-plus"></i>
+    </button>
     
  </div>
  
