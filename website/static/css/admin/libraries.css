@@ -99,7 +99,7 @@ td{
     text-align: right;
 }
 
-.deleteBtn, .editBtn {
+.deleteBtn, .editBtn,.addBtn {
     border-style: none;
     border: none;
     background-color: transparent; 
@@ -292,7 +292,13 @@ tr:nth-child(even) .editBtn:hover {
     margin-right: 1rem;
 }
 
+tr:nth-child(odd) .addBtn:hover {
+    color: #623CEA;
+}
 
+tr:nth-child(even) .addBtn:hover {
+    color: #FFF;
+}
 
 .btnRed {
     margin-right: 11rem;

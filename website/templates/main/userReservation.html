@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block link_block %}
+    <link rel="stylesheet" href="/static/css/views/reservations.css">
+{% endblock %}
+
+{% block body_block %}
+    <div class="content">
+        
+        <h1 class="reservation-header">Vaše rezervace</h1>
+        <div class="reservations">
+        {% for res in reservations %}
+            <div class="reservation">
+                <div class="upper-part">
+                    <h1 class="reservation-name">{{ res['title_name'] }}</h1>
+                    <button class="roll-down" id="roll-{{res['reservation_id']}}">
+                        <img src="/static/icons/right-arrow.png" alt="ArrowRight" class="arrow-icon">
+                    </button>
+                </div>
+                <div class="down-part" id="roll-{{res['reservation_id']}}-show" data-open="0">
+                    <div class="bottom-flex">
+                        <p class="reservationTime" >Rezervace do: <span id="date-{{res['reservation_id']}}">{{ res['until'].strftime('%d. %m. %Y') }}</span></p>
+                        <button class="time-btn" id="time-btn-{{res['reservation_id']}}">
+                            <img src="/static/icons/icons8-clock.svg" alt="ArrowRight" class="time-icon" title="Prodloužit rezervaci">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script src="/static/js/userReservations.js"></script>
+{% endblock %}
+
+<!-- Key[reservation_id] = 55
+Key[time] = 2021-11-17 11:44:40
+Key[until] = 2021-11-19
+Key[title_id] = 5
+Key[user_id] = 105
+Key[library_id] = 35
+Key[title_name] = Vianočné prasiatko
+Key[library_name] = Knihovna Židlochovice -->

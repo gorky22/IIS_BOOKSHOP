@@ -20,10 +20,16 @@
             </tr>
             
             {% for res in reservations %}
-                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}">
+                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}"
+                    {% if res["days"] < 3 %}
+                        class="red-row"
+                    {% elif res["days"] < 5 %}
+                        class="orange-row"
+                    {% endif %}
+                >
                     <td>{{ res['email'] }}</td>
                     <td>{{ res['title_name'] }}</td>
-                    <td>{{ res['time'].strftime("%d. %m. %Y") }}</td>
+                    <td>{{ res['until'].strftime("%d. %m. %Y") }}</td>
                     <td class="deleteForm">
                         <button class="button-icon confirm-res" data-res="{{ res['reservation_id'] }}">
                             <i class="fas fa-check-circle"></i>

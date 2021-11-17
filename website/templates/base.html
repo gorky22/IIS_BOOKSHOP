@@ -80,8 +80,8 @@
                         <img src="/static/icons/userBL.png" class="icon">
                         <div class="dropdown-content-user">
                             <a href="#" class="drop-link">Ahoj {{ session['user']['user_name'] }}</a>
-                            <a href="#" class="drop-link">Rezervace</a>
-                            <a href="#" class="drop-link">Výpůjčky</a>
+                            <a href="{{ url_for('views.userReservation')}}" class="drop-link">Rezervace</a>
+                            <a href="{{ url_for('views.borrowedReservation')}}" class="drop-link">Výpůjčky</a>
                             <a href="{{ url_for('auth.logout') }}" class="drop-link btn btn-blue">Odhlásit se</a>
                         </div>
                     </li>
