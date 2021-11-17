@@ -2,11 +2,16 @@
 
 
 {% block link_block %}
-
+    
 {% endblock %}
 
 {% block body_block %}
-
+    {% for order in orders %}
+        <h1>Objednavka: {{order['order_id']}}</h1>
+        {% for book in order['books']%}
+        <h2 style="margin-left: 2rem;">{{book['title_name']}}</h2>
+        {%endfor%}
+    {% endfor %}
 {% endblock %}
 
 {% block script_block %}

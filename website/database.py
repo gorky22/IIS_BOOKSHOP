@@ -442,6 +442,40 @@ def db_book_by_publisher(pub_id):
         query = '''SELECT title_id, title_name FROM Book_title WHERE publisher_id=%s;'''
         parameter = tuple([pub_id])
         return execute_select(query,parameters=parameter)
+
+def add_order(lib_id,pub_id):
+        query = '''INSERT INTO orders(librarian_id,distributor_id) 
+               VALUES(%s, %s)'''
+        parameter=tuple([lib_id,pub_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        idOfOrder = cursor.lastrowid
+        db_connection.commit()
+        cursor.close()
+        return idOfOrder
+        
+def add_books_to_order(order_id,title_ids,counts):
+        query = 'INSERT INTO order_book(title_id,order_id,count) VALUES '
+        values = ",".join([f'({title_ids[i]},{order_id},{counts[i]})' for i in range(len(title_ids))])
+        query = f'{query}{values};'
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query)
+        db_connection.commit()
+        cursor.close()
+
+def db_unfinished_orders_for_distributor(distrib_id):
+        query = '''SELECT o.*,u.email FROM orders o JOIN user u ON u.user_id = o.librarian_id WHERE distributor_id = %s AND state = 0;'''
+        parameter = tuple([distrib_id])
+        return execute_select(query,parameter)
+
+def db_info_about_books_in_order(order_id):
+        query = '''SELECT b.title_id, b.title_name FROM order_book o JOIN book_title b ON o.title_id = b.title_id WHERE o.order_id = %s'''
+        parameter = tuple([order_id])
+        return execute_select(query,parameter)
+
 def delete_library(lib_id):
         param = tuple([lib_id])
         query = "DELETE FROM Library WHERE library_id=%s"
@@ -452,6 +486,7 @@ def delete_library(lib_id):
         
         db_connection.commit()
         cursor.close()
+
 
 #this function updates user table
 def update_lib_db(atributes):

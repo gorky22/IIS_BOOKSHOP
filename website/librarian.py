@@ -101,10 +101,12 @@ def booksInLib():
         books = {}
         for i in request.form:
             books = json.loads(i)
-        for i in range(len(books['order'])):
-            book_id = books['id_list'][i]
-            count_of_books = books['order'][i]
-            
+        
+        id_of_order = add_order(session['user']['user_id'],books['publisher'])
+        ids = books['id_list']
+        counts = books['order']
+        add_books_to_order(id_of_order,ids,counts)
+        return {'err':False}
         
            
             

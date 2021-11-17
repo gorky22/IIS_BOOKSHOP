@@ -27,7 +27,12 @@ def distribHome():
 @distribSystem.route('/orders/')
 @distrib_required
 def distribOrders():
-    return render_template('distributor/orders.html')
+    orders = db_unfinished_orders_for_distributor(session['user']['publisher_id'])
+    books_in_order = [db_info_about_books_in_order(order['order_id']) for order in orders]
+    for i in range(len(orders)):
+        orders[i]['books'] = books_in_order[i]
+
+    return render_template('distributor/orders.html',orders=orders)
     
 
 @distribSystem.route('/books/')

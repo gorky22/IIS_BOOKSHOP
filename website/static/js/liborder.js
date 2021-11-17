@@ -40,17 +40,21 @@ $(document).on('click','#confirm',function(e){
             id_list.push($(this).data('bookid'))
         }
     })
-    let dataToSend = JSON.stringify({order:order,id_list:id_list,publisher:publisher})
-    $.ajax({
-        type: "POST",
-        url: '/librarian/books/',
-        data: dataToSend,
-        traditional: true,
-        dataType: "json",
-        success: function (response) {
-            
-        }
-    });
+    if (order.length > 0){
+        let dataToSend = JSON.stringify({order:order,id_list:id_list,publisher:publisher})
+        $.ajax({
+            type: "POST",
+            url: '/librarian/books/',
+            data: dataToSend,
+            traditional: true,
+            dataType: "json",
+            success: function (response) {
+                Toast.show("Objednávka byla úspěšně odeslána distributorovi","S")
+            }
+        });
+    } else {
+        Toast.show("V objednávce se nenachází, žádné položky","E")
+    }
 })
 
 
