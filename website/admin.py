@@ -26,7 +26,6 @@ def adminPage():
     else:
         users = get_all_users()
         libs = db_libraries()
-        print(users)
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
@@ -44,21 +43,44 @@ def userDelete():
         #delete_user(email)
 
         return {'message' : "ok"}
+
+
+@admin.route("deleteLib/", methods=["POST"])
+#@admin_required
+def libDelete():
+    
+    if request.method == "POST" :
+        email = request.form.get("email")  
+        print("Vymazal som knihovnu", email)
+        #delete_user(email)
+
+        return {'message' : "ok"}
+
         
 @admin.route("/user/<useremail>")
 #@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
-    print(user[0])
+    #print(user[0])
     return {'user' : user[0]}
+
+
+@admin.route("/library/<email>")
+#@admin_required
+def get_lib_by_email(email):
+    library = find_library(email)
+    
+    #print(library[0])
+    return {'lib' : library[0]}
+
 
 @admin.route('/editUser/', methods=["POST"])
 #@admin_required
 def edit_user():
-    print("EDITOVANIE USERA")
+    #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
-        print("Data", data)
+        #print("Data", data)
 
         # knihovnikovi nebola pridana kniznica
         if data['librarian'] == '1' and data['library_id'] == '0':
@@ -66,6 +88,17 @@ def edit_user():
         else:
             update_user_db(data)
             return {'message' : 'ok'}
+
+
+@admin.route('/editLib/', methods=["POST"])
+#@admin_required
+def edit_lib():
+    if request.method == "POST" :
+        data = request.form  
+        print("Data", data)
+        update_lib_db(data)
+
+        return {'message' : 'ok'}
 
 
 @admin.route("/libraries/", methods=["POST", "GET"])
@@ -78,19 +111,33 @@ def libPage():
     else:
         libraries = db_libraries()
         
+    print(*libraries, sep='\n')
     return render_template("admin/libraries.html", libraries=libraries)
 
 
-@admin.route("/distributors/")
+@admin.route("/distributors/", methods=["POST", "GET"])
 #@admin_required
 def distributorsPage():
-    return render_template("admin/distributors.html")
+    if request.method == "POST":
+        if "nm" in request.form:
+            distributors = find_distributors(request.form["nm"])
+            
+    else:
+        distributors = db_distributors()
+        
+    return render_template("admin/distributors.html", distributors=distributors)
 
 
-@admin.route("/tags/")
+@admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required
 def tagsPage():
-    return render_template("admin/tags.html")
+    if request.method == "POST":
+        if "nm" in request.form:
+            tags = db_tags(tag=request.form["nm"])
+            
+    else:
+        tags = db_tags()
+    return render_template("admin/tags.html", tags=tags)
     
 
 @admin.route('/notPermited/')
