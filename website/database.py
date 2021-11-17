@@ -538,8 +538,6 @@ def update_distributor_db(atributes):
         
         db_connection.commit()
         cursor.close()
-<<<<<<< HEAD
-=======
 
 def db_distributors():
         query = '''SELECT * FROM Publishers'''
@@ -587,4 +585,3 @@ def update_tag_db(name):
         
         db_connection.commit()
         cursor.close()
->>>>>>> main
