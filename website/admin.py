@@ -62,10 +62,18 @@ def edit_user():
 
         return {'message' : 'ok'}
 
-@admin.route("/libraries/")
+
+@admin.route("/libraries/", methods=["POST", "GET"])
 #@admin_required
 def libPage():
-    return render_template("/admin/libraries.html")
+    if request.method == "POST":
+        if "nm" in request.form:
+            libraries = find_library(request.form["nm"])
+            
+    else:
+        libraries = db_libraries()
+        
+    return render_template("admin/libraries.html", libraries=libraries)
 
 
 @admin.route("/distributors/")

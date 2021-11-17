@@ -2,24 +2,60 @@
 
 
 {% block link_block %}
-
+<link rel="stylesheet" href="/static/css/admin/libraries.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 {% endblock %}
 
-{% block block_body %}
+
+{% block body_block %}
  <div class="content">
     <table>
         <tr>
-            <th>E-mail</th>
+            <th>Email Knihovny</th>
             <th>Celé jméno</th>
-            <th>Registrace dne</th>
-            <!--<th class="search-box">
-                 <button class="btn-search btn-yellow">Search box</button> 
-                <form action="{{ url_for('admin.adminPage') }}" method="post">
-                    <input type="text" name="nm" placeholder="Hledat uživatele"> 
-                </form >-->
+            <th>Otvárací Hodiny</th>
+            <th>Mesto</th>
+            <th class="search-box">
+                <form action="{{ url_for('admin.libPage') }}" method="post">
+                    <input type="text" name="nm" placeholder="Hledat Knihovny"> 
+                </form >
             </th>
         </tr>
+        
+        {% for library in libraries %}
+     
+        <tr>
+            <td>{{ library['library_email']}}</td>
+            <td>{{ library['library_name'] }}</td>
+            <td> {{ library['opening_hours'] }} </td>
+            <td> {{ library['town'] }} </td>
+            <td class="deleteForm">
+                <form method="post">
+                    <button type="button" class="editBtn" name="btnEdit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" class="deleteBtn" name="btnDelete">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                   
+
+                   
+                </form >
+            </td>
+            
+          
+
+        </tr>
+        {% endfor %}
+        
     </table>
+
+    <div>
+        <button type="button" class="deleteBtn" name="btnDelete"}>
+            <i class="far fa-plus"></i>
+        </button>
+    </div>
+    
  </div>
  
 {% endblock %}
