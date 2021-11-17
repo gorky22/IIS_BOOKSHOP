@@ -58,8 +58,7 @@ make_order = '''CREATE TABLE Orders(
       librarian_id int not NULL,
       distributor_id int not NULL,
       CONSTRAINT order_librarian foreign key (librarian_id) references User(user_id) ON DELETE CASCADE,
-      CONSTRAINT order_distributor foreign key (distributor_id) references User(user_id) ON DELETE CASCADE,
-      CONSTRAINT order_unique UNIQUE (librarian_id, distributor_id)
+      CONSTRAINT order_distributor foreign key (distributor_id) references Publishers(publisher_id) ON DELETE CASCADE
       )
 '''
 
@@ -485,6 +484,7 @@ cursor = db_connection.cursor()
 
 x = [25,125,15]
 param = tuple(x)
+cursor.execute(make_order)
 cursor.execute(make_order_book)
 #cursor.execute("ALTER TABLE Book_title ADD CONSTRAINT title_publisher FOREIGN KEY ( publisher_id ) REFERENCES Publishers(publisher_id) ON DELETE CASCADE" )
 
