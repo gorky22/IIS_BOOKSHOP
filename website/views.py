@@ -10,7 +10,7 @@ def login_required(f):
     def decorated_function(*args,**kwargs):
         if not session.get('user'):
             return redirect(url_for('auth.authPage'))
-        if not session['user']['librarian']:
+        if not session['user']['reader'] and not session['user']['admin']:
             return redirect(url_for('admin.notPermited'))
         return f(*args,**kwargs)
     return decorated_function
