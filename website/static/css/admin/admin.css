@@ -177,7 +177,7 @@ tr:nth-child(even) .editBtn:hover {
 
 .content-modal-edit {
     width: 60rem;
-    height: 46rem;
+    height: 48rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -299,15 +299,19 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .library-select{
-    width: 10rem;
-    height: 1.2rem;
-    margin-right: 22rem;
-
+    width: 19.5rem;
+    text-align: right;
+    margin-right: 5.5rem;
     font-family: 'Nunito', sans-serif;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
+    margin-top: 0.5rem;
     border-radius: 1rem;
     border: none;
     padding: 1rem 0;
     box-shadow: 0px 5px 7px #0000002a;
     cursor: pointer;
+}
+
+.hide {
+    display: none;
 }

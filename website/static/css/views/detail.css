@@ -76,4 +76,15 @@
 .bottom-right{
     text-align: right;
 }
-
+.library-select{
+    width: 20rem;
+    text-align: right;
+    font-family: 'Nunito', sans-serif;
+    display: block;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    border: none;
+    padding: 1rem 0;
+    box-shadow: 0px 5px 7px #0000002a;
+    cursor: pointer;
+}

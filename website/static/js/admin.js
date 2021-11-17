@@ -110,6 +110,10 @@ $('.editBtn').click(function(e){
             
             checkBtn("adminR", user['admin'])
             checkBtn("libR", user['librarian'])
+            if (user['librarian'] == 1){
+                document.getElementById("res-combobox").classList.remove('hide')
+                document.getElementById("hide_br").classList.remove('hide')
+            }
             checkBtn("disR", user['distributor'])
             checkBtn("basicUserR", user['reader'])
 
@@ -144,6 +148,15 @@ $('#adminRemove').click(function(e){
     checkBtn("adminR", 0)
 })
 $('#libAdd').click(function(e){
+    document.getElementById("res-combobox").classList.remove('hide')
+    document.getElementById("hide_br").classList.remove('hide')
+
+    //$('#res-combobox').find('option:selected').val(10)
+    //var fero = $('#res-combobox').find('option:selected').val()
+    
+    //document.getElementById('res-combobox').value=55
+    //alert(fero)
+
     checkBtn("libR", 1)
 })
 $('#libRemove').click(function(e){
@@ -168,6 +181,9 @@ $('#basicUserRemove').click(function(e){
 document.querySelector('.btnCloseEdit').addEventListener('click', function() {
     document.querySelector('.bg-modal-edit').style.display = 'none'
 
+    document.getElementById("res-combobox").classList.add('hide')
+    document.getElementById("hide_br").classList.add('hide')
+
     delete_inputs()
 })
 
@@ -187,6 +203,8 @@ $('#sendEdit').click(function(e){
     var libR = 0
     var disR = 0
     var basicUserR = 0
+    var libraryId = $('#res-combobox').find('option:selected').val()
+    alert(libraryId)
 
     if (document.getElementById('adminR').classList.contains('fa-check')){
         adminR = 1
@@ -200,6 +218,10 @@ $('#sendEdit').click(function(e){
     if (document.getElementById('basicUserR').classList.contains('fa-check')){
         basicUserR = 1
     }
+
+
+    document.getElementById("res-combobox").classList.remove('hide')
+    document.getElementById("hide_br").classList.remove('hide')
 
     var data = {
         "old_email" : email,

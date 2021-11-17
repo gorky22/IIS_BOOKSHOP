@@ -25,12 +25,14 @@ def adminPage():
             
     else:
         users = get_all_users()
+        libs = db_libraries()
+        print(libs)
         #print(users)
         #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
         #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
         #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
 
-    return render_template("/admin/admin.html", users=users)
+    return render_template("/admin/admin.html", users=users, libraries=libs)
 
 
 @admin.route("delete/", methods=["POST"])
