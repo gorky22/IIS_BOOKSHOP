@@ -66,6 +66,9 @@ def confirm_res(resid):
 @librarian_required
 def borrowed():
     borrowed = db_borrowed_in_lib(session['user']['library_id'])
+    today = datetime.date.today()
+    for bor in borrowed:
+        bor['days'] = (bor['until'] - today).days
     return render_template('/librarian/borrowed.html',borrows=borrowed)
 
 @librarySystem.route('/borrowed/delete/<borid>/')

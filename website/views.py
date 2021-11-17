@@ -1,3 +1,4 @@
+from os import sep
 from flask import Blueprint, render_template, request,session,redirect,url_for
 from .database import *
 import random
@@ -132,7 +133,7 @@ def bookDetail(bookid):
                 user_id = session['user']['user_id']
                 until = datetime.date.today() + datetime.timedelta(days=10)
                 
-                if len(db_res_with_book_lib_user(bookid,user_id,library_id)) == 0:
+                if len(db_res_with_book_lib_user(bookid,user_id,library_id)) == 0 and len(db_bor_with_book_lib_user(bookid,user_id,library_id)) == 0:
                     count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
                     if count_of_book > 0:
                         db_insert_reservation(until,bookid,user_id,library_id)
@@ -141,7 +142,7 @@ def bookDetail(bookid):
                         count_of_book = int(db_actual_count(library_id,bookid)[0]['count'])
                         return {'err':False}
                     return {'err': True, 'msg':'Tato kniha již není k dispozici v této knihovně'}
-                return {'err':True,'msg':'Na tuto knížku již učiněnou rezervaci máte'}
+                return {'err':True,'msg':'Na tuto knížku již učiněnou rezervaci nebo výpůjčku máte'}
             return {'err':True,'msg':'Nemůžete rezervovat knihy, nemáte práva čtenáře.'}
         return {'err':True,'msg':'Rezervace nebyla dokončena, pro dokončení rezervace musíte být přihlášeni.'}
 
@@ -155,6 +156,31 @@ def bookDetail(bookid):
 
 
 @views.route("/user/reservations/")
+@login_required
 def userReservation():
-    
-    return render_template('/main/userReservation.html')
+    reservations = db_reserved_books(session['user']['user_id'])
+    return render_template('/main/userReservation.html',reservations=reservations)
+
+
+@views.route("/reservation/delay/<resid>/")
+def delayReservation(resid):
+    reservation = db_reservation_info(resid)[0]
+    reservation["until"] = reservation["until"] + datetime.timedelta(days=10)
+    db_update_reservation_time(resid,reservation['until'])
+    return {'err':False,'newtime':reservation['until'].strftime("%d. %m. %Y")}
+
+
+@views.route("/user/borrowed/")
+@login_required
+def borrowedReservation():
+    borrowed = db_borrowed_books(session['user']['user_id'])
+    print(borrowed)
+    return render_template('/main/userBorrows.html',borrowed=borrowed)
+
+@views.route("/borrow/delay/<borid>/")
+def delayBorrow(borid):
+    borrow = db_borrow_info(borid)[0]
+    borrow["until"] = borrow["until"] + datetime.timedelta(days=10)
+    db_update_borrow_time(borid,borrow['until'])
+    return {'err':False,'newtime':borrow['until'].strftime("%d. %m. %Y")}
+

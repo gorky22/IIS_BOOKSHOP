@@ -138,8 +138,8 @@ def db_book_by_id(book_id):
 #takes as input id of user
 # returns all reservations from user with this id
 def db_reserved_books(user_id):
-        query = '''SELECT r.* FROM Reservation r JOIN Book_title b ON r.title_id = b.title_id 
-               JOIN User u ON r.creator_id = u.user_id WHERE u.user_id = %s''' 
+        query = '''SELECT r.*, b.title_name, l.library_name FROM Reservation r JOIN Book_title b ON r.title_id = b.title_id 
+               JOIN User u ON r.user_id = u.user_id JOIN Library l ON l.library_id = r.library_id WHERE u.user_id = %s''' 
         
         parameter = tuple([user_id])
         return execute_select(query,parameters=parameter)
@@ -310,12 +310,36 @@ def db_insert_borrow(until,title_id,customer_id,handler_id,library_id):
         db_connection.commit()
         cursor.close()
 
+def db_update_borrow_time(res_pk,time):
+        query = '''UPDATE `lending` SET `until` = %s WHERE `lending`.`lending_id` = %s'''
+
+        x = [time,res_pk]
+        parameter = tuple(x)
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
 def db_borrowed_in_lib(lib_pk):
         query = '''SELECT u.user_id,u.email,b.title_id,b.title_name,le.until,le.lending_id from lending le 
                    join Library l on %s = le.library_id join User u on 
                    u.user_id = le.customer_id join Book_title b on le.title_id = b.title_id  GROUP BY le.lending_id'''
 
         parameter=tuple([lib_pk])
+        return execute_select(query,parameters=parameter)
+
+def db_borrowed_books(user_pk):
+        query = '''SELECT le.*, b.title_name, l.library_name FROM lending le JOIN Book_title b ON le.title_id = b.title_id 
+               JOIN User u ON le.customer_id = u.user_id JOIN Library l ON l.library_id = le.library_id WHERE u.user_id = %s''' 
+        parameter = tuple([user_pk])
+        return execute_select(query,parameters=parameter)
+
+def db_borrow_info(borrow_id):
+        query = '''SELECT * FROM lending WHERE lending_id = %s'''
+        parameter = tuple([borrow_id])
         return execute_select(query,parameters=parameter)
 
 def db_insert_reservation(until,title_id,user_id,library_id):
@@ -334,6 +358,11 @@ def db_insert_reservation(until,title_id,user_id,library_id):
 
 def db_res_with_book_lib_user(titleid,userid,libid):
         query = '''SELECT * FROM `Reservation` WHERE title_id = %s AND user_id = %s AND library_id = %s;'''
+        params = tuple([titleid,userid,libid])
+        return execute_select(query,parameters=params)
+
+def db_bor_with_book_lib_user(titleid,userid,libid):
+        query = '''SELECT * FROM `lending` WHERE title_id = %s AND lending_id = %s AND library_id = %s;'''
         params = tuple([titleid,userid,libid])
         return execute_select(query,parameters=params)
 

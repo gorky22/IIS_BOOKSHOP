@@ -1,0 +1,73 @@
+.reservations{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: auto;
+    width: 95%;
+    
+
+}
+.reservation-header{
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 2.6rem;
+}
+.reservation{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px #00000040;
+    border-radius: 1rem;
+    margin: 1rem 1rem;
+    padding: 1rem 3rem;
+    width: 34rem;
+}
+.reservation-name{
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    font-size: 1.9rem;
+}
+.upper-part{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrow-icon{
+    transform: rotate(0deg);
+    height: 2rem;
+    
+}
+.roll-down{
+    background-color: #fff;
+    border:none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.roll-down:hover{
+    transform: rotate(90deg);
+}
+.down-part{
+    display: none;
+    margin-top: 2rem;
+}
+.reservationTime{
+    font-size: 1.6rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+.bottom-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.time-btn{
+    background-color: #fff;
+    border:none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.time-icon{
+    height: 4rem
+}
+.time-btn:hover{
+    transform: rotate(360deg);
+}
