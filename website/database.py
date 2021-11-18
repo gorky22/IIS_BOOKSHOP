@@ -624,9 +624,18 @@ def delete_library(lib_email):
         db_connection.commit()
         cursor.close()
 
-def insert_into_lib(lib_name,town,opening_hours,description,
-                    link,path_to_picture,lib_email,adress):
+def insert_into_lib(atributes):
+        lib = atributes
         
+        lib_name = lib['library_name']
+        town = lib['town']
+        opening_hours = lib['opening_hours']
+        description = lib['description']
+        link = lib['webpage_link']
+        path_to_picture = lib['path_to_picture']
+        lib_email = lib['library_email']
+        adress = lib['adress']
+
         x = [lib_name,town,opening_hours,description,
              link,path_to_picture,lib_email,adress]
 
