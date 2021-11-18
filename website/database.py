@@ -587,7 +587,7 @@ def db_tags(tag=None):
                 query = '''SELECT * FROM Genre'''
                 return execute_select(query)
         else:
-                query = '''SELECT * FROM Genre where name = %s'''
+                query = '''SELECT * FROM Genre where genre_id = %s'''
                 param = tuple([tag])
                 return execute_select(query,parameters=param)
 
@@ -606,8 +606,8 @@ def insert_tag(tag_name):
         if(tag_name["name"] == "" or tag_name["name"] == None):
                 return False
         
-        param = tuple([tag_name])
-        query = "INSERT INTO Genre(genre_name) VALUES (%s)"
+        param = tuple([tag_name["name"]])
+        query = "INSERT INTO Genre(name) VALUES (%s)"
 
         is_connect()
         cursor = db_connection.cursor()
@@ -618,10 +618,9 @@ def insert_tag(tag_name):
         return True
 
 def update_tag_db(name):
-        query = '''UPDATE `Genre` SET `name` = %s WHERE `genre_id` = %s'''        
-        
+        query = '''UPDATE `Genre` SET `name` = %s WHERE `name` = %s'''        
         x = [name["name"],name["genre_id"]]
-        parameter = tuple(name)
+        parameter = tuple(x)
         is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,parameter)
