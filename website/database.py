@@ -612,3 +612,14 @@ def update_tag_db(name):
         
         db_connection.commit()
         cursor.close()
+
+def delete_library(lib_email):
+        param = tuple([lib_email])
+        query = "DELETE FROM Library WHERE library_email=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
