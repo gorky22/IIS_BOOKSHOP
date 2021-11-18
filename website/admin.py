@@ -48,6 +48,7 @@ def libDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
         print("Vymazal som knihovnu", email)
+        delete_library(email)
 
         return {'message' : "ok"}
 
@@ -101,7 +102,8 @@ def edit_lib():
 #@admin_required
 def add_lib():
     if request.method == "POST" :
-        #data = request.form  
+        data = request.form  
+        print(data)
 
         return {'message' : 'ok'}
 
