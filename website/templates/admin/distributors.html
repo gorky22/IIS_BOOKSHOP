@@ -24,14 +24,14 @@
         
         {% for distributor in distributors %}
      
-        <tr>
+        <tr class={{ distributor['publisher_email'] }}>
             <td>{{ distributor['publisher_email']}}</td>
             <td>{{ distributor['publisher_name'] }}</td>
             <td> {{ distributor['adress'] }} </td>
             <td> {{ distributor['town'] }} </td>
             <td class="deleteForm">
                 <form method="post">
-                    <button type="button" class="editBtn" name="btnEdit">
+                    <button type="button" class="editBtn" name="btnEdit" data-edit= {{ distributor['publisher_email'] }} >
                         <i class="fas fa-edit"></i>
                     </button>
                     <button type="button" class="deleteBtn" name="btnDelete" data-distributor={{ distributor['publisher_email'] }}>
