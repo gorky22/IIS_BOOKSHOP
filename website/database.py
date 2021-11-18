@@ -602,9 +602,21 @@ def delete_tag(tag_id):
         db_connection.commit()
         cursor.close()
 
-def update_tag_db(name):
-        query = '''UPDATE `Genre` SET `name` = %s WHERE `name` = %s'''        
+def insert_tag(tag_name):
+        param = tuple([tag_name])
+        query = "INSERT INTO Genre(genre_name) VALUES (%s)"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
         
+        db_connection.commit()
+        cursor.close()
+
+def update_tag_db(name):
+        query = '''UPDATE `Genre` SET `name` = %s WHERE `genre_id` = %s'''        
+        
+        x = [name["genre_name"],name["genre_id"]]
         parameter = tuple(name)
         is_connect()
         cursor = db_connection.cursor()
