@@ -51,108 +51,6 @@ document.getElementById('btnYes').addEventListener('click', function() {
     document.querySelector('.bg-modal-delete').style.display = 'none'
 })
 
-// Funkcia ktora nastavi Placeholder-y
-function setPlaceholder(lib){
-    $('#nameI').attr('placeholder', lib['library_name'])
-    $('#townI').attr('placeholder', lib['town'])
-    $('#opening_hoursI').attr('placeholder', lib['opening_hours'])
-    $('#web_linkI').attr('placeholder', lib['webpage_link'])
-    $('#path_picI').attr('placeholder', lib['path_to_picture'])
-    $('#lib_emailI').attr('placeholder', lib['library_email'])
-
-}
-
-
-// Editacia distributora
-// Tlacidlo na editovanie distributora
-$('.editBtn').click(function(e){
-    e.preventDefault()
-    
-    var email =  $(this).data('edit')
-
-    $.ajax({
-        type: "GET",
-        url: "/admin/library/"+email,
-        success: function (response) {
-            var lib = response['lib']
-
-            document.getElementById('name').innerHTML = lib['library_name']
-            document.getElementById('town').innerHTML = lib['town']
-            document.getElementById('opening_hours').innerHTML = lib['opening_hours']
-            document.getElementById('web_link').innerHTML = lib['webpage_link']
-            document.getElementById('path_pic').innerHTML = lib['path_to_picture']
-            document.getElementById('lib_email').innerHTML = lib['library_email']
-
-            setPlaceholder(lib)
-
-            // Zobrazi sa Pop Up okno na editaciu            
-            document.querySelector('.bg-modal-edit').style.display = 'flex'
-        }
-    });
-
-
-     
-})
-
-
-// Funkcia na odstraninie starych inputov
-function delete_inputs(){
-
-    document.getElementById('nameI').value = ""
-    document.getElementById("townI").value = ""
-    document.getElementById('opening_hoursI').value = ""
-    document.getElementById('web_linkI').value = ""
-    document.getElementById('path_picI').value = ""
-    document.getElementById('lib_emailI').value = ""
-
-}
-
-
-// Editacia knihovne
-// Ak bolo stlacene tlacidlo exit
-document.querySelector('.btnCloseEdit').addEventListener('click', function() {
-    document.querySelector('.bg-modal-edit').style.display = 'none'
-
-    delete_inputs()
-})
-
-
-
-// Tlacidlo na pridanie knihovne
-$('#btnAddLib').click(function(e){
-    e.preventDefault()
-   
-    // Zobrazi sa Pop Up okno
-    document.querySelector('.bg-modal-add').style.display = 'flex'
-})
-
-
-// Pridanie knihovne
-// ak bolo stlacene tlacidlo Exit schova sa Pop Up okno
-document.querySelector('.btnCloseAdd').addEventListener('click', function() {
-    document.querySelector('.bg-modal-add').style.display = 'none'
-})
-
-
-
-// Pridanie knihovne
-// Ak bolo stlacene tlacidlo na pridanie
-$('#sendAdd').click(function(e){
-
-    var data = 'fero'
-
-    $.ajax({
-        type: "POST",
-        url: "/admin/addLib/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-
-            document.querySelector('.bg-modal-add').style.display = 'none'
-        }
-    });
-})
-
 
 
 // Funkcia ktora nastavi Placeholder-y
@@ -167,7 +65,7 @@ function setPlaceholder(dist){
 
 // Editacia distributora
 // Tlacidlo na editovanie distributora
-$('.editBtnn').click(function(e){
+$('.editBtn').click(function(e){
     e.preventDefault()
     e.stopPropagation()
     e.stopImmediatePropagation()
@@ -217,7 +115,7 @@ document.querySelector('.btnCloseEdit').addEventListener('click', function() {
 })
 
 
-// Editacia knihovne
+// Editacia Dist
 // Ak bolo stlacene tlacidlo na ulozenie zmien
 $('#sendEdit').click(function(e){
     
@@ -277,16 +175,32 @@ document.querySelector('.btnCloseAdd').addEventListener('click', function() {
 // Ak bolo stlacene tlacidlo na pridanie
 $('#sendAdd').click(function(e){
 
-    var data = 'fero'
+    var name = $('#nameAdd').val()
+    var town = $('#townAdd').val()
+    var address = $('#adressAdd').val()
+    var dist_email = $('#dist_emailAdd').val()
+
+
+    var data = {
+        "publisher_name" : name,
+        "town" : town,
+        "adress" : address,
+        "publisher_email" : dist_email,
+    }
 
     $.ajax({
         type: "POST",
-        url: "/admin/addLib/",
+        url: "/admin/addDist/",
         data: data,
         dataType: "json",
         success: function (response) {
-
-            document.querySelector('.bg-modal-add').style.display = 'none'
+            if (response['message'] == 'ok')
+            {
+                Toast.show('Úspešne pridanie Distributotra','S')
+                document.querySelector('.bg-modal-add').style.display = 'none'
+                delete_inputs()
+                location.reload()
+            }
         }
     });
 })

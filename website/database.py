@@ -649,3 +649,17 @@ def insert_into_lib(atributes):
         cursor.execute(query,param)
         db_connection.commit()
         cursor.close()
+
+def insert_into_dist(dist):
+        
+        x = [dist["publisher_name"],dist["publisher_email"],dist["adress"],dist["town"]]
+
+        param = tuple(x)
+        query = '''INSERT INTO `Publishers` (`publisher_name`, `publisher_email`, `adress`, `town`) 
+                VALUES (%s, %s, %s, %s);'''
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        db_connection.commit()
+        cursor.close()

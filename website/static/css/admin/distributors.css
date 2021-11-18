@@ -103,7 +103,7 @@ td{
     text-align: right;
 }
 
-.deleteBtn, .editBtnn,.addBtn {
+.deleteBtn, .editBtn,.addBtn {
     border-style: none;
     border: none;
     background-color: transparent; 
@@ -123,11 +123,11 @@ tr:nth-child(even) .deleteBtn:hover {
     color: #FFF;
 }
 
-tr:nth-child(odd) .editBtnn:hover {
+tr:nth-child(odd) .editBtn:hover {
     color: #623CEA;
 }
 
-tr:nth-child(even) .editBtnn:hover {
+tr:nth-child(even) .editBtn:hover {
     color: #FFF;
 }
 

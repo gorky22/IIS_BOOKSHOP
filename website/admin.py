@@ -163,6 +163,15 @@ def edit_dist():
 
         return {'message' : 'ok'}
 
+@admin.route('/addDist/', methods=["POST"])
+#@admin_required
+def add_dist():
+    if request.method == "POST" :
+        data = request.form  
+        insert_into_dist(data)
+
+        return {'message' : 'ok'}
+
 @admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required
 def tagsPage():
