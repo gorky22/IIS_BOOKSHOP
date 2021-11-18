@@ -167,7 +167,9 @@ body{
     background-color: #a38ef0;
     color: #333;
 }
-
+.btn-long{
+    width: 100%;
+}
 .dropdown{
     position: relative;
     

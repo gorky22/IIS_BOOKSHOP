@@ -36,17 +36,17 @@ input,textarea{
     max-width: 80%;
 }
 .book-picture-label{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30rem;
-    height: 36rem;
-    background-color: #9f8aec;
-    border: 10px dashed #623CEA;
+    width: 100%;
+    text-align: center;
+    background-color: #623CEA;
+    padding: 1rem 2rem;
+    border-radius: 1.5rem;
+    color: #fff;
     font-size: 1.8rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 400;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 .header{
     font-weight: 800;
@@ -56,6 +56,8 @@ input,textarea{
 }
 .book-form{
     display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .left-side{
     width: 50%;
@@ -96,4 +98,22 @@ input,textarea{
 }
 .author-input{
     width: 50%;
+}
+#file-preview{
+    display: none;
+    width: 20rem;
+    height: 29rem;
+    object-fit: cover;
+    object-position: 50% 10%; 
+    border-radius: 1.5rem;
+}
+.file-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-name,.input-surname{
+    border: none;
+    border-radius: 1.5rem;
+    box-shadow: 0px 0px 5px #000000a0;
 }

@@ -12,6 +12,7 @@ db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=
 
 def create_app():
     app = Flask(__name__)
+    app.config['UPLOAD_FOLDER'] = "/static/img/libraries/"
     app.config['SECRET_KEY'] = 'randomKey'
 
     from .views import views

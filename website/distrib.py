@@ -50,9 +50,23 @@ def confirmOrder(orderid):
 
     return {'err':False,'order':orderid}
 
-@distribSystem.route('/books/')
+@distribSystem.route('/books/',methods=['GET','POST'])
 @distrib_required
 def distribBooks():
+    if request.method == "POST":
+        ALLOWED_FILES = ['.png','.jpg','.jpeg','.webp','.svg']
+        author_ids = []
+        if 'names[]' in request.form:
+            new_surnames = request.form.getlist("surnames[]")[0].split(",")
+            new_names = request.form.getlist("names[]")[0].split(",")
+            # !!!ADD AUTHORS TO DATABASE AND GET THEIR IDS!!!!!!!
+        if 'author_ids[]' in request.form:
+            author_ids = request.form.getlist("author_ids[]")[0].split(",")
+            # !!! ADD IDS TO BOOK_TITLE_AUHTOR
+            print(author_ids)
+        
+        return {'err':False}
+
     authors = db_authors()
     return render_template('distributor/books.html',authors=authors)
 

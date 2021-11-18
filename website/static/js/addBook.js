@@ -26,9 +26,6 @@ $(document).on('click','#delete-author-button',function (e){
     }
 })
 
-// add-new-author-button -tlacitko
-// delete-new-author-button - tlacitko
-
 $(document).on('click',"#add-new-author-button",function (e) {
     e.preventDefault()
     let new_name_surname = static_author.clone()
@@ -51,4 +48,93 @@ $(document).on('click','#delete-new-author-button',function (e){
         $(`#new-author-${curr_auth_id}`).remove()
         curr_auth_id--;
     }
+})
+
+
+
+
+function showPreview(event){
+    if(event.target.files.length > 0){
+      var src = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("file-preview");
+      preview.src = src;
+      preview.style.display = "block";
+    }
+}
+
+$(document).on('click','#confirm-button',function (e) {
+    e.preventDefault()
+    var form_data = new FormData()
+
+    var title_name = $('#title_name').val()
+    var date = $("#realease").val()
+    var isbn = $("#isbn").val()
+    var description = $("#description").val()
+    // file process
+    if(title_name == "" || date == "" || isbn == "" || description == ""){
+        Toast.show("Musíte přidat všechny potřebné hodnoty (Jméno, Datum, ISBN, Popis knihy)","E",4000)
+        //return
+    }
+    form_data.append("title_name",title_name)
+    form_data.append("date",date)
+    form_data.append("isbn",isbn)
+    form_data.append("description",description)
+
+    var authors_ids = [];
+    var names = []
+    var surnames = []
+    $('.author-combo').each(function(e){
+        authors_ids.push($(this).find('option:selected').val())
+    })
+    $('.input-name').each(function(e){
+        if($(this).val() != '')
+            names.push($(this).val())
+    })
+    $('.input-surname').each(function(e){
+        if($(this).val() != '')
+            surnames.push($(this).val())
+    })
+
+    if(authors_ids.length > 0){
+        form_data.append("author_ids[]",authors_ids)
+    }
+
+    if(names.length != surnames.length){
+        Toast.show("Každý autor musí mít jméno i příjmení.","E")
+        return
+    }
+    if(names.length == 0 && authors_ids == 0){
+        Toast.show("Kniha musí mít alespoň jednoho autora.","E")
+        return
+    }
+    if(names.length > 0){
+        form_data.append("names[]",names)
+    }
+    if(surnames.length > 0){
+        form_data.append("surnames[]",surnames)
+    }
+
+    
+    var ins = document.getElementById("title_picture").files.length
+    console.log(ins)
+    if(ins == 0){
+        Toast.show("Musíte zadat obrázek obalu knížky","E")
+    } else {
+        var data = document.getElementById("title_picture").files[0]
+        form_data.append("file",data)
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "/distributor/books/",
+        data: form_data,
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        cache: false,
+        success: function (response) {
+            
+        }
+    });
+
 })
