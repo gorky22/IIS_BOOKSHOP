@@ -115,6 +115,7 @@ def edit_tag():
     #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
+        print(data)
 
         update_tag_db(data)
         
@@ -139,6 +140,7 @@ def add_lib():
     if request.method == "POST" :
         data = request.form  
         print(data)
+        
         insert_into_lib(data)
 
         return {'message' : 'ok'}
