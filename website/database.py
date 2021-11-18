@@ -1,3 +1,4 @@
+from random import paretovariate
 from flask import Blueprint
 import mysql.connector as mysql
 from . import db_connection, HOST, DATABASE, USER, PASSWORD
@@ -772,3 +773,10 @@ def insert_into_dist(dist):
         cursor.execute(query,param)
         db_connection.commit()
         cursor.close()
+
+def distributor_alma_mater(dist_id):
+        query = '''select p.publisher_name from Publishers p  JOIN User u  ON u.publisher_id = p.publisher_id 
+                        where u.user_id = %s'''
+        param = tuple([dist_id])
+        
+        return execute_select(query,parameters=param)

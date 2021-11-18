@@ -477,16 +477,29 @@ for i in range(0,26):
 
 #param = tuple(["gorcak.damian@tmp.sk"])
 cursor = db_connection.cursor()
-cursor.execute("alter table Book_title_library drop foreign key title_library_title")
+#cursor.execute("alter table Book_title_library drop foreign key title_library_title")
 ######################### niesu v ziadnej kniznici #######################################################
 #query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
 #                    '''
 
 
-cursor.execute("ALTER TABLE Book_title_library ADD CONSTRAINT title_library_title FOREIGN KEY ( title_id ) REFERENCES Book_title(title_id) ON DELETE CASCADE" )
+cursor.execute('''select p.publisher_name from Publishers p  JOIN User u  ON u.publisher_id = p.publisher_id 
+                        where u.user_id = %s''')
 
 
 
+#cursor.execute(''' SELECT count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
+#              JOIN Library l ON bl.library_id = l.library_id  Where l.town = "Brno"''')
+
+
+records = cursor.fetchall()
+columns = [i[0] for i in cursor.description]
+
+results = []
+for row in records:
+      results.append(dict(zip(columns, row)))  
+
+print(results)
 
 print("Connected to:", db_connection.get_server_info())
 db_connection.close()
