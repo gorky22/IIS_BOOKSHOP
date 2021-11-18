@@ -42,6 +42,7 @@ document.getElementById('btnYes').addEventListener('click', function() {
             if (response['message'] == 'ok')
             {
                 Toast.show('Uspešne si odstránil vydavatela','S')
+                location.reload()
                
             }   
             document.querySelector('.'+ email["email"]).style.display = 'none'             

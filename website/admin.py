@@ -52,7 +52,20 @@ def libDelete():
 
         return {'message' : "ok"}
 
-        
+
+@admin.route("deleteTag/", methods=["POST"])
+#@admin_required
+def tagDelete():
+    
+    if request.method == "POST" :
+       
+        genre_id = request.form.get("genre_id")  
+        print("Vymazal som Tag", genre_id)
+        delete_tag(genre_id)
+
+        return {'message' : "ok"}
+
+
 @admin.route("/user/<useremail>")
 #@admin_required
 def get_user_by_id(useremail):
@@ -70,6 +83,15 @@ def get_lib_by_email(email):
     return {'lib' : library[0]}
 
 
+@admin.route("/tags/<id>")
+#@admin_required
+def get_tag_by_id(id):
+    #tag = find_library(id)
+    
+    tag = [{'name' : 'fero'}]
+
+    #print(library[0])
+    return {'tag' : tag[0]}
 
 @admin.route('/editUser/', methods=["POST"])
 #@admin_required
@@ -85,6 +107,19 @@ def edit_user():
         else:
             update_user_db(data)
             return {'message' : 'ok'}
+
+
+@admin.route('/editTag/', methods=["POST"])
+#@admin_required
+def edit_tag():
+    #print("EDITOVANIE USERA")
+    if request.method == "POST" :
+        data = request.form  
+
+        update_tag_db(data)
+        
+        return {'message' : 'ok'}
+
 
 
 @admin.route('/editLib/', methods=["POST"])
@@ -105,6 +140,17 @@ def add_lib():
         data = request.form  
         print(data)
         insert_into_lib(data)
+
+        return {'message' : 'ok'}
+
+
+@admin.route('/addTag/', methods=["POST"])
+#@admin_required
+def add_tag():
+    if request.method == "POST" :
+        data = request.form  
+        print(data)
+        ##insert_into_lib(data)
 
         return {'message' : 'ok'}
 
