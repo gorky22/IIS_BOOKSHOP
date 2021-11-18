@@ -3,6 +3,8 @@ from functools import wraps
 from .database import *
 import datetime
 import json
+from werkzeug.utils import secure_filename
+import os
 
 def librarian_required(f):
     @wraps(f)
@@ -131,5 +133,55 @@ def booksByLib():
 def deleteBook(bookid):
     db_delete_book(bookid)
     return {'err':False}
+
+@librarySystem.route('/addbooks/',methods=['GET','POST'])
+@librarian_required
+def addBook():
+    
+    
+    if request.method == "POST":
+        author_ids = []
+        UPLOAD_FOLDER = "website/static/img"
+        STATIC_FOLDER = "/static/img"
+        if 'names[]' in request.form:
+            new_surnames = request.form.getlist("surnames[]")[0].split(",")
+            new_names = request.form.getlist("names[]")[0].split(",")
+            for i in range(len(new_surnames)):
+                id_of_new = db_add_author(new_names[i],new_surnames[i])
+                author_ids.append(id_of_new)
+            
+        if 'author_ids[]' in request.form:
+            authors = request.form.getlist("author_ids[]")[0].split(",")
+            for id_auth in authors:
+                author_ids.append(int(id_auth))
+
+        file = request.files.getlist("file")[0]
+        filename = secure_filename(file.filename)
+        
+        path_to_new_file = os.path.join(UPLOAD_FOLDER,filename)
+        path_to_picture = os.path.join(STATIC_FOLDER,filename)
+        file.save(path_to_new_file)
+
+        form_title_name = request.form.get('title_name')
+        form_title_date = request.form.get('date')
+        form_title_isbn = request.form.get('isbn')
+        form_title_desc = request.form.get('description')
+        rating = 0
+        publisher_id = request.form.get('publisher_id')
+        id_of_inserted_book = db_insert_book(form_title_date,form_title_isbn,rating,form_title_desc,path_to_picture,form_title_name,publisher_id)
+        
+
+
+
+
+        for id_author in author_ids:
+            db_add_book_author(id_of_inserted_book,id_author)
+            
+        
+        return {'err':False,'url':url_for('librarySystem.booksByLib')}
+
+    authors = db_authors()
+    publishers = db_publishers()
+    return render_template('/librarian/books.html',authors=authors,publishers=publishers)
 
 

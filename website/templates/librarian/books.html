@@ -1,4 +1,4 @@
-{% extends 'baseDis.html' %}
+{% extends 'baselib.html' %}
 
 
 {% block link_block %}
@@ -42,7 +42,7 @@ rating = 0
                         {% endfor %}
                     </select>
                     <button type="button" class="btn btn-blue" id="add-author-button">Přidat dalšího autora</button>
-                    <button type="button" class="btn btn-blue" id="delete-author-button">Vymazat posledního</button>
+                    <button type="button" class="btn btn-red" id="delete-author-button">Vymazat posledního</button>
                     
                 </div>
                 <div class="add-new-author">
@@ -51,11 +51,18 @@ rating = 0
                         <input type="text" id="name-1" class="author-input input-name" placeholder="Jméno">
                         <input type="text" id="surname-1" class="author-input input-surname" placeholder="Příjmení">
                     </div>
-                    <button type="button" class="btn btn-red" id="add-new-author-button">Přidat dalšího autora</button>
+                    <button type="button" class="btn btn-blue" id="add-new-author-button">Přidat dalšího autora</button>
                     <button type="button" class="btn btn-red" id="delete-new-author-button">Vymazat posledního</button>
 
                 </div>
-
+                <div class="publisher-div">
+                    <label for="publisher" class="combo-label" style="margin-top: 2rem; display: block;">Distributor:</label>
+                    <select id="publisher" class="pub-combo" style="margin-top: 1rem;">
+                        {% for publisher in publishers %}
+                            <option value="{{publisher['publisher_id']}}">{{ publisher['publisher_name'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
                 
             </div>
@@ -66,5 +73,5 @@ rating = 0
 {% endblock %}
 
 {% block script_block %}
-<script src="/static/js/addBook.js"></script>
+<script src="/static/js/addBookLib.js"></script>
 {% endblock %}

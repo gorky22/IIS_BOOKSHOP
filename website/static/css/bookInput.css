@@ -71,22 +71,23 @@ input,textarea{
     padding-bottom: 1rem;
     margin-bottom: 1rem;
 }
-.combo-label,.author-combo{
+.combo-label,.author-combo, .pub-combo{
     font-family: 'Nunito',sans-serif;
     font-size: 1.8rem;
     font-weight: 400;
 }
-.author-combo{
+.author-combo,.pub-combo{
     display: block;
     background-color: #fff;
     border-radius: 1rem;
     padding: 1rem 2rem;
     margin-left: 2rem;
     margin-bottom: 1rem;
+    box-shadow: 0px 0px 5px #000000a0;
+    border: none;
+    cursor: pointer;
 }
-#add-author-button{
-    margin-left: 2rem;
-}
+
 .new-author{
     font-family: 'Nunito',sans-serif;
     font-size: 1.6rem;
@@ -116,4 +117,8 @@ input,textarea{
     border: none;
     border-radius: 1.5rem;
     box-shadow: 0px 0px 5px #000000a0;
+}
+#add-author-button,#add-new-author-button{
+    margin-right: 1rem;
+    margin-left: 2rem;
 }

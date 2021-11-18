@@ -14,7 +14,7 @@
                 <th>Jméno knížky</th>
                 <th>Hlavní autor</th>
                 <th>Počet</th>
-                <th><a class="btn btn-blue top-button" style="margin-bottom: 1rem;text-decoration: none;" href="{{ url_for('distribSystem.distribBooks') }}">Přidat knihu</a></th>
+                <th><a class="btn btn-blue top-button" style="margin-bottom: 1rem;text-decoration: none;" href="{{ url_for('librarySystem.addBook') }}">Přidat knihu</a></th>
             </tr>
             
             {% for book in books %}

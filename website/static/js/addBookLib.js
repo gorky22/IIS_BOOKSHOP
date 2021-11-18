@@ -70,7 +70,7 @@ $(document).on('click','#confirm-button',function (e) {
     var date = $("#realease").val()
     var isbn = $("#isbn").val()
     var description = $("#description").val()
-
+    var publisher_id = $("#publisher").find('option:selected').val()
     if(title_name == "" || date == "" || isbn == "" || description == ""){
         Toast.show("Musíte přidat všechny potřebné hodnoty (Jméno, Datum, ISBN, Popis knihy)","E",4000)
         return
@@ -79,7 +79,7 @@ $(document).on('click','#confirm-button',function (e) {
     form_data.append("date",date)
     form_data.append("isbn",isbn)
     form_data.append("description",description)
-
+    form_data.append("publisher_id",publisher_id)
     var authors_ids = [];
     var names = []
     var surnames = []
@@ -98,7 +98,7 @@ $(document).on('click','#confirm-button',function (e) {
     if(authors_ids.length > 0){
         form_data.append("author_ids[]",authors_ids)
     }
-
+    console.log(authors_ids)
     if(names.length != surnames.length){
         Toast.show("Každý autor musí mít jméno i příjmení.","E")
         return
@@ -119,6 +119,7 @@ $(document).on('click','#confirm-button',function (e) {
     console.log(ins)
     if(ins == 0){
         Toast.show("Musíte zadat obrázek obalu knížky","E")
+        return
     } else {
         var data = document.getElementById("title_picture").files[0]
         form_data.append("file",data)
@@ -126,7 +127,7 @@ $(document).on('click','#confirm-button',function (e) {
 
     $.ajax({
         type: "POST",
-        url: "/distributor/books/",
+        url: "/librarian/addbooks/",
         data: form_data,
         dataType: "json",
         contentType: false,
@@ -137,9 +138,6 @@ $(document).on('click','#confirm-button',function (e) {
             setTimeout(() => {
                 window.location.href = response['url'];
              },2000)
-        },
-        error: function(response){
-            Toast.show("Něco se stalo, kniha nemohla být přidána do databáze.","E",2000)
         }
     });
 

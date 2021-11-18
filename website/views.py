@@ -58,7 +58,7 @@ def viewsPage():
     books = [top[i] for i in randomlist]
     books = [db_book_info(book['title_id']) for book in books]
     books = [format_book_and_authors(book) for book in books]
-    
+    print(books)
     return render_template("/main/main.html",books=books,genres=genres)
 
 @views.route("/list/")
