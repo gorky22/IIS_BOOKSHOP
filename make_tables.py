@@ -477,16 +477,13 @@ for i in range(0,26):
 
 #param = tuple(["gorcak.damian@tmp.sk"])
 cursor = db_connection.cursor()
-
+cursor.execute("alter table Book_title_library drop foreign key title_library_title")
 ######################### niesu v ziadnej kniznici #######################################################
 #query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
 #                    '''
 
-x = [25,125,15]
-param = tuple(x)
-cursor.execute(make_order)
-cursor.execute(make_order_book)
-#cursor.execute("ALTER TABLE Book_title ADD CONSTRAINT title_publisher FOREIGN KEY ( publisher_id ) REFERENCES Publishers(publisher_id) ON DELETE CASCADE" )
+
+cursor.execute("ALTER TABLE Book_title_library ADD CONSTRAINT title_library_title FOREIGN KEY ( title_id ) REFERENCES Book_title(title_id) ON DELETE CASCADE" )
 
 
 

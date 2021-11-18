@@ -181,6 +181,42 @@ def distributorsPage():
         
     return render_template("admin/distributors.html", distributors=distributors)
 
+@admin.route("/distributors/delete/", methods=["POST"])
+#@admin_required
+def distributorDelete():
+    
+    if request.method == "POST" :
+        email = request.form.get("email")  
+        delete_distributors(email)
+
+        return {'message' : "ok"}
+
+@admin.route("/distributors/<distributoremail>", methods=["GET"])
+#@admin_required
+def get_distributors_by_email(distributoremail):
+    distributor = find_distributors(distributoremail)
+    #distributor = [{"publisher_name":"cc","adress":"ss","publisher_email":"ss","town":"sss"}]
+    print(distributor[0])
+    return {'dist' : distributor[0]}
+
+@admin.route('/editDist/', methods=["POST"])
+#@admin_required
+def edit_dist():
+    if request.method == "POST" :
+        data = request.form  
+        
+        update_distributor_db(data)
+
+        return {'message' : 'ok'}
+
+@admin.route('/addDist/', methods=["POST"])
+#@admin_required
+def add_dist():
+    if request.method == "POST" :
+        data = request.form  
+        insert_into_dist(data)
+
+        return {'message' : 'ok'}
 
 @admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required

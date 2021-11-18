@@ -571,9 +571,9 @@ def db_distributors():
 
         return execute_select(query)
 
-def delete_distributors(dist_id):
-        param = tuple([dist_id])
-        query = "DELETE FROM Publishers WHERE publisher_id=%s"
+def delete_distributors(dist_email):
+        param = tuple([dist_email])
+        query = "DELETE FROM Publishers WHERE publisher_email=%s"
 
         is_connect()
         cursor = db_connection.cursor()
@@ -643,6 +643,20 @@ def insert_into_lib(atributes):
         query = '''INSERT INTO `library` (`library_name`, `town`, `opening_hours`, `description`,
                  `webpage_link`, `path_to_picture`, `library_email`, `adress`) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'''
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        db_connection.commit()
+        cursor.close()
+
+def insert_into_dist(dist):
+        
+        x = [dist["publisher_name"],dist["publisher_email"],dist["adress"],dist["town"]]
+
+        param = tuple(x)
+        query = '''INSERT INTO `Publishers` (`publisher_name`, `publisher_email`, `adress`, `town`) 
+                VALUES (%s, %s, %s, %s);'''
 
         is_connect()
         cursor = db_connection.cursor()
