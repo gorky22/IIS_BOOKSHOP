@@ -1,0 +1,20 @@
+{% extends 'baseDis.html' %}
+
+{% block link_block %}
+<link rel="stylesheet" href="/static/css/distributor/home.css">
+{% endblock %}
+
+{% block body_block %}
+    <div class="distrib-control">
+        <h1 class="distributor-header">Distributorský systém pro: <span class="distributor-name">{{ publisher['publisher_name']}}</span></h1>
+        <div class="row">
+            <a href="{{ url_for('distribSystem.distribOrders') }}" class="huge-btn blue">Objednávky</a>
+            <a href="{{ url_for('distribSystem.distribBooks') }}" class="huge-btn green">Knihy</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script_block %}
+
+{% endblock %}

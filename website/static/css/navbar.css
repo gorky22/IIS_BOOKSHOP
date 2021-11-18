@@ -57,22 +57,30 @@ body{
     padding: 2rem;
     margin-bottom: 2rem;
 }
+.control-buttons{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
 .admin-url{
+    display: block;
     font-size: 2rem;
     background-color: #F00;
     color: #fff;
     border-radius: 1rem;
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
     padding: 1rem 2rem;
     text-decoration: none;
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
     transition: 0.3s all;
+    margin-top: 1rem;
+    text-align: center;
 }
 .admin-url.green{
     background-color: #0F0;
+}
+.admin-url.blue{
+    background-color: #00F;
 }
 .admin-url:hover,
 .admin-url:focus{

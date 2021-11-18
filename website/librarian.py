@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request,session, wrappers,redirect
 from functools import wraps
 from .database import *
 import datetime
+import json
 
 def librarian_required(f):
     @wraps(f)
@@ -90,9 +91,30 @@ def delete_bor(borid):
 @librarySystem.route('/order/')
 @librarian_required
 def order():
-    return render_template('/librarian/order.html')
+    publishers = db_publishers()
+    return render_template('/librarian/order.html',publishers=publishers)
 
-@librarySystem.route('/books/')
+@librarySystem.route('/books/',methods=["GET","POST"])
 @librarian_required
 def booksInLib():
+    if request.method == 'POST':
+        books = {}
+        for i in request.form:
+            books = json.loads(i)
+        
+        id_of_order = add_order(session['user']['user_id'],books['publisher'])
+        ids = books['id_list']
+        counts = books['order']
+        add_books_to_order(id_of_order,ids,counts)
+        return {'err':False}
+        
+           
+            
     return render_template('/librarian/booksInLib.html')
+
+@librarySystem.route('/publisher/books/<pubid>/')
+@librarian_required
+def booksByPublisher(pubid):
+    books = db_book_by_publisher(pubid)
+    
+    return {'err': None,'books':books}

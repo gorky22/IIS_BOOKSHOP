@@ -61,6 +61,10 @@ def add_user(name,surname,email,birth_date,
         cursor.execute(query,to_insert)
         db_connection.commit()
         cursor.close()
+def db_user_info(user_pk):
+        query = '''SELECT * FROM user where user_id = %s;'''
+        parameter = tuple([user_pk])
+        return execute_select(query,parameters=parameter)
 
 # this function returns dict of user information in shape {column_name:value}
 def get_user_with_this_email(email):
@@ -299,7 +303,16 @@ def db_actual_count(lib_pk,book_pk):
         x = [book_pk,lib_pk]
         param=tuple(x)
         return execute_select(query,parameters=param)
-        
+
+def db_insert_new_count(title_id,library_id,count):
+        query = '''INSERT INTO book_title_library (title_id,library_id,count) VALUES (%s,%s,%s);'''
+        parameter=tuple([title_id,library_id,count])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
+
 def db_update_actual_count(new_count,lib_pk,book_pk):
         query = '''UPDATE Book_title_library SET count = %s WHERE title_id = %s and library_id = %s '''
 
@@ -436,9 +449,70 @@ def db_remove_from_queue(book_id,lib_id,user_id):
         db_connection.commit()
         cursor.close()
 
-def delete_library(lib_email):
-        param = tuple([lib_email])
-        query = "DELETE FROM Library WHERE library_email=%s"
+def db_distributor_info(distrib_pk):
+        query = '''SELECT * FROM publishers WHERE publisher_id = %s'''
+        parameter = tuple([distrib_pk])
+        return execute_select(query,parameters=parameter)
+
+def db_publishers():
+        query = '''SELECT * FROM publishers'''
+        return execute_select(query)
+
+def db_book_by_publisher(pub_id):
+        query = '''SELECT title_id, title_name FROM Book_title WHERE publisher_id=%s;'''
+        parameter = tuple([pub_id])
+        return execute_select(query,parameters=parameter)
+
+def add_order(lib_id,pub_id):
+        query = '''INSERT INTO orders(librarian_id,distributor_id) 
+               VALUES(%s, %s)'''
+        parameter=tuple([lib_id,pub_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        idOfOrder = cursor.lastrowid
+        db_connection.commit()
+        cursor.close()
+        return idOfOrder
+def db_make_order_done(order_id):
+        query = '''UPDATE orders SET state = 1 WHERE order_id = %s;'''
+        parameter = tuple([order_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
+
+
+def add_books_to_order(order_id,title_ids,counts):
+        query = 'INSERT INTO order_book(title_id,order_id,count) VALUES '
+        values = ",".join([f'({title_ids[i]},{order_id},{counts[i]})' for i in range(len(title_ids))])
+        query = f'{query}{values};'
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query)
+        db_connection.commit()
+        cursor.close()
+
+def db_unfinished_orders_for_distributor(distrib_id):
+        query = '''SELECT o.*,u.email FROM orders o JOIN user u ON u.user_id = o.librarian_id WHERE distributor_id = %s AND state = 0;'''
+        parameter = tuple([distrib_id])
+        return execute_select(query,parameter)
+
+def db_info_about_books_in_order(order_id):
+        query = '''SELECT b.title_id, b.title_name, o.count FROM order_book o JOIN book_title b ON o.title_id = b.title_id WHERE o.order_id = %s'''
+        parameter = tuple([order_id])
+        return execute_select(query,parameter)
+
+def db_order_info(order_id):
+        query = '''SELECT * FROM orders WHERE order_id = %s;'''
+        parameter = tuple([order_id])
+        return execute_select(query,parameters=parameter)
+
+def delete_library(lib_id):
+        param = tuple([lib_id])
+        query = "DELETE FROM Library WHERE library_id=%s"
 
         is_connect()
         cursor = db_connection.cursor()
@@ -446,6 +520,7 @@ def delete_library(lib_email):
         
         db_connection.commit()
         cursor.close()
+
 
 #this function updates user table
 def update_lib_db(atributes):
@@ -534,6 +609,17 @@ def update_tag_db(name):
         is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+def delete_library(lib_email):
+        param = tuple([lib_email])
+        query = "DELETE FROM Library WHERE library_email=%s"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
         
         db_connection.commit()
         cursor.close()

@@ -21,14 +21,10 @@ def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
             users = find_user(request.form["nm"])
-            #users = [{'email' : 'najdeny@email', 'name' : request.form["nm"], 'data' : '21.12.1988'}]
             
     else:
         users = get_all_users()
         libs = db_libraries()
-        #users = [{'e-mail' : 'gorky@srac.sk', 'name' : 'Pan gorky', 'data' : '21.12.1988'},
-        #         {'e-mail' : 'Hanzik@beast.sk', 'name' : 'Janicko', 'data' : '11.10.1982'},
-        #         {'e-mail' : 'Tomik@mergesort.sk', 'name' : 'Shelby z brna', 'data' : '1.1.2002'}]
 
     return render_template("/admin/admin.html", users=users, libraries=libs)
 
@@ -40,7 +36,7 @@ def userDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
         print("Vymazal som uzivatela", email)
-        #delete_user(email)
+        delete_user(email)
 
         return {'message' : "ok"}
 
@@ -52,7 +48,6 @@ def libDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
         print("Vymazal som knihovnu", email)
-        #delete_user(email)
 
         return {'message' : "ok"}
 
@@ -72,6 +67,7 @@ def get_lib_by_email(email):
     
     #print(library[0])
     return {'lib' : library[0]}
+
 
 
 @admin.route('/editUser/', methods=["POST"])
@@ -97,6 +93,15 @@ def edit_lib():
         data = request.form  
         print("Data", data)
         update_lib_db(data)
+
+        return {'message' : 'ok'}
+
+
+@admin.route('/addLib/', methods=["POST"])
+#@admin_required
+def add_lib():
+    if request.method == "POST" :
+        #data = request.form  
 
         return {'message' : 'ok'}
 

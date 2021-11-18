@@ -1,0 +1,68 @@
+.order-header{
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    text-align: center;
+    font-size: 2.6rem;
+}
+.radio-button{
+    display: none;
+}
+.radio-header{
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    padding: 1rem 3rem;
+    margin: 1rem;
+    border-radius: 1.5rem;
+    font-size: 1.8rem;
+    font-family: 'Nunito',sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.radio-button:checked + .radio-header{
+    background-color: rgb(0, 255,0);
+}
+.side-header{
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 2rem;
+}
+#pub-form{
+    margin: 2rem 0;
+    margin-left: 2rem;
+}
+
+.book-label{
+    font-size: 1.8rem;
+	font-family: 'Nunito',sans-serif;
+	font-weight: 500;
+}
+
+.book-number {
+	width: 5rem;
+	font-size: 1.8rem;
+	font-family: 'Nunito',sans-serif;
+	font-weight: 500;
+	text-align: center;
+    float: right;
+}
+.number-input-box{
+    width: 31%;
+    margin: 1rem;
+    
+}
+.books{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#confirm{
+    float: right;
+    margin-bottom: 2rem;
+}
+.separator{
+    width: 100%;
+    background-color: #623CEA;
+    height: 3px;
+}
+
