@@ -74,7 +74,7 @@ $('.editBtn').click(function(e){
             var lib = response['lib']
 
             document.getElementById('name').innerHTML = lib['library_name']
-            document.getElementById('town').innerHTML = lib['town']
+            //document.getElementById('town').innerHTML = lib['town']
             document.getElementById('opening_hours').innerHTML = lib['opening_hours']
             document.getElementById('web_link').innerHTML = lib['webpage_link']
             document.getElementById('path_pic').innerHTML = lib['path_to_picture']
@@ -96,7 +96,7 @@ $('.editBtn').click(function(e){
 function delete_inputs(){
 
     document.getElementById('nameI').value = ""
-    document.getElementById("townI").value = ""
+    //document.getElementById("townI").value = ""
     document.getElementById('opening_hoursI').value = ""
     document.getElementById('web_linkI').value = ""
     document.getElementById('path_picI').value = ""
@@ -128,7 +128,7 @@ $('#sendEdit').click(function(e){
     var old_email = document.getElementById('lib_email').innerHTML
 
     var name = $('#nameI').val()
-    var town = $('#townI').val()
+    //var town = $('#townI').val()
     var opening_hours = $('#opening_hoursI').val()
     var web_link = $('#web_linkI').val()
     var path_pic = $('#path_picI').val()
@@ -141,7 +141,6 @@ $('#sendEdit').click(function(e){
     var data = {
         "old_email" : old_email,
         "library_name" : name,
-        "town" : town,
         "opening_hours" : opening_hours,
         "webpage_link" : web_link,
         "path_to_picture" : path_pic,
