@@ -163,7 +163,8 @@ def db_all_book_in_lib(lib_id):
         return execute_select(query,parameters=parameter)
 
 def db_all_books_not_in_lib(lib_id):
-        query = '''SELECT b.title_id, b.title_name FROM book_title b JOIN book_title_library bl ON b.title_id = bl.title_id WHERE bl.library_id <> %s;'''
+        #query = '''SELECT b.title_id, b.title_name FROM book_title b JOIN book_title_library bl ON b.title_id = bl.title_id WHERE bl.library_id <> %s;'''
+        query = '''select title_name,title_id from Book_title where title_name not in (SELECT b.title_name FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id JOIN Library l ON bl.library_id = l.library_id  Where l.library_id = %s)'''
         parameter = tuple([lib_id])
         return execute_select(query,parameter)
 

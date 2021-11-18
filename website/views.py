@@ -230,11 +230,7 @@ def surveysDetail(libid):
     
     
     books = db_all_books_not_in_lib(libid)
-    books = [dict(t) for t in {tuple(book.items()) for book in books}]
-    result =[]
-    for book in books:
-        count = db_actual_count(libid,book['title_id'])
-        if len(count) == 0:
-            result.append(book)
+    for i in books:
+        print(db_actual_count(libid,i['title_id']))
     library = db_library_info(libid)[0]
-    return render_template('/main/surveyDetail.html',books=result,library=library,genres=genres)
+    return render_template('/main/surveyDetail.html',books=books,library=library,genres=genres)
