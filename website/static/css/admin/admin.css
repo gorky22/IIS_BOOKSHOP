@@ -315,3 +315,6 @@ tr:nth-child(even) .editBtn:hover {
 .hide {
     display: none;
 }
+input[type=text]{
+    cursor: text !important;
+}

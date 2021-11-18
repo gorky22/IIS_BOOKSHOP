@@ -49,35 +49,6 @@ document.getElementById('btnYes').addEventListener('click', function() {
     document.querySelector('.bg-modal-delete').style.display = 'none'
 })
 
-// Funkcia na vypisanie datumu v krajsie forme
-function beautifulDate(input_date) {
-    var date = new Date(input_date)
-    var year = date.getFullYear()
-    var month = date.getMonth()
-    var day = date.getDate()
-    var birth_date = year + '-' + month + '-' + day
-
-    return birth_date
-}
-
-
-function testEmail(value){
-    var res = true
-    if(value.length < 7){
-        res = false;
-    } else if(!value.includes("@")){
-        res = false;
-    } else if(!value.includes(".")){
-        res = false;
-    }
-    
-    if(res == true) {
-        return res
-    } else {
-        Toast.show('Email nie je platný','E')
-        return res
-    }
-}
 
 
 // Funkcia ktora nastavi Check box

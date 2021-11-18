@@ -338,5 +338,6 @@ tr:nth-child(even) .addBtn:hover {
 .add-box input[type=text] {
     width: 65%;
 }
-
-
+input[type=text]{
+    cursor: text !important;
+}

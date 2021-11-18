@@ -60,6 +60,7 @@ $('.editBtn').click(function(e){
     e.preventDefault()
     
     var id =  $(this).data('id')
+    alert(id)
     $.ajax({
         type: "GET",
         url: "/admin/tags/"+id,
@@ -75,9 +76,6 @@ $('.editBtn').click(function(e){
             document.querySelector('.bg-modal-edit').style.display = 'flex'
         }
     });
-
-
-     
 })
 
 // Editacia tagu
