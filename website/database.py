@@ -624,4 +624,19 @@ def delete_library(lib_email):
         db_connection.commit()
         cursor.close()
 
+def insert_into_lib(lib_name,town,opening_hours,description,
+                    link,path_to_picture,lib_email,adress):
+        
+        x = [lib_name,town,opening_hours,description,
+             link,path_to_picture,lib_email,adress]
 
+        param = tuple(x)
+        query = '''INSERT INTO `library` (`library_name`, `town`, `opening_hours`, `description`,
+                 `webpage_link`, `path_to_picture`, `library_email`, `adress`) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);'''
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        db_connection.commit()
+        cursor.close()
