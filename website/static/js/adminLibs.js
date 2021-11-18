@@ -154,6 +154,40 @@ $('#sendEdit').click(function(e){
             }    
         }
     });
+})
 
-    
+
+// Tlacidlo na pridanie knihovne
+$('#btnAddLib').click(function(e){
+    e.preventDefault()
+   
+    // Zobrazi sa Pop Up okno
+    document.querySelector('.bg-modal-add').style.display = 'flex'
+})
+
+
+// Pridanie knihovne
+// ak bolo stlacene tlacidlo Exit schova sa Pop Up okno
+document.querySelector('.btnCloseAdd').addEventListener('click', function() {
+    document.querySelector('.bg-modal-add').style.display = 'none'
+})
+
+
+
+// Pridanie knihovne
+// Ak bolo stlacene tlacidlo na pridanie
+$('#sendAdd').click(function(e){
+
+    var data = 'fero'
+
+    $.ajax({
+        type: "POST",
+        url: "/admin/addLib/",
+        data: data,
+        dataType: "json",
+        success: function (response) {
+
+            document.querySelector('.bg-modal-add').style.display = 'none'
+        }
+    });
 })
