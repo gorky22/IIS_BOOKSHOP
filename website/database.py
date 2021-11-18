@@ -496,9 +496,9 @@ def db_distributors():
 
         return execute_select(query)
 
-def delete_distributors(dist_id):
-        param = tuple([dist_id])
-        query = "DELETE FROM Publishers WHERE publisher_id=%s"
+def delete_distributors(dist_email):
+        param = tuple([dist_email])
+        query = "DELETE FROM Publishers WHERE publisher_email=%s"
 
         is_connect()
         cursor = db_connection.cursor()

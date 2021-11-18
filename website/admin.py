@@ -127,6 +127,22 @@ def distributorsPage():
         
     return render_template("admin/distributors.html", distributors=distributors)
 
+@admin.route("/distributors/delete/", methods=["POST"])
+#@admin_required
+def distributorDelete():
+    
+    if request.method == "POST" :
+        email = request.form.get("email")  
+        delete_distributors(email)
+
+        return {'message' : "ok"}
+
+@admin.route("/distributors/<distributoremail>")
+#@admin_required
+def get_distributors_by_email(distributoremail):
+    distributor = find_distributors(distributoremail)
+    #print(user[0])
+    return {'distributor' : distributor[0]}
 
 @admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required
