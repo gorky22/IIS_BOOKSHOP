@@ -149,21 +149,24 @@ $('#sendEdit').click(function(e){
         "library_email" : lib_email,
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/editLib/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna editácia knihovny','S')
-                document.querySelector('.bg-modal-edit').style.display = 'none'
-                delete_inputs()
-                location.reload()
-            }    
-        }
-    });
+    if(testEmail(lib_email))
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/editLib/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia knihovny','S')
+                    document.querySelector('.bg-modal-edit').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+                }    
+            }
+        });
+    } 
 })
 
 
@@ -213,6 +216,24 @@ function chechValue(data){
     }
 }
 
+function testEmail(value){
+    var res = true
+    if(value.length < 7){
+        res = false;
+    } else if(!value.includes("@")){
+        res = false;
+    } else if(!value.includes(".")){
+        res = false;
+    }
+    
+    if(res == true) {
+        return res
+    } else {
+        Toast.show('Email nie je platný','E')
+        return res
+    }
+}
+
 
 // Pridanie knihovne
 // Ak bolo stlacene tlacidlo na pridanie
@@ -238,23 +259,26 @@ $('#sendAdd').click(function(e){
         "library_email" : lib_email,
     }
 
-
-    $.ajax({
-        type: "POST",
-        url: "/admin/addLib/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna pridanie knihovne','S')
-                document.querySelector('.bg-modal-add').style.display = 'none'
-                delete_inputs()
-                location.reload()
-            } else {
-                msg = chechValue(data)
-                Toast.show(msg,'E')
+    
+    if (testEmail(lib_email))    
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/addLib/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna pridanie knihovne','S')
+                    document.querySelector('.bg-modal-add').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+                } else {
+                    msg = chechValue(data)
+                    Toast.show(msg,'E')
+                }
             }
-        }
-    });
+        });
+    } 
 })

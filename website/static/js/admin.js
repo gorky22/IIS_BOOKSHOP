@@ -61,6 +61,25 @@ function beautifulDate(input_date) {
 }
 
 
+function testEmail(value){
+    var res = true
+    if(value.length < 7){
+        res = false;
+    } else if(!value.includes("@")){
+        res = false;
+    } else if(!value.includes(".")){
+        res = false;
+    }
+    
+    if(res == true) {
+        return res
+    } else {
+        Toast.show('Email nie je platný','E')
+        return res
+    }
+}
+
+
 // Funkcia ktora nastavi Check box
 function checkBtn(id, value){
     if (value == 1) {
@@ -235,7 +254,6 @@ $('#sendEdit').click(function(e){
     }
 
     
-    alert("posielam gorkymu: " + libraryId)
     var data = {
         "old_email" : email,
         "email" : new_email,
@@ -249,24 +267,27 @@ $('#sendEdit').click(function(e){
         "library_id" : libraryId,
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/editUser/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna editácia uživateľa','S')
-                document.querySelector('.bg-modal-edit').style.display = 'none'
-                delete_inputs()
-                location.reload()
-
-            } else {
-                Toast.show('Knihovnikovi nebola priadana knihovna','E')
-            }    
-        }
-    });
+    if(testEmail(new_email)){
+        $.ajax({
+            type: "POST",
+            url: "/admin/editUser/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia uživateľa','S')
+                    document.querySelector('.bg-modal-edit').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+    
+                } else {
+                    Toast.show('Knihovnikovi nebola priadana knihovna','E')
+                }    
+            }
+        });
+    } 
+    
 })
 
 
