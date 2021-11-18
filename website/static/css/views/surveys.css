@@ -1,0 +1,61 @@
+.survey-header{
+    font-family: 'Baloo 2', cursive;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+
+.libraries {
+	margin: 2rem 0;
+	margin-left: 2rem;
+	display: flex;
+	justify-content: start;
+	flex-wrap: wrap;
+}
+
+.lib-link {
+	background-color: #fff;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+	padding: 1rem 3rem;
+	margin: 1rem;
+	border-radius: 1.5rem;
+	font-size: 1.8rem;
+	font-family: 'Nunito',sans-serif;
+	font-weight: 400;
+	cursor: pointer;
+	transition: all 0.5s;
+	flex-grow: 1;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+}
+.book-btn {
+	background-color: #fff;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+	padding: 1rem 3rem;
+	margin: 1rem;
+	border-radius: 1.5rem;
+	font-size: 1.8rem;
+	font-family: 'Nunito',sans-serif;
+	font-weight: 400;
+	cursor: pointer;
+	transition: all 0.5s;
+	flex-grow: 1;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    border: none;
+}
+.lib-link:hover{
+    background-color: #623CEA;
+    color: #fff;
+}
+.book-btn:hover{
+    background-color: #0f0;
+    color: #333;
+}
+.library-name{
+    color: #623CEA;
+}

@@ -162,6 +162,20 @@ def db_all_book_in_lib(lib_id):
                     JOIN Author a ON ba.author_id = a.author_id GROUP BY b.title_id '''
         return execute_select(query,parameters=parameter)
 
+def db_all_books_not_in_lib(lib_id):
+        query = '''SELECT b.title_id, b.title_name FROM book_title b JOIN book_title_library bl ON b.title_id = bl.title_id WHERE bl.library_id <> %s;'''
+        parameter = tuple([lib_id])
+        return execute_select(query,parameter)
+
+def db_delete_votes(title_id,lib_id):
+        query = '''DELETE FROM votes WHERE title_id = %s AND library_id = %s;'''
+        parameter=tuple([title_id,lib_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
+
 def db_all_book_with_genre(genre_id):
         parameter = tuple([genre_id])
         query = '''SELECT b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname  FROM Book_title b JOIN Tag t ON b.title_id = t.title_id 
@@ -174,7 +188,19 @@ def db_book_by_id(book_id):
         parameter = tuple([book_id])
 
         return execute_select(query,parameters=parameter)
+def db_insert_new_vote(title_id,library_id,user_id):
+        query = '''INSERT INTO votes(title_id,library_id,user_id,yes,no) VALUES (%s, %s, %s, 1, 0)'''
+        parameter=tuple([title_id,library_id,user_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
 
+def db_votes_in_library(lib_id):
+        query = '''SELECT v.title_id, b.title_name FROM votes v JOIN book_title b ON v.title_id = b.title_id WHERE v.library_id = %s;'''
+        parameter = tuple([lib_id])
+        return execute_select(query,parameter)
 #takes as input id of user
 # returns all reservations from user with this id
 def db_reserved_books(user_id):

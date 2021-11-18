@@ -80,7 +80,7 @@
                     </li>
                     {% if session['logged_in'] %}
                     <li class="link-li">
-                        <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/quiz/' else 'class=link-a' }}>Ankety</a>
+                        <a href="{{ url_for('views.surveysPage') }}" {{ 'class=link-a-active' if request.path == '/surveys/' else 'class=link-a' }}>Ankety</a>
                     </li>
                     <li class="link-li dropdown-user">
                         <img src="/static/icons/userBL.png" class="icon">

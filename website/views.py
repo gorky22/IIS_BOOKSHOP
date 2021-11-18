@@ -183,7 +183,7 @@ def rateBook():
 @login_required
 def userReservation():
     reservations = db_reserved_books(session['user']['user_id'])
-    return render_template('/main/userReservation.html',reservations=reservations)
+    return render_template('/main/userReservation.html',reservations=reservations,genres=genres)
 
 
 @views.route("/reservation/delay/<resid>/")
@@ -199,7 +199,7 @@ def delayReservation(resid):
 def borrowedReservation():
     borrowed = db_borrowed_books(session['user']['user_id'])
     print(borrowed)
-    return render_template('/main/userBorrows.html',borrowed=borrowed)
+    return render_template('/main/userBorrows.html',borrowed=borrowed,genres=genres)
 
 @views.route("/borrow/delay/<borid>/")
 def delayBorrow(borid):
@@ -209,5 +209,32 @@ def delayBorrow(borid):
     return {'err':False,'newtime':borrow['until'].strftime("%d. %m. %Y")}
 
 @views.route("/surveys/")
-def surverysPage():
-    return
+@login_required
+def surveysPage():
+    libraries = db_libraries()
+
+    return render_template('/main/surveys.html',libs=libraries,genres=genres)
+
+
+@views.route("/surveys/<libid>/",methods=['GET','POST'])
+@login_required
+def surveysDetail(libid):
+    if request.method == 'POST':
+        if session['user']['reader']:
+            title_id = request.form.get('title_id')
+            lib_id = request.form.get('lib_id')
+            user_id = session['user']['user_id']
+            db_insert_new_vote(title_id,lib_id,user_id)
+            return {'err':False}
+        return {'err':True,'msg':'Na tuto operaci nemáte práva'}
+    
+    
+    books = db_all_books_not_in_lib(libid)
+    books = [dict(t) for t in {tuple(book.items()) for book in books}]
+    result =[]
+    for book in books:
+        count = db_actual_count(libid,book['title_id'])
+        if len(count) == 0:
+            result.append(book)
+    library = db_library_info(libid)[0]
+    return render_template('/main/surveyDetail.html',books=result,library=library,genres=genres)

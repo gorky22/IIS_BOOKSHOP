@@ -1,0 +1,37 @@
+{% extends 'baselib.html' %}
+
+
+{% block link_block %}
+<link rel="stylesheet" href="/static/css/admin/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<link rel="stylesheet" href="/static/css/librarian/reservation.css">    
+{% endblock %}
+
+{% block body_block %}
+    <div class="content">
+        <table id="library-bor-table">
+            <tr>
+                <th>Jméno knížky</th>
+                <th>Počet čtenářů</th>
+                <th style="text-align: right;">Kniha koupena</th>
+            </tr>
+            
+            {% for vote in votes %}
+                <tr id="book-{{vote['title_id']}}">
+                    <td>{{ vote['title_name'] }}</td>
+                    <td>{{ vote['count']}}</td>
+                    <td class="deleteForm">
+                        <button class="button-icon confirm-votes" data-book="{{ vote['title_id'] }}">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script src="/static/js/votes.js"></script>
+{% endblock %}

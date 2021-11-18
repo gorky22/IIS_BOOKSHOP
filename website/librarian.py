@@ -185,3 +185,29 @@ def addBook():
     return render_template('/librarian/books.html',authors=authors,publishers=publishers)
 
 
+@librarySystem.route("/surveys/")
+@librarian_required
+def surveys():
+    votes = db_votes_in_library(session['user']['library_id'])
+    new_votes = []
+    for vote in votes:
+        new_dct = {'title_id':vote['title_id'],'title_name':vote['title_name'],'count':0}
+        if new_dct not in new_votes:
+            new_votes.append(new_dct)
+
+    for vote in votes:
+        id_of_title = vote['title_id']
+        for add_vot in new_votes:
+            if id_of_title == add_vot['title_id']:
+                add_vot['count']+=1
+
+    return render_template('/librarian/surveys.html',votes=new_votes)
+
+@librarySystem.route('/confirm/votes/<bookid>/')
+@librarian_required
+def confirmVotes(bookid):
+    lib_id = session['user']['library_id']
+    if len(db_actual_count(lib_id,bookid)) > 0:
+        db_delete_votes(bookid,lib_id)
+        return {'err':False}
+    return {'err':True,'msg':'Nelžete pane knihovníku. Tato kniha na fondu není'}

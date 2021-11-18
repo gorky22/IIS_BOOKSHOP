@@ -95,6 +95,7 @@ $("#firstName").focusout(function(e){
     if(value.includes(".") || value.includes(" ")){
         $(this).css("box-shadow","0px 2px 5px rgba(255,0,0, 0.5)")
         err = true
+        Toast.show('Křestní jméno nesmí obsahovat tečku nebo mezeru.','E')
     }
     if(!err){
         $(this).css("box-shadow","0px 2px 5px rgba(0,255,0, 0.5)")
@@ -106,6 +107,7 @@ $("#surName").focusout(function(e){
     if(value.includes(".") || value.includes(" ")){
         $(this).css("box-shadow","0px 2px 5px rgba(255,0,0, 0.5)")
         err = true
+        Toast.show('Příjmení nesmí obsahovat tečku nebo mezeru.','E')
     }
     if(!err){
         $(this).css("box-shadow","0px 2px 5px rgba(0,255,0, 0.5)")
@@ -118,6 +120,7 @@ $("#pass1").focusout(function(e){
         $(this).css("box-shadow","0px 2px 5px rgba(0,255,0, 0.5)")
     } else {
         $(this).css("box-shadow","0px 2px 5px rgba(255,0,0, 0.5)")
+        Toast.show('Heslo musí obsahovat alespoň jednu číslici, musí být 8 znaků dlouhé a musí obsahovat jedno velké a malé písmeno.','E',4000)
     }
     
 })
@@ -128,6 +131,7 @@ $("#pass2").focusout(function(e){
         $(this).css("box-shadow","0px 2px 5px rgba(0,255,0, 0.5)")
     } else { 
         $(this).css("box-shadow","0px 2px 5px rgba(255,0,0, 0.5)")
+        Toast.show('Vaše hesla se neshodují','E',4000)
     }
 })
 

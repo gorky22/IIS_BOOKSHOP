@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block link_block %}
+<link rel="stylesheet" href="/static/css/views/surveys.css">
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="content">
+        <h1 class="survey-header">Klikněte na knihu, kterou byste si přáli v knihovně: <span class="library-name" data-lib="{{library['library_id']}}"">{{library['library_name']}}</span></h1>
+        <div class="libraries">
+            {% for book in books %}
+                <button class="book-btn" id="{{book['title_id']}}">{{book['title_name']}}</button>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script_block %}
+<script src="/static/js/survey.js"></script>
+
+{% endblock %}

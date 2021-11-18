@@ -43,3 +43,6 @@
     display: block;
     float: right;
 }
+.confirm-votes:hover{
+    color: #0f0;
+}
