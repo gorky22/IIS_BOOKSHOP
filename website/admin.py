@@ -87,8 +87,7 @@ def get_lib_by_email(email):
 #@admin_required
 def get_tag_by_id(id):
     #tag = find_library(id)
-    
-    tag = [{'name' : 'fero'}]
+    tag = db_tags(id)
 
     #print(library[0])
     return {'tag' : tag[0]}
@@ -151,7 +150,7 @@ def add_lib():
 def add_tag():
     if request.method == "POST" :
         data = request.form  
-        print(data)
+        insert_tag(data)
         ##insert_into_lib(data)
 
         return {'message' : 'ok'}
