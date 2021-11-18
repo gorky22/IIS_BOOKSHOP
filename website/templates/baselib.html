@@ -64,7 +64,7 @@
                         <a href="{{ url_for('librarySystem.order') }}" {{ 'class=link-a-active' if request.path == '/librarian/order/' else 'class=link-a' }}>Objednávky</a>
                     </li>
                     <li class="link-li">
-                        <a href="{{ url_for('librarySystem.booksInLib') }}" {{ 'class=link-a-active' if request.path == '/librarian/books/' else 'class=link-a' }}>Knižní tituly</a>
+                        <a href="{{ url_for('librarySystem.booksByLib') }}" {{ 'class=link-a-active' if request.path == '/librarian/booklis/' else 'class=link-a' }}>Knižní tituly</a>
                     </li>
                     
                     {% if session['logged_in'] %}

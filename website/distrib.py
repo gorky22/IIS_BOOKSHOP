@@ -95,12 +95,23 @@ def distribBooks():
     authors = db_authors()
     return render_template('distributor/books.html',authors=authors)
 
+@distribSystem.route('/booklist/',methods=['GET','POST'])
+@distrib_required
+def distribListBooks():
+    
 
-# release data
-# ISBN
-# rating = 0
-# description
-# path_to_picture -> input file
-# title_name
-# publisher_id -> default to session['user']['publisher_id']
+    books = db_books_with_publisher(session['user']['publisher_id'])
+    for book in books:
+        author = db_book_authors(book['title_id'])[0]
+        book['author'] = author['author_name'] + " " + author['author_surname']
+    
+    return render_template('distributor/bookList.html',books=books)
+
+@distribSystem.route('/bookdelete/<bookid>/',methods=['GET'])
+@distrib_required
+def deleteBook(bookid):
+    db_delete_book(bookid)
+    return {'err':False}
+
+
 

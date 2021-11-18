@@ -94,7 +94,7 @@ def order():
     publishers = db_publishers()
     return render_template('/librarian/order.html',publishers=publishers)
 
-@librarySystem.route('/books/',methods=["GET","POST"])
+@librarySystem.route('/books/',methods=["POST"])
 @librarian_required
 def booksInLib():
     if request.method == 'POST':
@@ -107,10 +107,7 @@ def booksInLib():
         counts = books['order']
         add_books_to_order(id_of_order,ids,counts)
         return {'err':False}
-        
-           
-            
-    return render_template('/librarian/booksInLib.html')
+
 
 @librarySystem.route('/publisher/books/<pubid>/')
 @librarian_required
@@ -118,4 +115,21 @@ def booksByPublisher(pubid):
     books = db_book_by_publisher(pubid)
     
     return {'err': None,'books':books}
+
+@librarySystem.route('/booklis/')
+@librarian_required
+def booksByLib():
+    books = db_all_book_in_lib(session['user']['library_id'])
+    for book in books:
+        author = db_book_authors(book['title_id'])[0]
+        book['author'] = author['author_name'] + " " + author['author_surname']
+        book['count'] = db_actual_count(session['user']['library_id'],book['title_id'])[0]['count']
+    return render_template('/librarian/booksInLib.html',books=books)
+
+@librarySystem.route('/bookdelete/<bookid>/',methods=['GET'])
+@librarian_required
+def deleteBook(bookid):
+    db_delete_book(bookid)
+    return {'err':False}
+
 

@@ -35,3 +35,11 @@
     background-color: rgb(255, 166, 0) !important;
     color: #fff !important;
 }
+.delete-book:hover{
+    transform: scale(1.1);
+    color: #f00;
+}
+.top-button{
+    display: block;
+    float: right;
+}

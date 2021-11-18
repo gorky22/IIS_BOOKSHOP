@@ -1,4 +1,4 @@
-{% extends 'baselib.html' %}
+{% extends 'baseDis.html' %}
 
 
 {% block link_block %}
@@ -13,7 +13,6 @@
             <tr>
                 <th>Jméno knížky</th>
                 <th>Hlavní autor</th>
-                <th>Počet</th>
                 <th><a class="btn btn-blue top-button" style="margin-bottom: 1rem;text-decoration: none;" href="{{ url_for('distribSystem.distribBooks') }}">Přidat knihu</a></th>
             </tr>
             
@@ -21,7 +20,6 @@
                 <tr id="book-{{book['title_id']}}">
                     <td>{{ book['title_name'] }}</td>
                     <td>{{ book['author']}}</td>
-                    <td>{{ book['count']}}</td>
                     <td class="deleteForm">
                         <button class="button-icon delete-book" data-book="{{ book['title_id'] }}">
                             <i class="fas fa-trash"></i>
@@ -35,5 +33,5 @@
 {% endblock %}
 
 {% block script_block %}
-<script src="/static/js/deleteBookLib.js"></script>
+<script src="/static/js/deletebook.js"></script>
 {% endblock %}

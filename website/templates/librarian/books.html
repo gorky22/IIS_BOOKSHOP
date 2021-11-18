@@ -1,0 +1,70 @@
+{% extends 'baseDis.html' %}
+
+
+{% block link_block %}
+    <link rel="stylesheet" href="/static/css/bookInput.css">
+{% endblock %}
+
+{% block body_block %}
+<!-- release data
+ISBN
+rating = 0
+
+
+
+-->
+    <div class="content">
+        <div class="header">Vložení nové knihy distributora: </div>
+        <form class="book-form">
+            <div class="left-side">
+                <input type="text" id="title_name" class="book-input" placeholder="Jméno knihy">    
+                <div class="book-date-input">
+                    <label for="release" class="book-date-label">Kdy byla kniha vydána?</label>
+                    <input type="date" id="realease" class="book-date" placeholder="Datum vydání" required>   
+                </div>
+                <input type="text" id="isbn" class="book-input" placeholder="ISBN">
+                <textarea id="description" class="book-input" placeholder="Popis knihy" rows="20" ></textarea>
+                
+
+            </div>
+            <div class="file-input-div">
+                <div class="file-div">
+                    <label for="title_picture" class="book-picture-label">Klikněte zde a vložte obrázek</label>
+                    <input type="file" id="title_picture" class="book-picture" accept="image/*" onchange="showPreview(event)">
+                    <img id="file-preview">
+                </div>
+                
+                <div class="combos">
+                    <label for="combobox-1" class="combo-label">Autoři: </label>
+                    <select id="combobox-1" class="author-combo">
+                        {% for author in authors %}
+                        <option value="{{author['author_id']}}">{{ author['author_name'] }} {{ author['author_surname'] }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="button" class="btn btn-blue" id="add-author-button">Přidat dalšího autora</button>
+                    <button type="button" class="btn btn-blue" id="delete-author-button">Vymazat posledního</button>
+                    
+                </div>
+                <div class="add-new-author">
+                    <p class="new-author">Pokud jste nenašli autora ve výše uvedeném výběru, zadejte jeho jméno a příjmení zde</p>
+                    <div class="name-surname" id="new-author-1">
+                        <input type="text" id="name-1" class="author-input input-name" placeholder="Jméno">
+                        <input type="text" id="surname-1" class="author-input input-surname" placeholder="Příjmení">
+                    </div>
+                    <button type="button" class="btn btn-red" id="add-new-author-button">Přidat dalšího autora</button>
+                    <button type="button" class="btn btn-red" id="delete-new-author-button">Vymazat posledního</button>
+
+                </div>
+
+
+                
+            </div>
+            <button class="btn btn-blue btn-long" id="confirm-button">Přidat knihu</button>
+        </form>
+        
+    </div>
+{% endblock %}
+
+{% block script_block %}
+<script src="/static/js/addBook.js"></script>
+{% endblock %}

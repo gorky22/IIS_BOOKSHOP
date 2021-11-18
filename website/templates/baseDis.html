@@ -56,7 +56,7 @@
                         <a href="{{ url_for('distribSystem.distribOrders') }}" {{ 'class=link-a-active' if request.path == '/distributor/orders/' else 'class=link-a' }}>Objednávky</a>
                     </li>
                     <li class="link-li">
-                        <a href="{{ url_for('distribSystem.distribBooks') }}" {{ 'class=link-a-active' if request.path == '/distributor/books/' else 'class=link-a' }}>Knihy</a>
+                        <a href="{{ url_for('distribSystem.distribBooks') }}" {{ 'class=link-a-active' if request.path == '/distributor/booklist/' else 'class=link-a' }}>Knihy</a>
                     </li>
                     
                     {% if session['logged_in'] %}

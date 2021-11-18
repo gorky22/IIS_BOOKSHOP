@@ -216,6 +216,16 @@ def delete_user(email):
         db_connection.commit()
         cursor.close()
 
+def db_delete_book(bookid):
+        query = '''DELETE FROM book_title WHERE title_id = %s;'''
+        param = tuple([bookid])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
 #this function finds user via mail or name or surname acording to input
 def find_user(string_to_find):
         
@@ -510,6 +520,7 @@ def add_order(lib_id,pub_id):
         db_connection.commit()
         cursor.close()
         return idOfOrder
+
 def db_make_order_done(order_id):
         query = '''UPDATE orders SET state = 1 WHERE order_id = %s;'''
         parameter = tuple([order_id])
@@ -557,6 +568,10 @@ def delete_library(lib_id):
         db_connection.commit()
         cursor.close()
 
+def db_books_with_publisher(pub_id):
+        query = '''SELECT * FROM book_title WHERE publisher_id = %s;'''
+        parameter = tuple([pub_id])
+        return execute_select(query,parameters=parameter)
 
 #this function updates user table
 def update_lib_db(atributes):
