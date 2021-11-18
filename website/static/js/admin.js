@@ -49,16 +49,6 @@ document.getElementById('btnYes').addEventListener('click', function() {
     document.querySelector('.bg-modal-delete').style.display = 'none'
 })
 
-// Funkcia na vypisanie datumu v krajsie forme
-function beautifulDate(input_date) {
-    var date = new Date(input_date)
-    var year = date.getFullYear()
-    var month = date.getMonth()
-    var day = date.getDate()
-    var birth_date = year + '-' + month + '-' + day
-
-    return birth_date
-}
 
 
 // Funkcia ktora nastavi Check box
@@ -235,7 +225,6 @@ $('#sendEdit').click(function(e){
     }
 
     
-    alert("posielam gorkymu: " + libraryId)
     var data = {
         "old_email" : email,
         "email" : new_email,
@@ -249,24 +238,27 @@ $('#sendEdit').click(function(e){
         "library_id" : libraryId,
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/editUser/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna editácia uživateľa','S')
-                document.querySelector('.bg-modal-edit').style.display = 'none'
-                delete_inputs()
-                location.reload()
-
-            } else {
-                Toast.show('Knihovnikovi nebola priadana knihovna','E')
-            }    
-        }
-    });
+    if(testEmail(new_email)){
+        $.ajax({
+            type: "POST",
+            url: "/admin/editUser/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia uživateľa','S')
+                    document.querySelector('.bg-modal-edit').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+    
+                } else {
+                    Toast.show('Knihovnikovi nebola priadana knihovna','E')
+                }    
+            }
+        });
+    } 
+    
 })
 
 

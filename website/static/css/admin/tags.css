@@ -368,3 +368,7 @@ tr:nth-child(even) .addBtn:hover {
     margin-bottom: 2rem;
     width: 30%;
 }
+
+input[type=text]{
+    cursor: text !important;
+}

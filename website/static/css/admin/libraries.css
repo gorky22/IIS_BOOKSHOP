@@ -341,4 +341,7 @@ tr:nth-child(even) .addBtn:hover {
     width: 65%;
 }
 
+input[type=text]{
+    cursor: text !important;
+}
 
