@@ -142,12 +142,23 @@ def distributorDelete():
 
         return {'message' : "ok"}
 
-@admin.route("/distributors/<distributoremail>")
+@admin.route("/distributors/<distributoremail>", methods=["GET"])
 #@admin_required
 def get_distributors_by_email(distributoremail):
     distributor = find_distributors(distributoremail)
-    #print(user[0])
-    return {'distributor' : distributor[0]}
+    #distributor = [{"publisher_name":"cc","adress":"ss","publisher_email":"ss","town":"sss"}]
+    print(distributor[0])
+    return {'dist' : distributor[0]}
+
+@admin.route('/editDist/', methods=["POST"])
+#@admin_required
+def edit_dist():
+    if request.method == "POST" :
+        data = request.form  
+        
+        update_distributor_db(data)
+
+        return {'message' : 'ok'}
 
 @admin.route("/tags/", methods=["POST", "GET"])
 #@admin_required
