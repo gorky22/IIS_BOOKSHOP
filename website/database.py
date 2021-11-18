@@ -76,6 +76,18 @@ def get_user_with_this_email(email):
         
 
 #this function takes no arguments and returns all titles which are in the system
+def db_insert_book(release_date,isbn,rating,description,path_to_picture,title_name,publisher_id):
+        query = '''INSERT INTO book_title(release_date,isbn,rating,description,path_to_picture,title_name,publisher_id)
+                VALUES (%s,%s,%s,%s,%s,%s,%s);'''
+        parameter = tuple([release_date,isbn,rating,description,path_to_picture,title_name,publisher_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        id_of_book = cursor.lastrowid
+        db_connection.commit()
+        cursor.close()
+        return id_of_book
+
 def db_books():
 
         query = "SELECT * FROM Book_title"
@@ -116,6 +128,27 @@ def db_book_authors(title_id):
 def db_authors():
         query = '''SELECT * FROM Author;'''
         return execute_select(query)
+
+def db_add_author(name,last_name):
+        query = '''INSERT INTO author(author_name,author_surname) VALUES (%s,%s);'''
+        parameter=tuple([name,last_name])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        id_of_author = cursor.lastrowid
+        db_connection.commit()
+        cursor.close()
+        return id_of_author
+
+def db_add_book_author(title_id,author_id):
+        query = '''INSERT INTO book_title_author(title_id,author_id) VALUES (%s,%s);'''
+        parameter=tuple([title_id,author_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
+
 
 def db_all_book_info():
         query2 = '''SELECT  b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 

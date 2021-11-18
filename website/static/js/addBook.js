@@ -123,7 +123,7 @@ $(document).on('click','#confirm-button',function (e) {
         var data = document.getElementById("title_picture").files[0]
         form_data.append("file",data)
     }
-    
+
     $.ajax({
         type: "POST",
         url: "/distributor/books/",
@@ -133,7 +133,10 @@ $(document).on('click','#confirm-button',function (e) {
         processData: false,
         cache: false,
         success: function (response) {
-            
+            Toast.show("Kniha byla úspěšně přidána do databáze.","S",2000)
+            setTimeout(() => {
+                window.location.href = response['url'];
+             },2000)
         }
     });
 

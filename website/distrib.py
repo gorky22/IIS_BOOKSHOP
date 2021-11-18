@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request,session, wrappers,redirect, url_for
 from functools import wraps
 from .database import *
+from werkzeug.utils import secure_filename
+import os
 import datetime
 
 def distrib_required(f):
@@ -54,18 +56,41 @@ def confirmOrder(orderid):
 @distrib_required
 def distribBooks():
     if request.method == "POST":
-        ALLOWED_FILES = ['.png','.jpg','.jpeg','.webp','.svg']
         author_ids = []
+        UPLOAD_FOLDER = "website/static/img"
+        STATIC_FOLDER = "/static/img"
         if 'names[]' in request.form:
             new_surnames = request.form.getlist("surnames[]")[0].split(",")
             new_names = request.form.getlist("names[]")[0].split(",")
-            # !!!ADD AUTHORS TO DATABASE AND GET THEIR IDS!!!!!!!
+            for i in range(len(new_surnames)):
+                id_of_new = db_add_author(new_names[i],new_surnames[i])
+                author_ids.append(id_of_new)
+            
         if 'author_ids[]' in request.form:
-            author_ids = request.form.getlist("author_ids[]")[0].split(",")
-            # !!! ADD IDS TO BOOK_TITLE_AUHTOR
-            print(author_ids)
+            authors = request.form.getlist("author_ids[]")[0].split(",")
+            for id_auth in authors:
+                author_ids.append(int(id_auth))
+
+        file = request.files.getlist("file")[0]
+        filename = secure_filename(file.filename)
         
-        return {'err':False}
+        path_to_new_file = os.path.join(UPLOAD_FOLDER,filename)
+        path_to_picture = os.path.join(STATIC_FOLDER,filename)
+        file.save(path_to_new_file)
+
+        form_title_name = request.form.get('title_name')
+        form_title_date = request.form.get('date')
+        form_title_isbn = request.form.get('isbn')
+        form_title_desc = request.form.get('description')
+        rating = 0
+        publisher_id = session['user']['publisher_id']
+        
+        id_of_inserted_book = db_insert_book(form_title_date,form_title_isbn,rating,form_title_desc,path_to_picture,form_title_name,publisher_id)
+        for id_author in author_ids:
+            db_add_book_author(id_of_inserted_book,id_author)
+            
+        
+        return {'err':False,'url':url_for('distribSystem.distribBooks')}
 
     authors = db_authors()
     return render_template('distributor/books.html',authors=authors)
