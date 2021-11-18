@@ -149,7 +149,7 @@ $('#sendEdit').click(function(e){
         "library_email" : lib_email,
     }
 
-    if(testEmail(lib_email))
+    if(testEmail(lib_email) && checkTime(opening_hours))
     {
         $.ajax({
             type: "POST",

@@ -119,7 +119,6 @@ document.querySelector('.btnCloseEdit').addEventListener('click', function() {
 // Editacia Dist
 // Ak bolo stlacene tlacidlo na ulozenie zmien
 $('#sendEdit').click(function(e){
-    
     var old_email = document.getElementById('dist_email').innerHTML
  
     var name = $('#nameI').val()
@@ -136,22 +135,24 @@ $('#sendEdit').click(function(e){
         "publisher_email" : dist_email,
     }
 
+    if (testEmail(dist_email)){
+        $.ajax({
+            type: "POST",
+            url: "/admin/editDist/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia knihovny','S')
+                    document.querySelector('.bg-modal-edit').style.display = 'none'
     
-    $.ajax({
-        type: "POST",
-        url: "/admin/editDist/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna editácia knihovny','S')
-                document.querySelector('.bg-modal-edit').style.display = 'none'
-
-                delete_inputs()
-            }    
-        }
-    });
+                    delete_inputs()
+                }    
+            }
+        });
+    } 
+    
 })
 
 
@@ -175,7 +176,6 @@ document.querySelector('.btnCloseAdd').addEventListener('click', function() {
 // Pridanie knihovne
 // Ak bolo stlacene tlacidlo na pridanie
 $('#sendAdd').click(function(e){
-
     var name = $('#nameAdd').val()
     var town = $('#townAdd').val()
     var address = $('#adressAdd').val()
@@ -189,19 +189,22 @@ $('#sendAdd').click(function(e){
         "publisher_email" : dist_email,
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/addDist/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešne pridanie Distributotra','S')
-                document.querySelector('.bg-modal-add').style.display = 'none'
-                delete_inputs()
-                location.reload()
+    if(testEmail(dist_email)){
+        $.ajax({
+            type: "POST",
+            url: "/admin/addDist/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešne pridanie Distributotra','S')
+                    document.querySelector('.bg-modal-add').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+                }
             }
-        }
-    });
+        });
+    }
+    
 })
