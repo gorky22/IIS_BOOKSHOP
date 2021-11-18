@@ -149,21 +149,24 @@ $('#sendEdit').click(function(e){
         "library_email" : lib_email,
     }
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/editLib/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna editácia knihovny','S')
-                document.querySelector('.bg-modal-edit').style.display = 'none'
-                delete_inputs()
-                location.reload()
-            }    
-        }
-    });
+    if(testEmail(lib_email))
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/editLib/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna editácia knihovny','S')
+                    document.querySelector('.bg-modal-edit').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+                }    
+            }
+        });
+    } 
 })
 
 
@@ -238,23 +241,25 @@ $('#sendAdd').click(function(e){
         "library_email" : lib_email,
     }
 
-
-    $.ajax({
-        type: "POST",
-        url: "/admin/addLib/",
-        data: data,
-        dataType: "json",
-        success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna pridanie knihovne','S')
-                document.querySelector('.bg-modal-add').style.display = 'none'
-                delete_inputs()
-                location.reload()
-            } else {
-                msg = chechValue(data)
-                Toast.show(msg,'E')
+    if (testEmail(lib_email) && checkTime(opening_hours))    
+    {
+        $.ajax({
+            type: "POST",
+            url: "/admin/addLib/",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                if (response['message'] == 'ok')
+                {
+                    Toast.show('Úspešna pridanie knihovne','S')
+                    document.querySelector('.bg-modal-add').style.display = 'none'
+                    delete_inputs()
+                    location.reload()
+                } else {
+                    msg = chechValue(data)
+                    Toast.show(msg,'E')
+                }
             }
-        }
-    });
+        });
+    } 
 })

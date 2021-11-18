@@ -678,7 +678,7 @@ def db_tags(tag=None):
                 query = '''SELECT * FROM Genre'''
                 return execute_select(query)
         else:
-                query = '''SELECT * FROM Genre where name = %s'''
+                query = '''SELECT * FROM Genre where genre_id = %s'''
                 param = tuple([tag])
                 return execute_select(query,parameters=param)
 

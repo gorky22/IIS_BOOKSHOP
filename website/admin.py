@@ -88,8 +88,6 @@ def get_lib_by_email(email):
 def get_tag_by_id(id):
     #tag = find_library(id)
     tag = db_tags(id)
-
-    #print(library[0])
     return {'tag' : tag[0]}
 
 @admin.route('/editUser/', methods=["POST"])
