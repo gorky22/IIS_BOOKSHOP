@@ -42,6 +42,7 @@ document.getElementById('btnYes').addEventListener('click', function() {
             if (response['message'] == 'ok')
             {
                 Toast.show('Uspešne si odstránil uživateľa','S')
+                location.reload()
             }                
         }
     });
@@ -259,6 +260,7 @@ $('#sendEdit').click(function(e){
                 Toast.show('Úspešna editácia uživateľa','S')
                 document.querySelector('.bg-modal-edit').style.display = 'none'
                 delete_inputs()
+                location.reload()
 
             } else {
                 Toast.show('Knihovnikovi nebola priadana knihovna','E')
