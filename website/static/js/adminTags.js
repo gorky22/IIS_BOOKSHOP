@@ -60,7 +60,6 @@ $('.editBtn').click(function(e){
     e.preventDefault()
     
     var id =  $(this).data('id')
-
     $.ajax({
         type: "GET",
         url: "/admin/tags/"+id,
@@ -68,6 +67,7 @@ $('.editBtn').click(function(e){
             var tag = response['tag']
 
             document.getElementById('name').innerHTML = tag['name']
+            document.getElementById('idTagEdit').innerHTML = id
 
             $('#nameI').attr('placeholder', tag['name'])
 
@@ -94,8 +94,7 @@ document.querySelector('.btnCloseEdit').addEventListener('click', function() {
 // Editacia tagu
 // Ak bolo stlacene tlacidlo na ulozenie zmien
 $('#sendEdit').click(function(e){
-    var id = document.getElementById('idTag').innerHTML
-
+    var id = document.getElementById('idTagEdit').innerHTML
     var name = $('#nameI').val()
    
     var data = {
@@ -167,7 +166,10 @@ $('#sendAdd').click(function(e){
                 document.getElementById('nameAdd').value = ""
 
                 location.reload()
-            } 
+            } else {
+                Toast.show('Zadaj nazov','E')
+            }
+
 
         }
     });

@@ -87,8 +87,7 @@ def get_lib_by_email(email):
 #@admin_required
 def get_tag_by_id(id):
     #tag = find_library(id)
-    
-    tag = [{'name' : 'fero'}]
+    tag = db_tags(id)
 
     #print(library[0])
     return {'tag' : tag[0]}
@@ -115,6 +114,7 @@ def edit_tag():
     #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
+        print(data)
 
         update_tag_db(data)
         
@@ -139,9 +139,12 @@ def add_lib():
     if request.method == "POST" :
         data = request.form  
         print(data)
-        insert_into_lib(data)
-
-        return {'message' : 'ok'}
+        
+        res = insert_into_lib(data)
+        if res == True:
+            return {'message' : 'ok'}
+        else:
+            return {'message' : 'err'}
 
 
 @admin.route('/addTag/', methods=["POST"])
@@ -149,11 +152,12 @@ def add_lib():
 def add_tag():
     if request.method == "POST" :
         data = request.form  
-        print(data)
-        ##insert_into_lib(data)
+        res = insert_tag(data)
 
-        return {'message' : 'ok'}
-
+        if res == True :
+            return {'message' : 'ok'}
+        else:
+            return {'message' : 'err'}
 
 @admin.route("/libraries/", methods=["POST", "GET"])
 #@admin_required

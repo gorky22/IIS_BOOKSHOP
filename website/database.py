@@ -692,10 +692,25 @@ def delete_tag(tag_id):
         db_connection.commit()
         cursor.close()
 
-def update_tag_db(name):
-        query = '''UPDATE `Genre` SET `name` = %s WHERE `name` = %s'''        
+def insert_tag(tag_name):
+        if(tag_name["name"] == "" or tag_name["name"] == None):
+                return False
         
-        parameter = tuple(name)
+        param = tuple([tag_name["name"]])
+        query = "INSERT INTO Genre(name) VALUES (%s)"
+
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+        return True
+
+def update_tag_db(name):
+        query = '''UPDATE `Genre` SET `name` = %s WHERE `genre_id` = %s'''        
+        x = [name["name"],name["genre_id"]]
+        parameter = tuple(x)
         is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,parameter)
@@ -729,6 +744,9 @@ def insert_into_lib(atributes):
         x = [lib_name,town,opening_hours,description,
              link,path_to_picture,lib_email,adress]
 
+        if("" in x):
+                return False
+
         param = tuple(x)
         query = '''INSERT INTO `library` (`library_name`, `town`, `opening_hours`, `description`,
                  `webpage_link`, `path_to_picture`, `library_email`, `adress`) 
@@ -739,6 +757,7 @@ def insert_into_lib(atributes):
         cursor.execute(query,param)
         db_connection.commit()
         cursor.close()
+        return True
 
 def insert_into_dist(dist):
         

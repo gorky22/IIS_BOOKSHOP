@@ -185,6 +185,34 @@ document.querySelector('.btnCloseAdd').addEventListener('click', function() {
 })
 
 
+function chechValue(data){
+
+    if (data['library_name'] == "") {
+        return "Zadajte názov knihovny"
+    } 
+    if (data['town'] == "") {
+        return "Zadajte názov mesta"
+    } 
+    if (data['adress'] == "") {
+        return "Zadajte adresu"
+    } 
+    if (data['description'] == "") {
+        return "Zadajte popis"
+    }
+    if (data['opening_hours'] == "") {
+        return "Zadajte otváracie hodiny"
+    }
+    if (data['webpage_link'] == "") {
+        return "Zadajte webovú stránku"
+    }
+    if (data['path_to_picture'] == "") {
+        return "Zadajte cestu k súboru"
+    }
+    if (data['library_email'] == "") {
+        return "Zadajte email"
+    }
+}
+
 
 // Pridanie knihovne
 // Ak bolo stlacene tlacidlo na pridanie
@@ -199,7 +227,6 @@ $('#sendAdd').click(function(e){
     var path_pic = $('#path_picAdd').val()
     var lib_email = $('#lib_emailAdd').val()
 
-
     var data = {
         "library_name" : name,
         "town" : town,
@@ -210,6 +237,7 @@ $('#sendAdd').click(function(e){
         "path_to_picture" : path_pic,
         "library_email" : lib_email,
     }
+
 
     $.ajax({
         type: "POST",
@@ -223,6 +251,9 @@ $('#sendAdd').click(function(e){
                 document.querySelector('.bg-modal-add').style.display = 'none'
                 delete_inputs()
                 location.reload()
+            } else {
+                msg = chechValue(data)
+                Toast.show(msg,'E')
             }
         }
     });
