@@ -81,7 +81,7 @@ def librariesPage():
     return render_template('/main/libraries.html',libraries=libraries,genres=genres)
 
 
-@views.route("/books/genre/<genreid>")
+@views.route("/books/genre/<genreid>/")
 def booksByGenre(genreid):
     books = db_all_book_with_genre(genreid)
     format_ratings(books)
@@ -91,7 +91,7 @@ def booksByGenre(genreid):
     return render_template('/main/list.html',books=books,genres=genres,active=genre)
     
 
-@views.route("books/library/<library>")
+@views.route("books/library/<library>/")
 def booksInLibrary(library):
     books = db_all_book_in_lib(library)
     format_ratings(books)

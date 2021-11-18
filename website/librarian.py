@@ -118,3 +118,4 @@ def booksByPublisher(pubid):
     books = db_book_by_publisher(pubid)
     
     return {'err': None,'books':books}
+

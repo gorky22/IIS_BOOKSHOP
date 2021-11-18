@@ -1,0 +1,99 @@
+.book-picture{
+    display: none;
+}
+input,textarea{
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    margin: 1rem 1rem;
+}
+
+.book-input, .book-date{
+    border: none;
+    border-radius: 1.5rem;
+    box-shadow: 0px 0px 5px #000000a0;
+    
+}
+.book-date-input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+.book-date-label{
+    margin-left: 1rem;
+}
+.book-date-label,.book-date{
+    display: inline-block;
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+.book-input{
+    width: 80%;
+    max-width: 80%;
+}
+.book-picture-label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    height: 36rem;
+    background-color: #9f8aec;
+    border: 10px dashed #623CEA;
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+}
+.header{
+    font-weight: 800;
+    font-family: 'Baloo 2', cursive;
+    font-size: 3rem;
+    text-align: center;
+}
+.book-form{
+    display: flex;
+}
+.left-side{
+    width: 50%;
+}
+.file-input-div{
+    width: 50%;
+}
+.combos{
+    margin-top: 1rem;
+    border-bottom: 2px solid #aaa ;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.combo-label,.author-combo{
+    font-family: 'Nunito',sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+.author-combo{
+    display: block;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+#add-author-button{
+    margin-left: 2rem;
+}
+.new-author{
+    font-family: 'Nunito',sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    
+}
+.name-surname{
+    display: flex;
+}
+.author-input{
+    width: 50%;
+}

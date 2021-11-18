@@ -113,6 +113,9 @@ def db_book_authors(title_id):
         parameter = tuple([title_id])
         return execute_select(query2,parameters=parameter)
 
+def db_authors():
+        query = '''SELECT * FROM Author;'''
+        return execute_select(query)
 
 def db_all_book_info():
         query2 = '''SELECT  b.title_id,b.title_name,b.rating,b.path_to_picture,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 

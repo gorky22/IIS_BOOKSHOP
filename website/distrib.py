@@ -53,9 +53,15 @@ def confirmOrder(orderid):
 @distribSystem.route('/books/')
 @distrib_required
 def distribBooks():
-    
-    return render_template('distributor/books.html')
+    authors = db_authors()
+    return render_template('distributor/books.html',authors=authors)
 
 
-
+# release data
+# ISBN
+# rating = 0
+# description
+# path_to_picture -> input file
+# title_name
+# publisher_id -> default to session['user']['publisher_id']
 
