@@ -88,3 +88,109 @@
     box-shadow: 0px 5px 7px #0000002a;
     cursor: pointer;
 }
+@media only screen and (max-width: 920px){
+    .content.extra-padding{
+        flex-wrap: wrap;
+    }
+    .split-left,.split-right{
+        width: 100%;
+    }
+    .split-left{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+}
+@media only screen and (max-width: 605px){
+    .bottom-split{
+        flex-wrap: wrap;
+    }
+    .bottom-left,.bottom-right{
+        width: 100%;
+    }
+    .bottom-left{
+        margin-bottom: 2rem;
+    }
+    .library-select{
+        width: 100%;
+        text-align: center;
+    }
+    .bottom-right{
+        text-align: center;
+    }
+    #reservation{
+        width: 100%;
+    }
+    .content.extra-padding{
+        padding: 1rem;
+    }
+    .top .percent-align{
+        width: 100%;
+    }
+    .top .percent-align .book-rating{
+        width: 100%;
+    }
+    .top .percent-align .book-rating-text{
+        font-size: 1.8rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+  
+  .slider {
+    -webkit-appearance: none;  
+    appearance: none;
+    width: 100%; 
+    height: 2rem; 
+    background: rgb(231,223,198);
+    background: -moz-linear-gradient(90deg, rgba(231,223,198,1) 0%, rgba(98,60,234,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(231,223,198,1) 0%, rgba(98,60,234,1) 100%);
+    background: linear-gradient(90deg, rgba(231,223,198,1) 0%, rgba(98,60,234,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e7dfc6",endColorstr="#623cea",GradientType=1);
+    outline: none; 
+    opacity: 0.7; 
+    -webkit-transition: .2s; 
+    transition: opacity .2s;
+    border-radius: 1.5rem;
+  }
+  
+ 
+  .slider:hover {
+    opacity: 1; 
+  }
+  
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 25px; 
+    height: 25px; 
+    background: rgba(98,60,234,1); 
+    cursor: pointer; 
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 0px 5px #000000a0;
+    transition: all 0.3s;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px; 
+    height: 25px; 
+    background: rgba(98,60,234,1); 
+    cursor: pointer; 
+    border-radius: 50%;
+    border: 2px solid black;
+    box-shadow: 0px 0px 5px #000000a0;
+    transition: all 0.3s;
+  }
+  .slider::-moz-range-thumb:hover,.slider::-webkit-slider-thumb{
+      transform: scale(1.1);
+  }

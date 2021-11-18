@@ -248,6 +248,11 @@ def find_distributors(string_to_find):
 
         return execute_select(query,parameters=param)
 
+def db_counts_of_books_in_library(lib_pk):
+        query = '''SELECT count FROM book_title_library WHERE library_id = %s'''
+        parameter = tuple([lib_pk])
+        return execute_select(query,parameters=parameter)
+        
 #this function returns book which has this genre
 def db_books_with_genre(genre):
         param = tuple([genre])
@@ -255,7 +260,15 @@ def db_books_with_genre(genre):
                 JOIN Genre g ON t.genre_id = g.genre_id WHERE g.genre_id=%s'''
 
         return execute_select(query,parameters=param)
-
+def db_update_rating(title_id,new_value):
+        query = '''UPDATE book_title SET rating = %s WHERE title_id = %s;'''
+        parameter = tuple([new_value,title_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
 
 def db_genres():
         query = '''SELECT * FROM Genre'''
@@ -268,8 +281,8 @@ def db_genre_info(genreid):
         return execute_select(query,parameters=param)
 
 def db_library_info(libid):
-
         query = '''SELECT library_name,library_id FROM Library WHERE library_id=%s'''
+
         param=tuple([libid])
         return execute_select(query,parameters=param)
 

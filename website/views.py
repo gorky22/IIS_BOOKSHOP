@@ -78,6 +78,12 @@ def detailPage():
 @views.route("/libraries/")
 def librariesPage():
     libraries = db_libraries()
+    for lib in libraries:
+        counts = db_counts_of_books_in_library(lib['library_id'])
+        if len(counts) > 0:
+            lib['count'] = sum(count['count'] for count in counts)
+        else:
+            lib['count'] = 0
     return render_template('/main/libraries.html',libraries=libraries,genres=genres)
 
 
@@ -93,11 +99,14 @@ def booksByGenre(genreid):
 
 @views.route("books/library/<library>/")
 def booksInLibrary(library):
+    session['lib'] = int(library)
+    
+
     books = db_all_book_in_lib(library)
     format_ratings(books)
     books = group_by_five(books)
     library = db_library_info(library)[0]['library_name']
-
+    
     return render_template("/main/list.html",books=books,library=library,genres=genres,library_name=library)
 
 @views.route("/isbookAvailible/<bookid>/<libid>/",methods=["GET","POST"])
@@ -148,12 +157,27 @@ def bookDetail(bookid):
 
 
     book = db_book_info(bookid)
-    print(book)
     book = format_book_and_authors(book)
     libraries = db_libraries_with_book(book['title_id'])
+
+
     
     return render_template('/main/detail.html',book=book,genres=genres,libraries=libraries,similar=similar_books)
 
+@views.route('/rate/book/',methods=['POST'])
+def rateBook():
+    book_id = request.form.get('title_id')
+    old_rating = float(request.form.get('old_value'))
+    new_rating = float(request.form.get('value'))
+    if session['user']:
+        if session['user']['reader']:
+            result = (old_rating+new_rating)/2
+            result = float("%.1f" % result)
+            db_update_rating(book_id,result)
+            path_to_image = '/static/img/rating/' + str(round(result)*10)+'percent.png'
+            return {'err':False,'new_value':result,'path_to_image':path_to_image}
+        return {'err':True,'msg':'Pro hodnocení musíte mít práva čtenáře.'}
+    return {'err':True,'msg':'Pro hodnocení knih se musíte přihlássit'}
 
 @views.route("/user/reservations/")
 @login_required
@@ -184,3 +208,6 @@ def delayBorrow(borid):
     db_update_borrow_time(borid,borrow['until'])
     return {'err':False,'newtime':borrow['until'].strftime("%d. %m. %Y")}
 
+@views.route("/surveys/")
+def surverysPage():
+    

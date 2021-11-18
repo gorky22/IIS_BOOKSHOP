@@ -27,17 +27,27 @@
                 <div class="top">
                     <p class="book-author-detail"><span class="baloo-bold">Hodnocení:</span></p>
                     <div class="percent-align">
-                        <img src="{{ book['rating_path'] }}" alt="rating" class="book-rating">
-                        <p class="book-rating-text">{{ book['rating'] }}</p>
+                        <img src="{{ book['rating_path'] }}" alt="rating" class="book-rating" id="detail-rating">
+                        <p class="book-rating-text" id="old-rating">{{ book['rating'] }}</p>
                     </div>
                 </div>
-                <button class="link-a btn btn-yellow">Ohodnotit</button>
+                <button class="link-a btn btn-yellow" id="rate">Ohodnotit</button>
             </div>
             <div class="bottom-right">
                 <p class="baloo-bold">Zvolte knihovnu</p>
                 <select name="library" class="library-select" id="res-combobox" data-book="{{ book['title_id'] }}">
                     {% for library in libraries %}
-                        <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
+                        {% if session['lib'] %}
+                            {% if session['lib'] == library['library_id'] %}
+                                <option value="{{ library['library_id'] }}" selected="selected">{{ library['library_name'] }}</option>
+                            {% else %}
+                                <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
+                            {% endif %}
+                            
+                        {% else %}
+                            <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
+                        {% endif %}
+                        
                     {% endfor %}
                 </select>
                 <button class="link-a btn btn-blue" id="reservation">Rezervovat</button>
@@ -69,6 +79,8 @@
 
 {% endblock %}
 {% block script_block %}
-<script src="/static/js/reservation.js"></script>
+
 <script src="/static/js/popupwindow.js"></script>
+<script src="/static/js/reservation.js"></script>
+<script src="/static/js/rating.js"></script>
 {% endblock %}
