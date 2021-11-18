@@ -41,7 +41,6 @@ document.getElementById('btnYes').addEventListener('click', function() {
             if (response['message'] == 'ok')
             {
                 Toast.show('Uspešne si odstránil knihovnu','S')
-                location.reload()
             }                
         }
     });
@@ -65,6 +64,7 @@ function setPlaceholder(lib){
 $('.editBtn').click(function(e){
     e.preventDefault()
     
+    alert("som tu")
     var email =  $(this).data('edit')
 
     $.ajax({
@@ -74,7 +74,6 @@ $('.editBtn').click(function(e){
             var lib = response['lib']
 
             document.getElementById('name').innerHTML = lib['library_name']
-            //document.getElementById('town').innerHTML = lib['town']
             //document.getElementById('town').innerHTML = lib['town']
             document.getElementById('opening_hours').innerHTML = lib['opening_hours']
             document.getElementById('web_link').innerHTML = lib['webpage_link']
@@ -97,20 +96,11 @@ $('.editBtn').click(function(e){
 function delete_inputs(){
 
     document.getElementById('nameI').value = ""
-    //document.getElementById("townI").value = ""
+    document.getElementById("townI").value = ""
     document.getElementById('opening_hoursI').value = ""
     document.getElementById('web_linkI').value = ""
     document.getElementById('path_picI').value = ""
     document.getElementById('lib_emailI').value = ""
-
-    document.getElementById('nameAdd').value = ""
-    document.getElementById('townAdd').value = ""
-    document.getElementById('adressAdd').value = ""
-    document.getElementById('descriptionAdd').value = ""
-    document.getElementById('opening_hoursAdd').value = ""
-    document.getElementById('web_linkAdd').value = ""
-    document.getElementById('path_picAdd').value = ""
-    document.getElementById('lib_emailAdd').value = ""
 
 }
 
@@ -130,7 +120,7 @@ $('#sendEdit').click(function(e){
     var old_email = document.getElementById('lib_email').innerHTML
 
     var name = $('#nameI').val()
-    //var town = $('#townI').val()
+    var town = $('#townI').val()
     var opening_hours = $('#opening_hoursI').val()
     var web_link = $('#web_linkI').val()
     var path_pic = $('#path_picI').val()
@@ -143,6 +133,7 @@ $('#sendEdit').click(function(e){
     var data = {
         "old_email" : old_email,
         "library_name" : name,
+        "town" : town,
         "opening_hours" : opening_hours,
         "webpage_link" : web_link,
         "path_to_picture" : path_pic,
@@ -159,8 +150,8 @@ $('#sendEdit').click(function(e){
             {
                 Toast.show('Úspešna editácia knihovny','S')
                 document.querySelector('.bg-modal-edit').style.display = 'none'
+
                 delete_inputs()
-                location.reload()
             }    
         }
     });
@@ -180,8 +171,6 @@ $('#btnAddLib').click(function(e){
 // ak bolo stlacene tlacidlo Exit schova sa Pop Up okno
 document.querySelector('.btnCloseAdd').addEventListener('click', function() {
     document.querySelector('.bg-modal-add').style.display = 'none'
-
-    delete_inputs()
 })
 
 
@@ -190,26 +179,7 @@ document.querySelector('.btnCloseAdd').addEventListener('click', function() {
 // Ak bolo stlacene tlacidlo na pridanie
 $('#sendAdd').click(function(e){
 
-    var name = $('#nameAdd').val()
-    var town = $('#townAdd').val()
-    var address = $('#adressAdd').val()
-    var description = $('#descriptionAdd').val()
-    var opening_hours = $('#opening_hoursAdd').val()
-    var web_link = $('#web_linkAdd').val()
-    var path_pic = $('#path_picAdd').val()
-    var lib_email = $('#lib_emailAdd').val()
-
-
-    var data = {
-        "library_name" : name,
-        "town" : town,
-        "adress" : address,
-        "description" : description,
-        "opening_hours" : opening_hours,
-        "webpage_link" : web_link,
-        "path_to_picture" : path_pic,
-        "library_email" : lib_email,
-    }
+    var data = 'fero'
 
     $.ajax({
         type: "POST",
@@ -217,13 +187,8 @@ $('#sendAdd').click(function(e){
         data: data,
         dataType: "json",
         success: function (response) {
-            if (response['message'] == 'ok')
-            {
-                Toast.show('Úspešna pridanie knihovne','S')
-                document.querySelector('.bg-modal-add').style.display = 'none'
-                delete_inputs()
-                location.reload()
-            }
+
+            document.querySelector('.bg-modal-add').style.display = 'none'
         }
     });
 })

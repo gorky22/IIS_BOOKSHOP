@@ -64,7 +64,8 @@ td{
     color: #333;
 }
 
-.search-box input[type=text] {
+.search-box input[type=text],
+.add-box input[type=text] {
     text-align: center;
     font-family: 'Baloo 2', cursive;
     font-weight: 800;
@@ -82,7 +83,10 @@ td{
     color: #333;
     outline: none;
 }
-.search-box input[type=text]:focus, .search-box input[type=text]:hover {
+.search-box input[type=text]:focus, 
+.search-box input[type=text]:hover,
+.add-box input[type=text]:focus,
+.add-box input[type=text]:hover {
     background-color: #5f5b50;
     color: rgb(255, 255, 255);
     border: none;
@@ -153,7 +157,7 @@ tr:nth-child(even) .editBtn:hover {
 
 }
 
-.btnClose, .btnCloseEdit {
+.btnClose, .btnCloseEdit, .btnCloseAdd {
     position: absolute;
     top: 0;
     right: 3rem;
@@ -176,8 +180,35 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .content-modal-edit {
-    width: 60rem;
-    height: 42rem;
+    width: 65rem;
+    height: 25rem;
+
+    background-color: #FFF;
+    border-radius: 3rem;
+    padding: 3rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    font-family: 'Baloo 2', cursive;
+    position: relative;
+    margin: auto;
+
+}
+
+.bg-modal-add {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+}
+.content-modal-add {
+    width: 65rem;
+    height: 25rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -197,7 +228,7 @@ tr:nth-child(even) .editBtn:hover {
 .data-db {
     text-align: right;
     float: left;
-    font-size: 1.3rem;
+    font-size: 2.2rem;
     margin-left: 3rem;
     width:  40%;
    
@@ -206,7 +237,7 @@ tr:nth-child(even) .editBtn:hover {
     text-align: left;
     float: left;
 
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin-left: 3rem;
     width: 40%;
 }
@@ -265,32 +296,26 @@ tr:nth-child(even) .editBtn:hover {
 }
 
 .changeTo input[type=text] {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.5rem;
     width: 85%;
-    padding: 0.2rem;
-    padding-left: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0px 2px 2px #0000002a;
+    padding: 0.2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 7px #0000002a;
     border: none;
     cursor: pointer;
     border-style: none;
     text-decoration: none;
+    margin-bottom: 0.7rem;
     background-color: #fff;
     color: #333;
     outline: none;
     
 }
 
-.rightsBtn {
-    text-align: right;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    
-}
 
-.rightsBtn i {
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
 
 tr:nth-child(odd) .addBtn:hover {
     color: #623CEA;
@@ -306,4 +331,40 @@ tr:nth-child(even) .addBtn:hover {
 
 .tag {
     text-align: center;
+}
+
+.addSection {
+    text-align: center;
+}
+
+#thHeader, #tdContent {
+    padding-left: 18rem;
+}
+
+.addBtn i {
+    font-size: 4rem;
+    color: #623CEA;
+}
+
+.addBtn i:hover {
+    color: #c4b3fb;
+}
+
+#deleteTag {
+    font-weight: bold;
+}
+#sendEdit {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 60%;
+}
+
+.add-box input[type=text] {
+    width: 65%;
+}
+
+#sendAdd {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 30%;
 }

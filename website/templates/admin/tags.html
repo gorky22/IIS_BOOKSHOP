@@ -13,7 +13,7 @@
         <tr>
             <th></th>
             <th></th>
-            <th class="tag">Názov</th>
+            <th id="thHeader" class="tag">Názov</th>
             <th></th>
             <th class="search-box">
                 <form action="{{ url_for('admin.tagsPage') }}" method="post">
@@ -27,14 +27,14 @@
         <tr>
             <td></td>
             <td></td>
-            <td class="tag"> {{ tag['name'] }} </td>
+            <td id="tdContent" class="tag"> {{ tag['name'] }} </td>
             <td></td>
             <td class="deleteForm">
                 <form method="post">
-                    <button type="button" class="editBtn" name="btnEdit">
+                    <button type="button" class="editBtn" name="btnEdit" data-id= {{ tag['genre_id'] }}>
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button type="button" class="deleteBtn" name="btnDelete">
+                    <button type="button" class="deleteBtn" name="btnDelete" data-tag= {{ tag['name'] }} data-id= {{ tag['genre_id'] }}>
                         <i class="far fa-trash-alt"></i>
                     </button>
                    
@@ -47,21 +47,72 @@
 
         </tr>
         {% endfor %}
-        <tr>
-            <td></td>
-            <td></td>
-            <td class="tag">
-                <button type="button" class="addBtn" name="btnadd"}>
-                    <i class="far fa-plus"></i>
-                </button>
-            </td>
-            <td></td>
-            <td></td>
-        </tr>
     </table>
-
+    <br>
+    <div class="addSection">
+        <button id="btnAddTag" type="button" class="addBtn" name="btnadd"}>
+            <i class="fas fa-plus-circle"></i>
+        </button>
+    </div>
+    
     
  </div>
+
+
+<!-- Modal section -->
+<!-- Model Delete Lib -->
+<div class="bg-modal-delete">
+    <div class="content-modal-delete">
+        <div class="btnClose">+</div>
+        <p id="deleteText">Naozaj chceš vymazať tag</p>
+        <p id="deleteTag"></p>
+        <p style="display: none;" id="idTag" > </p>
+        <button id="btnYes" class="btn-search btn-yellow">Áno</button>
+        <button id="btnNo"class="btn-search btn-blue">Nie</button>
+    </div>
+</div>
  
+
+<!-- Model Edit Tag -->
+<div class="bg-modal-edit">
+    <div class="content-modal-edit">
+        <div class="btnCloseEdit">+</div>
+        <p id="editText">Editace Tagu</p>
+
+        <div id="colsContainer">
+            <div class="data-db">
+                <h1>Informace v databázi</h1>
+                <label for="name">Názov: </label>
+                <p  id="name"></p><br>
+            </div>
+
+            <div class="changeTo">
+                <h1>Změnit na</h1>
+                <form action="">
+                    <input id='nameI' type="text" placeholder="">
+                </form>
+            </div>
+        </div>
+        <button id="sendEdit" class="btn-search btn-blue">Potvrdiť zmeny</button>
+    </div>
+</div>
+
+
+<!-- Model Add Tag -->
+<div class="bg-modal-add">
+    <div class="content-modal-add">
+        <div class="btnCloseAdd">+</div>
+        <p id="addText">Pridanie Tagu</p>
+            <div class="add-box">
+                <form action="">
+                    <input id='nameAdd' type="text" placeholder="Jméno tagu"><br>
+                </form>
+            </div>
+        <button id="sendAdd" class="btn-search btn-blue">Potvrdiť zmeny</button>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/adminTags.js"></script>
+
 {% endblock %}
 
