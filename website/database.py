@@ -618,10 +618,8 @@ def insert_tag(tag_name):
         return True
 
 def update_tag_db(name):
-        print("SOM TU")
         query = '''UPDATE `Genre` SET `name` = %s WHERE `genre_id` = %s'''        
         x = [name["name"],name["genre_id"]]
-        print(x)
         parameter = tuple(x)
         is_connect()
         cursor = db_connection.cursor()
