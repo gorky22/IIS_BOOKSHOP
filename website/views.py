@@ -210,4 +210,4 @@ def delayBorrow(borid):
 
 @views.route("/surveys/")
 def surverysPage():
-    
+    return
