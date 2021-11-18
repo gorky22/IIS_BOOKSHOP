@@ -257,7 +257,7 @@ $('#sendEdit').click(function(e){
 
 
 // Tlacidlo na pridanie knihovne
-$('#btnAddLib').click(function(e){
+$('#btnAddDist').click(function(e){
     e.preventDefault()
    
     // Zobrazi sa Pop Up okno
