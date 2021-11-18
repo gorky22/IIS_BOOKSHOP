@@ -140,9 +140,11 @@ def add_lib():
         data = request.form  
         print(data)
         
-        insert_into_lib(data)
-
-        return {'message' : 'ok'}
+        res = insert_into_lib(data)
+        if res == True:
+            return {'message' : 'ok'}
+        else:
+            return {'message' : 'err'}
 
 
 @admin.route('/addTag/', methods=["POST"])
@@ -150,11 +152,12 @@ def add_lib():
 def add_tag():
     if request.method == "POST" :
         data = request.form  
-        insert_tag(data)
-        ##insert_into_lib(data)
+        res = insert_tag(data)
 
-        return {'message' : 'ok'}
-
+        if res == True :
+            return {'message' : 'ok'}
+        else:
+            return {'message' : 'err'}
 
 @admin.route("/libraries/", methods=["POST", "GET"])
 #@admin_required

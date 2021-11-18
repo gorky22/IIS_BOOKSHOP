@@ -166,7 +166,10 @@ $('#sendAdd').click(function(e){
                 document.getElementById('nameAdd').value = ""
 
                 location.reload()
-            } 
+            } else {
+                Toast.show('Zadaj nazov','E')
+            }
+
 
         }
     });

@@ -251,6 +251,9 @@ $('#sendAdd').click(function(e){
                 document.querySelector('.bg-modal-add').style.display = 'none'
                 delete_inputs()
                 location.reload()
+            } else {
+                msg = chechValue(data)
+                Toast.show(msg,'E')
             }
         }
     });
