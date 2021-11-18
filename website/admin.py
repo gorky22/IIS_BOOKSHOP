@@ -104,6 +104,7 @@ def add_lib():
     if request.method == "POST" :
         data = request.form  
         print(data)
+        insert_into_lib(data)
 
         return {'message' : 'ok'}
 

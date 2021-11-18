@@ -75,6 +75,7 @@ $('.editBtn').click(function(e){
 
             document.getElementById('name').innerHTML = lib['library_name']
             //document.getElementById('town').innerHTML = lib['town']
+            //document.getElementById('town').innerHTML = lib['town']
             document.getElementById('opening_hours').innerHTML = lib['opening_hours']
             document.getElementById('web_link').innerHTML = lib['webpage_link']
             document.getElementById('path_pic').innerHTML = lib['path_to_picture']
@@ -104,6 +105,7 @@ function delete_inputs(){
 
     document.getElementById('nameAdd').value = ""
     document.getElementById('townAdd').value = ""
+    document.getElementById('adressAdd').value = ""
     document.getElementById('descriptionAdd').value = ""
     document.getElementById('opening_hoursAdd').value = ""
     document.getElementById('web_linkAdd').value = ""
@@ -190,6 +192,7 @@ $('#sendAdd').click(function(e){
 
     var name = $('#nameAdd').val()
     var town = $('#townAdd').val()
+    var address = $('#adressAdd').val()
     var description = $('#descriptionAdd').val()
     var opening_hours = $('#opening_hoursAdd').val()
     var web_link = $('#web_linkAdd').val()
@@ -200,6 +203,7 @@ $('#sendAdd').click(function(e){
     var data = {
         "library_name" : name,
         "town" : town,
+        "adress" : address,
         "description" : description,
         "opening_hours" : opening_hours,
         "webpage_link" : web_link,
