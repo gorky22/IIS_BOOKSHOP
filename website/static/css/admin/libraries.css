@@ -372,3 +372,6 @@ input[type=file]:hover {
 #PicEdit{
     text-align: center;
 }
+input[type=file]::file-selector-button {
+    display: none;
+}
