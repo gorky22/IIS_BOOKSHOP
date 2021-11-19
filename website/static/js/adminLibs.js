@@ -54,7 +54,6 @@ function setPlaceholder(lib){
     $('#townI').attr('placeholder', lib['town'])
     $('#opening_hoursI').attr('placeholder', lib['opening_hours'])
     $('#web_linkI').attr('placeholder', lib['webpage_link'])
-    $('#path_picI').attr('placeholder', lib['path_to_picture'])
     $('#lib_emailI').attr('placeholder', lib['library_email'])
 
 }
@@ -78,7 +77,6 @@ $('.editBtn').click(function(e){
             //document.getElementById('town').innerHTML = lib['town']
             document.getElementById('opening_hours').innerHTML = lib['opening_hours']
             document.getElementById('web_link').innerHTML = lib['webpage_link']
-            document.getElementById('path_pic').innerHTML = lib['path_to_picture']
             document.getElementById('lib_email').innerHTML = lib['library_email']
 
             setPlaceholder(lib)
@@ -100,7 +98,6 @@ function delete_inputs(){
     //document.getElementById("townI").value = ""
     document.getElementById('opening_hoursI').value = ""
     document.getElementById('web_linkI').value = ""
-    document.getElementById('path_picI').value = ""
     document.getElementById('lib_emailI').value = ""
 
     document.getElementById('nameAdd').value = ""
@@ -124,6 +121,14 @@ document.querySelector('.btnCloseEdit').addEventListener('click', function() {
 })
 
 
+function checkImage(id){
+    var tmp = document.getElementById(id).files.length
+
+    if(tmp == 0){
+        Toast.show("Musite zadat obrázok knižnice", "E")
+    }
+}
+
 // Editacia knihovne
 // Ak bolo stlacene tlacidlo na ulozenie zmien
 $('#sendEdit').click(function(e){
@@ -133,29 +138,32 @@ $('#sendEdit').click(function(e){
     //var town = $('#townI').val()
     var opening_hours = $('#opening_hoursI').val()
     var web_link = $('#web_linkI').val()
-    var path_pic = $('#path_picI').val()
     var lib_email = $('#lib_emailI').val()
-   
-
 
     
-   
-    var data = {
-        "old_email" : old_email,
-        "library_name" : name,
-        "opening_hours" : opening_hours,
-        "webpage_link" : web_link,
-        "path_to_picture" : path_pic,
-        "library_email" : lib_email,
-    }
+    var file = document.getElementById("path_picEdit").files[0]
 
-    if(testEmail(lib_email) && checkTime(opening_hours))
+    var form_data = new FormData()
+
+    form_data.append("old_email", old_email)
+    form_data.append("library_name", name)
+    form_data.append("opening_hours", opening_hours)
+    form_data.append("webpage_link", web_link)
+    form_data.append("library_email", lib_email)
+    form_data.append("file", file)
+    
+   
+    
+    if(testEmail(lib_email) && checkTime(opening_hours, 0))
     {
         $.ajax({
             type: "POST",
             url: "/admin/editLib/",
-            data: data,
+            data: form_data,
             dataType: "json",
+            contentType: false,
+            processData: false,
+            cache: false,
             success: function (response) {
                 if (response['message'] == 'ok')
                 {
@@ -209,7 +217,7 @@ function chechValue(data){
         return "Zadajte webovú stránku"
     }
     if (data['path_to_picture'] == "") {
-        return "Zadajte cestu k súboru"
+        return "Zadajte obrazok"
     }
     if (data['library_email'] == "") {
         return "Zadajte email"
@@ -227,30 +235,35 @@ $('#sendAdd').click(function(e){
     var description = $('#descriptionAdd').val()
     var opening_hours = $('#opening_hoursAdd').val()
     var web_link = $('#web_linkAdd').val()
-    var path_pic = $('#path_picAdd').val()
     var lib_email = $('#lib_emailAdd').val()
+    var file = document.getElementById("path_picAdd").files[0]
 
-    var data = {
-        "library_name" : name,
-        "town" : town,
-        "adress" : address,
-        "description" : description,
-        "opening_hours" : opening_hours,
-        "webpage_link" : web_link,
-        "path_to_picture" : path_pic,
-        "library_email" : lib_email,
-    }
+    var form_data = new FormData()
 
-    if (testEmail(lib_email) && checkTime(opening_hours))    
+    form_data.append("library_name", name)
+    form_data.append("town", town)
+    form_data.append("adress", address)
+    form_data.append("description", description)
+    form_data.append("opening_hours", opening_hours)
+    form_data.append("webpage_link", web_link)
+    form_data.append("library_email", lib_email)
+    form_data.append("file", file)
+
+
+    if (testEmail(lib_email) && checkTime(opening_hours, 1)  && checkImage("path_picAdd"))    
     {
         $.ajax({
             type: "POST",
             url: "/admin/addLib/",
-            data: data,
+            data: form_data,
             dataType: "json",
+            contentType: false,
+            processData: false,
+            cache: false,
             success: function (response) {
                 if (response['message'] == 'ok')
                 {
+                    alert("@@@")
                     Toast.show('Úspešna pridanie knihovne','S')
                     document.querySelector('.bg-modal-add').style.display = 'none'
                     delete_inputs()

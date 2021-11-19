@@ -112,6 +112,14 @@ $('.editBtn').click(function(e){
                 document.getElementById("hide_br").classList.add('hide')
             }
             checkBtn("disR", user['distributor'])
+            if (user['distributor'] == 1){
+                document.getElementById("res-comboboxDis").classList.remove('hide')
+                document.getElementById("hide_br_dis").classList.remove('hide')
+            
+            } else {
+                document.getElementById("res-comboboxDis").classList.add('hide')
+                document.getElementById("hide_br_dis").classList.add('hide')
+            }
             checkBtn("basicUserR", user['reader'])
 
             setPlaceholder(user)
@@ -167,9 +175,20 @@ $('#libRemove').click(function(e){
     checkBtn("libR", 0)
 })
 $('#disAdd').click(function(e){
+    document.getElementById("res-comboboxDis").classList.remove('hide')
+    document.getElementById("hide_br_dis").classList.remove('hide')
+
+    //odobrat knihovnu v ktorej user pracuje
+    document.getElementById('res-comboboxDis').value=0
+
     checkBtn("disR", 1)
 })
 $('#disRemove').click(function(e){
+    document.getElementById("res-comboboxDis").classList.add('hide')
+    document.getElementById("hide_br_dis").classList.add('hide')
+
+    //odobrat knihovnu v ktorej user pracuje
+    document.getElementById('res-comboboxDis').value=0
     checkBtn("disR", 0)
 })
 $('#basicUserAdd').click(function(e){

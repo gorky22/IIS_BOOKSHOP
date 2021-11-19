@@ -115,13 +115,20 @@
                     <option value="{{ library['library_id'] }}">{{ library['library_name'] }}</option>
                 {% endfor %}
             </select> 
-            <br id="hide_br" class="library-select hide"> 
+            <br id="hide_br" class="library-select hide">
 
             <p style="display: inline;">Distribútor</p>
             <i id="disR" class="fas"></i>
             <button id="disAdd" class="btnGreen">Udeliť práva</button>
             <button id="disRemove" class="btnRed">Odebrať práva</button> 
             <br>
+            <select name="distributors" class="dis-select hide" id="res-comboboxDis">
+                <option value="0">Vyber distribútora</option>
+                {% for dis in distributors %}
+                    <option value="{{ dis['publisher_id'] }}">{{ dis['publisher_name'] }}</option>
+                {% endfor %}
+            </select> 
+            <br id="hide_br_dis" class="dis-select hide">
 
             <p style="display: inline;">Bežný užívateľ</p>
             <i id="basicUserR" class="fas"></i>

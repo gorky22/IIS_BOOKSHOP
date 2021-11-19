@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request,session,redirect,url_for
 from functools import wraps
 from .database import *
+from werkzeug.utils import secure_filename
+import os
 
 def admin_required(f):
     @wraps(f)
@@ -25,8 +27,9 @@ def adminPage():
     else:
         users = get_all_users()
         libs = db_libraries()
+        dis = db_distributors()
 
-    return render_template("/admin/admin.html", users=users, libraries=libs)
+    return render_template("/admin/admin.html", users=users, libraries=libs, distributors=dis)
 
 
 @admin.route("delete/", methods=["POST"])
@@ -123,8 +126,30 @@ def edit_tag():
 @admin.route('/editLib/', methods=["POST"])
 #@admin_required
 def edit_lib():
+    UPLOAD_FOLDER = "website/static/img"
+    STATIC_FOLDER = "/static/img"
     if request.method == "POST" :
-        data = request.form  
+        name = request.form.get('library_name')
+        opening_hours = request.form.get('opening_hours')
+        web_link = request.form.get('webpage_link')
+        lib_email = request.form.get('library_email')
+        old_email = request.form.get('old_email')
+
+        file = request.files.getlist("file")[0]
+        filename = secure_filename(file.filename)
+        
+        path_to_new_file = os.path.join(UPLOAD_FOLDER,filename)
+        path_to_picture = os.path.join(STATIC_FOLDER,filename)
+        file.save(path_to_new_file) 
+
+        data = {
+        "old_email" : old_email,
+        "library_name" : name,
+        "opening_hours" : opening_hours,
+        "webpage_link" : web_link,
+        "path_to_picture" : path_to_picture,
+        "library_email" : lib_email,
+        }
         print("Data", data)
         update_lib_db(data)
 
@@ -134,10 +159,36 @@ def edit_lib():
 @admin.route('/addLib/', methods=["POST"])
 #@admin_required
 def add_lib():
+    UPLOAD_FOLDER = "website/static/img"
+    STATIC_FOLDER = "/static/img"
     if request.method == "POST" :
-        data = request.form  
-        print(data)
+        name = request.form.get('library_name')
+        town = request.form.get('town')
+        description = request.form.get('description')
+        address = request.form.get('adress')
+        opening_hours = request.form.get('opening_hours')
+        web_link = request.form.get('webpage_link')
+        lib_email = request.form.get('library_email')
+
+        file = request.files.getlist("file")[0]
+        filename = secure_filename(file.filename)
         
+        path_to_new_file = os.path.join(UPLOAD_FOLDER,filename)
+        path_to_picture = os.path.join(STATIC_FOLDER,filename)
+        file.save(path_to_new_file)
+
+        data = {
+        "library_name" : name,
+        "town" : town,
+        "adress" : address,
+        "description" : description,
+        "opening_hours" : opening_hours,
+        "webpage_link" : web_link,
+        "path_to_picture" : path_to_picture,
+        "library_email" : lib_email,
+        }
+
+        print(data)
         res = insert_into_lib(data)
         if res == True:
             return {'message' : 'ok'}
@@ -167,7 +218,6 @@ def libPage():
     else:
         libraries = db_libraries()
         
-    print(*libraries, sep='\n')
     return render_template("admin/libraries.html", libraries=libraries)
 
 

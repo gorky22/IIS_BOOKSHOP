@@ -181,7 +181,7 @@ tr:nth-child(even) .editBtn:hover {
 
 .content-modal-edit, .content-modal-add {
     width: 80rem;
-    height: 32rem;
+    height: 34rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -344,4 +344,31 @@ tr:nth-child(even) .addBtn:hover {
 input[type=text]{
     cursor: text !important;
 }
-
+input[type=file] {
+    text-align: center;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 1.7rem;
+    width: 65%;
+    padding: 0.2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 5px 7px #0000002a;
+    border: none;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+    background-color: #E7DFC6;
+    color: #333;
+    outline: none;   
+}
+input[type=file]:hover {
+    background-color: #5f5b50;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-style: none;
+    box-shadow: 0px 5px 7px #0000002a;
+}
+#PicEdit{
+    text-align: center;
+}

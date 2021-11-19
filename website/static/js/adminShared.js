@@ -75,7 +75,10 @@ function test_time(time){
    
 }
 
-function checkTime(time){
+function checkTime(time, add){
+    if(time == "" && add == 0){
+        return true
+    }
     if(test_time(time) == false){
         Toast.show('Zadaj čas v tvare hh:mm','E')
         return false
