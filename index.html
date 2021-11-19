@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2" />
+    <title>Projekt IIS</title>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,400&display=swap');
+
+        table {
+            border-collapse: collapse;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        dt,
+        dd {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        p {
+            width: 1100px;
+        }
+
+        td,
+        th {
+            border: 1px solid black;
+            padding: 0.3em 0.5em;
+            text-align: left;
+        }
+
+        dt {
+            font-weight: bold;
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+    <h1>2. Knihovna: vyhledávání, rezervace, půjčování a objednávání knih</h1> <!-- Nahradte názvem svého zadání -->
+
+    <dl>
+        <dt>Autoři</dt>
+        <dd>1. <a href="mailto:xautor01@stud.fit.vutbr.cz">xkriva29@stud.fit.vutbr.cz</a> - Design stránky, aplikace pro
+            neregistrované i registrované uživatele, systém knihovníků, systém distributorů
+        </dd>
+        <dd>2. <a href="mailto:xautor02@stud.fit.vutbr.cz">xhomol27@stud.fit.vutbr.cz</a> - Administrátorský systém -
+            role administrátora, která spravuje data v systému (zároveň může nahlížet do systémů jiných rolí)
+
+        </dd>
+        <dd>3. <a href="mailto:xautor03@stud.fit.vutbr.cz">xgorca00@stud.fit.vutbr.cz</a> - Vytvoření databáze v MySQL,
+            vytváření dotazů nad systémem, vkládání do databáze, mazání z databáze
+
+        </dd>
+        <dt>URL aplikace</dt>
+        <dd><a href="http://www.stud.fit.vutbr.cz/~xautor01/IIS">https://bookreserver.herokuapp.com/</a></dd>
+    </dl>
+
+    <h2>Uživatelé systému pro testování</h2>
+    <table>
+        <tr>
+            <th>Login</th>
+            <th>Heslo</th>
+            <th>Role</th>
+        </tr>
+        <tr>
+            <td>admin@gmail.com</td>
+            <td>Admin123</td>
+            <td>Administrátor</td>
+        </tr>
+        <tr>
+            <td>librarian@gmail.com</td>
+            <td>Librarian123</td>
+            <td>Knihovník (pracuje v Knihovně Brno)</td>
+        </tr>
+        <tr>
+            <td>distributor@gmail.com</td>
+            <td>Distributor123</td>
+            <td>Distributor (pracuje ve vydavatelství Vydavatel s.r.o)</td>
+        </tr>
+        <tr>
+            <td>uzivatel@gmail.com</td>
+            <td>Uzivatel123</td>
+            <td>Běžný uživatel</td>
+        </tr>
+    </table>
+    <h2>Implementace</h2>
+    <p>Aplikace je implementována pomocí frameworku Flask v programovacím jazyce Python.<br>
+        Frontend webové aplikace je implementován v jazyce HTML (s šablonovacím systémem Jinja2), CSS, a Javascript (s
+        knihovnou Jquerry).
+        Hlavní soubor aplikace - app.py pouze vytváří aplikaci jako takovou a spouští ji. Všechny další potřebné soubory
+        jsou ve složce website
+        Pro asinchronní komunikaci je použita knihovna Jquerry ($.ajax). Asynchronní komunikace se serverem se používá
+        napříč celou aplikací.
+        Aplikace je rozdělena do několika souborů, které řídí chod celé aplikace.</p>
+    <h4>Soubory ve složce website</h4>
+    <ul>
+        <li>
+            <p><span style="font-weight: 800;">__init__.py</span> - V souboru je inicializace celé aplikace. Připojení k
+                databázi a provázání všech následujících souborů pomocí Flask Blueprintů.</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">views.py</span> - Logika hlavní aplikace - stránky pro běžné uživatele,
+                neregistrované uživatele.</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">admin.py</span> -***********************HANZ***********************</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">auth.py</span> - Logika registrování, přihlašování a odhlašování
+                uživatelů.</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">distrib.py</span> - Systém pro distributory - potvrzování objednávek,
+                přehled knih distributora a možnost vložit novou knihu</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">librarian.py</span> - Systém pro knihovníka - správa rezervací a výpůjček
+                v knihovně, kde knihovník pracuje, tvoření objednávek od distributorů, správa knížek v knihovně a
+                možnost vložit novou knihu do systému. Nahlížení do anket (ukazování, kolik lidí hlasovalo pro objednání
+                určité knihy do knihovny)</p>
+        </li>
+        <li>
+            <p><span style="font-weight: 800;">database.py</span> -
+                -***********************DAMIAN***********************</p>
+        </li>
+    </ul>
+    <h4>Další soubory/adresáře</h4>
+    <ul>
+        <li>
+            <p><span style="font-weight: 800;">static</span> - Zde se nacházejí statické soubory (CSS,JS,obrázky,ikony)
+            </p>
+        </li>
+        <ul>
+            <li>
+                <p><span style="font-weight: 800;">JS soubory</span> - v adresáři s Javascriptovými soubory jsou všechny
+                    JS prostředky pro asynchronní komunikaci, responsivní design - jako např. Kontrola registrace
+                    (správný tvar všech požadovaných informací), Prostředek pro podávání zpráv uživately (Toast),
+                    vyskakující okno, živé vyhledávání.</p>
+            </li>
+        </ul>
+        <li>
+            <p><span style="font-weight: 800;">templates</span> - Zde se nacházejí HTML soubory, které se používají ve
+                funkci z modulu FLASK render_template. Tyto soubory se renderují, když uživatel navštíví jakoukoliv
+                stránku aplikace.
+            </p>
+        </li>
+    </ul>
+
+    <h3>Databáze</h3>
+
+    ***********************DAMIAN***********************
+
+    <h2>Instalace</h2>
+
+    Stručně popište:
+    <ul>
+        <li>postup instalace na server,</li>
+        <li>softwarové požadavky (verze PHP apod.),</li>
+        <li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+    </ul>
+
+    <h2>Známé problémy</h2>
+    <p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla
+        implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme
+        muset dlouze hledat.</p>
+
+</body>
+
+</html>
