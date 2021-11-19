@@ -181,7 +181,7 @@ tr:nth-child(even) .editBtn:hover {
 
 .content-modal-edit, .content-modal-add {
     width: 80rem;
-    height: 34rem;
+    height: 36rem;
 
     background-color: #FFF;
     border-radius: 3rem;
@@ -195,7 +195,7 @@ tr:nth-child(even) .editBtn:hover {
 
 }
 .content-modal-add {
-    height: 50rem;
+    height: 54rem;
 }
 #colsContaier {
     width: 100%;

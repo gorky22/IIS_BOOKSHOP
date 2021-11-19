@@ -17,13 +17,15 @@ def admin_required(f):
 
 admin = Blueprint("admin",__name__)
 
+
+####    USER    #### 
+####################
 @admin.route("/", methods=["POST", "GET"])
 #@admin_required
 def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
             users = find_user(request.form["nm"])
-            
     else:
         users = get_all_users()
         libs = db_libraries()
@@ -32,10 +34,10 @@ def adminPage():
     return render_template("/admin/admin.html", users=users, libraries=libs, distributors=dis)
 
 
+# Delete user
 @admin.route("delete/", methods=["POST"])
 #@admin_required
 def userDelete():
-    
     if request.method == "POST" :
         email = request.form.get("email")  
         print("Vymazal som uzivatela", email)
@@ -44,39 +46,13 @@ def userDelete():
         return {'message' : "ok"}
 
 
-@admin.route("deleteLib/", methods=["POST"])
-#@admin_required
-def libDelete():
-    
-    if request.method == "POST" :
-        email = request.form.get("email")  
-        print("Vymazal som knihovnu", email)
-        delete_library(email)
-
-        return {'message' : "ok"}
-
-
-@admin.route("deleteTag/", methods=["POST"])
-#@admin_required
-def tagDelete():
-    
-    if request.method == "POST" :
-       
-        genre_id = request.form.get("genre_id")  
-        print("Vymazal som Tag", genre_id)
-        delete_tag(genre_id)
-
-        return {'message' : "ok"}
-
-
+# Get info from user
 @admin.route("/user/<useremail>")
 #@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
     dis = distributor_alma_mater(useremail)
     
-    print("co tu je ", dis)
-    #print(user[0])
     if len(dis) == 0 :
         return {'user' : user[0],
             'dis' : ""}    
@@ -85,31 +61,13 @@ def get_user_by_id(useremail):
             'dis' : dis[0]}
 
 
-@admin.route("/library/<email>")
-#@admin_required
-def get_lib_by_email(email):
-    library = find_library(email)
-    dis = distributor_alma_mater(email)
-    
-    print("co tu je ", dis)
-    #print(library[0])
-    return {'lib' : library[0]}
-
-
-@admin.route("/tags/<id>")
-#@admin_required
-def get_tag_by_id(id):
-    #tag = find_library(id)
-    tag = db_tags(id)
-    return {'tag' : tag[0]}
-
+# Edit user
 @admin.route('/editUser/', methods=["POST"])
 #@admin_required
 def edit_user():
     #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
-        #print("Data", data)
 
         # knihovnikovi nebola pridana kniznica
         if data['librarian'] == '1' and data['library_id'] == '0':
@@ -120,20 +78,42 @@ def edit_user():
             return {'message' : 'ok'}
 
 
-@admin.route('/editTag/', methods=["POST"])
+####    LIBRARY    #### 
+#######################
+@admin.route("/libraries/", methods=["POST", "GET"])
 #@admin_required
-def edit_tag():
-    #print("EDITOVANIE USERA")
-    if request.method == "POST" :
-        data = request.form  
-        print(data)
-
-        update_tag_db(data)
+def libPage():
+    if request.method == "POST":
+        if "nm" in request.form:
+            libraries = find_library(request.form["nm"])
+    else:
+        libraries = db_libraries()
         
-        return {'message' : 'ok'}
+    return render_template("admin/libraries.html", libraries=libraries)
 
 
+# Delete Library
+@admin.route("deleteLib/", methods=["POST"])
+#@admin_required
+def libDelete():
+    if request.method == "POST" :
+        email = request.form.get("email")  
+        delete_library(email)
 
+        return {'message' : "ok"}
+
+
+# Get info from library
+@admin.route("/library/<email>")
+#@admin_required
+def get_lib_by_email(email):
+    library = find_library(email)
+    dis = distributor_alma_mater(email)
+    
+    return {'lib' : library[0]}
+
+
+# Edit library
 @admin.route('/editLib/', methods=["POST"])
 #@admin_required
 def edit_lib():
@@ -167,6 +147,7 @@ def edit_lib():
         return {'message' : 'ok'}
 
 
+# Add Library
 @admin.route('/addLib/', methods=["POST"])
 #@admin_required
 def add_lib():
@@ -207,6 +188,52 @@ def add_lib():
             return {'message' : 'err'}
 
 
+
+####    TAG    #### 
+###################
+@admin.route("/tags/", methods=["POST", "GET"])
+#@admin_required
+def tagsPage():
+    if request.method == "POST":
+        if "nm" in request.form:
+            tags = db_tags(tag=request.form["nm"])
+    else:
+        tags = db_tags()
+    return render_template("admin/tags.html", tags=tags)
+
+
+# Delete Tag
+@admin.route("deleteTag/", methods=["POST"])
+#@admin_required
+def tagDelete():
+    if request.method == "POST" :
+        genre_id = request.form.get("genre_id")  
+        delete_tag(genre_id)
+
+        return {'message' : "ok"}
+
+
+# Get info from Tag
+@admin.route("/tags/<id>")
+#@admin_required
+def get_tag_by_id(id):
+    tag = db_tags(id)
+    return {'tag' : tag[0]}
+
+
+# Edit Tag
+@admin.route('/editTag/', methods=["POST"])
+#@admin_required
+def edit_tag():
+    #print("EDITOVANIE USERA")
+    if request.method == "POST" :
+        data = request.form  
+        update_tag_db(data)
+        
+        return {'message' : 'ok'}
+
+
+# Add tag
 @admin.route('/addTag/', methods=["POST"])
 #@admin_required
 def add_tag():
@@ -219,19 +246,9 @@ def add_tag():
         else:
             return {'message' : 'err'}
 
-@admin.route("/libraries/", methods=["POST", "GET"])
-#@admin_required
-def libPage():
-    if request.method == "POST":
-        if "nm" in request.form:
-            libraries = find_library(request.form["nm"])
-            
-    else:
-        libraries = db_libraries()
-        
-    return render_template("admin/libraries.html", libraries=libraries)
 
-
+####    DISTRIBUTORS    #### 
+############################
 @admin.route("/distributors/", methods=["POST", "GET"])
 #@admin_required
 def distributorsPage():
@@ -244,24 +261,28 @@ def distributorsPage():
         
     return render_template("admin/distributors.html", distributors=distributors)
 
+
+# Delete Distributor
 @admin.route("/distributors/delete/", methods=["POST"])
 #@admin_required
 def distributorDelete():
-    
     if request.method == "POST" :
         email = request.form.get("email")  
         delete_distributors(email)
 
         return {'message' : "ok"}
 
+
+# Get info from Distributor
 @admin.route("/distributors/<distributoremail>", methods=["GET"])
 #@admin_required
 def get_distributors_by_email(distributoremail):
     distributor = find_distributors(distributoremail)
-    #distributor = [{"publisher_name":"cc","adress":"ss","publisher_email":"ss","town":"sss"}]
-    print(distributor[0])
+
     return {'dist' : distributor[0]}
 
+
+# Edit distributor
 @admin.route('/editDist/', methods=["POST"])
 #@admin_required
 def edit_dist():
@@ -272,6 +293,8 @@ def edit_dist():
 
         return {'message' : 'ok'}
 
+
+# Add Distributor
 @admin.route('/addDist/', methods=["POST"])
 #@admin_required
 def add_dist():
@@ -281,18 +304,8 @@ def add_dist():
 
         return {'message' : 'ok'}
 
-@admin.route("/tags/", methods=["POST", "GET"])
-#@admin_required
-def tagsPage():
-    if request.method == "POST":
-        if "nm" in request.form:
-            tags = db_tags(tag=request.form["nm"])
-            
-    else:
-        tags = db_tags()
-    return render_template("admin/tags.html", tags=tags)
-    
 
+    
 @admin.route('/notPermited/')
 def notPermited():
     return render_template('admin/notPermited.html')
