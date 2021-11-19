@@ -58,7 +58,6 @@ def viewsPage():
     books = [top[i] for i in randomlist]
     books = [db_book_info(book['title_id']) for book in books]
     books = [format_book_and_authors(book) for book in books]
-    print(books)
     return render_template("/main/main.html",books=books,genres=genres)
 
 @views.route("/list/")
@@ -198,7 +197,6 @@ def delayReservation(resid):
 @login_required
 def borrowedReservation():
     borrowed = db_borrowed_books(session['user']['user_id'])
-    print(borrowed)
     return render_template('/main/userBorrows.html',borrowed=borrowed,genres=genres)
 
 @views.route("/borrow/delay/<borid>/")
@@ -230,7 +228,5 @@ def surveysDetail(libid):
     
     
     books = db_all_books_not_in_lib(libid)
-    for i in books:
-        print(db_actual_count(libid,i['title_id']))
     library = db_library_info(libid)[0]
     return render_template('/main/surveyDetail.html',books=books,library=library,genres=genres)
