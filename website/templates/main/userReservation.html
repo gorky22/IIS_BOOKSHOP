@@ -19,6 +19,7 @@
                 </div>
                 <div class="down-part" id="roll-{{res['reservation_id']}}-show" data-open="0">
                     <div class="bottom-flex">
+                        <p class="reservationTime" >Knihovna: {{res['library_name']}}</span></p>
                         <p class="reservationTime" >Rezervace do: <span id="date-{{res['reservation_id']}}">{{ res['until'].strftime('%d. %m. %Y') }}</span></p>
                         <button class="time-btn" id="time-btn-{{res['reservation_id']}}">
                             <img src="/static/icons/icons8-clock.svg" alt="ArrowRight" class="time-icon" title="Prodloužit rezervaci">

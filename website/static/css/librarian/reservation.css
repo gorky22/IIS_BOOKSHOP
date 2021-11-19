@@ -46,3 +46,6 @@
 .confirm-votes:hover{
     color: #0f0;
 }
+.not-display{
+    display: none;
+}

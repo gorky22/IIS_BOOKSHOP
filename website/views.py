@@ -111,9 +111,12 @@ def booksInLibrary(library):
 @views.route("/isbookAvailible/<bookid>/<libid>/",methods=["GET","POST"])
 def is_book_availible(bookid,libid):
     count_of_book = int(db_actual_count(libid,bookid)[0]['count'])
+    user_id = session['user']['user_id']
+    if len(db_res_with_book_lib_user(bookid,user_id,libid)) != 0 or len(db_bor_with_book_lib_user(bookid,user_id,libid)) != 0:
+        return {'answer':False,'res_bor':True}
     if count_of_book > 0:
         return {'answer':True}
-    return {'answer':False}
+    return {'answer':False,'res_bor':True}
 
 @views.route('/addToQue/',methods=['POST'])
 def addToQue():
@@ -168,7 +171,7 @@ def rateBook():
     book_id = request.form.get('title_id')
     old_rating = float(request.form.get('old_value'))
     new_rating = float(request.form.get('value'))
-    if session['user']:
+    if session.get('user'):
         if session['user']['reader']:
             result = (old_rating+new_rating)/2
             result = float("%.1f" % result)
@@ -186,6 +189,7 @@ def userReservation():
 
 
 @views.route("/reservation/delay/<resid>/")
+@login_required
 def delayReservation(resid):
     reservation = db_reservation_info(resid)[0]
     reservation["until"] = reservation["until"] + datetime.timedelta(days=10)
@@ -200,6 +204,7 @@ def borrowedReservation():
     return render_template('/main/userBorrows.html',borrowed=borrowed,genres=genres)
 
 @views.route("/borrow/delay/<borid>/")
+@login_required
 def delayBorrow(borid):
     borrow = db_borrow_info(borid)[0]
     borrow["until"] = borrow["until"] + datetime.timedelta(days=10)
@@ -222,8 +227,10 @@ def surveysDetail(libid):
             title_id = request.form.get('title_id')
             lib_id = request.form.get('lib_id')
             user_id = session['user']['user_id']
-            db_insert_new_vote(title_id,lib_id,user_id)
-            return {'err':False}
+            if len(db_votes_for_user_lib(user_id,lib_id,title_id)) == 0:
+                db_insert_new_vote(title_id,lib_id,user_id)
+                return {'err':False}
+            return {'err':True,'msg':'Pro tuto knihu jste v této knihovně již hlasovali.'}
         return {'err':True,'msg':'Na tuto operaci nemáte práva'}
     
     

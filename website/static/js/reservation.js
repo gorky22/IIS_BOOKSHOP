@@ -9,6 +9,7 @@ $('#reservation').click(function(e){
             let insert_this;
 
             if(response['answer']){
+                
                 insert_this = `
                 <h1 class="popup-header">Potvrďte prosím rezervaci</h1>
                         <p class="popup-text">Požadovaná kniha: <span class="popup-bold">${$('.book-header-detail').text()}</span></p>
@@ -19,6 +20,10 @@ $('#reservation').click(function(e){
                         </div>
                 `
             } else {
+                if(response['res_bor']){
+                    Toast.show('Tuto knihu již máte zarezervovanou nebo vypůjčenou.','E')
+                    return
+                }
                 insert_this = `
                 <h1 class="popup-header">Kniha není k dispozici</h1>
                         <p class="popup-text">Chcete zařadit do fronty rezervací pro tuto knihu?</p>

@@ -199,6 +199,10 @@ def db_insert_new_vote(title_id,library_id,user_id):
         db_connection.commit()
         cursor.close()
 
+def db_votes_for_user_lib(user_id,lib_id,title_id):
+        query = '''SELECT * FROM votes WHERE user_id = %s AND library_id = %s AND title_id = %s;'''
+        parameter = tuple([user_id,lib_id,title_id])
+        return execute_select(query,parameter)
 def db_votes_in_library(lib_id):
         query = '''SELECT v.title_id, b.title_name FROM votes v JOIN book_title b ON v.title_id = b.title_id WHERE v.library_id = %s;'''
         parameter = tuple([lib_id])
@@ -244,9 +248,9 @@ def delete_user(email):
         db_connection.commit()
         cursor.close()
 
-def db_delete_book(bookid):
-        query = '''DELETE FROM book_title WHERE title_id = %s;'''
-        param = tuple([bookid])
+def db_delete_book(bookid,library_id):
+        query = '''DELETE FROM book_title_library WHERE title_id = %s AND library_id = %s;'''
+        param = tuple([bookid,library_id])
         is_connect()
         cursor = db_connection.cursor()
         cursor.execute(query,param)

@@ -5,7 +5,7 @@ $('.delete-book').click(function(e){
     <h1 class="popup-header">Opravdu chcete knihu smazat?</h1>
             <div class="btn-row">
                 <button class="popup-button close" id="close">Zavřít</button>
-                <button class="popup-button confirm" id="popup-del-book" data-book=${bookid}>Ukončit výpůjčku</button>
+                <button class="popup-button confirm" id="popup-del-book" data-book=${bookid}>Smazat knihu</button>
             </div>
     `
     PopUp.show(insert_this)
@@ -25,6 +25,10 @@ $(document).on('click','#popup-del-book',function(e){
             Toast.show('Kniha byla smazána.','S')
             $(`#book-${bookid}`).remove()
             PopUp.hide()
+        },
+        error: function (response) {
+            Toast.show('Knihu není možné smazat. Někdo jí má zarezervovanou nebo půjčenou','E')
         }
+
     });
 })

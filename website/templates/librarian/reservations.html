@@ -15,19 +15,19 @@
                 <th>Jméno knihy</th>
                 <th>Rezervace do</th>
                 <th class="search-box">
-                        <input type="text" name="nm" placeholder="Hledat email">                
+                        <input type="text" name="nm" placeholder="Hledat email" id="searchBox">                
                 </th>
             </tr>
             
             {% for res in reservations %}
-                <tr id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}"
+                <tr class="row" id="res-num-{{ res['reservation_id'] }}" data-user="{{res['user_id']}}" data-book="{{res['title_id']}}"
                     {% if res["days"] < 3 %}
                         class="red-row"
                     {% elif res["days"] < 5 %}
                         class="orange-row"
                     {% endif %}
                 >
-                    <td>{{ res['email'] }}</td>
+                    <td class="liveSearchEmail" >{{ res['email'] }}</td>
                     <td>{{ res['title_name'] }}</td>
                     <td>{{ res['until'].strftime("%d. %m. %Y") }}</td>
                     <td class="deleteForm">
@@ -49,5 +49,5 @@
 
 {% block script_block %}
     <script src="/static/js/libres.js"></script>
- 
+    <script src="/static/js/liveSearch.js"></script>
 {% endblock %}

@@ -42,11 +42,10 @@
                     <a href="{{ url_for('views.viewsPage') }}" class="nav-link">Domů</a>
                     <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
                     <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knihovny</a>
-                    <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Ankety</a>
+                    <a href="{{ url_for('views.surveysPage') }}" class="nav-link">Ankety</a>
                     {% if session['logged_in'] %}
-                        <a href="#" class="nav-link">Ahoj {{ session['user']['name'] }} </a>
-                        <!-- {{ url_for('auth.logout') }} -->
-                        <a href="#" class="nav-link">Moje Rezervace</a>
+                        <a href="{{ url_for('views.userReservation')}}" class="nav-link">Moje rezervace</a>
+                        <a href="{{ url_for('views.borrowedReservation')}}" class="nav-link">Moje výpůjčky</a>
                         <a href="{{ url_for('auth.logout') }}"" class="nav-link btn btn-blue">Odhlásit se</a>
                     {% else %}
                         <a href="{{ url_for('auth.authPage') }}" class="nav-link btn btn-blue">Registrovat</a>
