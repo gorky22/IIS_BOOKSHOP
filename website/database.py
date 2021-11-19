@@ -780,8 +780,8 @@ def insert_into_dist(dist):
         cursor.close()
 
 def distributor_alma_mater(dist_id):
-        query = '''select p.publisher_name from Publishers p  JOIN User u  ON u.publisher_id = p.publisher_id 
-                        where u.user_id = %s'''
+        query = '''select p.publisher_id from Publishers p  JOIN User u  ON u.publisher_id = p.publisher_id 
+                        where u.email = %s'''
         param = tuple([dist_id])
         
         return execute_select(query,parameters=param)

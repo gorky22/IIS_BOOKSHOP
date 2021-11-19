@@ -85,6 +85,8 @@ $('.editBtn').click(function(e){
     e.preventDefault()
     
     document.getElementById('res-combobox').value=0
+    document.getElementById('res-comboboxDis').value=0
+
 
     var email =  $(this).data('edit')
     var user = false
@@ -94,6 +96,7 @@ $('.editBtn').click(function(e){
         url: "/admin/user/"+email,
         success: function (response) {
             var user = response['user']
+            var dis = response['dis']
             var date = beautifulDate(user['birth_date'])
 
             document.getElementById('name').innerHTML = user['user_name']
@@ -115,6 +118,8 @@ $('.editBtn').click(function(e){
             if (user['distributor'] == 1){
                 document.getElementById("res-comboboxDis").classList.remove('hide')
                 document.getElementById("hide_br_dis").classList.remove('hide')
+                alert(dis["publisher_id"])
+                document.getElementById("res-comboboxDis").value = dis["publisher_id"]
             
             } else {
                 document.getElementById("res-comboboxDis").classList.add('hide')
@@ -226,6 +231,8 @@ $('#sendEdit').click(function(e){
     var disR = 0
     var basicUserR = 0
     var libraryId = $('#res-combobox').find('option:selected').val()
+    var publisher_id = $('#res-comboboxDis').find('option:selected').val()
+    alert(publisher_id)
 
     if (document.getElementById('adminR').classList.contains('fa-check')){
         adminR = 1
@@ -255,6 +262,7 @@ $('#sendEdit').click(function(e){
         "distributor" : disR,
         "reader" : basicUserR,
         "library_id" : libraryId,
+        "publisher_id" : publisher_id,
     }
 
     if(testEmail(new_email)){

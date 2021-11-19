@@ -73,15 +73,25 @@ def tagDelete():
 #@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
+    dis = distributor_alma_mater(useremail)
+    
+    print("co tu je ", dis)
     #print(user[0])
-    return {'user' : user[0]}
+    if len(dis) == 0 :
+        return {'user' : user[0],
+            'dis' : ""}    
+    else :
+        return {'user' : user[0],
+            'dis' : dis[0]}
 
 
 @admin.route("/library/<email>")
 #@admin_required
 def get_lib_by_email(email):
     library = find_library(email)
+    dis = distributor_alma_mater(email)
     
+    print("co tu je ", dis)
     #print(library[0])
     return {'lib' : library[0]}
 
@@ -106,6 +116,7 @@ def edit_user():
             return {'message' : 'err'}
         else:
             update_user_db(data)
+            
             return {'message' : 'ok'}
 
 
