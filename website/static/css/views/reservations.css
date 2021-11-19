@@ -25,6 +25,7 @@
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
     font-size: 1.9rem;
+    
 }
 .upper-part{
     display: flex;
@@ -53,11 +54,13 @@
     font-size: 1.6rem;
     font-family: 'Nunito', sans-serif;
     font-weight: 400;
+    width: 80%;
 }
 .bottom-flex{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .time-btn{
     background-color: #fff;

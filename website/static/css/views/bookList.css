@@ -3,7 +3,6 @@
     color: #333;
     font-family: 'Baloo 2', cursive;
     font-weight: 700;
-    margin-bottom: 1rem;
 }
 .book-row{
     display: flex;
@@ -63,6 +62,38 @@
     text-align: center;
     color: white;
     z-index: 2;
+}
+.up-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+.book-botDisplayed{
+    display: none;
+}
+#live-search{
+    width: 20rem;
+    padding: 1rem 2rem;
+    text-align: center;
+    background-color: #E7DFC6;
+    color:#333;
+    font-family: 'Nunito',sans-serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 1.5rem;
+    box-shadow: 0px 0px 5px #00000033;
+}
+@media only screen and (max-width: 562px){
+    #live-search{
+        width: 100%;
+        margin: 1rem;
+    }
+    .up-row{
+        justify-content: center;
+    }
 }
 @media only screen and (max-width: 512px){
     .book-rating{

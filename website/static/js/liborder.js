@@ -50,6 +50,8 @@ $(document).on('click','#confirm',function(e){
             dataType: "json",
             success: function (response) {
                 Toast.show("Objednávka byla úspěšně odeslána distributorovi","S")
+                $('.books').html('')
+                $('.radio-button:checked').prop("checked",false)
             }
         });
     } else {
@@ -57,6 +59,7 @@ $(document).on('click','#confirm',function(e){
     }
 })
 
+$('.radio-button:checked').prop("checked",false)
 
 $(document).on('change',".book-number",function (e) {
     if($(this).val() < 0){

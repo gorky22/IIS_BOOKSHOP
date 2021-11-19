@@ -80,9 +80,12 @@ def delete_bor(borid):
     borrow_info = db_borrow_info(borid)[0]
     db_remove_borrow(borid)
 
-    count_of_book = int(db_actual_count(borrow_info['library_id'],borrow_info['title_id'])[0]['count'])
-    count_of_book+=1
-    db_update_actual_count(str(count_of_book),borrow_info['library_id'],borrow_info['title_id'])
+    count_of_book = db_actual_count(borrow_info['library_id'],borrow_info['title_id'])
+    if len(count_of_book) == 0:
+        db_insert_new_count(borrow_info['title_id'],borrow_info['library_id'],1)
+    else:
+        count_of_book=int(count_of_book[0]['count'])+1
+        db_update_actual_count(str(count_of_book),borrow_info['library_id'],borrow_info['title_id'])
 
 
     return {"err":False}
@@ -131,7 +134,7 @@ def booksByLib():
 @librarySystem.route('/bookdelete/<bookid>/',methods=['GET'])
 @librarian_required
 def deleteBook(bookid):
-    db_delete_book(bookid)
+    db_delete_book(bookid,session['user']['library_id'])
     return {'err':False}
 
 @librarySystem.route('/addbooks/',methods=['GET','POST'])
