@@ -484,10 +484,10 @@ cursor = db_connection.cursor()
 
 x = tuple(["damian@godofdatabase.com"])
 cursor.execute("select * from user where email = %s",x)
-#cursor.execute("UPDATE `user` SET `publisher_id` = 2 WHERE `user`.`id` = ",x)
+#cursor.execute("UPDATE `user` SET `publisher_id` = NULL WHERE email = %s",x)
 
 
-
+#db_connection.commit()
 #cursor.execute(''' SELECT count FROM Book_title b JOIN Book_title_library bl ON b.title_id = bl.title_id 
 #              JOIN Library l ON bl.library_id = l.library_id  Where l.town = "Brno"''')
 
