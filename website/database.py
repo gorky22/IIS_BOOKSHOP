@@ -787,12 +787,8 @@ def distributor_alma_mater(dist_id):
         return execute_select(query,parameters=param)
 
 def add_publisher_to_dist(dic):
-        query = '''Update User set publisher_id = %s where email = %s'''
-        x = [dic["publisher_id"],dic["old_email"]]
+        query = '''Update User set publisher_id = %s where user_email = %s'''
+        x = [dic["publisher_id"],dic["user_email"]]
         param = tuple(x)
         
-        is_connect()
-        cursor = db_connection.cursor()
-        cursor.execute(query,param)
-        db_connection.commit()
-        cursor.close()
+        return execute_select(query,parameters=param)
