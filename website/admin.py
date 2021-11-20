@@ -74,7 +74,7 @@ def edit_user():
             return {'message' : 'err'}
         else:
             update_user_db(data)
-            
+            add_publisher_to_dist(data)
             return {'message' : 'ok'}
 
 
