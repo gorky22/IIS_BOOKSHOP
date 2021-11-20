@@ -404,7 +404,8 @@ body{
 
 @media only screen and (max-width: 670px){
     .centered{
-        width: 35rem;
+        width: 32rem;
+        padding: 2rem;
     }
     .btn-row{
         flex-wrap: wrap;
