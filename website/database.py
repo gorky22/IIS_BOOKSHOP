@@ -789,10 +789,10 @@ def distributor_alma_mater(dist_id):
 def add_publisher_to_dist(dic):
         if(dic['publisher_id'] != 0):
                 query = '''Update User set publisher_id = %s where email = %s'''
-                x = [dic["old_email"]]
+                x = [dic["old_email"],dic["publisher_id"]]
         else:
                 query = '''Update User set publisher_id = NULL where email = %s'''
-                x = [dic["publisher_id"],dic["old_email"]]
+                x = [dic["old_email"]]
         param = tuple(x)
         
         is_connect()
