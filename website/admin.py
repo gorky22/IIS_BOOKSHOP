@@ -108,7 +108,6 @@ def libDelete():
 #@admin_required
 def get_lib_by_email(email):
     library = find_library(email)
-    dis = distributor_alma_mater(email)
     
     return {'lib' : library[0]}
 

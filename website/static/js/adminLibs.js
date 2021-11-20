@@ -126,7 +126,9 @@ function checkImage(id){
 
     if(tmp == 0){
         Toast.show("Musite zadat obrázok knižnice", "E")
+        return false
     }
+    return true
 }
 
 // Editacia knihovne
@@ -228,7 +230,6 @@ function chechValue(data){
 // Pridanie knihovne
 // Ak bolo stlacene tlacidlo na pridanie
 $('#sendAdd').click(function(e){
-
     var name = $('#nameAdd').val()
     var town = $('#townAdd').val()
     var address = $('#adressAdd').val()
@@ -248,10 +249,11 @@ $('#sendAdd').click(function(e){
     form_data.append("webpage_link", web_link)
     form_data.append("library_email", lib_email)
     form_data.append("file", file)
-
+    
 
     if (testEmail(lib_email) && checkTime(opening_hours, 1)  && checkImage("path_picAdd"))    
     {
+        alert("som tu")
         $.ajax({
             type: "POST",
             url: "/admin/addLib/",
@@ -274,5 +276,7 @@ $('#sendAdd').click(function(e){
                 }
             }
         });
-    } 
+    } else {
+        alert("nie je v ife")
+    }
 })
