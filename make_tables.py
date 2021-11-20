@@ -482,9 +482,9 @@ cursor = db_connection.cursor()
 #query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
 #                    '''
 
-
-cursor.execute('''select p.publisher_name from Publishers p  JOIN User u  ON u.publisher_id = p.publisher_id 
-                        where u.user_id = %s''')
+x = tuple(["damian@godofdatabase.com"])
+cursor.execute("select * from user where email = %s",x)
+#cursor.execute("UPDATE `user` SET `publisher_id` = 2 WHERE `user`.`id` = ",x)
 
 
 
