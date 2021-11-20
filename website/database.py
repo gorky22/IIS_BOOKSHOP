@@ -785,3 +785,10 @@ def distributor_alma_mater(dist_id):
         param = tuple([dist_id])
         
         return execute_select(query,parameters=param)
+
+def add_publisher_to_dist(dic):
+        query = '''Update User set publisher_id = %s where user_email = %s'''
+        x = [dic["publisher_id"],dic["user_email"]]
+        param = tuple(x)
+        
+        return execute_select(query,parameters=param)
