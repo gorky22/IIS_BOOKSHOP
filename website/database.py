@@ -787,7 +787,8 @@ def distributor_alma_mater(dist_id):
         return execute_select(query,parameters=param)
 
 def add_publisher_to_dist(dic):
-        if(dic['publisher_id'] != 0):
+        if(dic['publisher_id'] != '0'):
+                print("som tu")
                 query = '''Update User set publisher_id = %s where email = %s'''
                 x = [dic["publisher_id"],dic["old_email"]]
         else:
