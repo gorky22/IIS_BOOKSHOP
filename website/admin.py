@@ -40,7 +40,6 @@ def adminPage():
 def userDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
-        print("Vymazal som uzivatela", email)
         delete_user(email)
 
         return {'message' : "ok"}
@@ -65,7 +64,6 @@ def get_user_by_id(useremail):
 @admin.route('/editUser/', methods=["POST"])
 #@admin_required
 def edit_user():
-    #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
 
@@ -140,7 +138,6 @@ def edit_lib():
         "path_to_picture" : path_to_picture,
         "library_email" : lib_email,
         }
-        print("Data", data)
         update_lib_db(data)
 
         return {'message' : 'ok'}
@@ -179,7 +176,6 @@ def add_lib():
         "library_email" : lib_email,
         }
 
-        print(data)
         res = insert_into_lib(data)
         if res == True:
             return {'message' : 'ok'}
@@ -224,7 +220,6 @@ def get_tag_by_id(id):
 @admin.route('/editTag/', methods=["POST"])
 #@admin_required
 def edit_tag():
-    #print("EDITOVANIE USERA")
     if request.method == "POST" :
         data = request.form  
         update_tag_db(data)
