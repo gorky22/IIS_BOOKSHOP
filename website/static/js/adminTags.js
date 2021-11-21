@@ -60,7 +60,6 @@ $('.editBtn').click(function(e){
     e.preventDefault()
     
     var id =  $(this).data('id')
-    alert(id)
     $.ajax({
         type: "GET",
         url: "/admin/tags/"+id,

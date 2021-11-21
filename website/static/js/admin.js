@@ -118,7 +118,6 @@ $('.editBtn').click(function(e){
             if (user['distributor'] == 1){
                 document.getElementById("res-comboboxDis").classList.remove('hide')
                 document.getElementById("hide_br_dis").classList.remove('hide')
-                alert(dis["publisher_id"])
                 document.getElementById("res-comboboxDis").value = dis["publisher_id"]
             
             } else {
@@ -162,12 +161,6 @@ $('#libAdd').click(function(e){
     document.getElementById("hide_br").classList.remove('hide')
 
     document.getElementById('res-combobox').value=0
-
-    //$('#res-combobox').find('option:selected').val(10)
-    //var fero = $('#res-combobox').find('option:selected').val()
-    
-    //document.getElementById('res-combobox').value=55
-    //alert(fero)
 
     checkBtn("libR", 1)
 })
@@ -232,7 +225,6 @@ $('#sendEdit').click(function(e){
     var basicUserR = 0
     var libraryId = $('#res-combobox').find('option:selected').val()
     var publisher_id = $('#res-comboboxDis').find('option:selected').val()
-    alert(publisher_id)
 
     if (document.getElementById('adminR').classList.contains('fa-check')){
         adminR = 1

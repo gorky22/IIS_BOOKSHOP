@@ -253,7 +253,6 @@ $('#sendAdd').click(function(e){
 
     if (testEmail(lib_email) && checkTime(opening_hours, 1)  && checkImage("path_picAdd"))    
     {
-        alert("som tu")
         $.ajax({
             type: "POST",
             url: "/admin/addLib/",
@@ -265,7 +264,6 @@ $('#sendAdd').click(function(e){
             success: function (response) {
                 if (response['message'] == 'ok')
                 {
-                    alert("@@@")
                     Toast.show('Úspešna pridanie knihovne','S')
                     document.querySelector('.bg-modal-add').style.display = 'none'
                     delete_inputs()
@@ -276,7 +274,5 @@ $('#sendAdd').click(function(e){
                 }
             }
         });
-    } else {
-        alert("nie je v ife")
     }
 })
