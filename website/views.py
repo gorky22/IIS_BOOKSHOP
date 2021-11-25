@@ -111,12 +111,16 @@ def booksInLibrary(library):
 @views.route("/isbookAvailible/<bookid>/<libid>/",methods=["GET","POST"])
 def is_book_availible(bookid,libid):
     count_of_book = int(db_actual_count(libid,bookid)[0]['count'])
-    user_id = session['user']['user_id']
-    if len(db_res_with_book_lib_user(bookid,user_id,libid)) != 0 or len(db_bor_with_book_lib_user(bookid,user_id,libid)) != 0:
-        return {'answer':False,'res_bor':True}
-    if count_of_book > 0:
-        return {'answer':True}
-    return {'answer':False,'res_bor':True}
+    if session.get('user'):
+        if session['user'].get('reader'):
+            user_id = session['user']['user_id']
+            if len(db_res_with_book_lib_user(bookid,user_id,libid)) != 0 or len(db_bor_with_book_lib_user(bookid,user_id,libid)) != 0:
+                return {'answer':False,'res_bor':True}
+            if count_of_book > 0:
+                return {'answer':True}
+            return {'answer':False,'res_bor':False}
+        return {'answer':False,'res_bor':True,'msg':'Nemáte práva čtenáře.'}
+    return {'answer':False,'res_bor':True,'msg':'Pro tuto operaci musíte být přihlášen.'}
 
 @views.route('/addToQue/',methods=['POST'])
 def addToQue():

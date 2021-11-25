@@ -90,6 +90,8 @@
                             <a href="{{ url_for('auth.logout') }}" class="drop-link btn btn-blue">Odhlásit se</a>
                         </div>
                     </li>
+                    {% elif session['logged_in'] and not session['user']['admin']%}
+                    
                     {% else %}
                         <li class="link-li">
                             <a href="{{ url_for('auth.authPage') }}" class="link-a btn btn-blue">Registrovat</a>

@@ -21,7 +21,7 @@ $('#reservation').click(function(e){
                 `
             } else {
                 if(response['res_bor']){
-                    Toast.show('Tuto knihu již máte zarezervovanou nebo vypůjčenou.','E')
+                    Toast.show(response.msg,'E')
                     return
                 }
                 insert_this = `
