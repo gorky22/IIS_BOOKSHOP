@@ -14,16 +14,16 @@ rating = 0
 
 -->
     <div class="content">
-        <div class="header">Vložení nové knihy distributora: </div>
-        <form class="book-form">
+        <div class="header">Editace knihy distributora: </div>
+        <form class="book-form" id="{{book['title_id']}}">
             <div class="left-side">
-                <input type="text" id="title_name" class="book-input" placeholder="Jméno knihy">    
+                <input type="text" id="title_name" class="book-input" value="{{book['title_name']}}">    
                 <div class="book-date-input">
                     <label for="release" class="book-date-label">Kdy byla kniha vydána?</label>
-                    <input type="date" id="realease" class="book-date" placeholder="Datum vydání" required>   
+                    <input type="date" id="realease" class="book-date" placeholder="Datum vydání" value="{{book['release_date']}}" required>   
                 </div>
-                <input type="text" id="isbn" class="book-input" placeholder="ISBN">
-                <textarea id="description" class="book-input" placeholder="Popis knihy" rows="20" ></textarea>
+                <input type="text" id="isbn" class="book-input" value="{{book['ISBN']}}">
+                <textarea id="description" class="book-input" placeholder="Popis knihy" rows="20" >{{book['description']}}</textarea>
                 
 
             </div>
@@ -31,16 +31,23 @@ rating = 0
                 <div class="file-div">
                     <label for="title_picture" class="book-picture-label">Klikněte zde a vložte obrázek</label>
                     <input type="file" id="title_picture" class="book-picture" accept="image/*" onchange="showPreview(event)">
-                    <img id="file-preview">
+                    <img id="file-preview" src="{{book['path_to_picture']}}">
                 </div>
                 
                 <div class="combos">
                     <label for="combobox-1" class="combo-label">Autoři: </label>
-                    <select id="combobox-1" class="author-combo">
-                        {% for author in authors %}
-                        <option value="{{author['author_id']}}">{{ author['author_name'] }} {{ author['author_surname'] }}</option>
-                        {% endfor %}
-                    </select>
+
+                    {% for auth in authors %}
+                        <select id="combobox-{{loop.index}}" class="author-combo" data-count="{{loop.index}}">
+                            {% for author in all_authors %}
+                                {% if auth['author_id'] == author['author_id'] %}
+                                    <option value="{{author['author_id']}}" selected="selected">{{ author['author_name'] }} {{ author['author_surname'] }}</option>
+                                {% else %}
+                                    <option value="{{author['author_id']}}">{{ author['author_name'] }} {{ author['author_surname'] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    {% endfor %}
                     <button type="button" class="btn btn-blue" id="add-author-button">Přidat dalšího autora</button>
                     <button type="button" class="btn btn-blue" id="delete-author-button">Vymazat posledního</button>
                     
@@ -55,24 +62,24 @@ rating = 0
                     <button type="button" class="btn btn-red" id="delete-new-author-button">Vymazat posledního</button>
 
                 </div>
-
                 <div class="genres">
                     <p class="new-author">Žánry knihy:</p>
                     {% for genre in genres %}
                         <div class="genre">
-                            <input type="checkbox" data-genre="{{genre['genre_id']}}" id="genre{{genre['genre_id']}}" class="genres">
+                            <input type="checkbox" data-genre="{{genre['genre_id']}}" id="genre{{genre['genre_id']}}" class="genres" {% if genre['genre_id'] in selected_genres %} checked {% endif %}>
                             <label for="genre{{genre['genre_id']}}" class="genres-label">{{ genre['name'] }}</label>
                         </div>
                     {% endfor %}
                 </div>
+
                 
             </div>
-            <button class="btn btn-blue btn-long" id="confirm-button">Přidat knihu</button>
+            <button class="btn btn-blue btn-long" id="confirm-button">Editovat knihu</button>
         </form>
         
     </div>
 {% endblock %}
 
 {% block script_block %}
-<script src="/static/js/addBook.js"></script>
+<script src="/static/js/editbook.js"></script>
 {% endblock %}

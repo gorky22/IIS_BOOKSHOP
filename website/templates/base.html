@@ -43,7 +43,7 @@
                     <a href="{{ url_for('views.listPage') }}" class="nav-link">Knihy</a>
                     <a href="{{ url_for('views.librariesPage') }}" class="nav-link">Knihovny</a>
                     <a href="{{ url_for('views.surveysPage') }}" class="nav-link">Ankety</a>
-                    {% if session['logged_in'] %}
+                    {% if session['logged_in'] and session['user']['reader'] %}
                         <a href="{{ url_for('views.userReservation')}}" class="nav-link">Moje rezervace</a>
                         <a href="{{ url_for('views.borrowedReservation')}}" class="nav-link">Moje výpůjčky</a>
                         <a href="{{ url_for('auth.logout') }}"" class="nav-link btn btn-blue">Odhlásit se</a>
@@ -77,7 +77,7 @@
                     <li class="link-li">
                         <a href="{{ url_for('views.librariesPage') }}" {{ 'class=link-a-active' if request.path == '/libraries/' else 'class=link-a' }}>Knihovny</a>
                     </li>
-                    {% if session['logged_in'] %}
+                    {% if session['logged_in'] and session['user']['reader']%}
                     <li class="link-li">
                         <a href="{{ url_for('views.surveysPage') }}" {{ 'class=link-a-active' if request.path == '/surveys/' else 'class=link-a' }}>Ankety</a>
                     </li>

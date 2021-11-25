@@ -115,19 +115,19 @@ def db_top_books():
 def db_book_info(title_id):
         query = "SELECT title_name FROM Book_title"
         parameter = tuple([title_id])
-        query2 = '''SELECT b.title_id, b.title_name,b.rating,b.path_to_picture, b.description,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT b.*,a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
 
         return execute_select(query2,parameters=parameter)
 
 def db_book_authors(title_id):
-        query2 = '''SELECT a.author_name, a.author_surname FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
+        query2 = '''SELECT a.author_name, a.author_surname,a.author_id FROM  Book_title b JOIN Book_title_author ba ON b.title_id = ba.title_id 
                     JOIN Author a ON ba.author_id = a.author_id WHERE b.title_id = %s'''
         parameter = tuple([title_id])
         return execute_select(query2,parameters=parameter)
 
 def db_authors():
-        query = '''SELECT * FROM Author;'''
+        query = '''SELECT author_name, author_surname, author_id FROM Author;'''
         return execute_select(query)
 
 def db_add_author(name,last_name):
@@ -302,6 +302,36 @@ def db_update_rating(title_id,new_value):
         db_connection.commit()
         cursor.close()
 
+def db_update_book(title_id,title_name,description,release_date,isbn):
+        query = '''UPDATE book_title SET title_name = %s, description = %s,release_date = %s,ISBN = %s WHERE title_id = %s;'''
+        parameter = tuple([title_name,description,release_date,isbn,title_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_delete_book_author(title_id,author_id):
+        query = "DELETE FROM book_title_author WHERE title_id = %s AND author_id = %s"
+        param = tuple([title_id,author_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,param)
+        
+        db_connection.commit()
+        cursor.close()
+
+def db_update_book_path_to_picture(title_id,path_to_picture):
+        query = '''UPDATE book_title SET path_to_picture = %s WHERE title_id = %s;'''
+        parameter = tuple([path_to_picture,title_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
 def db_genres():
         query = '''SELECT * FROM Genre'''
         return execute_select(query)
@@ -317,6 +347,29 @@ def db_library_info(libid):
 
         param=tuple([libid])
         return execute_select(query,parameters=param)
+
+def db_selected_genres(title_id):
+        query = '''SELECT genre_id FROM tag WHERE title_id = %s'''
+        param=tuple([title_id])
+        return execute_select(query,parameters=param)
+
+def db_add_genre_to_book(genre_id,title_id):
+        query = '''INSERT INTO tag (title_id,genre_id) VALUES (%s,%s);'''
+        parameter=tuple([title_id,genre_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
+
+def db_delete_genre_to_book(genre_id,title_id):
+        query = '''DELETE FROM tag WHERE genre_id = %s AND title_id = %s'''
+        parameter=tuple([genre_id,title_id])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        db_connection.commit()
+        cursor.close()
 
 #this function updates user table
 def update_user_db(atributes):

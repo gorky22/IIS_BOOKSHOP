@@ -49,3 +49,10 @@
 .not-display{
     display: none;
 }
+.edit-book{
+    transition: all 0.3s;
+}
+.edit-book:hover{
+    transform: scale(1.1);
+    color: rgb(46, 46, 255);
+}

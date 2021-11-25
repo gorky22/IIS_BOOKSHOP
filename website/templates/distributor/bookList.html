@@ -21,6 +21,9 @@
                     <td>{{ book['title_name'] }}</td>
                     <td>{{ book['author']}}</td>
                     <td class="deleteForm">
+                        <a class="button-icon edit-book" data-book="{{ book['title_id'] }}" style="text-decoration:none;"href="{{ url_for('distribSystem.editBook',bookid=book['title_id']) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
                         <button class="button-icon delete-book" data-book="{{ book['title_id'] }}">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -30,8 +33,11 @@
 
         </table>
     </div>
+
+
 {% endblock %}
 
 {% block script_block %}
 <script src="/static/js/deletebook.js"></script>
+
 {% endblock %}

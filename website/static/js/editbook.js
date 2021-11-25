@@ -1,7 +1,8 @@
 var static_combo = $('#combobox-1').clone()
 var static_author = $("#new-author-1").clone()
 
-let curr_combo_id = 1
+let curr_combo_id = parseInt($('.author-combo').last().data('count'))
+
 let curr_auth_id = 1
 
 $(document).on('click','#add-author-button',function (e){
@@ -49,13 +50,60 @@ $(document).on('click','#delete-new-author-button',function (e){
 
 
 
+var title_name_original = $('#title_name').val()
+var date_original = $("#realease").val()
+var isbn_original = $("#isbn").val()
+var description_original = $("#description").val()
+var authors_original = []
+$('.author-combo').each(function(e){
+    authors_original.push($(this).find('option:selected').val())
+})
 
+var genres_original = []
+$('.genres').each(function(e){
+    if($(this).is(":checked")){
+        genres_original.push($(this).data('genre'))
+    }
+})
+
+$("#title_name").keyup(function (e) { 
+    if(title_name_original != $(this).val()){
+        $(this).addClass("input-changed")
+    } else {
+        $(this).removeClass("input-changed")
+    }
+});
+
+$("#realease").change(function (e) { 
+    if(date_original != $(this).val()){
+        $(this).addClass("input-changed")
+    } else {
+        $(this).removeClass("input-changed")
+    }
+});
+$("#isbn").keyup(function (e) { 
+    if(isbn_original != $(this).val()){
+        $(this).addClass("input-changed")
+    } else {
+        $(this).removeClass("input-changed")
+    }
+});
+$("#description").keyup(function (e) { 
+    if(description_original != $(this).val()){
+        $(this).addClass("input-changed")
+    } else {
+        $(this).removeClass("input-changed")
+    }
+});
+document.getElementById("file-preview").style.display = "block";
+var imgChanged = false
 function showPreview(event){
     if(event.target.files.length > 0){
       var src = URL.createObjectURL(event.target.files[0]);
       var preview = document.getElementById("file-preview");
       preview.src = src;
       preview.style.display = "block";
+      imgChanged=true
     }
 }
 
@@ -69,7 +117,7 @@ $(document).on('click','#confirm-button',function (e) {
     var description = $("#description").val()
 
     if(title_name == "" || date == "" || isbn == "" || description == ""){
-        Toast.show("Musíte přidat všechny potřebné hodnoty (Jméno, Datum, ISBN, Popis knihy)","E",4000)
+        Toast.show("Musíte zadat všechny potřebné hodnoty (Jméno, Datum, ISBN, Popis knihy)","E",4000)
         return
     }
     form_data.append("title_name",title_name)
@@ -78,8 +126,11 @@ $(document).on('click','#confirm-button',function (e) {
     form_data.append("description",description)
 
     var authors_ids = [];
+    var new_authors = [];
+    var delete_authors = [];
     var names = []
     var surnames = []
+
     $('.author-combo').each(function(e){
         authors_ids.push($(this).find('option:selected').val())
     })
@@ -87,6 +138,18 @@ $(document).on('click','#confirm-button',function (e) {
         Toast.show("Nelze přidat dva stejné autory k jedné knížce.","E",4000)
         return
     }
+
+    authors_ids.forEach(function(item, index){
+        if(!authors_original.includes(item)){
+            new_authors.push(item)
+        }
+    })
+    authors_original.forEach(function(item,index){
+        if(!authors_ids.includes(item)){
+            delete_authors.push(item)
+        }
+    })
+
     $('.input-name').each(function(e){
         if($(this).val() != '')
             names.push($(this).val())
@@ -96,8 +159,11 @@ $(document).on('click','#confirm-button',function (e) {
             surnames.push($(this).val())
     })
 
-    if(authors_ids.length > 0){
-        form_data.append("author_ids[]",authors_ids)
+    if(new_authors.length > 0){
+        form_data.append("new_author_ids[]",new_authors)
+    }
+    if(delete_authors.length > 0){
+        form_data.append("delete_author_ids[]",delete_authors)
     }
 
     if(names.length != surnames.length){
@@ -108,52 +174,67 @@ $(document).on('click','#confirm-button',function (e) {
         Toast.show("Kniha musí mít alespoň jednoho autora.","E")
         return
     }
+
     if(names.length > 0){
         form_data.append("names[]",names)
     }
     if(surnames.length > 0){
         form_data.append("surnames[]",surnames)
     }
-    var genres_ids = []
-    $('.genres').each(function(e){
-        if($(this).is(":checked")){
-            genres_ids.push($(this).data('genre'))
-        }
-    })
-    if(genres_ids.length > 0){
-        form_data.append("genres[]",genres_ids)
-    } else {
-        Toast.show("Prosím vyberte alespoň jeden žánr pro tuto knihu.","E")
-        return
-    }
 
-
-
+    
     var ins = document.getElementById("title_picture").files.length
-    console.log(ins)
-    if(ins == 0){
-        Toast.show("Musíte zadat obrázek obalu knížky","E")
-    } else {
+
+    if(imgChanged){
         var data = document.getElementById("title_picture").files[0]
         form_data.append("file",data)
     }
 
+    var genre_ids = []
+
+    $('.genres').each(function(e){
+        if($(this).is(":checked")){
+            genre_ids.push($(this).data('genre'))
+        }
+    })
+    var new_genre_ids = []
+    var delete_genre_ids = []
+    genre_ids.forEach(function(item,index){
+        if(!genres_original.includes(item)){
+            new_genre_ids.push(item)
+        }
+    })
+    genres_original.forEach(function(item,index){
+        if(!genre_ids.includes(item)){
+            delete_genre_ids.push(item)
+        }
+    })
+    if(new_genre_ids.length > 0){
+        form_data.append("new_genres[]",new_genre_ids)
+    }
+    if(delete_genre_ids.length > 0){
+        form_data.append("delete_genres[]",delete_genre_ids)
+    }
+    console.log(new_genre_ids)
+    console.log(delete_genre_ids)
+    let title_id = $('.book-form').attr('id')
+    
     $.ajax({
         type: "POST",
-        url: "/distributor/books/",
+        url: `/distributor/bookedit/${title_id}/`,
         data: form_data,
         dataType: "json",
         contentType: false,
         processData: false,
         cache: false,
         success: function (response) {
-            Toast.show("Kniha byla úspěšně přidána do databáze.","S",2000)
+            Toast.show("Kniha byla úspěšně upravena.","S",2000)
             setTimeout(() => {
                 window.location.href = response['url'];
              },2000)
         },
         error: function(response){
-            Toast.show("Něco se stalo, kniha nemohla být přidána do databáze.","E",2000)
+            Toast.show("Něco se stalo, kniha se nepodařila upravit.","E",2000)
         }
     });
 
