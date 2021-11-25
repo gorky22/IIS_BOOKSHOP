@@ -21,7 +21,7 @@ admin = Blueprint("admin",__name__)
 ####    USER    #### 
 ####################
 @admin.route("/", methods=["POST", "GET"])
-#@admin_required
+@admin_required
 def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -36,7 +36,7 @@ def adminPage():
 
 # Delete user
 @admin.route("delete/", methods=["POST"])
-#@admin_required
+@admin_required
 def userDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
@@ -47,7 +47,7 @@ def userDelete():
 
 # Get info from user
 @admin.route("/user/<useremail>")
-#@admin_required
+@admin_required
 def get_user_by_id(useremail):
     user = get_user_with_this_email(useremail)
     dis = distributor_alma_mater(useremail)
@@ -62,7 +62,7 @@ def get_user_by_id(useremail):
 
 # Edit user
 @admin.route('/editUser/', methods=["POST"])
-#@admin_required
+@admin_required
 def edit_user():
     if request.method == "POST" :
         data = request.form  
@@ -79,7 +79,7 @@ def edit_user():
 ####    LIBRARY    #### 
 #######################
 @admin.route("/libraries/", methods=["POST", "GET"])
-#@admin_required
+@admin_required
 def libPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -92,7 +92,7 @@ def libPage():
 
 # Delete Library
 @admin.route("deleteLib/", methods=["POST"])
-#@admin_required
+@admin_required
 def libDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
@@ -103,7 +103,7 @@ def libDelete():
 
 # Get info from library
 @admin.route("/library/<email>")
-#@admin_required
+@admin_required
 def get_lib_by_email(email):
     library = find_library(email)
     
@@ -112,7 +112,7 @@ def get_lib_by_email(email):
 
 # Edit library
 @admin.route('/editLib/', methods=["POST"])
-#@admin_required
+@admin_required
 def edit_lib():
     UPLOAD_FOLDER = "website/static/img"
     STATIC_FOLDER = "/static/img"
@@ -145,7 +145,7 @@ def edit_lib():
 
 # Add Library
 @admin.route('/addLib/', methods=["POST"])
-#@admin_required
+@admin_required
 def add_lib():
     UPLOAD_FOLDER = "website/static/img"
     STATIC_FOLDER = "/static/img"
@@ -187,7 +187,7 @@ def add_lib():
 ####    TAG    #### 
 ###################
 @admin.route("/tags/", methods=["POST", "GET"])
-#@admin_required
+@admin_required
 def tagsPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -199,7 +199,7 @@ def tagsPage():
 
 # Delete Tag
 @admin.route("deleteTag/", methods=["POST"])
-#@admin_required
+@admin_required
 def tagDelete():
     if request.method == "POST" :
         genre_id = request.form.get("genre_id")  
@@ -210,7 +210,7 @@ def tagDelete():
 
 # Get info from Tag
 @admin.route("/tags/<id>")
-#@admin_required
+@admin_required
 def get_tag_by_id(id):
     tag = db_tags(id)
     return {'tag' : tag[0]}
@@ -218,7 +218,7 @@ def get_tag_by_id(id):
 
 # Edit Tag
 @admin.route('/editTag/', methods=["POST"])
-#@admin_required
+@admin_required
 def edit_tag():
     if request.method == "POST" :
         data = request.form  
@@ -229,7 +229,7 @@ def edit_tag():
 
 # Add tag
 @admin.route('/addTag/', methods=["POST"])
-#@admin_required
+@admin_required
 def add_tag():
     if request.method == "POST" :
         data = request.form  
@@ -244,7 +244,7 @@ def add_tag():
 ####    DISTRIBUTORS    #### 
 ############################
 @admin.route("/distributors/", methods=["POST", "GET"])
-#@admin_required
+@admin_required
 def distributorsPage():
     if request.method == "POST":
         if "nm" in request.form:
@@ -258,7 +258,7 @@ def distributorsPage():
 
 # Delete Distributor
 @admin.route("/distributors/delete/", methods=["POST"])
-#@admin_required
+@admin_required
 def distributorDelete():
     if request.method == "POST" :
         email = request.form.get("email")  
@@ -269,7 +269,7 @@ def distributorDelete():
 
 # Get info from Distributor
 @admin.route("/distributors/<distributoremail>", methods=["GET"])
-#@admin_required
+@admin_required
 def get_distributors_by_email(distributoremail):
     distributor = find_distributors(distributoremail)
 
@@ -278,7 +278,7 @@ def get_distributors_by_email(distributoremail):
 
 # Edit distributor
 @admin.route('/editDist/', methods=["POST"])
-#@admin_required
+@admin_required
 def edit_dist():
     if request.method == "POST" :
         data = request.form  
@@ -290,7 +290,7 @@ def edit_dist():
 
 # Add Distributor
 @admin.route('/addDist/', methods=["POST"])
-#@admin_required
+@admin_required
 def add_dist():
     if request.method == "POST" :
         data = request.form  
