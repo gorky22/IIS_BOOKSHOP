@@ -69,7 +69,7 @@ def loginPage():
                 if user_from_db['librarian']:
                     returning_url = url_for('librarySystem.homePage')
                 if user_from_db['distributor']:
-                    returning_url = url_for('views.viewsPage')
+                    returning_url = url_for('distribSystem.distribHome')
                 if user_from_db['admin']:
                     returning_url = url_for('admin.adminPage')
                     

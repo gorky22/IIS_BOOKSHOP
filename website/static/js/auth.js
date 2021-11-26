@@ -47,19 +47,6 @@ $('#registration').click(function (e) {
 });
 
 
-function testEmail(value){
-    if(value.length < 7){
-        return false;
-    } else if(!value.includes("@")){
-        return false;
-    } else if(!value.includes(".")){
-        return false;
-    } else if (value.includes(" ")){
-        return false;
-    }
-    return true;
-    
-}
 function testPassword(value){
     let longPass = new RegExp('(?=.{8,})')
     let upperCase = new RegExp('(?=.*[A-Z])')
