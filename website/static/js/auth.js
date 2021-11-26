@@ -54,6 +54,8 @@ function testEmail(value){
         return false;
     } else if(!value.includes(".")){
         return false;
+    } else if (value.includes(" ")){
+        return false;
     }
     return true;
     
@@ -86,6 +88,7 @@ $('#email').focusout(function (e) {
         $(this).css("box-shadow","0px 2px 5px rgba(0,255,0, 0.5)")
     } else {
         $(this).css("box-shadow","0px 2px 5px rgba(255,0,0, 0.5)")
+        Toast.show('Nesprávný tvar e-mailu.','E')
     }
     
 });

@@ -1,13 +1,16 @@
 $("#login").click(function(e){
     e.preventDefault()
-
+    
     var email = $("#email").val()
     var pass = $("#pass").val()
     var data = {
         "email" : email,
         "pass" : pass,
     }
-
+    if(!testEmail(email)){
+        Toast.show("E-mail je neplatný","e")
+        return
+    }
     $.ajax({
         type: "POST",
         url: "/auth/login/",
@@ -32,3 +35,17 @@ $("#login").click(function(e){
 
 
 })
+
+function testEmail(value){
+    if(value.length < 7){
+        return false;
+    } else if(!value.includes("@")){
+        return false;
+    } else if(!value.includes(".")){
+        return false;
+    } else if (value.includes(" ")){
+        return false;
+    }
+    return true;
+    
+}

@@ -26,6 +26,8 @@ def adminPage():
     if request.method == "POST":
         if "nm" in request.form:
             users = find_user(request.form["nm"])
+            return render_template("/admin/admin.html", users=users)
+
     else:
         users = get_all_users()
         libs = db_libraries()

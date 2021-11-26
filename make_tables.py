@@ -2,11 +2,15 @@ import mysql.connector as mysql
 import _datetime as datetime
 from random import seed
 from random import randint
-
-HOST = "eu-cdbr-west-01.cleardb.com" 
-DATABASE = "heroku_c8164a0212f5cf6"
-USER = "b91cfec2095f4d"
-PASSWORD = "4fd07a3f"
+# Database host info
+# HOST = "eu-cdbr-west-01.cleardb.com" 
+# DATABASE = "heroku_c8164a0212f5cf6"
+# USER = "b91cfec2095f4d"
+# PASSWORD = "4fd07a3f"
+HOST = None
+DATABASE = None
+USER = None
+PASSWORD = None
 
 db_connection = mysql.connect(host=HOST, database=DATABASE, user=USER, password=PASSWORD)
 

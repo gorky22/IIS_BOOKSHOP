@@ -5,7 +5,7 @@ $('.delete-book').click(function(e){
     <h1 class="popup-header">Opravdu chcete knihu smazat?</h1>
             <div class="btn-row">
                 <button class="popup-button close" id="close">Zavřít</button>
-                <button class="popup-button confirm" id="popup-del-book" data-book=${bookid}>Ukončit výpůjčku</button>
+                <button class="popup-button confirm" id="popup-del-book" data-book=${bookid}>Smazat knihu</button>
             </div>
     `
     PopUp.show(insert_this)

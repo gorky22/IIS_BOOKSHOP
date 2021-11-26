@@ -179,13 +179,17 @@ def addBook():
 
         for id_author in author_ids:
             db_add_book_author(id_of_inserted_book,id_author)
-            
+        
+        genres = request.form.getlist("genres[]")[0].split(",")
+        for genre in genres:
+            db_add_genre_to_book(genre,id_of_inserted_book)
         
         return {'err':False,'url':url_for('librarySystem.booksByLib')}
 
     authors = db_authors()
     publishers = db_publishers()
-    return render_template('/librarian/books.html',authors=authors,publishers=publishers)
+    genres = db_genres()
+    return render_template('/librarian/books.html',authors=authors,publishers=publishers,genres=genres)
 
 
 @librarySystem.route("/surveys/")

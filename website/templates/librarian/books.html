@@ -63,7 +63,15 @@ rating = 0
                         {% endfor %}
                     </select>
                 </div>
-
+                <div class="genres">
+                    <p class="new-author">Žánry knihy:</p>
+                    {% for genre in genres %}
+                        <div class="genre">
+                            <input type="checkbox" data-genre="{{genre['genre_id']}}" id="genre{{genre['genre_id']}}" class="genres">
+                            <label for="genre{{genre['genre_id']}}" class="genres-label">{{ genre['name'] }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
                 
             </div>
             <button class="btn btn-blue btn-long" id="confirm-button">Přidat knihu</button>

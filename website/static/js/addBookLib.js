@@ -125,6 +125,19 @@ $(document).on('click','#confirm-button',function (e) {
         form_data.append("file",data)
     }
 
+    var genres_ids = []
+    $('.genres').each(function(e){
+        if($(this).is(":checked")){
+            genres_ids.push($(this).data('genre'))
+        }
+    })
+    if(genres_ids.length > 0){
+        form_data.append("genres[]",genres_ids)
+    } else {
+        Toast.show("Prosím vyberte alespoň jeden žánr pro tuto knihu.","E")
+        return
+    }
+    
     $.ajax({
         type: "POST",
         url: "/librarian/addbooks/",

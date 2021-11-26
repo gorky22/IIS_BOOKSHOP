@@ -258,6 +258,16 @@ def db_delete_book(bookid,library_id):
         db_connection.commit()
         cursor.close()
 
+def db_delete_book_from_publisher(bookid):
+        query = '''UPDATE book_title SET publisher_id = NULL WHERE title_id = %s;'''
+        parameter = tuple([bookid])
+        is_connect()
+        cursor = db_connection.cursor()
+        cursor.execute(query,parameter)
+        
+        db_connection.commit()
+        cursor.close()
+
 #this function finds user via mail or name or surname acording to input
 def find_user(string_to_find):
         

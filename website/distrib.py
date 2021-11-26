@@ -186,7 +186,8 @@ def editBook(bookid):
 @distribSystem.route('/bookdelete/<bookid>/',methods=['GET'])
 @distrib_required
 def deleteBook(bookid):
-    db_delete_book(bookid)
+    db_delete_book_from_publisher(bookid)
+
     return {'err':False}
 
 
