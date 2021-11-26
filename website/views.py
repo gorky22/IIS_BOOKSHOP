@@ -52,12 +52,13 @@ def format_ratings(books):
 
 @views.route("/")
 def viewsPage():
-    top = db_top_books()
-    
+    top = sorted(db_books(), key= lambda b: b['rating'],reverse=True)
     randomlist = random.sample(range(0, 9), 5)
     books = [top[i] for i in randomlist]
     books = [db_book_info(book['title_id']) for book in books]
     books = [format_book_and_authors(book) for book in books]
+
+
     return render_template("/main/main.html",books=books,genres=genres)
 
 @views.route("/list/")

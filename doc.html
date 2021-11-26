@@ -99,7 +99,7 @@
         knihovnou Jquerry).
         Hlavní soubor aplikace - app.py pouze vytváří aplikaci jako takovou a spouští ji. Všechny další potřebné soubory
         jsou ve složce website
-        Pro asinchronní komunikaci je použita knihovna Jquerry ($.ajax). Asynchronní komunikace se serverem se používá
+        Pro asynchronní komunikaci je použita knihovna Jquerry ($.ajax). Asynchronní komunikace se serverem se používá
         napříč celou aplikací.
         Aplikace je rozdělena do několika souborů, které řídí chod celé aplikace.</p>
     <h4>Soubory ve složce website</h4>
@@ -133,7 +133,7 @@
         </li>
         <li>
             <p><span style="font-weight: 800;">database.py</span> -
-                Správa požiadavkov na databázu t.j vkladanie položiek, uprava položiek, dotazovanie sa na konkrétne 
+                Správa požiadavkov na databázu t.j vkladanie položiek, uprava položiek, dotazovanie sa na konkrétne
                 dáta v databázy atd. Taktiež sa tu každým dotazom na databázu kontroluje stav pripojenia k serveru ,
                 a v prípade že je aplikácia z nejakého dôvodu nepripojená, tak sa pripojenie obnoví.</p>
         </li>
@@ -167,18 +167,49 @@
     <img src="Database-schema.png" alt="Italian Trulli">
 
     <h2>Instalace</h2>
-
-    Stručně popište:
-    <ul>
-        <li>postup instalace na server,</li>
-        <li>softwarové požadavky (verze PHP apod.),</li>
-        <li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
-    </ul>
+    <ol>
+        <li>Aplikace byla implementována ve verzi Python 3.9.7, proto je žádoucí mít nainstalovánu právě tuto verzi.
+        </li>
+        <li>Je žádoucí si vytvořit virtuální python prostředí příkazem: python3 -m venv virtualenv</li>
+        <li>Příkazem (v kořenovém adresáři projektu): pip3 install -r requirements.txt se nainstalují potřebné balíky
+        </li>
+        <li>Poté spuštění aplikace přes: ./app.py nebo python3 app.py</li>
+        <li>Databáze je nastavená na free hostingu (není potřeba ji nijak instalovat)</li>
+    </ol>
 
     <h2>Známé problémy</h2>
-    <p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla
-        implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme
-        muset dlouze hledat.</p>
+    <p>Aplikaci jsme se do posledního detailu snažili doladit, bohužel jsou zde nějaké známé nedostatky:</p>
+    <ul>
+        <li>
+            <p>Pokud běžný uživatel chce zarezervovat knížku, která na dané knihovně není právě dostupná - může se
+                přidat do fronty, ale v zadání není specifikováno, jak se s frontou dále pracuje - proto jsme dále tuto
+                funkcionalitu neimplementovali.</p>
+        </li>
+        <li>
+            <p>
+                Administrátor webové aplikace má přidělena všechna práva - aby se, ale dostal do
+                knihovnického/distributorského systému, musí si v administrativě uživatelů přiřadit danou
+                knihovnu/distributora.
+            </p>
+        </li>
+        <li>
+            <p>Uživatel může prodloužit výpůjčku a rezervaci kolikrát chce (to není chyba, ale znamenalo by to, že kdyby
+                uživatel chtěl může si knihu nechat :D)</p>
+        </li>
+        <li>
+            <p>
+                Hodnocení knih je počítáno pouze z uložené hodnoty v databázi - Tzn. dělá se průměr mezi uloženou a
+                zadanou hodnotou od uživatele. (není to úplně nejlepší způsob uchovávání hodnocení.) a uživatel může
+                hodnotit kolikrát chce.
+            </p>
+        </li>
+        <li>
+            <p>
+                Pokud se mění práva/informace o uživateli, je třeba aby se tento uživatel po změně informací odhlásil a
+                pak znovu přihlásil, protože tyto data jsou ukládáný do sessions, které se obnovují při přihlášení.
+            </p>
+        </li>
+    </ul>
 
 </body>
 
