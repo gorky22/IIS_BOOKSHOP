@@ -477,13 +477,13 @@ for i in range(0,26):
 
 #param = tuple(["gorcak.damian@tmp.sk"])
 cursor = db_connection.cursor()
-#cursor.execute("alter table Book_title_library drop foreign key title_library_title")
+cursor.execute(make_book_title_genre)
 ######################### niesu v ziadnej kniznici #######################################################
 #query = '''SELECT b.title_name FROM Book_title b where b.title_id not in (SELECT title_id from Book_title_library)
 #                    '''
 
-x = tuple(["damian@godofdatabase.com"])
-cursor.execute("select * from user where email = %s",x)
+
+
 #cursor.execute("UPDATE `user` SET `publisher_id` = NULL WHERE email = %s",x)
 
 
@@ -492,15 +492,6 @@ cursor.execute("select * from user where email = %s",x)
 #              JOIN Library l ON bl.library_id = l.library_id  Where l.town = "Brno"''')
 
 
-records = cursor.fetchall()
-columns = [i[0] for i in cursor.description]
 
-results = []
-for row in records:
-      results.append(dict(zip(columns, row)))  
-
-print(results)
-
-print("Connected to:", db_connection.get_server_info())
 db_connection.close()
 cursor.close()
